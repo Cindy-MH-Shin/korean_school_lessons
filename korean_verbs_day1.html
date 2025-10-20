@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Verbs - Day 1 (Elementary)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #805ad5;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .level-elementary {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+            font-weight: bold;
+        }
+        
+        .level-middle {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-high {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .etymology {
+            background: #fff9e6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .etymology-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .etymology-text {
+            font-size: 13px;
+            color: #5d4037;
+        }
+        
+        .related-words {
+            font-size: 12px;
+            color: #6d4c41;
+            margin-top: 5px;
+        }
+        
+        .examples {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .example-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+        
+        .collocations {
+            background: #f0f4ff;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .collocation-title {
+            font-weight: bold;
+            color: #5a67d8;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .collocation-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .collocation-item {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #4c51bf;
+            border: 1px solid #c3dafe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Korean Verbs - Day 1</h1>
+            <div class="subtitle">Elementary Level - 10 Essential Verbs</div>
+        </div>
+        
+        <div class="content">
+            <div class="vocab-grid">
+                <!-- Verb 1: 가다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">1</div>
+                        <div class="vocab-word">가다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[ga-da]</div>
+                    <div class="vocab-meaning">to go, to leave, to move</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">가다</div>
+                        <div class="level-box level-middle">이동하다</div>
+                        <div class="level-box level-high">향하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Most basic verb for movement away from the speaker</div>
+                        <div class="related-words"><strong>Related:</strong> 가요 (polite), 갔어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">학교에 가요.</span>
+                            <span class="example-en">I go to school.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">집에 가자.</span>
+                            <span class="example-en">Let's go home.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">학교에 가다</span>
+                            <span class="collocation-item">집에 가다</span>
+                            <span class="collocation-item">여행을 가다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 2: 오다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">2</div>
+                        <div class="vocab-word">오다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[o-da]</div>
+                    <div class="vocab-meaning">to come, to arrive</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">오다</div>
+                        <div class="level-box level-middle">도착하다</div>
+                        <div class="level-box level-high">내방하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Movement toward the speaker or destination</div>
+                        <div class="related-words"><strong>Related:</strong> 와요 (polite), 왔어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">이리 와요.</span>
+                            <span class="example-en">Come here.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">친구가 왔어요.</span>
+                            <span class="example-en">My friend came.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">집에 오다</span>
+                            <span class="collocation-item">이리 오다</span>
+                            <span class="collocation-item">빨리 오다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 3: 먹다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">3</div>
+                        <div class="vocab-word">먹다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[meok-da]</div>
+                    <div class="vocab-meaning">to eat, to have a meal</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">먹다</div>
+                        <div class="level-box level-middle">섭취하다</div>
+                        <div class="level-box level-high">식사하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Most common verb for eating and consuming food</div>
+                        <div class="related-words"><strong>Related:</strong> 먹어요 (polite), 먹었어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">밥을 먹어요.</span>
+                            <span class="example-en">I eat rice/food.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">사과를 먹었어요.</span>
+                            <span class="example-en">I ate an apple.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">밥을 먹다</span>
+                            <span class="collocation-item">아침을 먹다</span>
+                            <span class="collocation-item">간식을 먹다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 4: 마시다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">4</div>
+                        <div class="vocab-word">마시다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[ma-si-da]</div>
+                    <div class="vocab-meaning">to drink</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">마시다</div>
+                        <div class="level-box level-middle">음용하다</div>
+                        <div class="level-box level-high">들이키다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Used for drinking any liquid</div>
+                        <div class="related-words"><strong>Related:</strong> 마셔요 (polite), 마셨어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">물을 마셔요.</span>
+                            <span class="example-en">I drink water.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">우유를 마셨어요.</span>
+                            <span class="example-en">I drank milk.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">물을 마시다</span>
+                            <span class="collocation-item">커피를 마시다</span>
+                            <span class="collocation-item">주스를 마시다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 5: 자다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">5</div>
+                        <div class="vocab-word">자다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[ja-da]</div>
+                    <div class="vocab-meaning">to sleep</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">자다</div>
+                        <div class="level-box level-middle">취침하다</div>
+                        <div class="level-box level-high">숙면하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Basic verb for sleeping and resting</div>
+                        <div class="related-words"><strong>Related:</strong> 자요 (polite), 잤어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">일찍 자요.</span>
+                            <span class="example-en">I sleep early.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">잘 잤어요.</span>
+                            <span class="example-en">I slept well.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">일찍 자다</span>
+                            <span class="collocation-item">잘 자다</span>
+                            <span class="collocation-item">푹 자다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 6: 보다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">6</div>
+                        <div class="vocab-word">보다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[bo-da]</div>
+                    <div class="vocab-meaning">to see, to watch, to look</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">보다</div>
+                        <div class="level-box level-middle">관찰하다</div>
+                        <div class="level-box level-high">목격하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Used for seeing, watching, and meeting</div>
+                        <div class="related-words"><strong>Related:</strong> 봐요 (polite), 봤어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">영화를 봐요.</span>
+                            <span class="example-en">I watch a movie.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">친구를 봤어요.</span>
+                            <span class="example-en">I saw my friend.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">영화를 보다</span>
+                            <span class="collocation-item">텔레비전을 보다</span>
+                            <span class="collocation-item">친구를 보다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 7: 듣다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">7</div>
+                        <div class="vocab-word">듣다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[deut-da]</div>
+                    <div class="vocab-meaning">to hear, to listen</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">듣다</div>
+                        <div class="level-box level-middle">청취하다</div>
+                        <div class="level-box level-high">경청하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Used for both hearing and listening</div>
+                        <div class="related-words"><strong>Related:</strong> 들어요 (polite), 들었어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">음악을 들어요.</span>
+                            <span class="example-en">I listen to music.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">소리를 들었어요.</span>
+                            <span class="example-en">I heard a sound.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">음악을 듣다</span>
+                            <span class="collocation-item">이야기를 듣다</span>
+                            <span class="collocation-item">말을 듣다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 8: 말하다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">8</div>
+                        <div class="vocab-word">말하다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[mal-ha-da]</div>
+                    <div class="vocab-meaning">to speak, to say, to talk</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">말하다</div>
+                        <div class="level-box level-middle">발언하다</div>
+                        <div class="level-box level-high">진술하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">General verb for speaking and talking</div>
+                        <div class="related-words"><strong>Related:</strong> 말해요 (polite), 말했어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">한국어를 말해요.</span>
+                            <span class="example-en">I speak Korean.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">진실을 말했어요.</span>
+                            <span class="example-en">I told the truth.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">진실을 말하다</span>
+                            <span class="collocation-item">이야기를 말하다</span>
+                            <span class="collocation-item">한국어를 말하다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 9: 읽다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">9</div>
+                        <div class="vocab-word">읽다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[ik-da]</div>
+                    <div class="vocab-meaning">to read</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">읽다</div>
+                        <div class="level-box level-middle">독서하다</div>
+                        <div class="level-box level-high">열람하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Used for reading text, books, or signs</div>
+                        <div class="related-words"><strong>Related:</strong> 읽어요 (polite), 읽었어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">책을 읽어요.</span>
+                            <span class="example-en">I read a book.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">신문을 읽었어요.</span>
+                            <span class="example-en">I read a newspaper.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">책을 읽다</span>
+                            <span class="collocation-item">신문을 읽다</span>
+                            <span class="collocation-item">소설을 읽다</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verb 10: 쓰다 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">10</div>
+                        <div class="vocab-word">쓰다</div>
+                    </div>
+                    <div class="vocab-pronunciation">[sseu-da]</div>
+                    <div class="vocab-meaning">to write, to use</div>
+                    
+                    <div class="level-progression">
+                        <div class="level-box level-elementary">쓰다</div>
+                        <div class="level-box level-middle">작성하다</div>
+                        <div class="level-box level-high">기술하다</div>
+                    </div>
+                    
+                    <div class="etymology">
+                        <div class="etymology-title">📌 Usage Note</div>
+                        <div class="etymology-text">Can mean "to write" or "to use" depending on context</div>
+                        <div class="related-words"><strong>Related:</strong> 써요 (polite), 썼어요 (past tense)</div>
+                    </div>
+                    
+                    <div class="examples">
+                        <div class="example-title">💡 Examples</div>
+                        <div class="example-item">
+                            <span class="example-ko">편지를 써요.</span>
+                            <span class="example-en">I write a letter.</span>
+                        </div>
+                        <div class="example-item">
+                            <span class="example-ko">일기를 썼어요.</span>
+                            <span class="example-en">I wrote a diary.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="collocations">
+                        <div class="collocation-title">🔗 Common Phrases</div>
+                        <div class="collocation-items">
+                            <span class="collocation-item">편지를 쓰다</span>
+                            <span class="collocation-item">일기를 쓰다</span>
+                            <span class="collocation-item">글을 쓰다</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
