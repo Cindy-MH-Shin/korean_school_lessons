@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Vowel "ㅓ" Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .question {
+            background: #f8f9ff;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+        
+        .matching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .matching-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .matching-item:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .matching-item.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .image-placeholder {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .word {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+        }
+        
+        .syllable-box {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        
+        .hint {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇰🇷 Korean Vowel "ㅓ" Practice</h1>
+        <p class="subtitle">거/너/더/러/머/버/서/어/저/처/커/터/퍼/허</p>
+        
+        <!-- Question 1-4: Picture Matching -->
+        <div class="question">
+            <div class="question-number">Questions 1-4: Match pictures with words</div>
+            <div class="question-text">Select the correct Korean word for each picture</div>
+            <div class="matching-grid">
+                <div class="matching-item" data-answer="거미">
+                    <div class="image-placeholder">🕷️</div>
+                    <div class="word">?</div>
+                </div>
+                <div class="matching-item" data-answer="너구리">
+                    <div class="image-placeholder">🦝</div>
+                    <div class="word">?</div>
+                </div>
+                <div class="matching-item" data-answer="버스">
+                    <div class="image-placeholder">🚌</div>
+                    <div class="word">?</div>
+                </div>
+                <div class="matching-item" data-answer="커피">
+                    <div class="image-placeholder">☕</div>
+                    <div class="word">?</div>
+                </div>
+            </div>
+            <div class="options" style="grid-template-columns: repeat(2, 1fr); margin-top: 20px;">
+                <button class="option" onclick="selectWord(this, '거미')">거미</button>
+                <button class="option" onclick="selectWord(this, '너구리')">너구리</button>
+                <button class="option" onclick="selectWord(this, '버스')">버스</button>
+                <button class="option" onclick="selectWord(this, '커피')">커피</button>
+            </div>
+        </div>
+
+        <!-- Question 5: Fill in the blank -->
+        <div class="question">
+            <div class="question-number">Question 5</div>
+            <div class="question-text">Fill in the blank: <span class="syllable-box">_미</span></div>
+            <div class="hint">(Hint: 🕷️ spider)</div>
+            <input type="text" id="q5" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <div class="question-number">Question 6</div>
+            <div class="question-text">Fill in the blank: <span class="syllable-box">_구리</span></div>
+            <div class="hint">(Hint: 🦝 raccoon)</div>
+            <input type="text" id="q6" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <div class="question-number">Question 7</div>
+            <div class="question-text">How do you write "Bus" in Korean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 7, '버스')">버스</button>
+                <button class="option" onclick="selectAnswer(this, 7, '비스')">비스</button>
+                <button class="option" onclick="selectAnswer(this, 7, '부스')">부스</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <div class="question-number">Question 8</div>
+            <div class="question-text">How do you write "Coffee" in Korean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 8, '커피')">커피</button>
+                <button class="option" onclick="selectAnswer(this, 8, '코피')">코피</button>
+                <button class="option" onclick="selectAnswer(this, 8, '카피')">카피</button>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <div class="question-number">Question 9</div>
+            <div class="question-text">Fill in the blank: <span class="syllable-box">_커스</span></div>
+            <div class="hint">(Hint: 🎪 circus)</div>
+            <input type="text" id="q9" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <div class="question-number">Question 10</div>
+            <div class="question-text">What does "어머니" mean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 10, 'Mother')">Mother</button>
+                <button class="option" onclick="selectAnswer(this, 10, 'Father')">Father</button>
+                <button class="option" onclick="selectAnswer(this, 10, 'Sister')">Sister</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <div class="question-number">Question 11</div>
+            <div class="question-text">What is "piggy bank" in Korean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 11, '저금통')">저금통</button>
+                <button class="option" onclick="selectAnswer(this, 11, '조금통')">조금통</button>
+                <button class="option" onclick="selectAnswer(this, 11, '지금통')">지금통</button>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <div class="question-number">Question 12</div>
+            <div class="question-text">Fill in the blank: <span class="syllable-box">_음</span></div>
+            <div class="hint">(Hint: ⛪ church)</div>
+            <input type="text" id="q12" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <div class="question-number">Question 13</div>
+            <div class="question-text">How do you write "Terminal" in Korean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 13, '터미널')">터미널</button>
+                <button class="option" onclick="selectAnswer(this, 13, '타미날')">타미날</button>
+                <button class="option" onclick="selectAnswer(this, 13, '투미널')">투미널</button>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <div class="question-number">Question 14</div>
+            <div class="question-text">Fill in the blank: <span class="syllable-box">_센트</span></div>
+            <div class="hint">(Hint: % percent)</div>
+            <input type="text" id="q14" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <div class="question-number">Question 15</div>
+            <div class="question-text">What does "허리" mean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 15, 'Waist')">Waist</button>
+                <button class="option" onclick="selectAnswer(this, 15, 'Leg')">Leg</button>
+                <button class="option" onclick="selectAnswer(this, 15, 'Arm')">Arm</button>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question">
+            <div class="question-number">Question 16</div>
+            <div class="question-text">Select all words that contain the vowel "ㅓ"</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 16, 'all')">거미, 커피, 버스</button>
+                <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">고양이, 토끼, 강아지</button>
+                <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">사과, 바나나, 수박</button>
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question">
+            <div class="question-number">Question 17</div>
+            <div class="question-text">Fill in the blank: Russian people = <span class="syllable-box">_시아</span> 사람</div>
+            <input type="text" id="q17" maxlength="1" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question">
+            <div class="question-number">Question 18</div>
+            <div class="question-text">What does "처음" mean?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 18, 'First')">First time / Beginning</button>
+                <button class="option" onclick="selectAnswer(this, 18, 'Last')">Last time</button>
+                <button class="option" onclick="selectAnswer(this, 18, 'Middle')">Middle</button>
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question">
+            <div class="question-number">Question 19</div>
+            <div class="question-text">Write "mole" (the animal) in Korean</div>
+            <input type="text" id="q19" placeholder="Type your answer">
+        </div>
+
+        <!-- Question 20 -->
+        <div class="question">
+            <div class="question-number">Question 20</div>
+            <div class="question-text">Which one is written correctly?</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 20, 'correct')">어머니께 전화하다</button>
+                <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">오머니께 전화하다</button>
+                <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">아머니께 전화하다</button>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const answers = {
+            q5: '거',
+            q6: '너',
+            q9: '서',
+            q12: '처',
+            q14: '퍼',
+            q17: '러',
+            q19: '두더지',
+            7: '버스',
+            8: '커피',
+            10: 'Mother',
+            11: '저금통',
+            13: '터미널',
+            15: 'Waist',
+            16: 'all',
+            18: 'First',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+        let matchingAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.style.background = 'white');
+            button.style.background = '#f0f4ff';
+            button.style.borderColor = '#667eea';
+            userAnswers[questionNum] = answer;
+        }
+
+        function selectWord(button, word) {
+            const emptyItem = document.querySelector('.matching-item[data-answer]:not(.filled)');
+            if (!emptyItem) return;
+            
+            const wordDiv = emptyItem.querySelector('.word');
+            wordDiv.textContent = word;
+            emptyItem.classList.add('filled');
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            matchingAnswers[emptyItem.dataset.answer] = word;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs
+            ['q5', 'q6', 'q9', 'q12', 'q14', 'q17', 'q19'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim();
+                if (userAnswer === answers[id]) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [7, 8, 10, 11, 13, 15, 16, 18, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            // Check matching (questions 1-4)
+            Object.keys(matchingAnswers).forEach(key => {
+                if (matchingAnswers[key] === key) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! ';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! ';
+            } else {
+                message = '💪 Keep practicing! ';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct! (${percentage}%)`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+        }
+    </script>
+</body>
+</html>
