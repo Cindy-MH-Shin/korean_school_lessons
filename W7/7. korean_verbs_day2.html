@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Verbs - Day 2 (Elementary)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #f5576c;
+            background: white;
+            border-bottom: 4px solid #f5576c;
+        }
+        
+        .nav-tab:hover {
+            background: #edf2f7;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #f5576c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #f5576c;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #d946ef;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .level-elementary {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+            font-weight: bold;
+        }
+        
+        .level-middle {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-high {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .etymology {
+            background: #fff9e6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .etymology-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .etymology-text {
+            font-size: 13px;
+            color: #5d4037;
+        }
+        
+        .related-words {
+            font-size: 12px;
+            color: #6d4c41;
+            margin-top: 5px;
+        }
+        
+        .examples {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #f5576c;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .example-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+        
+        .collocations {
+            background: #fef0f5;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .collocation-title {
+            font-weight: bold;
+            color: #ec4899;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .collocation-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .collocation-item {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #db2777;
+            border: 1px solid #fce7f3;
+        }
+        
+        .quiz-question {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f5576c;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .korean-word-large {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 0 8px;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            padding: 12px 15px;
+            background: white;
+            border: 3px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .quiz-option:hover {
+            border-color: #f5576c;
+            background: #fef0f5;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-option.selected {
+            border-color: #f5576c;
+            background: #fef0f5;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #f5576c;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #e5476c;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-results {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 64px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 35px;
+            font-size: 18px;
+            background: white;
+            color: #f5576c;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Korean Verbs - Day 2</h1>
+            <div class="subtitle">Elementary Level - 10 More Essential Verbs</div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('vocabulary')">📖 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('quiz')">✏️ Practice Quiz</button>
+        </div>
+        
+        <div class="content">
+            <!-- Vocabulary Section -->
+            <div id="vocabulary-section" class="section active">
+                <div class="vocab-grid">
+                    <!-- Verb 1: 하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">1</div>
+                            <div class="vocab-word">하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ha-da]</div>
+                        <div class="vocab-meaning">to do, to make, to play</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">하다</div>
+                            <div class="level-box level-middle">실시하다</div>
+                            <div class="level-box level-high">수행하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Most versatile verb in Korean, used in countless compound verbs</div>
+                            <div class="related-words"><strong>Related:</strong> 해요 (polite), 했어요 (past tense)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">숙제를 해요.</span>
+                                <span class="example-en">I do homework.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">운동을 해요.</span>
+                                <span class="example-en">I exercise.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">공부하다</span>
+                                <span class="collocation-item">요리하다</span>
+                                <span class="collocation-item">일하다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 2: 만들다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">2</div>
+                            <div class="vocab-word">만들다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[man-deul-da]</div>
+                        <div class="vocab-meaning">to make, to create, to build</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">만들다</div>
+                            <div class="level-box level-middle">제작하다</div>
+                            <div class="level-box level-high">창조하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for physical creation or making something</div>
+                            <div class="related-words"><strong>Related:</strong> 만들어요 (polite), 만들었어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">케이크를 만들어요.</span>
+                                <span class="example-en">I make a cake.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">친구를 만들어요.</span>
+                                <span class="example-en">I make friends.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">음식을 만들다</span>
+                                <span class="collocation-item">계획을 만들다</span>
+                                <span class="collocation-item">시간을 만들다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 3: 사다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">3</div>
+                            <div class="vocab-word">사다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[sa-da]</div>
+                        <div class="vocab-meaning">to buy, to purchase</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">사다</div>
+                            <div class="level-box level-middle">구매하다</div>
+                            <div class="level-box level-high">구입하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Basic verb for purchasing items</div>
+                            <div class="related-words"><strong>Related:</strong> 사요 (polite), 샀어요 (past tense)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">옷을 사요.</span>
+                                <span class="example-en">I buy clothes.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">선물을 샀어요.</span>
+                                <span class="example-en">I bought a gift.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">책을 사다</span>
+                                <span class="collocation-item">음식을 사다</span>
+                                <span class="collocation-item">표를 사다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 4: 팔다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">4</div>
+                            <div class="vocab-word">팔다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[pal-da]</div>
+                        <div class="vocab-meaning">to sell</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">팔다</div>
+                            <div class="level-box level-middle">판매하다</div>
+                            <div class="level-box level-high">매각하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 사다 (to buy)</div>
+                            <div class="related-words"><strong>Related:</strong> 팔아요 (polite), 팔았어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">과일을 팔아요.</span>
+                                <span class="example-en">I sell fruits.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">차를 팔았어요.</span>
+                                <span class="example-en">I sold my car.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">물건을 팔다</span>
+                                <span class="collocation-item">집을 팔다</span>
+                                <span class="collocation-item">많이 팔다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 5: 주다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">5</div>
+                            <div class="vocab-word">주다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ju-da]</div>
+                        <div class="vocab-meaning">to give</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">주다</div>
+                            <div class="level-box level-middle">제공하다</div>
+                            <div class="level-box level-high">증여하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used when giving something to someone</div>
+                            <div class="related-words"><strong>Related:</strong> 줘요 (polite), 줬어요 (past tense)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">선물을 줘요.</span>
+                                <span class="example-en">I give a gift.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">친구에게 책을 줬어요.</span>
+                                <span class="example-en">I gave a book to my friend.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">돈을 주다</span>
+                                <span class="collocation-item">도움을 주다</span>
+                                <span class="collocation-item">용기를 주다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 6: 받다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">6</div>
+                            <div class="vocab-word">받다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[bat-da]</div>
+                        <div class="vocab-meaning">to receive, to get</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">받다</div>
+                            <div class="level-box level-middle">수령하다</div>
+                            <div class="level-box level-high">수취하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 주다 (to give)</div>
+                            <div class="related-words"><strong>Related:</strong> 받아요 (polite), 받았어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">편지를 받았어요.</span>
+                                <span class="example-en">I received a letter.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">선물을 받아요.</span>
+                                <span class="example-en">I receive a gift.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">전화를 받다</span>
+                                <span class="collocation-item">상을 받다</span>
+                                <span class="collocation-item">도움을 받다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 7: 알다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">7</div>
+                            <div class="vocab-word">알다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[al-da]</div>
+                        <div class="vocab-meaning">to know, to understand</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">알다</div>
+                            <div class="level-box level-middle">인지하다</div>
+                            <div class="level-box level-high">파악하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for knowledge or understanding</div>
+                            <div class="related-words"><strong>Related:</strong> 알아요 (polite), 알았어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">한국어를 알아요.</span>
+                                <span class="example-en">I know Korean.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">그 사람을 알아요.</span>
+                                <span class="example-en">I know that person.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">이름을 알다</span>
+                                <span class="collocation-item">잘 알다</span>
+                                <span class="collocation-item">모르다 (not know)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 8: 배우다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">8</div>
+                            <div class="vocab-word">배우다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[bae-u-da]</div>
+                        <div class="vocab-meaning">to learn, to study</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">배우다</div>
+                            <div class="level-box level-middle">학습하다</div>
+                            <div class="level-box level-high">습득하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for acquiring new knowledge or skills</div>
+                            <div class="related-words"><strong>Related:</strong> 배워요 (polite), 배웠어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">한국어를 배워요.</span>
+                                <span class="example-en">I learn Korean.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">피아노를 배웠어요.</span>
+                                <span class="example-en">I learned piano.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">외국어를 배우다</span>
+                                <span class="collocation-item">학교에서 배우다</span>
+                                <span class="collocation-item">새로운 것을 배우다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 9: 가르치다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">9</div>
+                            <div class="vocab-word">가르치다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ga-reu-chi-da]</div>
+                        <div class="vocab-meaning">to teach, to instruct</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">가르치다</div>
+                            <div class="level-box level-middle">교육하다</div>
+                            <div class="level-box level-high">지도하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 배우다 (to learn)</div>
+                            <div class="related-words"><strong>Related:</strong> 가르쳐요 (polite), 가르쳤어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">영어를 가르쳐요.</span>
+                                <span class="example-en">I teach English.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">학생들을 가르쳐요.</span>
+                                <span class="example-en">I teach students.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">한국어를 가르치다</span>
+                                <span class="collocation-item">학교에서 가르치다</span>
+                                <span class="collocation-item">잘 가르치다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 10: 일하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">10</div>
+                            <div class="vocab-word">일하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[il-ha-da]</div>
+                        <div class="vocab-meaning">to work</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">일하다</div>
+                            <div class="level-box level-middle">근무하다</div>
+                            <div class="level-box level-high">종사하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Compound verb: 일 (work) + 하다 (to do)</div>
+                            <div class="related-words"><strong>Related:</strong> 일해요 (polite), 일했어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">회사에서 일해요.</span>
+                                <span class="example-en">I work at a company.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">열심히 일해요.</span>
+                                <span class="example-en">I work hard.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">사무실에서 일하다</span>
+                                <span class="collocation-item">밤에 일하다</span>
+                                <span class="collocation-item">함께 일하다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Section -->
+            <div id="quiz-section" class="section">
+                <h2 style="text-align: center; color: #f5576c; font-size: 32px; margin-bottom: 30px;">Korean Verbs Quiz - Day 2</h2>
+                
+                <!-- Question 1 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does <span class="korean-word-large">하다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'do')">to do</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'make')">to make (create)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'work')">to work</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'learn')">to learn</button>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you say "to buy" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '사다')">사다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '팔다')">팔다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '주다')">주다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '받다')">받다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does <span class="korean-word-large">만들다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'make')">to make/create</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'buy')">to buy</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'sell')">to sell</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'give')">to give</button>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">Complete the sentence: 옷을 _____. (I buy clothes.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '사요')">사요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '팔아요')">팔아요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '만들어요')">만들어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '줘요')">줘요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you say "to give" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '주다')">주다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '받다')">받다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '사다')">사다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '팔다')">팔다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does <span class="korean-word-large">알다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'know')">to know</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'learn')">to learn</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'teach')">to teach</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'work')">to work</button>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Which verb means "to sell"?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '팔다')">팔다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '사다')">사다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '주다')">주다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '받다')">받다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Complete the sentence: 한국어를 _____. (I learn Korean.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '배워요')">배워요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '가르쳐요')">가르쳐요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '알아요')">알아요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '일해요')">일해요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does <span class="korean-word-large">가르치다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'teach')">to teach</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'learn')">to learn</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'know')">to know</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'study')">to study</button>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">How do you say "to work" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '일하다')">일하다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '하다')">하다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '만들다')">만들다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '배우다')">배우다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 11 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">Match the pronunciation: [bat-da]</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '받다')">받다 (to receive)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '주다')">주다 (to give)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '사다')">사다 (to buy)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '팔다')">팔다 (to sell)</button>
+                    </div>
+                </div>
+                
+                <!-- Question 12 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Complete the sentence: 선물을 _____. (I give a gift.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '줘요')">줘요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '받아요')">받아요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '사요')">사요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '팔아요')">팔아요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 13 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">Which is the intermediate level word for 만들다?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '제작하다')">제작하다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '생산하다')">생산하다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '구성하다')">구성하다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '형성하다')">형성하다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 14 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What is the opposite of 주다 (to give)?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '받다')">받다 (to receive)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '사다')">사다 (to buy)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '팔다')">팔다 (to sell)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '만들다')">만들다 (to make)</button>
+                    </div>
+                </div>
+                
+                <!-- Question 15 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">Complete the sentence: 회사에서 _____. (I work at a company.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '일해요')">일해요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '공부해요')">공부해요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '배워요')">배워요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '가르쳐요')">가르쳐요</button>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+                
+                <div class="quiz-results" id="results">
+                    <h2>Quiz Results</h2>
+                    <div class="score" id="score"></div>
+                    <p id="message"></p>
+                    <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: 'do',
+            2: '사다',
+            3: 'make',
+            4: '사요',
+            5: '주다',
+            6: 'know',
+            7: '팔다',
+            8: '배워요',
+            9: 'teach',
+            10: '일하다',
+            11: '받다',
+            12: '줘요',
+            13: '제작하다',
+            14: '받다',
+            15: '일해요'
+        };
+        
+        let userAnswers = {};
+        
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            if (section === 'vocabulary') {
+                document.getElementById('vocabulary-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (section === 'quiz') {
+                document.getElementById('quiz-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            }
+        }
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! You have mastered these Korean verbs!';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 Not bad! Review the vocabulary and try again!';
+            } else {
+                message = '📚 Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보라의 생일 파티 - Bora's Birthday Party</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .book-title {
+            text-align: center;
+            color: #ff6b9d;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .book-subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .story-page {
+            background: linear-gradient(to bottom, #fff9f0 0%, #ffffff 100%);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: 3px solid #f0e6d2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .story-page:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #ff6b9d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .illustration {
+            text-align: center;
+            font-size: 4em;
+            margin: 20px 0;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .korean-text {
+            font-size: 1.4em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .pronunciation {
+            color: #999;
+            font-style: italic;
+            font-size: 1em;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .english-text {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            padding-top: 10px;
+            border-top: 2px dashed #e0e0e0;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #ffd54f 60%);
+            font-weight: bold;
+            padding: 2px 4px;
+        }
+        
+        .ending {
+            text-align: center;
+            font-size: 3em;
+            margin: 30px 0;
+            color: #ff6b9d;
+        }
+        
+        .vocabulary-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .vocab-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .vocab-korean {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .vocab-english {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="book-title">🎉 보라의 생일 파티</h1>
+        <p class="book-subtitle">Bora's Birthday Party</p>
+        
+        <!-- Page 1 -->
+        <div class="story-page">
+            <span class="page-number">Page 1</span>
+            <div class="illustration">👧🎂</div>
+            <p class="korean-text">
+                오늘은 <span class="highlight">조카</span> <span class="highlight">보라</span>의 생일이에요.
+            </p>
+            <p class="pronunciation">
+                [o-neul-eun jo-ka bo-ra-ui saeng-il-i-e-yo]
+            </p>
+            <p class="english-text">
+                Today is my niece Bora's birthday.
+            </p>
+        </div>
+        
+        <!-- Page 2 -->
+        <div class="story-page">
+            <span class="page-number">Page 2</span>
+            <div class="illustration">💌🎈</div>
+            <p class="korean-text">
+                나는 <span class="highlight">보라</span>를 <span class="highlight">초대</span>받았어요.
+            </p>
+            <p class="pronunciation">
+                [na-neun bo-ra-reul cho-dae-bad-ass-eo-yo]
+            </p>
+            <p class="english-text">
+                I was invited to Bora's party.
+            </p>
+        </div>
+        
+        <!-- Page 3 -->
+        <div class="story-page">
+            <span class="page-number">Page 3</span>
+            <div class="illustration">🚶‍♀️🛣️</div>
+            <p class="korean-text">
+                <span class="highlight">도로</span>를 따라 걸어가다가 큰 <span class="highlight">로터리</span>를 지났어요.
+            </p>
+            <p class="pronunciation">
+                [do-ro-reul tta-ra geor-eo-ga-da-ga keun ro-teo-ri-reul ji-na-sseo-yo]
+            </p>
+            <p class="english-text">
+                Walking along the road, I passed a big rotary.
+            </p>
+        </div>
+        
+        <!-- Page 4 -->
+        <div class="story-page">
+            <span class="page-number">Page 4</span>
+            <div class="illustration">🚒🏢</div>
+            <p class="korean-text">
+                <span class="highlight">로터리</span> 옆에 빨간 <span class="highlight">소방서</span>가 있었어요.
+            </p>
+            <p class="pronunciation">
+                [ro-teo-ri yeop-e ppal-gan so-bang-seo-ga i-sseo-sseo-yo]
+            </p>
+            <p class="english-text">
+                Next to the rotary was a red fire station.
+            </p>
+        </div>
+        
+        <!-- Page 5 -->
+        <div class="story-page">
+            <span class="page-number">Page 5</span>
+            <div class="illustration">🏠🌸</div>
+            <p class="korean-text">
+                <span class="highlight">보라</span>네 집에 도착했어요.
+            </p>
+            <p class="pronunciation">
+                [bo-ra-ne jib-e do-chak-hae-sseo-yo]
+            </p>
+            <p class="english-text">
+                I arrived at Bora's house.
+            </p>
+        </div>
+        
+        <!-- Page 6 -->
+        <div class="story-page">
+            <span class="page-number">Page 6</span>
+            <div class="illustration">🐰🐘</div>
+            <p class="korean-text">
+                정원에서 <span class="highlight">토끼</span>와 <span class="highlight">코끼리</span> 인형이 나를 반겼어요.
+            </p>
+            <p class="pronunciation">
+                [jeong-won-e-seo to-kki-wa ko-kki-ri in-hyeong-i na-reul ban-gyeo-sseo-yo]
+            </p>
+            <p class="english-text">
+                In the garden, rabbit and elephant dolls greeted me.
+            </p>
+        </div>
+        
+        <!-- Page 7 -->
+        <div class="story-page">
+            <span class="page-number">Page 7</span>
+            <div class="illustration">👧🎩</div>
+            <p class="korean-text">
+                <span class="highlight">보라</span>는 예쁜 <span class="highlight">모자</span>를 쓰고 있었어요.
+            </p>
+            <p class="pronunciation">
+                [bo-ra-neun ye-ppeun mo-ja-reul sseu-go i-sseo-sseo-yo]
+            </p>
+            <p class="english-text">
+                Bora was wearing a pretty hat.
+            </p>
+        </div>
+        
+        <!-- Page 8 -->
+        <div class="story-page">
+            <span class="page-number">Page 8</span>
+            <div class="illustration">🎵🎉</div>
+            <p class="korean-text">
+                "생일 축하해, <span class="highlight">보라</span>야!" 나는 <span class="highlight">노래</span>를 불렀어요.
+            </p>
+            <p class="pronunciation">
+                [saeng-il chuk-ha-hae, bo-ra-ya! na-neun no-rae-reul bul-leo-sseo-yo]
+            </p>
+            <p class="english-text">
+                "Happy birthday, Bora!" I sang a song.
+            </p>
+        </div>
+        
+        <!-- Page 9 -->
+        <div class="story-page">
+            <span class="page-number">Page 9</span>
+            <div class="illustration">🍽️✨</div>
+            <p class="korean-text">
+                식탁에는 맛있는 음식이 많았어요.
+            </p>
+            <p class="pronunciation">
+                [sik-tak-e-neun ma-si-nneun eum-sik-i man-ass-eo-yo]
+            </p>
+            <p class="english-text">
+                There was lots of delicious food on the table.
+            </p>
+        </div>
+        
+        <!-- Page 10 -->
+        <div class="story-page">
+            <span class="page-number">Page 10</span>
+            <div class="illustration">🍠🥒🍇</div>
+            <p class="korean-text">
+                <span class="highlight">고구마</span>, <span class="highlight">오이</span>, <span class="highlight">포도</span>가 있었어요.
+            </p>
+            <p class="pronunciation">
+                [go-gu-ma, o-i, po-do-ga i-sseo-sseo-yo]
+            </p>
+            <p class="english-text">
+                There were sweet potatoes, cucumbers, and grapes.
+            </p>
+        </div>
+        
+        <!-- Page 11 -->
+        <div class="story-page">
+            <span class="page-number">Page 11</span>
+            <div class="illustration">🎂🐯</div>
+            <p class="korean-text">
+                <span class="highlight">호랑이</span> 그림이 그려진 케이크도 있었어요!
+            </p>
+            <p class="pronunciation">
+                [ho-rang-i geu-rim-i geu-ryeo-jin ke-i-keu-do i-sseo-sseo-yo!]
+            </p>
+            <p class="english-text">
+                There was also a cake with a tiger drawing on it!
+            </p>
+        </div>
+        
+        <!-- Page 12 -->
+        <div class="story-page">
+            <span class="page-number">Page 12</span>
+            <div class="illustration">😊🎈💕</div>
+            <p class="korean-text">
+                우리는 함께 맛있는 음식을 먹고 즐거운 하루를 보냈어요.
+            </p>
+            <p class="pronunciation">
+                [u-ri-neun ham-kke ma-si-nneun eum-sik-eul meok-go jeul-geo-un ha-ru-reul bo-nae-sseo-yo]
+            </p>
+            <p class="english-text">
+                We ate delicious food together and had a wonderful day.
+            </p>
+        </div>
+        
+        <div class="ending">
+            ⭐ 끝 (The End) ⭐
+        </div>
+        
+        <!-- Vocabulary Box -->
+        <div class="vocabulary-box">
+            <div class="vocab-title">📚 Story Vocabulary (이야기 속 단어)</div>
+            <div class="vocab-grid">
+                <div class="vocab-item">
+                    <div class="vocab-korean">고구마</div>
+                    <div class="vocab-english">sweet potato</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">노래</div>
+                    <div class="vocab-english">song</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">도로</div>
+                    <div class="vocab-english">road</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">로터리</div>
+                    <div class="vocab-english">rotary</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">모자</div>
+                    <div class="vocab-english">hat</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">보라</div>
+                    <div class="vocab-english">Bora (name)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">소방서</div>
+                    <div class="vocab-english">fire station</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">오이</div>
+                    <div class="vocab-english">cucumber</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">조카</div>
+                    <div class="vocab-english">niece/nephew</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">초대</div>
+                    <div class="vocab-english">invitation</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">코끼리</div>
+                    <div class="vocab-english">elephant</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">토끼</div>
+                    <div class="vocab-english">rabbit</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">포도</div>
+                    <div class="vocab-english">grapes</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-korean">호랑이</div>
+                    <div class="vocab-english">tiger</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

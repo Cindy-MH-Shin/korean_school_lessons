@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보라의 생일 파티 - 문법 연습 (Grammar Practice)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        
+        .section-title {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 30px 0 20px;
+            text-align: center;
+        }
+        
+        .question {
+            background: #f8f9ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .example {
+            background: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.95em;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .blank {
+            display: inline-block;
+            min-width: 80px;
+            padding: 5px 15px;
+            border-bottom: 2px solid #667eea;
+            margin: 0 5px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .hint {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .word-bank {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .word-chip {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #4caf50;
+            color: #4caf50;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .word-chip:active {
+            transform: scale(0.95);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 30px 0 0;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+            background: #5568d3;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .grammar-note {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .grammar-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 8px;
+        }
+        
+        .sentence-parts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            min-height: 60px;
+            border: 2px dashed #ddd;
+            align-items: center;
+        }
+        
+        .draggable-word {
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 8px;
+            cursor: move;
+            user-select: none;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .draggable-word:active {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 보라의 생일 파티</h1>
+        <div class="subtitle">
+            Grammar Practice Quiz<br>
+            문법 구조 연습 문제
+        </div>
+
+        <!-- Section 1: Particles Practice -->
+        <div class="section-title">📌 Part 1: 조사 연습 (Particle Practice)</div>
+        
+        <!-- Question 1 -->
+        <div class="question">
+            <div class="question-number">Question 1</div>
+            <div class="question-text">
+                Fill in the correct word to complete the sentence:
+            </div>
+            <div class="example">
+                Example: 오늘은 조카 보라<strong>의</strong> 생일이에요. (Today is my niece Bora's birthday.)
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                나는 보라의 <input type="text" id="q1" maxlength="2" placeholder="?" style="width: 60px; display: inline-block; text-align: center;">를 받았어요.
+            </p>
+            <div class="hint">Hint: invitation = 초대</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <div class="question-number">Question 2</div>
+            <div class="question-text">
+                Fill in the correct particle (이/가):
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                로터리 옆에 빨간 소방서<input type="text" id="q2" maxlength="1" placeholder="?" style="width: 50px; display: inline-block; text-align: center;"> 있었어요.
+            </p>
+            <div class="hint">Hint: Subject particle for noun ending in vowel</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <div class="question-number">Question 3</div>
+            <div class="question-text">
+                Choose the correct particle:
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                도로_____ 따라 걸어갔어요. (I walked along the road.)
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 3, '를')">를</button>
+                <button class="option" onclick="selectAnswer(this, 3, '에')">에</button>
+                <button class="option" onclick="selectAnswer(this, 3, '에서')">에서</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <div class="question-number">Question 4</div>
+            <div class="question-text">
+                Choose the correct particle for location:
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                정원_____ 토끼와 코끼리 인형이 있었어요. (In the garden, there were rabbit and elephant dolls.)
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 4, '에')">에</button>
+                <button class="option" onclick="selectAnswer(this, 4, '에서')">에서</button>
+                <button class="option" onclick="selectAnswer(this, 4, '로')">로</button>
+            </div>
+            <div class="hint">Hint: Use "에" for existence/location (있다)</div>
+        </div>
+
+        <!-- Section 2: Verb Conjugation -->
+        <div class="section-title">📝 Part 2: 동사 활용 (Verb Conjugation)</div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <div class="question-number">Question 5</div>
+            <div class="question-text">
+                Change the verb to past tense (~었어요/았어요):
+            </div>
+            <div class="grammar-note">
+                <div class="grammar-title">Grammar Note:</div>
+                받다 (to receive) → 받았어요 (received)<br>
+                쓰다 (to wear/put on) → 썼어요 (wore/put on)
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                보라는 예쁜 모자를 <input type="text" id="q5" placeholder="쓰다 → ?" style="width: 150px; display: inline-block;">
+            </p>
+            <div class="hint">Hint: 쓰다 (to wear/put on) → simple past tense (썼어요)</div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <div class="question-number">Question 6</div>
+            <div class="question-text">
+                Complete the sentence with the correct verb form:
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                "생일 축하해, 보라야!" 나는 노래를 _____.
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 6, '불렀어요')">불렀어요 (sang)</button>
+                <button class="option" onclick="selectAnswer(this, 6, '부르다')">부르다 (to sing)</button>
+                <button class="option" onclick="selectAnswer(this, 6, '불러요')">불러요 (sing)</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <div class="question-number">Question 7</div>
+            <div class="question-text">
+                Fill in the blank with past tense:
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                보라네 집에 <input type="text" id="q7" placeholder="도착하다 → ?" style="width: 150px; display: inline-block;">
+            </p>
+            <div class="hint">Hint: 도착하다 (to arrive) → past tense</div>
+        </div>
+
+        <!-- Section 3: Sentence Construction -->
+        <div class="section-title">🔧 Part 3: 문장 만들기 (Sentence Construction)</div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <div class="question-number">Question 8</div>
+            <div class="question-text">
+                Arrange the words to make a correct sentence:
+            </div>
+            <div class="grammar-note">
+                <div class="grammar-title">Correct Order:</div>
+                Subject + Object + Verb (Korean sentence structure)
+            </div>
+            <div class="word-bank">
+                <span class="word-chip" onclick="selectWord(this, 8, '식탁에는')">식탁에는</span>
+                <span class="word-chip" onclick="selectWord(this, 8, '맛있는')">맛있는</span>
+                <span class="word-chip" onclick="selectWord(this, 8, '음식이')">음식이</span>
+                <span class="word-chip" onclick="selectWord(this, 8, '많았어요')">많았어요</span>
+            </div>
+            <input type="text" id="q8" placeholder="Type the sentence in order" style="width: 100%;">
+            <div class="hint">Answer: 식탁에는 맛있는 음식이 많았어요</div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <div class="question-number">Question 9</div>
+            <div class="question-text">
+                Translate and write in Korean:
+            </div>
+            <p style="margin: 15px 0;">
+                "I walked along the road."
+            </p>
+            <div class="word-bank">
+                <span class="word-chip">도로를</span>
+                <span class="word-chip">따라</span>
+                <span class="word-chip">걸어갔어요</span>
+            </div>
+            <input type="text" id="q9" placeholder="Write the complete sentence">
+        </div>
+
+        <!-- Section 4: Grammar Patterns -->
+        <div class="section-title">📚 Part 4: 문법 패턴 (Grammar Patterns)</div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <div class="question-number">Question 10</div>
+            <div class="question-text">
+                Complete using ~고 있었어요 (was doing):
+            </div>
+            <div class="grammar-note">
+                <div class="grammar-title">Pattern: Verb stem + 고 있었어요</div>
+                쓰다 → 쓰고 있었어요 (was wearing)
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                보라는 예쁜 모자를 _____.
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 10, '쓰고 있었어요')">쓰고 있었어요</button>
+                <button class="option" onclick="selectAnswer(this, 10, '썼어요')">썼어요</button>
+                <button class="option" onclick="selectAnswer(this, 10, '쓰어요')">쓰어요</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <div class="question-number">Question 11</div>
+            <div class="question-text">
+                Complete using ~가 그려진 (drawn/with a picture of):
+            </div>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                호랑이 그림이 _____ 케이크도 있었어요!
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 11, '그려진')">그려진</button>
+                <button class="option" onclick="selectAnswer(this, 11, '그렸어요')">그렸어요</button>
+                <button class="option" onclick="selectAnswer(this, 11, '그려요')">그려요</button>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <div class="question-number">Question 12</div>
+            <div class="question-text">
+                Complete using ~를 먹고 (eat and):
+            </div>
+            <div class="grammar-note">
+                <div class="grammar-title">Pattern: Verb stem + 고 (and)</div>
+                먹다 + 보내다 → 먹고 보냈어요 (ate and spent)
+            </div>
+            <input type="text" id="q12" placeholder="우리는 맛있는 음식을 _____ 즐거운 하루를 보냈어요." style="width: 100%;">
+        </div>
+
+        <!-- Section 5: Translation Practice -->
+        <div class="section-title">🌏 Part 5: 번역 연습 (Translation Practice)</div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <div class="question-number">Question 13</div>
+            <div class="question-text">
+                Translate to Korean:
+            </div>
+            <p style="margin: 15px 0;">
+                "Today is my niece Bora's birthday."
+            </p>
+            <input type="text" id="q13" placeholder="오늘은...">
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <div class="question-number">Question 14</div>
+            <div class="question-text">
+                Choose the correct Korean sentence:
+            </div>
+            <p style="margin: 15px 0;">
+                "Next to the rotary was a red fire station."
+            </p>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 14, 'correct')">로터리 옆에 빨간 소방서가 있었어요.</button>
+                <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">로터리에서 빨간 소방서가 있었어요.</button>
+                <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">빨간 소방서 옆에 로터리가 있었어요.</button>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <div class="question-number">Question 15</div>
+            <div class="question-text">
+                Write a sentence using this pattern:
+            </div>
+            <div class="grammar-note">
+                <div class="grammar-title">Pattern: ~에 도착했어요 (arrived at ~)</div>
+                Example: 보라네 집에 도착했어요. (I arrived at Bora's house.)
+            </div>
+            <p style="margin: 15px 0;">
+                Write your own sentence using "~에 도착했어요":
+            </p>
+            <input type="text" id="q15" placeholder="___에 도착했어요." style="width: 100%;">
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const answers = {
+            q1: '초대',
+            q2: '가',
+            q5: '썼어요',
+            q7: '도착했어요',
+            q8: '식탁에는 맛있는 음식이 많았어요',
+            q9: '나는 도로를 따라 걸어갔어요',
+            q12: '먹고',
+            q13: '오늘은 내 조카 보라의 생일이예요',
+            3: '를',
+            4: '에',
+            6: '불렀어요',
+            10: '쓰고 있었어요',
+            11: '그려진',
+            14: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function selectWord(chip, questionNum, word) {
+            // Just for visual feedback
+            chip.style.opacity = chip.style.opacity === '0.5' ? '1' : '0.5';
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 15;
+            let results = {};
+
+            // Check text inputs (8 questions)
+            ['q1', 'q2', 'q5', 'q7', 'q8', 'q9', 'q12', 'q13'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim();
+                const correctAnswer = answers[id];
+                
+                let isCorrect = false;
+                
+                if (id === 'q1') {
+                    isCorrect = userAnswer === '초대';
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer === '가';
+                } else if (id === 'q5') {
+                    const cleanAnswer = userAnswer.replace(/[.。]/g, '');
+                    isCorrect = cleanAnswer === '썼어요' || cleanAnswer === '쓰고 있었어요';
+                } else if (id === 'q7') {
+                    const cleanAnswer = userAnswer.replace(/[.。]/g, '');
+                    isCorrect = cleanAnswer === '도착했어요';
+                } else if (id === 'q8') {
+                    const userClean = userAnswer.replace(/[\s.。,!?]/g, '');
+                    const correctClean = '식탁에는맛있는음식이많았어요';
+                    isCorrect = userClean === correctClean;
+                } else if (id === 'q9') {
+                    const userClean = userAnswer.replace(/[\s.。]/g, '');
+                    const correctClean = '나는도로를따라걸어갔어요';
+                    isCorrect = userClean === correctClean;
+                } else if (id === 'q12') {
+                    isCorrect = userAnswer.includes('먹고');
+                } else if (id === 'q13') {
+                    const userClean = userAnswer.replace(/[\s.。]/g, '');
+                    // Accept multiple variations
+                    isCorrect = userClean.includes('오늘') && userClean.includes('조카') && 
+                               userClean.includes('보라') && userClean.includes('생일');
+                }
+                
+                const qNum = id.replace('q', '');
+                results['Q' + qNum] = isCorrect;
+                
+                if (isCorrect) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice (6 questions: 3, 4, 6, 10, 11, 14)
+            [3, 4, 6, 10, 11, 14].forEach(num => {
+                const isCorrect = userAnswers[num] === answers[num];
+                results['Q' + num] = isCorrect;
+                
+                if (isCorrect) {
+                    correct++;
+                }
+            });
+
+            // Q15 is open-ended (1 question)
+            const q15Input = document.getElementById('q15');
+            const q15Answer = q15Input.value.trim();
+            let q15Correct = false;
+            
+            if (q15Answer.length > 0 && q15Answer.includes('도착했어요')) {
+                q15Correct = true;
+                correct++;
+                q15Input.style.borderColor = '#4caf50';
+            } else if (q15Answer.length > 0) {
+                q15Input.style.borderColor = '#ffc107';
+            } else {
+                q15Input.style.borderColor = '#f44336';
+            }
+            results['Q15'] = q15Correct;
+
+            // Find wrong questions
+            const wrongQuestions = Object.keys(results).filter(key => !results[key]);
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage === 100) {
+                message = '🎉 Perfect Score! 완벽해요!\n';
+            } else if (percentage >= 90) {
+                message = '🎉 Excellent! 훌륭해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else if (percentage >= 50) {
+                message = '💪 Keep practicing! 계속 연습하세요!\n';
+            } else {
+                message = '📚 Study more! 더 공부하세요!\n';
+            }
+            
+            let debugInfo = '';
+            if (wrongQuestions.length > 0) {
+                debugInfo = '\n\n❌ Check: ' + wrongQuestions.join(', ');
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%${debugInfo}`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
