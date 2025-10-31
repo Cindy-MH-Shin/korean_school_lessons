@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>수미와 우주의 대화 - Conversation Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.sumi {
+            color: #e91e63;
+        }
+        
+        .speaker.wooju {
+            color: #2196f3;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.sumi {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.wooju {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+        
+        .quiz-section {
+            margin-top: 30px;
+        }
+        
+        .quiz-title {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            background: #f8f9ff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 25px 0 0;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+            background: #5568d3;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .vocabulary-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .vocabulary-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .vocabulary-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            font-size: 0.95em;
+            color: #555;
+        }
+        
+        .vocab-item {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 수미와 우주의 대화</h1>
+        <div class="subtitle">
+            A Conversation between Sumi and Wooju<br>
+            Read the dialogue and answer the quiz questions!
+        </div>
+
+        <!-- Conversation Section -->
+        <div class="conversation-section">
+            <div class="conversation-title">🗣️ Dialogue / 대화</div>
+            
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미 (Sumi):</span>
+                </div>
+                <div class="message sumi">
+                    우주야, 밖을 봐! 하늘에 <span class="highlight">푸른</span> 하늘과 하얀 <span class="highlight">구름</span>이 정말 예쁘다!
+                    <div class="translation">Wooju, look outside! The blue sky and white clouds are so pretty!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker wooju">
+                    <span class="speaker-icon">👦</span>
+                    <span>우주 (Wooju):</span>
+                </div>
+                <div class="message wooju">
+                    맞아! 근데 <span class="highlight">무지개</span>도 보여! 비가 온 후라서 <span class="highlight">무지개</span>가 떴나 봐.
+                    <div class="translation">Right! But I can also see a rainbow! It must have appeared after the rain.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미:</span>
+                </div>
+                <div class="message sumi">
+                    너는 <span class="highlight">우산</span>을 가져왔구나.
+                    <div class="translation">You brought an umbrella.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker wooju">
+                    <span class="speaker-icon">👦</span>
+                    <span>우주:</span>
+                </div>
+                <div class="message wooju">
+                    우리 <span class="highlight">누나</span>가 <span class="highlight">우산</span>을 챙겨줬어. 일기 예보에 비 온다고 하면서. 나는 오늘 <span class="highlight">수영</span> 수업이 있어.
+                    <div class="translation">My older sister packed the umbrella for me. She said the weather forecast predicted rain. I have swimming class today.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미:</span>
+                </div>
+                <div class="message sumi">
+                    너의 <span class="highlight">누나</span>는 참 똑똑하시네. 너, 그거 알아? 우리 <span class="highlight">수영</span> 선생님은 야구 <span class="highlight">투수</span>였대. 팔 힘이 아주 강해.
+                    <div class="translation">Your older sister is really smart. You know what? Our swimming teacher used to be a baseball pitcher. His arm strength is very strong.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker wooju">
+                    <span class="speaker-icon">👦</span>
+                    <span>우주:</span>
+                </div>
+                <div class="message wooju">
+                    와, 정말? 그건 몰랐네. <span class="highlight">수영</span> 끝나고 우리 집에 갈래? 엄마가 <span class="highlight">쿠키</span> 구우셨어. 맛있는 초코 <span class="highlight">쿠키</span>!
+                    <div class="translation">Wow, really? I didn't know that. Do you want to come to my house after swimming? Mom baked cookies. Delicious chocolate cookies!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미:</span>
+                </div>
+                <div class="message sumi">
+                    좋아! 그럼 차도 마시자. <span class="highlight">주전자</span>에 물을 끓여서 따뜻한 차를 만들면 좋겠다.
+                    <div class="translation">Great! Let's have some tea too. It would be nice to boil water in the kettle and make warm tea.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker wooju">
+                    <span class="speaker-icon">👦</span>
+                    <span>우주:</span>
+                </div>
+                <div class="message wooju">
+                    응! 아, 그리고 지난주에 동화책을 읽었는데 <span class="highlight">추장</span>과 <span class="highlight">부엉이</span>가 나오는 이야기였어. 밤에 <span class="highlight">부엉이</span>가 <span class="highlight">추장</span>에게 지혜를 알려줬대.
+                    <div class="translation">Yes! Oh, and last week I read a fairy tale about a chief and an owl. At night, the owl shared wisdom with the chief.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미:</span>
+                </div>
+                <div class="message sumi">
+                    재미있겠다! 나는 어제 정원에서 <span class="highlight">두더지</span>를 봤어. 땅을 파고 있더라. 크리스마스 때는 빨간 코 <span class="highlight">루돌프</span> 영화를 보고 싶어!
+                    <div class="translation">That sounds interesting! I saw a mole in the garden yesterday. It was digging in the ground. At Christmas, I want to watch a red-nosed Rudolph movie!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker wooju">
+                    <span class="speaker-icon">👦</span>
+                    <span>우주:</span>
+                </div>
+                <div class="message wooju">
+                    좋은 생각이야! 그때 <span class="highlight">쿠키</span>에 <span class="highlight">후추</span>를... 아니지, 설탕을 뿌려서 먹자. <span class="highlight">후추</span>는 짠 음식에 넣어야지! 하하!
+                    <div class="translation">Good idea! Then let's sprinkle... pepper on cookies... no wait, sugar! Pepper should go in salty foods! Haha!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker sumi">
+                    <span class="speaker-icon">👧</span>
+                    <span>수미:</span>
+                </div>
+                <div class="message sumi">
+                    하하하! 그래, <span class="highlight">후추</span> <span class="highlight">쿠키</span>는 안 되지! 자, 이제 <span class="highlight">수영</span> 가자!
+                    <div class="translation">Hahaha! Right, pepper cookies won't work! Come on, let's go swimming now!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Box -->
+        <div class="vocabulary-box">
+            <div class="vocabulary-title">📚 Vocabulary Details (상세 어휘 정보)</div>
+            <div style="font-size: 0.95em; line-height: 1.8; color: #555;">
+                <div style="margin-bottom: 12px;">
+                    <strong>1. 구름</strong> (gureum) - cloud<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>2. 누나</strong> (nuna) - older sister (of a male)<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>3. 두더지</strong> (dudeoji) - mole<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>4. 루돌프</strong> (Rudolpeu) - Rudolph<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From English "Rudolph"</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>5. 무지개</strong> (mujigae) - rainbow<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word (무지 + 개)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>6. 부엉이</strong> (bueong-i) - owl<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word (onomatopoeia from owl's call "부엉")</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>7. 수영</strong> (suyeong) - swimming<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 水泳 (water + swim)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>8. 우산</strong> (usan) - umbrella<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 雨傘 (rain + umbrella)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>9. 주전자</strong> (jujeonja) - kettle, teapot<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 注煎子 (pour + boil + thing)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>10. 추장</strong> (chujang) - chief, tribal leader<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 酋長 (chief + leader)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>11. 쿠키</strong> (kuki) - cookie<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From English "cookie"</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>12. 투수</strong> (tusu) - pitcher (baseball)<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 投手 (throw + hand)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>13. 푸른</strong> (pureun) - blue, green<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word (adjective form of 푸르다)</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <strong>14. 후추</strong> (huchu) - pepper<br>
+                    <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 胡椒 (foreign + spice)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-title">📝 Comprehension Quiz / 이해도 퀴즈</div>
+
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">What did Sumi see in the sky?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 1, 'correct')">Blue sky and white clouds</button>
+                    <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">Stars and moon</button>
+                    <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">Airplane and birds</button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">Why did a rainbow appear?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 2, 'correct')">Because it rained</button>
+                    <button class="option" onclick="selectAnswer(this, 2, 'wrong1')">Because it's morning</button>
+                    <button class="option" onclick="selectAnswer(this, 2, 'wrong2')">Because it's windy</button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">Who packed the umbrella for Wooju?</div>
+                <input type="text" id="q3" placeholder="Type in Korean (Hint: 누_)">
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">What class does Wooju have today?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 4, 'correct')">Swimming class</button>
+                    <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">Piano class</button>
+                    <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">Art class</button>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">What was the swimming teacher's previous job?</div>
+                <input type="text" id="q5" placeholder="Type in Korean">
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">What did Wooju's mom bake?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 6, 'correct')">Cookies</button>
+                    <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">Cake</button>
+                    <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">Bread</button>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">What will they use to make warm tea?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 7, 'correct')">주전자 (kettle)</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">컵 (cup)</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">냄비 (pot)</button>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">The fairy tale Wooju read was about which two characters?</div>
+                <input type="text" id="q8" placeholder="Type in Korean (추장 and ___)">
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">What animal did Sumi see in the garden?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 9, 'correct')">두더지 (mole)</button>
+                    <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">다람쥐 (squirrel)</button>
+                    <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">토끼 (rabbit)</button>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">What is the Korean word for "chief/tribal leader"?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 10, 'correct')">추장</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">추수</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">주장</button>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-number">Question 11</div>
+                <div class="question-text">What should NOT be sprinkled on cookies?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 11, 'correct')">후추 (pepper)</button>
+                    <button class="option" onclick="selectAnswer(this, 11, 'wrong1')">설탕 (sugar)</button>
+                    <button class="option" onclick="selectAnswer(this, 11, 'wrong2')">초콜릿 (chocolate)</button>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-number">Question 12</div>
+                <div class="question-text">Who packed the umbrella for Wooju?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 12, 'correct')">His older sister (누나)</button>
+                    <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">His mom</button>
+                    <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">Sumi</button>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const answers = {
+            q3: '누나',
+            q5: '투수',
+            q8: '부엉이',
+            1: 'correct',
+            2: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            11: 'correct',
+            12: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 12;
+
+            // Check text inputs
+            const q3 = document.getElementById('q3').value.trim();
+            if (q3 === answers.q3) {
+                correct++;
+                document.getElementById('q3').style.borderColor = '#4caf50';
+            } else {
+                document.getElementById('q3').style.borderColor = '#f44336';
+            }
+
+            const q5 = document.getElementById('q5').value.trim();
+            if (q5 === answers.q5) {
+                correct++;
+                document.getElementById('q5').style.borderColor = '#4caf50';
+            } else {
+                document.getElementById('q5').style.borderColor = '#f44336';
+            }
+
+            const q8 = document.getElementById('q8').value.trim();
+            if (q8 === answers.q8) {
+                correct++;
+                document.getElementById('q8').style.borderColor = '#4caf50';
+            } else {
+                document.getElementById('q8').style.borderColor = '#f44336';
+            }
+
+            // Check multiple choice
+            [1, 2, 4, 6, 7, 9, 10, 11, 12].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Proverbs Quiz - 한국 속담 퀴즈 (Extended)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        
+        .proverb-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .proverb-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .proverb-item {
+            margin: 12px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+        
+        .proverb-korean {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .proverb-english {
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .question {
+            background: #f8f9ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .matching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
+        }
+        
+        .matching-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .matching-item:hover {
+            border-color: #667eea;
+        }
+        
+        .matching-item:active {
+            transform: scale(0.95);
+        }
+        
+        .matching-item.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .matching-item.filled {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+        
+        .korean-text {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .english-text {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .meaning-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .meaning-btn {
+            padding: 12px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .meaning-btn:hover {
+            border-color: #667eea;
+        }
+        
+        .meaning-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .meaning-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .hint {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 30px 0 0;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #5568d3;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .emoji {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+        
+        .instruction {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇰🇷 Korean Proverbs Quiz</h1>
+        <div class="subtitle">
+            한국 속담 퀴즈 (Extended Edition)<br>
+            Learn 8 Korean proverbs!
+        </div>
+
+        <!-- Proverb Reference Box -->
+        <div class="proverb-box">
+            <div class="proverb-title">📚 8 Korean Proverbs (속담)</div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">1. 가는 말이 고와야 오는 말이 곱다</div>
+                <div class="proverb-english">What goes around comes around</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">2. 원숭이도 나무에서 떨어진다</div>
+                <div class="proverb-english">Even monkeys fall from trees (Even experts make mistakes)</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">3. 시작이 반이다</div>
+                <div class="proverb-english">Well begun is half done</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">4. 낮말은 새가 듣고 밤말은 쥐가 듣는다</div>
+                <div class="proverb-english">Walls have ears (Be careful what you say)</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">5. 배보다 배꼽이 더 크다</div>
+                <div class="proverb-english">The belly button is bigger than the belly (The minor part is bigger than the major part)</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">6. 콩 심은 데 콩 나고 팥 심은 데 팥 난다</div>
+                <div class="proverb-english">You reap what you sow</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">7. 등잔 밑이 어둡다</div>
+                <div class="proverb-english">It's dark under the lamp (It's hard to see what's right in front of you)</div>
+            </div>
+            
+            <div class="proverb-item">
+                <div class="proverb-korean">8. 호랑이도 제 말 하면 온다</div>
+                <div class="proverb-english">Speak of the tiger, and it comes (Speak of the devil)</div>
+            </div>
+        </div>
+
+        <!-- Question 1-8: Matching -->
+        <div class="question">
+            <div class="question-number">Questions 1-8: Match the Proverbs</div>
+            <div class="instruction">
+                <strong>📌 Instructions:</strong> Click on a Korean proverb, then click on its English meaning below.
+            </div>
+            <div class="matching-grid">
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="가는 말이 고와야 오는 말이 곱다">
+                    <div class="korean-text">가는 말이 고와야<br>오는 말이 곱다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="원숭이도 나무에서 떨어진다">
+                    <div class="korean-text">원숭이도<br>나무에서 떨어진다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="시작이 반이다">
+                    <div class="korean-text">시작이 반이다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="낮말은 새가 듣고 밤말은 쥐가 듣는다">
+                    <div class="korean-text">낮말은 새가 듣고<br>밤말은 쥐가 듣는다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="배보다 배꼽이 더 크다">
+                    <div class="korean-text">배보다<br>배꼽이 더 크다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="콩 심은 데 콩 나고 팥 심은 데 팥 난다">
+                    <div class="korean-text">콩 심은 데 콩 나고<br>팥 심은 데 팥 난다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="등잔 밑이 어둡다">
+                    <div class="korean-text">등잔 밑이 어둡다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+                <div class="matching-item" onclick="selectProverb(this)" data-answer="호랑이도 제 말 하면 온다">
+                    <div class="korean-text">호랑이도<br>제 말 하면 온다</div>
+                    <div class="english-text">Click to match ➡️</div>
+                </div>
+            </div>
+            <div class="meaning-options">
+                <button class="meaning-btn" onclick="matchMeaning(this, '가는 말이 고와야 오는 말이 곱다')">
+                    What goes around<br>comes around
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '원숭이도 나무에서 떨어진다')">
+                    Even experts<br>make mistakes
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '시작이 반이다')">
+                    Well begun is<br>half done
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '낮말은 새가 듣고 밤말은 쥐가 듣는다')">
+                    Walls have ears
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '배보다 배꼽이 더 크다')">
+                    The minor part is bigger<br>than the major part
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '콩 심은 데 콩 나고 팥 심은 데 팥 난다')">
+                    You reap<br>what you sow
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '등잔 밑이 어둡다')">
+                    Hard to see what's<br>right in front of you
+                </button>
+                <button class="meaning-btn" onclick="matchMeaning(this, '호랑이도 제 말 하면 온다')">
+                    Speak of the devil
+                </button>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <div class="question-number">Question 9</div>
+            <div class="question-text">
+                When expenses are greater than what you're buying, which proverb fits?
+            </div>
+            <div class="emoji">🤰💰</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 9, 'correct')">배보다 배꼽이 더 크다</button>
+                <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">시작이 반이다</button>
+                <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">등잔 밑이 어둡다</button>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <div class="question-number">Question 10</div>
+            <div class="question-text">
+                What does "콩 심은 데 콩 나고 팥 심은 데 팥 난다" teach us?
+            </div>
+            <div class="emoji">🌱🫘</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">Always plant beans, not red beans</button>
+                <button class="option" onclick="selectAnswer(this, 10, 'correct')">Your actions determine your results</button>
+                <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">Farming is important</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question">
+            <div class="question-number">Question 11</div>
+            <div class="question-text">
+                Fill in the blank: 등잔 ___이 어둡다
+            </div>
+            <div class="hint">Hint: under the lamp</div>
+            <input type="text" id="q11" placeholder="Type the missing word in Korean">
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question">
+            <div class="question-number">Question 12</div>
+            <div class="question-text">
+                Someone keeps appearing right when you're talking about them. Which proverb describes this?
+            </div>
+            <div class="emoji">🐯💬</div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">원숭이도 나무에서 떨어진다</button>
+                <button class="option" onclick="selectAnswer(this, 12, 'correct')">호랑이도 제 말 하면 온다</button>
+                <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">가는 말이 고와야 오는 말이 곱다</button>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question">
+            <div class="question-number">Question 13</div>
+            <div class="question-text">
+                Which proverb means "You can't see the obvious things close to you"?
+            </div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">배보다 배꼽이 더 크다</button>
+                <button class="option" onclick="selectAnswer(this, 13, 'correct')">등잔 밑이 어둡다</button>
+                <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">낮말은 새가 듣고 밤말은 쥐가 듣는다</button>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question">
+            <div class="question-number">Question 14</div>
+            <div class="question-text">
+                Write the Korean proverb that means "Speak of the devil"
+            </div>
+            <div class="hint">Hint: 호랑이도...</div>
+            <input type="text" id="q14" placeholder="Type the complete proverb in Korean">
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question">
+            <div class="question-number">Question 15</div>
+            <div class="question-text">
+                What is the literal meaning of "배보다 배꼽이 더 크다"?
+            </div>
+            <div class="options">
+                <button class="option" onclick="selectAnswer(this, 15, 'correct')">The belly button is bigger than the belly</button>
+                <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">The belly is very big</button>
+                <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">Belly buttons are important</button>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question">
+            <div class="question-number">Question 16</div>
+            <div class="question-text">
+                Fill in the blank: 콩 심은 데 콩 나고 팥 심은 데 팥 _____
+            </div>
+            <div class="hint">Hint: grows/comes out</div>
+            <input type="text" id="q16" placeholder="Type the missing word in Korean">
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const answers = {
+            q11: '밑',
+            q14: '호랑이도 제 말 하면 온다',
+            q16: '난다',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            13: 'correct',
+            15: 'correct'
+        };
+
+        let userAnswers = {};
+        let matchingAnswers = {};
+        let selectedProverb = null;
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function selectProverb(item) {
+            if (item.classList.contains('filled')) {
+                return;
+            }
+            const allItems = document.querySelectorAll('.matching-item');
+            allItems.forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            selectedProverb = item;
+        }
+
+        function matchMeaning(button, correctProverb) {
+            if (!selectedProverb) {
+                alert('Please select a Korean proverb first! 먼저 한국 속담을 선택하세요!');
+                return;
+            }
+            
+            if (selectedProverb.classList.contains('filled')) {
+                alert('Already matched! 이미 매칭되었습니다!');
+                return;
+            }
+            
+            const proverbText = selectedProverb.dataset.answer;
+            matchingAnswers[correctProverb] = proverbText;
+            
+            selectedProverb.classList.add('filled');
+            selectedProverb.classList.remove('selected');
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            
+            selectedProverb = null;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 16;
+            let results = {};
+
+            // Check text inputs (q11, q14, q16)
+            const q11Input = document.getElementById('q11');
+            const q11Answer = q11Input.value.trim().replace(/[.。]/g, '');
+            const q11Correct = q11Answer === '밑';
+            results['Q11'] = q11Correct;
+            if (q11Correct) {
+                correct++;
+                q11Input.style.borderColor = '#4caf50';
+            } else {
+                q11Input.style.borderColor = '#f44336';
+            }
+
+            const q14Input = document.getElementById('q14');
+            const q14Answer = q14Input.value.trim().replace(/[\s.。]/g, '');
+            const correctQ14 = '호랑이도제말하면온다';
+            const q14Correct = q14Answer === correctQ14;
+            results['Q14'] = q14Correct;
+            if (q14Correct) {
+                correct++;
+                q14Input.style.borderColor = '#4caf50';
+            } else {
+                q14Input.style.borderColor = '#f44336';
+            }
+
+            const q16Input = document.getElementById('q16');
+            const q16Answer = q16Input.value.trim().replace(/[.。]/g, '');
+            const q16Correct = q16Answer === '난다';
+            results['Q16'] = q16Correct;
+            if (q16Correct) {
+                correct++;
+                q16Input.style.borderColor = '#4caf50';
+            } else {
+                q16Input.style.borderColor = '#f44336';
+            }
+
+            // Check multiple choice (9, 10, 12, 13, 15)
+            [9, 10, 12, 13, 15].forEach(num => {
+                const isCorrect = userAnswers[num] === answers[num];
+                results['Q' + num] = isCorrect;
+                if (isCorrect) {
+                    correct++;
+                }
+            });
+
+            // Check matching (questions 1-8)
+            Object.keys(matchingAnswers).forEach(correctAnswer => {
+                if (matchingAnswers[correctAnswer] === correctAnswer) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            let emoji = '';
+            if (percentage === 100) {
+                message = 'Perfect Score! 완벽해요!';
+                emoji = '🎉🏆';
+            } else if (percentage >= 80) {
+                message = 'Excellent! 훌륭해요!';
+                emoji = '👏✨';
+            } else if (percentage >= 60) {
+                message = 'Good job! 잘했어요!';
+                emoji = '👍😊';
+            } else {
+                message = 'Keep practicing! 계속 연습하세요!';
+                emoji = '💪📚';
+            }
+            
+            resultDiv.innerHTML = `<div style="font-size: 3em; margin-bottom: 10px;">${emoji}</div>${message}<br><br>You got ${correct} out of ${total} correct!<br>${percentage}%`;
+            resultDiv.style.background = percentage >= 60 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 60 ? '#2e7d32' : '#e65100';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
