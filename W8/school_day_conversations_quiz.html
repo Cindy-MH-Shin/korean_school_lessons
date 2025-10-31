@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>학교 일과 대화 - School Day Conversations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 15px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+            color: #667eea;
+        }
+        
+        .speaker.teacher {
+            color: #e91e63;
+        }
+        
+        .message {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 1.02em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 3px solid #667eea;
+        }
+        
+        .message.teacher {
+            border-left-color: #e91e63;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 6px;
+            font-style: italic;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .menu-item {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .vocabulary-section {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .vocabulary-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .vocab-category {
+            margin-bottom: 20px;
+        }
+        
+        .category-title {
+            font-weight: bold;
+            color: #ff6f00;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #ffb74d;
+            padding-bottom: 5px;
+        }
+        
+        .vocab-item {
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .vocab-word {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.05em;
+        }
+        
+        .vocab-details {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 3px;
+        }
+        
+        .quiz-section {
+            margin-top: 30px;
+        }
+        
+        .quiz-title {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            background: #f8f9ff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .matching-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .matching-item {
+            text-align: center;
+            padding: 15px 10px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .matching-item:active {
+            transform: scale(0.95);
+        }
+        
+        .matching-item.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .word {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .word-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .word-btn {
+            padding: 12px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.2s;
+        }
+        
+        .word-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .word-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 25px 0 0;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+            background: #5568d3;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .hint {
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 학교 일과 대화</h1>
+        <div class="subtitle">
+            School Day Conversations<br>
+            Learn Korean vocabulary through daily school life!
+        </div>
+
+        <!-- Dialogue 1: Being Late -->
+        <div class="section">
+            <div class="section-title">🕐 대화 1: 지각 이유 / Reasons for Being Late</div>
+            
+            <div class="dialogue">
+                <div class="speaker teacher">👨‍🏫 선생님 (Teacher):</div>
+                <div class="message teacher">
+                    왜 <span class="highlight">지각</span>했니?
+                    <div class="translation">Why are you late?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생1 (Student 1):</div>
+                <div class="message">
+                    <span class="highlight">버스</span>를 <span class="highlight">놓쳐서</span> 늦었어요.
+                    <div class="translation">I'm late because I missed the bus.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👩‍🎓 학생2 (Student 2):</div>
+                <div class="message">
+                    <span class="highlight">친구</span>와 <span class="highlight">수다 떨면서</span> 걸어오다가 늦었어요.
+                    <div class="translation">I'm late because I was chatting with a friend while walking here.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생3 (Student 3):</div>
+                <div class="message">
+                    <span class="highlight">아침 밥</span>을 먹다가 늦었어요.
+                    <div class="translation">I'm late because I was eating breakfast.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👩‍🎓 학생4 (Student 4):</div>
+                <div class="message">
+                    <span class="highlight">차</span>가 <span class="highlight">막혀서</span> 늦었어요.
+                    <div class="translation">I'm late because of traffic congestion.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialogue 2: Favorite Subjects -->
+        <div class="section">
+            <div class="section-title">📖 대화 2: 좋아하는 과목 / Favorite Subjects</div>
+            
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생1:</div>
+                <div class="message">
+                    너는 무슨 <span class="highlight">과목</span>이 제일 좋지?
+                    <div class="translation">What subject do you like best?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👩‍🎓 학생2:</div>
+                <div class="message">
+                    나는 <span class="highlight">국어</span>가 제일 좋아.
+                    <div class="translation">I like Korean the best.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생3:</div>
+                <div class="message">
+                    나는 <span class="highlight">과학</span>이 제일 좋아.
+                    <div class="translation">I like science the best.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- School Cafeteria Menu -->
+        <div class="section">
+            <div class="section-title">🍽️ 학교 식당 메뉴 / School Cafeteria Menu</div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <span class="highlight">한식</span><br>
+                    <span style="font-size: 0.9em; font-weight: normal;">Korean food</span>
+                </div>
+                <div class="menu-item">
+                    <span class="highlight">양식</span><br>
+                    <span style="font-size: 0.9em; font-weight: normal;">Western food</span>
+                </div>
+                <div class="menu-item">
+                    <span class="highlight">중식</span><br>
+                    <span style="font-size: 0.9em; font-weight: normal;">Chinese food</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- School Cleaning -->
+        <div class="section">
+            <div class="section-title">🧹 학교 청소 / School Cleaning</div>
+            
+            <div class="info-box">
+                <div class="info-title"><span class="highlight">교실</span> 청소 / Classroom Cleaning</div>
+                아침, 점심 시간, 혹은 수업 시간 이후에 <span class="highlight">교실</span> 및 인근 <span class="highlight">복도</span> 청소
+                <div class="translation">Clean the classroom and nearby hallways in the morning, during lunchtime, or after class hours</div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">특별 구역 청소 / Special Area Cleaning</div>
+                특별실 (<span class="highlight">음악실</span>, <span class="highlight">미술실</span>, <span class="highlight">체육관</span>) 및 근처 청소
+                <div class="translation">Clean special rooms (music room, art room, gymnasium) and nearby areas</div>
+            </div>
+        </div>
+
+        <!-- Closing Homeroom -->
+        <div class="section">
+            <div class="section-title">🔔 종례 / Closing Homeroom</div>
+            <div class="info-box">
+                하루를 마무리하는 시간
+                <div class="translation">Time to wrap up the day</div>
+            </div>
+        </div>
+
+        <!-- Dialogue 3: After School Plans -->
+        <div class="section">
+            <div class="section-title">🏃 대화 3: 방과 후 계획 / After School Plans</div>
+            
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생1:</div>
+                <div class="message">
+                    학교 끝나고 뭐해?
+                    <div class="translation">What are you doing after school?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👩‍🎓 학생2:</div>
+                <div class="message">
+                    집으로 갈거야.
+                    <div class="translation">I'm going home.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👨‍🎓 학생2:</div>
+                <div class="message">
+                    남아서 <span class="highlight">공부</span>할거야.
+                    <div class="translation">I'm staying to study.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker">👩‍🎓 학생3:</div>
+                <div class="message">
+                    <span class="highlight">학원</span>에 갈거야.
+                    <div class="translation">I'm going to the academy (private tutoring institute).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Section -->
+        <div class="vocabulary-section">
+            <div class="vocabulary-title">📚 주요 단어 정리 / Vocabulary List</div>
+            
+            <div class="vocab-category">
+                <div class="category-title">🏫 학교 관련 / School-Related</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">1. 교실 (gyosil)</div>
+                    <div class="vocab-details">classroom | Etymology: From Chinese characters 敎室 (teach + room)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">2. 조례 (jorye)</div>
+                    <div class="vocab-details">morning assembly/homeroom | Etymology: From Chinese characters 朝禮 (morning + ceremony)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">3. 종례 (jongrye)</div>
+                    <div class="vocab-details">closing homeroom/assembly | Etymology: From Chinese characters 終禮 (end + ceremony)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">4. 지각 (jigak)</div>
+                    <div class="vocab-details">being late, tardiness | Etymology: From Chinese characters 遲刻 (late + carve/engrave)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">5. 선생님 (seonsaengnim)</div>
+                    <div class="vocab-details">teacher | Etymology: From Chinese characters 先生 + 님 (honorific)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">6. 학생 (haksaeng)</div>
+                    <div class="vocab-details">student | Etymology: From Chinese characters 學生 (learn + life/born)</div>
+                </div>
+            </div>
+
+            <div class="vocab-category">
+                <div class="category-title">📖 과목 / Subjects</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">7. 과목 (gwamok)</div>
+                    <div class="vocab-details">subject (school subject) | Etymology: From Chinese characters 科目 (department + item)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">8. 국어 (gugeo)</div>
+                    <div class="vocab-details">Korean language | Etymology: From Chinese characters 國語 (country + language)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">9. 과학 (gwahak)</div>
+                    <div class="vocab-details">science | Etymology: From Chinese characters 科學 (department + learning)</div>
+                </div>
+            </div>
+
+            <div class="vocab-category">
+                <div class="category-title">🏛️ 장소 / Places</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">10. 식당 (sikdang)</div>
+                    <div class="vocab-details">cafeteria, dining hall | Etymology: From Chinese characters 食堂 (eat + hall)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">11. 음악실 (eumagsil)</div>
+                    <div class="vocab-details">music room | Etymology: From Chinese characters 音樂室 (sound + music + room)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">12. 미술실 (misutsil)</div>
+                    <div class="vocab-details">art room | Etymology: From Chinese characters 美術室 (beauty + art + room)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">13. 체육관 (cheyukgwan)</div>
+                    <div class="vocab-details">gymnasium | Etymology: From Chinese characters 體育館 (body + nurture + building)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">14. 복도 (bokdo)</div>
+                    <div class="vocab-details">hallway, corridor | Etymology: From Chinese characters 複道 (complex + path)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">15. 학원 (hagwon)</div>
+                    <div class="vocab-details">private academy, tutoring institute | Etymology: From Chinese characters 學院 (learn + institution)</div>
+                </div>
+            </div>
+
+            <div class="vocab-category">
+                <div class="category-title">🍜 음식 / Food</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">16. 한식 (hansik)</div>
+                    <div class="vocab-details">Korean food | Etymology: From Chinese characters 韓食 (Korea + food)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">17. 양식 (yangsik)</div>
+                    <div class="vocab-details">Western food | Etymology: From Chinese characters 洋食 (ocean/Western + food)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">18. 중식 (jungsik)</div>
+                    <div class="vocab-details">Chinese food | Etymology: From Chinese characters 中食 (China/middle + food)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">19. 아침 밥 (achim bap)</div>
+                    <div class="vocab-details">breakfast | Etymology: 아침 (morning, native) + 밥 (cooked rice, native)</div>
+                </div>
+            </div>
+
+            <div class="vocab-category">
+                <div class="category-title">💬 동사 / Verbs</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">20. 놓치다 (nochida)</div>
+                    <div class="vocab-details">to miss (bus, train, opportunity) | Etymology: Native Korean word</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">21. 수다 떨다 (suda tteolda)</div>
+                    <div class="vocab-details">to chat, to gossip | Etymology: Native Korean phrase</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">22. 막히다 (makhida)</div>
+                    <div class="vocab-details">to be blocked, to be congested | Etymology: Native Korean word</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">23. 청소 (cheongso)</div>
+                    <div class="vocab-details">cleaning | Etymology: From Chinese characters 淸掃 (clean + sweep)</div>
+                </div>
+            </div>
+
+            <div class="vocab-category">
+                <div class="category-title">🚗 기타 / Others</div>
+                
+                <div class="vocab-item">
+                    <div class="vocab-word">24. 버스 (beoseu)</div>
+                    <div class="vocab-details">bus | Etymology: From English "bus"</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">25. 차 (cha)</div>
+                    <div class="vocab-details">car, vehicle | Etymology: From Chinese character 車 (vehicle)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">26. 친구 (chingu)</div>
+                    <div class="vocab-details">friend | Etymology: From Chinese characters 親舊 (close + old/familiar)</div>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">27. 공부 (gongbu)</div>
+                    <div class="vocab-details">study | Etymology: From Chinese characters 工夫 (work + time/effort)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-title">📝 Vocabulary Quiz / 단어 퀴즈</div>
+
+            <!-- Questions 1-4: Matching -->
+            <div class="question">
+                <div class="question-number">Questions 1-4: Match Korean words with English meanings</div>
+                <div class="question-text">Click on a Korean word, then click on the correct English meaning<br>한국어 단어를 클릭한 후 올바른 영어 뜻을 클릭하세요</div>
+                
+                <div class="matching-grid">
+                    <div class="matching-item" data-answer="classroom" onclick="selectImage(this)">
+                        <div class="word">교실</div>
+                    </div>
+                    <div class="matching-item" data-answer="student" onclick="selectImage(this)">
+                        <div class="word">학생</div>
+                    </div>
+                    <div class="matching-item" data-answer="teacher" onclick="selectImage(this)">
+                        <div class="word">선생님</div>
+                    </div>
+                    <div class="matching-item" data-answer="friend" onclick="selectImage(this)">
+                        <div class="word">친구</div>
+                    </div>
+                </div>
+
+                <div class="word-options">
+                    <button class="word-btn" onclick="selectWord(this, 'classroom')">classroom</button>
+                    <button class="word-btn" onclick="selectWord(this, 'student')">student</button>
+                    <button class="word-btn" onclick="selectWord(this, 'teacher')">teacher</button>
+                    <button class="word-btn" onclick="selectWord(this, 'friend')">friend</button>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">What is the Korean word for "being late"?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 5, 'correct')">지각</button>
+                    <button class="option" onclick="selectAnswer(this, 5, 'wrong1')">조례</button>
+                    <button class="option" onclick="selectAnswer(this, 5, 'wrong2')">종례</button>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">Write the Korean word for "bus"</div>
+                <input type="text" id="q6" placeholder="Type in Korean">
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">What does "과목" mean in English?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 7, 'correct')">subject</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">student</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">teacher</button>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">How do you say "Korean language" in Korean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 8, 'correct')">국어</button>
+                    <button class="option" onclick="selectAnswer(this, 8, 'wrong1')">과학</button>
+                    <button class="option" onclick="selectAnswer(this, 8, 'wrong2')">과목</button>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">Write the Korean word for "cafeteria"</div>
+                <input type="text" id="q9" placeholder="Type in Korean (Hint: 식_)">
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">What is "음악실" in English?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 10, 'correct')">music room</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">art room</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">gymnasium</button>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-number">Question 11</div>
+                <div class="question-text">Which room is "미술실"?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 11, 'correct')">art room</button>
+                    <button class="option" onclick="selectAnswer(this, 11, 'wrong1')">music room</button>
+                    <button class="option" onclick="selectAnswer(this, 11, 'wrong2')">classroom</button>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-number">Question 12</div>
+                <div class="question-text">Write the Korean word for "gymnasium"</div>
+                <input type="text" id="q12" placeholder="Type in Korean">
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-number">Question 13</div>
+                <div class="question-text">What does "한식" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 13, 'correct')">Korean food</button>
+                    <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">Western food</button>
+                    <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">Chinese food</button>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-number">Question 14</div>
+                <div class="question-text">How do you say "Western food" in Korean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 14, 'correct')">양식</button>
+                    <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">한식</button>
+                    <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">중식</button>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-number">Question 15</div>
+                <div class="question-text">What is "학원" in English?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 15, 'correct')">private academy</button>
+                    <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">school</button>
+                    <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">library</button>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-number">Question 16</div>
+                <div class="question-text">Write the Korean word for "hallway"</div>
+                <input type="text" id="q16" placeholder="Type in Korean (Hint: 복_)">
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-number">Question 17</div>
+                <div class="question-text">What does "청소" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 17, 'correct')">cleaning</button>
+                    <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">studying</button>
+                    <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">eating</button>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-number">Question 18</div>
+                <div class="question-text">How do you say "to study" in Korean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 18, 'correct')">공부</button>
+                    <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">청소</button>
+                    <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">수업</button>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-number">Question 19</div>
+                <div class="question-text">What is "조례" in English?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 19, 'correct')">morning assembly</button>
+                    <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">closing homeroom</button>
+                    <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">lunch time</button>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-number">Question 20</div>
+                <div class="question-text">Write the Korean word for "closing homeroom"</div>
+                <input type="text" id="q20" placeholder="Type in Korean">
+            </div>
+
+            <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const answers = {
+            q6: '버스',
+            q9: '식당',
+            q12: '체육관',
+            q16: '복도',
+            q20: '종례',
+            5: 'correct',
+            7: 'correct',
+            8: 'correct',
+            10: 'correct',
+            11: 'correct',
+            13: 'correct',
+            14: 'correct',
+            15: 'correct',
+            17: 'correct',
+            18: 'correct',
+            19: 'correct'
+        };
+
+        let userAnswers = {};
+        let matchingAnswers = {};
+        let selectedImage = null;
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function selectImage(item) {
+            const allItems = document.querySelectorAll('.matching-item');
+            allItems.forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            selectedImage = item;
+        }
+
+        function selectWord(button, word) {
+            if (!selectedImage) {
+                alert('먼저 한국어 단어를 선택해주세요! / Please select a Korean word first!');
+                return;
+            }
+            
+            if (selectedImage.classList.contains('filled')) {
+                alert('이미 답을 선택했습니다! / Already answered!');
+                return;
+            }
+            
+            selectedImage.classList.add('filled');
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            matchingAnswers[selectedImage.dataset.answer] = word;
+            
+            selectedImage.classList.remove('selected');
+            selectedImage = null;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs
+            ['q6', 'q9', 'q12', 'q16', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim();
+                if (userAnswer === answers[id]) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [5, 7, 8, 10, 11, 13, 14, 15, 17, 18, 19].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            // Check matching (questions 1-4)
+            Object.keys(matchingAnswers).forEach(key => {
+                if (matchingAnswers[key] === key) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
