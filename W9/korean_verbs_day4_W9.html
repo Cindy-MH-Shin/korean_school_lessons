@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Verbs - Day 4 (Elementary)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #f57c00;
+            background: white;
+            border-bottom: 4px solid #f57c00;
+        }
+        
+        .nav-tab:hover {
+            background: #edf2f7;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #f57c00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 124, 0, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #f57c00;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #fb8c00;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .level-elementary {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+            font-weight: bold;
+        }
+        
+        .level-middle {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-high {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .etymology {
+            background: #fff9e6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .etymology-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .etymology-text {
+            font-size: 13px;
+            color: #5d4037;
+        }
+        
+        .related-words {
+            font-size: 12px;
+            color: #6d4c41;
+            margin-top: 5px;
+        }
+        
+        .examples {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .example-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+        
+        .collocations {
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .collocation-title {
+            font-weight: bold;
+            color: #ef6c00;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .collocation-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .collocation-item {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .quiz-question {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .korean-word-large {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f57c00;
+            margin: 0 8px;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            padding: 12px 15px;
+            background: white;
+            border: 3px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .quiz-option:hover {
+            border-color: #f57c00;
+            background: #fff3e0;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-option.selected {
+            border-color: #f57c00;
+            background: #fff3e0;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #f57c00;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #e65100;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-results {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 64px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 35px;
+            font-size: 18px;
+            background: white;
+            color: #f57c00;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Korean Verbs - Day 4</h1>
+            <div class="subtitle">Elementary Level - 10 Daily Life Verbs</div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('vocabulary')">📖 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('quiz')">✏️ Practice Quiz</button>
+        </div>
+        
+        <div class="content">
+            <!-- Vocabulary Section -->
+            <div id="vocabulary-section" class="section active">
+                <div class="vocab-grid">
+                    <!-- Verb 1: 열다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">1</div>
+                            <div class="vocab-word">열다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[yeol-da]</div>
+                        <div class="vocab-meaning">to open</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">열다</div>
+                            <div class="level-box level-middle">개방하다</div>
+                            <div class="level-box level-high">개시하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for opening doors, windows, books, etc.</div>
+                            <div class="related-words"><strong>Related:</strong> 열어요 (polite), 열었어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">문을 열어요.</span>
+                                <span class="example-en">I open the door.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">창문을 열었어요.</span>
+                                <span class="example-en">I opened the window.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">가게를 열다</span>
+                                <span class="collocation-item">책을 열다</span>
+                                <span class="collocation-item">입을 열다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 2: 닫다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">2</div>
+                            <div class="vocab-word">닫다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[dat-da]</div>
+                        <div class="vocab-meaning">to close, to shut</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">닫다</div>
+                            <div class="level-box level-middle">폐쇄하다</div>
+                            <div class="level-box level-high">폐문하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 열다 (to open)</div>
+                            <div class="related-words"><strong>Related:</strong> 닫아요 (polite), 닫았어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">문을 닫아요.</span>
+                                <span class="example-en">I close the door.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">창문을 닫았어요.</span>
+                                <span class="example-en">I closed the window.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">가게를 닫다</span>
+                                <span class="collocation-item">눈을 닫다</span>
+                                <span class="collocation-item">입을 닫다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 3: 켜다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">3</div>
+                            <div class="vocab-word">켜다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[kyeo-da]</div>
+                        <div class="vocab-meaning">to turn on, to switch on</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">켜다</div>
+                            <div class="level-box level-middle">작동시키다</div>
+                            <div class="level-box level-high">가동하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for lights, electronics, appliances</div>
+                            <div class="related-words"><strong>Related:</strong> 켜요 (polite), 켰어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">불을 켜요.</span>
+                                <span class="example-en">I turn on the light.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">컴퓨터를 켰어요.</span>
+                                <span class="example-en">I turned on the computer.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">TV를 켜다</span>
+                                <span class="collocation-item">에어컨을 켜다</span>
+                                <span class="collocation-item">핸드폰을 켜다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 4: 끄다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">4</div>
+                            <div class="vocab-word">끄다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[kkeu-da]</div>
+                        <div class="vocab-meaning">to turn off, to switch off</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">끄다</div>
+                            <div class="level-box level-middle">소등하다</div>
+                            <div class="level-box level-high">정지시키다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 켜다 (to turn on)</div>
+                            <div class="related-words"><strong>Related:</strong> 꺼요 (polite), 껐어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">불을 꺼요.</span>
+                                <span class="example-en">I turn off the light.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">TV를 껐어요.</span>
+                                <span class="example-en">I turned off the TV.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">컴퓨터를 끄다</span>
+                                <span class="collocation-item">에어컨을 끄다</span>
+                                <span class="collocation-item">핸드폰을 끄다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 5: 씻다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">5</div>
+                            <div class="vocab-word">씻다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ssit-da]</div>
+                        <div class="vocab-meaning">to wash, to clean</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">씻다</div>
+                            <div class="level-box level-middle">세척하다</div>
+                            <div class="level-box level-high">세정하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for washing body parts or objects</div>
+                            <div class="related-words"><strong>Related:</strong> 씻어요 (polite), 씻었어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">손을 씻어요.</span>
+                                <span class="example-en">I wash my hands.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">샤워를 했어요.</span>
+                                <span class="example-en">I took a shower.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">얼굴을 씻다</span>
+                                <span class="collocation-item">머리를 감다</span>
+                                <span class="collocation-item">과일을 씻다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 6: 입다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">6</div>
+                            <div class="vocab-word">입다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ip-da]</div>
+                        <div class="vocab-meaning">to wear, to put on (clothes)</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">입다</div>
+                            <div class="level-box level-middle">착용하다</div>
+                            <div class="level-box level-high">의복하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used specifically for clothes, shirts, pants, dresses</div>
+                            <div class="related-words"><strong>Related:</strong> 입어요 (polite), 입었어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">옷을 입어요.</span>
+                                <span class="example-en">I wear clothes.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">청바지를 입었어요.</span>
+                                <span class="example-en">I wore jeans.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">교복을 입다</span>
+                                <span class="collocation-item">정장을 입다</span>
+                                <span class="collocation-item">예쁜 옷을 입다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 7: 벗다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">7</div>
+                            <div class="vocab-word">벗다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[beot-da]</div>
+                        <div class="vocab-meaning">to take off, to remove (clothes)</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">벗다</div>
+                            <div class="level-box level-middle">탈의하다</div>
+                            <div class="level-box level-high">제거하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 입다 (to wear)</div>
+                            <div class="related-words"><strong>Related:</strong> 벗어요 (polite), 벗었어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">신발을 벗어요.</span>
+                                <span class="example-en">I take off my shoes.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">재킷을 벗었어요.</span>
+                                <span class="example-en">I took off my jacket.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">양말을 벗다</span>
+                                <span class="collocation-item">모자를 벗다</span>
+                                <span class="collocation-item">옷을 벗다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 8: 타다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">8</div>
+                            <div class="vocab-word">타다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ta-da]</div>
+                        <div class="vocab-meaning">to ride, to take (transportation)</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">타다</div>
+                            <div class="level-box level-middle">탑승하다</div>
+                            <div class="level-box level-high">승차하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for all forms of transportation</div>
+                            <div class="related-words"><strong>Related:</strong> 타요 (polite), 탔어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">버스를 타요.</span>
+                                <span class="example-en">I take the bus.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">지하철을 탔어요.</span>
+                                <span class="example-en">I took the subway.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">택시를 타다</span>
+                                <span class="collocation-item">비행기를 타다</span>
+                                <span class="collocation-item">자전거를 타다</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 9: 내리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">9</div>
+                            <div class="vocab-word">내리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[nae-ri-da]</div>
+                        <div class="vocab-meaning">to get off, to go down</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">내리다</div>
+                            <div class="level-box level-middle">하차하다</div>
+                            <div class="level-box level-high">하강하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Opposite of 타다 (to get on); also means to come down</div>
+                            <div class="related-words"><strong>Related:</strong> 내려요 (polite), 내렸어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">버스에서 내려요.</span>
+                                <span class="example-en">I get off the bus.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">계단을 내려가요.</span>
+                                <span class="example-en">I go down the stairs.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">지하철에서 내리다</span>
+                                <span class="collocation-item">택시에서 내리다</span>
+                                <span class="collocation-item">눈이 내리다 (to snow)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verb 10: 기다리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">10</div>
+                            <div class="vocab-word">기다리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[gi-da-ri-da]</div>
+                        <div class="vocab-meaning">to wait</div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-elementary">기다리다</div>
+                            <div class="level-box level-middle">대기하다</div>
+                            <div class="level-box level-high">기대하다</div>
+                        </div>
+                        
+                        <div class="etymology">
+                            <div class="etymology-title">📌 Usage Note</div>
+                            <div class="etymology-text">Used for waiting for people, things, or events</div>
+                            <div class="related-words"><strong>Related:</strong> 기다려요 (polite), 기다렸어요 (past)</div>
+                        </div>
+                        
+                        <div class="examples">
+                            <div class="example-title">💡 Examples</div>
+                            <div class="example-item">
+                                <span class="example-ko">친구를 기다려요.</span>
+                                <span class="example-en">I wait for my friend.</span>
+                            </div>
+                            <div class="example-item">
+                                <span class="example-ko">버스를 기다렸어요.</span>
+                                <span class="example-en">I waited for the bus.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="collocations">
+                            <div class="collocation-title">🔗 Common Phrases</div>
+                            <div class="collocation-items">
+                                <span class="collocation-item">오래 기다리다</span>
+                                <span class="collocation-item">조금만 기다리다</span>
+                                <span class="collocation-item">여기서 기다리다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Section -->
+            <div id="quiz-section" class="section">
+                <h2 style="text-align: center; color: #f57c00; font-size: 32px; margin-bottom: 30px;">Korean Verbs Quiz - Day 4</h2>
+                
+                <!-- Question 1 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does <span class="korean-word-large">열다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'open')">to open</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'close')">to close</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'turn on')">to turn on</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'turn off')">to turn off</button>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you say "to turn on" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '켜다')">켜다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '끄다')">끄다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '열다')">열다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, '닫다')">닫다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does <span class="korean-word-large">씻다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'wash')">to wash</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'wear')">to wear</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'take off')">to take off</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, 'clean')">to clean</button>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">Complete the sentence: 문을 _____. (I close the door.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '닫아요')">닫아요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '열어요')">열어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '켜요')">켜요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, '꺼요')">꺼요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you say "to wear" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '입다')">입다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '벗다')">벗다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '씻다')">씻다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, '사다')">사다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does <span class="korean-word-large">기다리다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'wait')">to wait</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'go')">to go</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'come')">to come</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'stay')">to stay</button>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Which verb means "to turn off"?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '끄다')">끄다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '켜다')">켜다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '열다')">열다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '닫다')">닫다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Complete the sentence: 버스를 _____. (I take the bus.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '타요')">타요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '내려요')">내려요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '기다려요')">기다려요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '타고 가요')">타고 가요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does <span class="korean-word-large">벗다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'takeoff')">to take off</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'wear')">to wear</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'wash')">to wash</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'buy')">to buy</button>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">How do you say "to get off" in Korean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '내리다')">내리다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '타다')">타다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '가다')">가다</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '오다')">오다</button>
+                    </div>
+                </div>
+                
+                <!-- Question 11 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">Match the pronunciation: [dat-da]</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '닫다')">닫다 (to close)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '열다')">열다 (to open)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '타다')">타다 (to ride)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, '받다')">받다 (to receive)</button>
+                    </div>
+                </div>
+                
+                <!-- Question 12 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Complete the sentence: 손을 _____. (I wash my hands.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '씻어요')">씻어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '입어요')">입어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '벗어요')">벗어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, '열어요')">열어요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 13 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does <span class="korean-word-large">타다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'ride')">to ride/take</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'walk')">to walk</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'run')">to run</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'drive')">to drive</button>
+                    </div>
+                </div>
+                
+                <!-- Question 14 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What is the opposite of 열다 (to open)?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '닫다')">닫다 (to close)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '켜다')">켜다 (to turn on)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '끄다')">끄다 (to turn off)</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '잠그다')">잠그다 (to lock)</button>
+                    </div>
+                </div>
+                
+                <!-- Question 15 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">Complete the sentence: 불을 _____. (I turn on the light.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '켜요')">켜요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '꺼요')">꺼요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '열어요')">열어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, '닫아요')">닫아요</button>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+                
+                <div class="quiz-results" id="results">
+                    <h2>Quiz Results</h2>
+                    <div class="score" id="score"></div>
+                    <p id="message"></p>
+                    <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: 'open',
+            2: '켜다',
+            3: 'wash',
+            4: '닫아요',
+            5: '입다',
+            6: 'wait',
+            7: '끄다',
+            8: '타요',
+            9: 'takeoff',
+            10: '내리다',
+            11: '닫다',
+            12: '씻어요',
+            13: 'ride',
+            14: '닫다',
+            15: '켜요'
+        };
+        
+        let userAnswers = {};
+        
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            if (section === 'vocabulary') {
+                document.getElementById('vocabulary-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (section === 'quiz') {
+                document.getElementById('quiz-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            }
+        }
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! You have mastered these Korean verbs!';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 Not bad! Review the vocabulary and try again!';
+            } else {
+                message = '📚 Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

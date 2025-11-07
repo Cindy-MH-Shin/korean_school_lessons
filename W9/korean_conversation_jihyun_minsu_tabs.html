@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>지현과 민수의 대화 - Conversation Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #f5576c;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #fff5f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #f5576c;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f5576c;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.jihyun {
+            color: #9c27b0;
+        }
+        
+        .speaker.minsu {
+            color: #ff6b35;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.jihyun {
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .message.minsu {
+            border-left: 4px solid #ff6b35;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f5576c;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #fff5f8;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #f5576c;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #fff5f8;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #f5576c;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #fff5f8;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #f5576c;
+        }
+        
+        .question-number {
+            color: #f5576c;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: #fff5f8;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #f5576c;
+            background: #ffe8ec;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 25px 0 0;
+            padding: 18px;
+            background: #f5576c;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+            background: #e04557;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗣️ 지현과 민수의 대화</h1>
+        <div class="subtitle">
+            Jihyun and Minsu's Conversation<br>
+            Practice Korean conversation with vowel ㅡ (eu)
+        </div>
+
+        <!-- Conversation Section -->
+        <div class="conversation-section">
+            <div class="conversation-title">💬 Conversation / 대화</div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현 (Jihyun):</span>
+                </div>
+                <div class="message jihyun">
+                    이 <span class="highlight">그림</span> 정말 멋지다.
+                    <div class="translation">This picture is really cool.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수 (Minsu):</span>
+                </div>
+                <div class="message minsu">
+                    아프리카 <span class="highlight">르완다</span> 갔을 때 산 정글 <span class="highlight">그림</span>이야.
+                    <div class="translation">I bought this jungle picture when I went to Rwanda in Africa.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    이 동물은 무슨 동물이야?
+                    <div class="translation">What animal is this?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    응. <span class="highlight">느리</span>기로 유명한 나무늘보야.
+                    <div class="translation">Yeah. It's a sloth, famous for being slow.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    너무 귀엽다. 근데 엄청 <span class="highlight">느리</span>지?
+                    <div class="translation">So cute. But it's really slow, right?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    그렇지. <span class="highlight">느리</span>지.
+                    <div class="translation">That's right. It's slow.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    마치 내 컴퓨터 같군. 우리집 컴퓨터는 나무늘보 보다 더 <span class="highlight">느려</span>.
+                    <div class="translation">Just like my computer. My home computer is slower than a sloth.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    저녁 먹을래? 해질 때 <span class="highlight">즈음</span>이면 배가 고파.
+                    <div class="translation">Want to have dinner? I get hungry around sunset.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    그래. 나가서 먹자. <span class="highlight">브라질</span> 고기 뷔페 어때?
+                    <div class="translation">Okay. Let's go out to eat. How about a Brazilian meat buffet?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    오늘은 <span class="highlight">프랑스</span>식 먹자. 파리바게트 어떠니?
+                    <div class="translation">Let's eat French style today. How about Paris Baguette?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    날씨가 <span class="highlight">흐르</span>네. 그럼 한식으로 먹자. 순두부 찌개 어때?
+                    <div class="translation">The weather is cloudy. Then let's eat Korean food. How about soft tofu stew?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    그래. 그럼 강촌 가서 찌개 먹고 후식으로 생<span class="highlight">크림</span> 케익 먹자.
+                    <div class="translation">Okay. Then let's go to Gangchon, eat stew, and have fresh cream cake for dessert.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    생<span class="highlight">크림</span> 케익은 오브래드가 <span class="highlight">으뜸</span>이지.
+                    <div class="translation">Au Bread is the best for fresh cream cake.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    아니다, 오늘 축구하는데 치맥 어때?
+                    <div class="translation">No, there's soccer today. How about chicken and beer?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    그럼, 저녁 겸 치맥하자.
+                    <div class="translation">Then, let's do chicken and beer for dinner.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    그래, 새로생긴 <span class="highlight">므드셀라</span> 코리안 치킨집 가자.
+                    <div class="translation">Okay, let's go to the newly opened Methuselah Korean chicken place.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    이름이 왜 <span class="highlight">므드셀라</span>야?
+                    <div class="translation">Why is the name Methuselah?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    응, 가게 주인 이름이 노아야. <span class="highlight">므드셀라</span>가 노아의 할아버지 잖아. 장수의 아이콘이지.
+                    <div class="translation">Yeah, the store owner's name is Noah. Methuselah is Noah's grandfather. He's an icon of longevity.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker jihyun">
+                    <span class="speaker-icon">👩</span>
+                    <span>지현:</span>
+                </div>
+                <div class="message jihyun">
+                    아, 가게가 성공해서 오래도록 남아있도록 그 이름을 붙였구나.
+                    <div class="translation">Oh, he named it that so the store would succeed and remain for a long time.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minsu">
+                    <span class="speaker-icon">👨</span>
+                    <span>민수:</span>
+                </div>
+                <div class="message minsu">
+                    마침 오픈 이벤트 쿠폰도 있어. 추첨해서 당첨되면 <span class="highlight">드론</span>을 선물로 준다더라구.
+                    <div class="translation">They also have an opening event coupon. I heard if you win the lottery, they give you a drone as a gift.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('vocabulary')">📚 Vocabulary / 단어</button>
+            <button class="tab-button" onclick="openTab('quiz')">📝 Quiz / 퀴즈</button>
+        </div>
+
+        <!-- Vocabulary Tab Content -->
+        <div id="vocabulary" class="tab-content active">
+            <div class="vocabulary-section">
+                <div class="vocabulary-grid">
+                    <div class="vocab-item">
+                        <strong>1. 그림</strong> (geurim) - picture, painting<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>2. 멋지다</strong> (meotjida) - cool, wonderful, stylish<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>3. 아프리카</strong> (apeurika) - Africa<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "Africa"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>4. 르완다</strong> (reuwanda) - Rwanda<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "Rwanda"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>5. 정글</strong> (jeonggeul) - jungle<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "jungle"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>6. 동물</strong> (dongmul) - animal<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 動物 (moving + thing)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>7. 느리다</strong> (neurida) - slow<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>8. 유명하다</strong> (yumyeonghada) - famous<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 有名 (have + name)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>9. 나무늘보</strong> (namuneubo) - sloth<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean (나무 tree + 늘보 slow one)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>10. 귀엽다</strong> (gwiyeopda) - cute, adorable<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>11. 엄청</strong> (eomcheong) - very, extremely<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>12. 마치</strong> (machi) - just like, as if<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>13. 컴퓨터</strong> (keompyuteo) - computer<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "computer"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>14. 저녁</strong> (jeonyeok) - dinner, evening<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>15. 해질</strong> (haejil) - sunset (해 sun + 질 set)<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean compound</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>16. 즈음</strong> (jeueum) - about, around (time)<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>17. 배</strong> (bae) - stomach, belly<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>18. 고프다</strong> (gopeuda) - hungry<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>19. 나가다</strong> (nagada) - go out<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>20. 브라질</strong> (beurajil) - Brazil<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Portuguese "Brasil"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>21. 고기</strong> (gogi) - meat<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>22. 뷔페</strong> (bwipe) - buffet<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From French "buffet"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>23. 프랑스</strong> (peurangseu) - France<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From French "France"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>24. 파리바게트</strong> (paribageteu) - Paris Baguette<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Brand name (Paris + Baguette)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>25. 날씨</strong> (nalssi) - weather<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>26. 흐리다</strong> (heurida) - cloudy<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>27. 한식</strong> (hansik) - Korean food<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 韓食 (Korean + food)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>28. 순두부</strong> (sundubu) - soft tofu<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean compound (순 pure + 두부 tofu)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>29. 찌개</strong> (jjigae) - stew<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>30. 강촌</strong> (gangchon) - Gangchon (place name)<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Korean place name (江村 river + village)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>31. 후식</strong> (husik) - dessert<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 後食 (after + food)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>32. 생크림</strong> (saengkeurim) - fresh cream<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Korean + English (생 fresh + cream)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>33. 케익</strong> (keik) - cake<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "cake"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>34. 으뜸</strong> (eutteum) - best, number one<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>35. 축구</strong> (chukgu) - soccer, football<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 蹴球 (kick + ball)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>36. 치맥</strong> (chimaek) - chicken and beer<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Korean compound (치킨 chicken + 맥주 beer)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>37. 겸</strong> (gyeom) - as well as, combined with<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese character 兼 (dependent noun)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>38. 새로</strong> (saero) - newly, anew<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>39. 므드셀라</strong> (meudeuselra) - Methuselah<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Hebrew biblical name</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>40. 코리안</strong> (korian) - Korean<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "Korean"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>41. 치킨</strong> (chikin) - chicken<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "chicken"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>42. 이름</strong> (ireum) - name<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>43. 가게</strong> (gage) - store, shop<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>44. 주인</strong> (juin) - owner<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 主人 (master + person)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>45. 노아</strong> (noa) - Noah<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Hebrew biblical name</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>46. 할아버지</strong> (harabeoji) - grandfather<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>47. 장수</strong> (jangsu) - longevity<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 長壽 (long + life)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>48. 아이콘</strong> (aikon) - icon<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "icon"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>49. 성공하다</strong> (seonggonghada) - to succeed<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 成功 (accomplish + success)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>50. 오래</strong> (orae) - long time<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>51. 남아있다</strong> (namaissda) - to remain, stay<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean compound</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>52. 붙이다</strong> (buchida) - to attach, put on (name)<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>53. 마침</strong> (machim) - just, exactly, by chance<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: Native Korean word</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>54. 오픈</strong> (opeun) - open, opening<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "open"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>55. 이벤트</strong> (ibenteu) - event<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "event"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>56. 쿠폰</strong> (kupon) - coupon<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "coupon"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>57. 추첨</strong> (chucheom) - lottery, drawing<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 抽籤 (draw + lot)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>58. 당첨</strong> (dangcheom) - winning, hit<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 當籤 (hit + lot)</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>59. 드론</strong> (deuron) - drone<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From English "drone"</span>
+                    </div>
+                    <div class="vocab-item">
+                        <strong>60. 선물</strong> (seonmul) - gift, present<br>
+                        <span style="color: #888; font-size: 0.9em;">Etymology: From Chinese characters 膳物 (food + thing)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab Content -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "그림" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">picture, painting</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">frame</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">shadow</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">Fill in the blank: Rwanda in Korean = <strong>____완다</strong></div>
+                    <input type="text" id="q2" maxlength="1" placeholder="Type one syllable">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "느리다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">slow</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">fast</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">tired</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "동물" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">animal</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">plant</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">people</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">What does "즈음" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 5, 'correct')">about, around (time)</button>
+                        <button class="option" onclick="selectAnswer(this, 5, 'wrong1')">exactly</button>
+                        <button class="option" onclick="selectAnswer(this, 5, 'wrong2')">never</button>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">Fill in the blank: Brazil = <strong>____라질</strong></div>
+                    <input type="text" id="q6" maxlength="1" placeholder="Type one syllable">
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "프랑스" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">France</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">Finland</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">Poland</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Fill in the blank: cloudy = <strong>____리다</strong></div>
+                    <input type="text" id="q8" maxlength="1" placeholder="Type one syllable">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "크림" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">cream</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">dream</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">crime</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "으뜸" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">best, number one</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">worst</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">average</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "Methuselah" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Fill in the blank: drone = <strong>____론</strong></div>
+                    <input type="text" id="q12" maxlength="1" placeholder="Type one syllable">
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What is the etymology of "치맥"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">치킨 (chicken) + 맥주 (beer)</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">치즈 (cheese) + 맥주 (beer)</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">Native Korean word</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">Which word is a dependent noun (의존명사) whose meaning is "as well as" and "also"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">겸</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">저녁</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">치맥</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "장수" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">longevity</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">general (military)</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">marketplace</button>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Select all words with vowel "ㅡ"</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">그림, 느리다, 즈음, 크림</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">구름, 누나, 우산</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">고기, 노래, 사과</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">What is "나무늘보" in English?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">sloth</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">squirrel</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">monkey</button>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">Which word comes from Chinese characters 長壽?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 18, 'correct')">장수 (longevity)</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">주인 (owner)</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">마침 (just, by chance)</button>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "유명하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">famous</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">happy</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">expensive</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">What does "배가 고프다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 20, 'correct')">I'm hungry / to be hungry</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">I'm thirsty</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">I'm tired</button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '르',
+            q6: '브',
+            q8: '흐',
+            q11: '므드셀라',
+            q12: '드',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            5: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            13: 'correct',
+            14: 'correct',
+            15: 'correct',
+            16: 'correct',
+            17: 'correct',
+            18: 'correct',
+            19: 'correct',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q6', 'q8', 'q11', 'q12'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 5, 7, 9, 10, 13, 14, 15, 16, 17, 18, 19, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
