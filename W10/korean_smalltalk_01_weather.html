@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>수지와 지호의 대화 - Small Talk #1: 날씨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.suji {
+            color: #e91e63;
+        }
+        
+        .speaker.jiho {
+            color: #2196f3;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.suji {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.jiho {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f0f4ff;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 15px;
+            background: #f0f4ff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #e3e8ff;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            margin: 25px 0 0;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+            background: #5568d3;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Small Talk #1: 날씨 🌤️</h1>
+        <div class="subtitle">
+            수지와 지호의 대화<br>
+            Conversation about Weather
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">💬 대화</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">📚 어휘</button>
+            <button class="tab-button" onclick="openTab('quiz')">✏️ 퀴즈</button>
+        </div>
+
+        <!-- Conversation Tab -->
+        <div id="conversation" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">수업 전 캠퍼스에서</div>
+                
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        지호야, 안녕! 오늘 <span class="highlight">날씨가 좀 쌀쌀해졌어</span>.
+                        <div class="translation">Jiho, hi! The weather got a bit chilly today.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        그러게. 아침에 나올 때 <span class="highlight">바람이 차더라</span>. 겉옷 안 입고 나온 거 후회했어.
+                        <div class="translation">I know. The wind was cold when I left this morning. I regretted not wearing a jacket.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        나도 아침에 일어났을 때 깜짝 놀랐어. <span class="highlight">벌써 가을이구나</span> 싶더라고.
+                        <div class="translation">I was also surprised when I woke up this morning. I thought, "It's already fall."</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        응. 근데 저기 하늘 좀 봐. <span class="highlight">구름이 많은 걸 보니 비가 오겠어</span>.
+                        <div class="translation">Yeah. But look at the sky over there. Judging by all those clouds, it's going to rain.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        어머, 진짜네. 우산 안 가져왔는데... <span class="highlight">오늘 비 올 줄 몰랐어</span>.
+                        <div class="translation">Oh my, you're right. I didn't bring an umbrella... I didn't know it would rain today.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        걱정 마. 내가 우산 있으니까 수업 끝나고 <span class="highlight">같이 쓰자</span>.
+                        <div class="translation">Don't worry. I have an umbrella, so let's share it after class.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        고마워! 그나저나 <span class="highlight">이러다 곧 겨울이 되겠다</span>.
+                        <div class="translation">Thanks! By the way, at this rate, it will soon be winter.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        맞아. 벌써 11월이잖아. 한 달만 있으면 12월이야.
+                        <div class="translation">That's right. It's already November. In just one month, it'll be December.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        그러면 곧 눈도 오겠네. <span class="highlight">첫 눈이 오면 뭐 할 거야</span>?
+                        <div class="translation">Then it will snow soon. What are you going to do when it snows for the first time?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        음... <span class="highlight">눈이 오면 캠퍼스에서 사진 찍고 싶어</span>. 여기 겨울 풍경이 정말 예쁘거든.
+                        <div class="translation">Hmm... When it snows, I want to take pictures on campus. The winter scenery here is really beautiful.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        좋은 생각이다! 나도 같이 가도 돼? <span class="highlight">눈 오는 날 따뜻한 커피 마시면서</span> 산책하면 낭만적일 것 같아.
+                        <div class="translation">That's a good idea! Can I come with you? I think it would be romantic to take a walk while drinking warm coffee on a snowy day.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        물론이지! 그럼 <span class="highlight">첫 눈 오는 날 같이 나가자</span>.
+                        <div class="translation">Of course! Then let's go out together on the day of the first snow.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker suji">
+                        <span class="speaker-icon">👩</span>
+                        수지:
+                    </div>
+                    <div class="message suji">
+                        좋아! 근데 지금은 수업 들어가야 해. <span class="highlight">비 오기 전에 빨리 가자</span>!
+                        <div class="translation">Great! But we need to go to class now. Let's hurry before it rains!</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jiho">
+                        <span class="speaker-icon">👨</span>
+                        지호:
+                    </div>
+                    <div class="message jiho">
+                        그래, 가자!
+                        <div class="translation">Okay, let's go!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="conversation-title">어휘 및 표현</div>
+                <div class="vocabulary-grid">
+                    <div class="vocab-item">
+                        <strong>날씨</strong> (nal-ssi) - weather
+                    </div>
+                    <div class="vocab-item">
+                        <strong>쌀쌀하다</strong> (ssal-ssal-ha-da) - to be chilly, cool
+                    </div>
+                    <div class="vocab-item">
+                        <strong>바람</strong> (ba-ram) - wind
+                    </div>
+                    <div class="vocab-item">
+                        <strong>차다</strong> (cha-da) - to be cold (to the touch)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>겉옷</strong> (geot-ot) - outer garment, jacket
+                    </div>
+                    <div class="vocab-item">
+                        <strong>후회하다</strong> (hu-hoe-ha-da) - to regret
+                    </div>
+                    <div class="vocab-item">
+                        <strong>벌써</strong> (beol-sseo) - already
+                    </div>
+                    <div class="vocab-item">
+                        <strong>가을</strong> (ga-eul) - fall, autumn
+                    </div>
+                    <div class="vocab-item">
+                        <strong>하늘</strong> (ha-neul) - sky
+                    </div>
+                    <div class="vocab-item">
+                        <strong>구름</strong> (gu-reum) - cloud
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~을/를 보니</strong> (~eul/reul bo-ni) - judging by~, seeing that~
+                    </div>
+                    <div class="vocab-item">
+                        <strong>비</strong> (bi) - rain
+                    </div>
+                    <div class="vocab-item">
+                        <strong>오다</strong> (o-da) - to come; (rain/snow) to fall
+                    </div>
+                    <div class="vocab-item">
+                        <strong>우산</strong> (u-san) - umbrella
+                    </div>
+                    <div class="vocab-item">
+                        <strong>가져오다</strong> (ga-jyeo-o-da) - to bring
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~을/를 몰랐어</strong> (~eul/reul mol-rass-eo) - didn't know that~
+                    </div>
+                    <div class="vocab-item">
+                        <strong>걱정 마</strong> (geok-jeong ma) - don't worry
+                    </div>
+                    <div class="vocab-item">
+                        <strong>같이 쓰다</strong> (ga-chi sseu-da) - to use together, to share
+                    </div>
+                    <div class="vocab-item">
+                        <strong>그나저나</strong> (geu-na-jeo-na) - by the way, anyway
+                    </div>
+                    <div class="vocab-item">
+                        <strong>이러다</strong> (i-reo-da) - at this rate, if things continue like this
+                    </div>
+                    <div class="vocab-item">
+                        <strong>곧</strong> (got) - soon
+                    </div>
+                    <div class="vocab-item">
+                        <strong>겨울</strong> (gyeo-ul) - winter
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~이/가 되다</strong> (~i/ga doe-da) - to become
+                    </div>
+                    <div class="vocab-item">
+                        <strong>눈</strong> (nun) - snow
+                    </div>
+                    <div class="vocab-item">
+                        <strong>첫 눈</strong> (cheot nun) - first snow (of the season)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~면</strong> (~myeon) - if, when
+                    </div>
+                    <div class="vocab-item">
+                        <strong>캠퍼스</strong> (kaem-peo-seu) - campus
+                    </div>
+                    <div class="vocab-item">
+                        <strong>사진 찍다</strong> (sa-jin jjik-da) - to take a photo
+                    </div>
+                    <div class="vocab-item">
+                        <strong>풍경</strong> (pung-gyeong) - scenery, landscape
+                    </div>
+                    <div class="vocab-item">
+                        <strong>예쁘다</strong> (ye-ppeu-da) - to be pretty, beautiful
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~거든</strong> (~geo-deun) - because, you know (explanatory)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>따뜻하다</strong> (tta-tteu-ta-da) - to be warm
+                    </div>
+                    <div class="vocab-item">
+                        <strong>커피</strong> (keo-pi) - coffee
+                    </div>
+                    <div class="vocab-item">
+                        <strong>마시다</strong> (ma-si-da) - to drink
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~면서</strong> (~myeon-seo) - while (doing)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>산책</strong> (san-chaek) - walk, stroll
+                    </div>
+                    <div class="vocab-item">
+                        <strong>낭만적이다</strong> (nang-man-jeog-i-da) - to be romantic
+                    </div>
+                    <div class="vocab-item">
+                        <strong>물론이지</strong> (mul-ron-i-ji) - of course!
+                    </div>
+                    <div class="vocab-item">
+                        <strong>나가다</strong> (na-ga-da) - to go out
+                    </div>
+                    <div class="vocab-item">
+                        <strong>수업</strong> (su-eop) - class, lesson
+                    </div>
+                    <div class="vocab-item">
+                        <strong>들어가다</strong> (deu-reo-ga-da) - to enter, to go in
+                    </div>
+                    <div class="vocab-item">
+                        <strong>빨리</strong> (ppal-li) - quickly, fast
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <div class="conversation-title">연습 문제</div>
+
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "쌀쌀하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">to be chilly, cool</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">to be hot</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">to be humid</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">Fill in the blank: 바람이 ____ (The wind was cold)</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "구름이 많은 걸 보니 비가 오겠어" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">Judging by all those clouds, it's going to rain</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">The clouds are beautiful today</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">There are no clouds in the sky</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">How do you say "umbrella" in Korean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">우산</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">우유</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">운동</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">Fill in the blank: 이러다 곧 ____이 되겠다 (At this rate, it will soon be winter)</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "첫 눈" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">first snow (of the season)</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">first eye</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">last snow</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">How do you say "jacket/outer garment" in Korean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">겉옷</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">속옷</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">양복</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Fill in the blank: 같이 ____ (Let's share/use together)</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "낭만적이다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to be romantic</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to be practical</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to be boring</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "벌써" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">already</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">not yet</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">never</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "sky" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does "산책" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 12, 'correct')">walk, stroll</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">mountain</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">calculation</button>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">Fill in the blank: 비 오기 전에 ____ 가자 (Let's hurry before it rains)</div>
+                    <input type="text" id="q13" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does "풍경" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">scenery, landscape</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">balloon</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">tradition</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">How do you say "of course!" in Korean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">물론이지</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">미안해</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">괜찮아</button>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What season is "가을"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">fall, autumn</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">spring</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">summer</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">Fill in the blank: 사진 ____ (to take a photo)</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "후회하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 18, 'correct')">to regret</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">to celebrate</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">to remember</button>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "~거든" indicate at the end of a sentence?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">explanatory/because, you know</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">question</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">command</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "cloud" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '차더라',
+            q5: '겨울',
+            q8: '쓰자',
+            q11: '하늘',
+            q13: '빨리',
+            q17: '찍다',
+            q20: '구름',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            14: 'correct',
+            15: 'correct',
+            16: 'correct',
+            18: 'correct',
+            19: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q11', 'q13', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 12, 14, 15, 16, 18, 19].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
