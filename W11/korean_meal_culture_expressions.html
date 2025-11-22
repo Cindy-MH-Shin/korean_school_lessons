@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>한국 식사 문화와 표현 - Korean Meal Culture & Expressions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fa709a;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .content-section {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #fa709a;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fa709a;
+        }
+        
+        .content-block {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fee140 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .category-title {
+            color: #fa709a;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .expression-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 3px solid #fa709a;
+        }
+        
+        .expression-ko {
+            font-weight: bold;
+            font-size: 1.05em;
+            color: #333;
+        }
+        
+        .expression-en {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #fa709a;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #fff5f7;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #fa709a;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #fa709a;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #fa709a;
+        }
+        
+        .question-number {
+            color: #fa709a;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #fff5f7;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 0.95em;
+        }
+        
+        .option:hover {
+            background: #ffe5ed;
+            border-color: #fa709a;
+        }
+        
+        .option.selected {
+            background: #fa709a;
+            color: white;
+            border-color: #fa709a;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #fa709a;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #fa709a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #e85d89;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(250,112,154,0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+        }
+
+        .note-box {
+            background: #fffbea;
+            border-left: 4px solid #fee140;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .note-title {
+            font-weight: bold;
+            color: #d4a017;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .tab-button {
+                font-size: 0.95em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍚 한국 식사 문화와 표현 🍚</h1>
+        <div class="subtitle">
+            <strong>Korean Meal Culture & Expressions</strong><br>
+            Understanding "밥" (rice/meal) in Korean Language and Culture
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('content')">📖 Content</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">📚 Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz')">✏️ Quiz</button>
+        </div>
+
+        <div id="content" class="tab-content active">
+            <div class="content-section">
+                <div class="section-title">한국인에게 "밥"과 "식사"의 의미</div>
+                
+                <div class="content-block">
+                    <p>"<span class="highlight">밥</span>" (rice/meal) and "<span class="highlight">식사</span>" (meal) are very important to Korean people.</p>
+                    <p style="margin-top: 10px;">When Koreans greet each other, they often ask:</p>
+                    <div class="expression-item" style="margin-top: 10px;">
+                        <div class="expression-ko">아침 드셨어요? / 점심 드셨어요? / 저녁 드셨어요?</div>
+                        <div class="expression-en">Did you have breakfast/lunch/dinner?</div>
+                    </div>
+                    <p style="margin-top: 10px;">This shows care and concern for others, not just curiosity about their meal.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">1. 인사 표현 (Greeting Expressions)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥 먹었어?</div>
+                        <div class="expression-en">Did you eat? (casual greeting)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">진지 드셨어요?</div>
+                        <div class="expression-en">Have you eaten? (respectful/honorific)</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">2. 초대 표현 (Invitation Expressions)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥 한번 먹자</div>
+                        <div class="expression-en">Let's have a meal together sometime</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">우리 밥 한 끼 같이 해요</div>
+                        <div class="expression-en">Let's share a meal together</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">언제 한번 밥 사줄게</div>
+                        <div class="expression-en">I'll buy you a meal sometime</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">3. 생계/직업 표현 (Livelihood Expressions)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">식구들 밥 굶기지는 않겠다</div>
+                        <div class="expression-en">I won't let my family go hungry (responsibility to provide)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥벌이</div>
+                        <div class="expression-en">Making a living, livelihood</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥줄</div>
+                        <div class="expression-en">Lifeline, source of income (literally "rice line")</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥그릇 (싸움)</div>
+                        <div class="expression-en">Rice bowl (fight) - competition over jobs/territory</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">4. 관계 표현 (Relationship Expressions)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">식구</div>
+                        <div class="expression-en">Family member (literally: person who eats together)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">한솥밥을 먹다</div>
+                        <div class="expression-en">To eat from the same pot (to be very close, like family)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥심으로 살다</div>
+                        <div class="expression-en">To live on the strength of meals</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">5. 속담 (Proverbs)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">금강산도 식후경</div>
+                        <div class="expression-en">Even beautiful Mt. Geumgang is best seen after a meal (food comes first)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">시장이 반찬이다</div>
+                        <div class="expression-en">Hunger is the best sauce (when hungry, everything tastes good)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">공짜 밥은 없다</div>
+                        <div class="expression-en">There's no free lunch (everything has a cost)</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="category-title">6. 현대 표현 (Modern Expressions)</div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">혼밥</div>
+                        <div class="expression-en">Eating alone (혼자 + 밥)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">먹방</div>
+                        <div class="expression-en">Mukbang - eating broadcast</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥테러</div>
+                        <div class="expression-en">Food terrorism/porn (posting delicious food pictures late at night)</div>
+                    </div>
+                    
+                    <div class="expression-item">
+                        <div class="expression-ko">밥약</div>
+                        <div class="expression-en">Meal appointment (밥 + 약속)</div>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-title">💡 Cultural Note</div>
+                    Rice and meals are central to Korean culture and social bonding. Sharing meals is a fundamental way of building and maintaining relationships. Many Korean expressions about work, money, and survival are framed around "밥", showing how deeply food culture is embedded in Korean society.
+                </div>
+            </div>
+        </div>
+
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="vocabulary-grid">
+                    <div class="vocab-item">
+                        <strong>밥</strong> (bap) = rice, meal, food
+                    </div>
+                    <div class="vocab-item">
+                        <strong>식사</strong> (sik-sa) = meal (formal)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>진지</strong> (jin-ji) = meal (honorific)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>식구</strong> (sik-gu) = family member (person who eats together)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥벌이</strong> (bap-beol-i) = making a living, livelihood
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥줄</strong> (bap-jul) = lifeline, source of income
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥그릇</strong> (bap-geu-reut) = rice bowl, one's livelihood
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥값</strong> (bap-gap) = worth one's keep, to earn one's pay
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥맛</strong> (bap-mat) = appetite; mood for eating
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥심</strong> (bap-sim) = strength from eating rice/meals
+                    </div>
+                    <div class="vocab-item">
+                        <strong>한솥밥</strong> (han-sot-bap) = rice from the same pot (close relationship)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥상</strong> (bap-sang) = dining table
+                    </div>
+                    <div class="vocab-item">
+                        <strong>혼밥</strong> (hon-bap) = eating alone
+                    </div>
+                    <div class="vocab-item">
+                        <strong>먹방</strong> (meok-bang) = mukbang, eating broadcast
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥테러</strong> (bap-te-reo) = food terrorism/porn
+                    </div>
+                    <div class="vocab-item">
+                        <strong>밥약</strong> (bap-yak) = meal appointment
+                    </div>
+                    <div class="vocab-item">
+                        <strong>굶다</strong> (gul-da) = to starve, to skip a meal
+                    </div>
+                    <div class="vocab-item">
+                        <strong>굶기다</strong> (gul-gi-da) = to make someone starve/skip meals
+                    </div>
+                    <div class="vocab-item">
+                        <strong>배부르다</strong> (bae-bu-reu-da) = to be full (stomach)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>배고프다</strong> (bae-go-peu-da) = to be hungry
+                    </div>
+                    <div class="vocab-item">
+                        <strong>드시다</strong> (deu-si-da) = to eat (honorific)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>먹다</strong> (meok-da) = to eat
+                    </div>
+                    <div class="vocab-item">
+                        <strong>차리다</strong> (cha-ri-da) = to set, to prepare (a table)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>사다</strong> (sa-da) = to buy (as in buying someone a meal)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>반찬</strong> (ban-chan) = side dishes
+                    </div>
+                    <div class="vocab-item">
+                        <strong>국물</strong> (guk-mul) = soup, broth
+                    </div>
+                    <div class="vocab-item">
+                        <strong>보약</strong> (bo-yak) = health tonic, nutritious food
+                    </div>
+                    <div class="vocab-item">
+                        <strong>금강산</strong> (geum-gang-san) = Mt. Geumgang (famous mountain)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>식후경</strong> (sik-hu-gyeong) = view after meal
+                    </div>
+                    <div class="vocab-item">
+                        <strong>시장</strong> (si-jang) = hunger (also means "market")
+                    </div>
+                    <div class="vocab-item">
+                        <strong>공짜</strong> (gong-jja) = free, for free
+                    </div>
+                    <div class="vocab-item">
+                        <strong>생계</strong> (saeng-gye) = livelihood
+                    </div>
+                    <div class="vocab-item">
+                        <strong>끊기다</strong> (kkeun-gi-da) = to be cut off, severed
+                    </div>
+                    <div class="vocab-item">
+                        <strong>뺏기다</strong> (ppeat-gi-da) = to be taken away, robbed
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "밥 먹었어?" literally mean, and how is it commonly used?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">Did you eat? (used as a greeting)</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">Are you cooking rice?</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">Do you like rice?</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "family member" in Korean (hint: literally means "person who eats together")?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "식구들 밥 굶기지는 않겠다" express?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">My family doesn't like rice</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">I won't let my family go hungry (responsibility to provide)</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">My family eats together</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What is "밥벌이"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">making a living, livelihood</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">rice farmer</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">rice cooker</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">Fill in the blank: 금강산도 ____ (Even Mt. Geumgang is best seen after a meal)</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "한솥밥을 먹다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">to eat from the same pot (to be very close, like family)</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">to cook one pot of rice</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">to have Korean food</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What is the modern Korean term for "eating alone"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">혼밥</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">먹방</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">밥약</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "mukbang" (eating broadcast) in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does the proverb "시장이 반찬이다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">Hunger is the best sauce</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">The market sells side dishes</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">The boss is a side dish</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "밥값을 하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">to earn one's keep, to be worth it</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">to pay for rice</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">to calculate meal costs</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">Fill in the blank: 공짜 ____ 은 없다 (There's no free lunch)</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does "밥줄" literally mean and what does it represent?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 12, 'correct')">rice line - one's source of income/lifeline</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">rice noodles</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">waiting line for food</button>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">How do you write "to starve" or "to skip a meal" in Korean?</div>
+                    <input type="text" id="q13" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does "밥테러" mean in modern Korean slang?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">food terrorism/porn (posting delicious food pictures late at night)</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">eating too much rice</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">food fight</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "진지 드셨어요?" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">Have you eaten? (honorific/respectful)</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">Is the food ready?</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">Do you want rice?</button>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Fill in the blank: 밥 한번 ____ (Let's have a meal together sometime)</div>
+                    <input type="text" id="q16" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">What does "밥그릇 싸움" refer to?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">competition over jobs/territory (rice bowl fight)</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">fighting while eating</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">washing dishes fight</button>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "밥약" mean in modern Korean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 18, 'correct')">meal appointment (밥 + 약속)</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">rice medicine</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">weak rice</button>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">How do you write "side dishes" in Korean?</div>
+                    <input type="text" id="q19" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">What does "밥이 보약이다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 20, 'correct')">Food is the best medicine</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">Rice is expensive</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">Rice is a supplement</button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '식구',
+            q5: '식후경',
+            q8: '먹방',
+            q11: '밥',
+            q13: '굶다',
+            q16: '먹자',
+            q19: '반찬',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            14: 'correct',
+            15: 'correct',
+            17: 'correct',
+            18: 'correct',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q11', 'q13', 'q16', 'q19'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 12, 14, 15, 17, 18, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
