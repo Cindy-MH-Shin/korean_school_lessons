@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 퀴즈: 복합 모음 (Korean Quiz: Compound Vowels)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 15px;
+        }
+        .song-section {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        .song-section h2 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .audio-player {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .song-link {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .song-link:hover {
+            background-color: #ffb300;
+        }
+        .quiz-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question {
+            background-color: #f3e5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #9b59b6;
+        }
+        .question-text {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        .option {
+            background-color: white;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        .option:hover {
+            background-color: #ecf0f1;
+            border-color: #9b59b6;
+        }
+        .option.selected {
+            background-color: #9b59b6;
+            color: white;
+            border-color: #8e44ad;
+        }
+        .option.correct {
+            background-color: #27ae60;
+            color: white;
+            border-color: #229954;
+        }
+        .option.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .submit-btn {
+            background-color: #9b59b6;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #8e44ad;
+        }
+        .submit-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .score {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f3e5f5;
+            border-radius: 8px;
+            display: none;
+        }
+        .reset-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .reset-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>한국어 퀴즈: 복합 모음<br><small style="font-size: 18px;">Korean Quiz: Compound Vowels</small></h1>
+
+    <div class="song-section">
+        <h2>🎵 한글 노래 듣기 (Listen to Hangeul Song)</h2>
+        <p>퀴즈를 시작하기 전에 한글 노래를 들어보세요!</p>
+        <p>Listen to the Hangeul song before starting the quiz!</p>
+        <a href="https://suno.com/s/3O40Mt25Gc0pgoM2" target="_blank" class="song-link">
+            🎵 한글 노래 듣기 / Listen to Song
+        </a>
+    </div>
+
+    <div class="quiz-container">
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-text">1. "간장 게장은 밥도둑이에요" - What does this phrase mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a"> The crab is too salty
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b"> Ganjang Gejang is so delicious it "steals the rice"
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c"> The crab is expensive
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d"> You need rice to eat crab
+                    </label>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-text">2. Which word contains the vowel "네" (ne)?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a"> 게장 (marinated crab)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b"> 네모 (square)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c"> 레몬 (lemon)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d"> 세월 (time)
+                    </label>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-text">3. "소설 데미안은 어려운 책입니다" - What is Demian?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="a"> a movie
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b"> a novel
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c"> a song
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="d"> a poem
+                    </label>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-text">4. "여름철 레몬 에이드는 찐입니다" - What does "찐" mean in this context?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="a"> fake
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b"> cold
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c"> the real deal, authentic
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="d"> expensive
+                    </label>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-text">5. "논에 강충강충 뛰어다니는 메뚜기가 있어요" - Where are the grasshoppers hopping?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="a"> in the garden
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="b"> on the road
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="c"> in the rice paddy
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="d"> in the forest
+                    </label>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-text">6. Which vowel sound is in "베짱이" (cicada)?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="a"> 레 (re/le)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="b"> 베 (be)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="c"> 메 (me)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="d"> 세 (se)
+                    </label>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-text">7. "노인의 깊은 주름은 세월의 흔적이다" - What does "세월" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="a"> sadness
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="b"> time, years
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="c"> wisdom
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="d"> age
+                    </label>
+                </div>
+                <div class="feedback" id="feedback7"></div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-text">8. "여름인데 에어컨이 고장났다" - What season is it?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="a"> spring
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="b"> summer
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="c"> fall
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="d"> winter
+                    </label>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-text">9. "강남에는 제비가 많다" - What is common in Gangnam?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="a"> sparrows
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="b"> pigeons
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="c"> swallows
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="d"> eagles
+                    </label>
+                </div>
+                <div class="feedback" id="feedback9"></div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-text">10. Which word contains the vowel "체" (che)?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="a"> 제비 (swallow)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="b"> 체스 (chess)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="c"> 케이크 (cake)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="d"> 테이블 (table)
+                    </label>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-text">11. "누나는 치즈 케이크를 좋아한다" - What does the older sister like?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q11" value="a"> chocolate
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="b"> cheesecake
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="c"> ice cream
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="d"> cookies
+                    </label>
+                </div>
+                <div class="feedback" id="feedback11"></div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-text">12. "테이블 매너도 중요하다" - What is also important?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q12" value="a"> tennis skills
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="b"> table manners
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="c"> painting skills
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="d"> cooking skills
+                    </label>
+                </div>
+                <div class="feedback" id="feedback12"></div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-text">13. "루미는 지붕을 분홍색 페인트로 칠했다" - What color did Lumi use?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q13" value="a"> blue
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="b"> pink
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="c"> yellow
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="d"> green
+                    </label>
+                </div>
+                <div class="feedback" id="feedback13"></div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-text">14. "'헤어질 결심'은 좋은 영화다" - What is "Decision to Leave"?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q14" value="a"> a book
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="b"> a movie
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="c"> a TV show
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="d"> a play
+                    </label>
+                </div>
+                <div class="feedback" id="feedback14"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="checkAnswers()">정답 확인 / Check Answers</button>
+        </form>
+
+        <div class="score" id="scoreDisplay">
+            <div id="scoreText"></div>
+            <button class="reset-btn" onclick="resetQuiz()">다시 하기 / Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'c',
+            q5: 'c',
+            q6: 'b',
+            q7: 'b',
+            q8: 'b',
+            q9: 'c',
+            q10: 'b',
+            q11: 'b',
+            q12: 'b',
+            q13: 'b',
+            q14: 'b'
+        };
+
+        const explanations = {
+            q1: '게장 (ge-jang) is marinated crab. "밥도둑" literally means "rice thief" - food so delicious you eat more rice.',
+            q2: '네모 (ne-mo) means square and contains the 네 (ne) vowel.',
+            q3: '데미안 (de-mi-an) is a novel by Hermann Hesse.',
+            q4: '찐 (jjin) is slang meaning "the real deal" or "authentic."',
+            q5: '논 (non) means rice paddy or rice field.',
+            q6: '베짱이 (be-jjang-i) contains the 베 (be) vowel and means cicada.',
+            q7: '세월 (se-wol) means time or years, often referring to the passage of time.',
+            q8: '여름 (yeo-reum) means summer.',
+            q9: '제비 (je-bi) means swallow, a type of bird.',
+            q10: '체스 (che-seu) contains the 체 (che) vowel and means chess.',
+            q11: '치즈 케이크 (chi-jeu ke-i-keu) means cheesecake.',
+            q12: '테이블 매너 (te-i-beul mae-neo) means table manners.',
+            q13: '분홍색 (bun-hong-saek) means pink color.',
+            q14: '\'헤어질 결심\' (Decision to Leave) is a critically acclaimed movie by director Park Chan-wook.'
+        };
+
+        // Add click handlers to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                const name = input.name;
+                
+                // Remove selected class from all options in this question
+                this.closest('.options').querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                input.checked = true;
+            });
+        });
+
+        function checkAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(answers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                const feedback = document.getElementById(`feedback${i}`);
+                const options = document.querySelectorAll(`input[name="${questionName}"]`);
+
+                if (selectedAnswer) {
+                    const selectedOption = selectedAnswer.parentElement;
+                    
+                    if (selectedAnswer.value === answers[questionName]) {
+                        score++;
+                        selectedOption.classList.remove('selected');
+                        selectedOption.classList.add('correct');
+                        feedback.className = 'feedback correct';
+                        feedback.textContent = '정답입니다! ✓ ' + explanations[questionName];
+                    } else {
+                        selectedOption.classList.remove('selected');
+                        selectedOption.classList.add('incorrect');
+                        
+                        // Show correct answer
+                        options.forEach(option => {
+                            if (option.value === answers[questionName]) {
+                                option.parentElement.classList.add('correct');
+                            }
+                        });
+                        
+                        feedback.className = 'feedback incorrect';
+                        feedback.textContent = '틀렸습니다. ✗ ' + explanations[questionName];
+                    }
+                }
+            }
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreText = document.getElementById('scoreText');
+            scoreText.innerHTML = `<strong>점수 / Score: ${score} / ${totalQuestions}</strong><br>`;
+            
+            if (score === totalQuestions) {
+                scoreText.innerHTML += '완벽합니다! 🎉 Perfect!';
+            } else if (score >= totalQuestions * 0.7) {
+                scoreText.innerHTML += '잘했어요! 👏 Great job!';
+            } else {
+                scoreText.innerHTML += '더 연습하세요! 💪 Keep practicing!';
+            }
+            
+            scoreDisplay.style.display = 'block';
+            
+            // Disable submit button
+            document.querySelector('.submit-btn').disabled = true;
+        }
+
+        function resetQuiz() {
+            // Reset all selections and feedback
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('.feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+                feedback.className = 'feedback';
+            });
+            
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            
+            // Hide score
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // Enable submit button
+            document.querySelector('.submit-btn').disabled = false;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

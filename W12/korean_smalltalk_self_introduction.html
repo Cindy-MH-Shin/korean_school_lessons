@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>자기소개 - Small Talk: Self Introduction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.teacher {
+            color: #e91e63;
+        }
+        
+        .speaker.jisoo {
+            color: #2196f3;
+        }
+        
+        .speaker.andy {
+            color: #4caf50;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.teacher {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.jisoo {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .message.andy {
+            border-left: 4px solid #4caf50;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f0f5ff;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .tab-button {
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 자기소개</h1>
+        <div class="subtitle">
+            <strong>Small Talk: Self Introduction</strong><br>
+            Teacher Candy introduces the class topic, then students Jisoo and Andy introduce themselves
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">💬 Conversation</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">📚 Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz')">✏️ Quiz</button>
+        </div>
+
+        <div id="conversation" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">자기소개 시간 / Self-Introduction Time</div>
+                
+                <!-- Teacher Candy -->
+                <div class="dialogue">
+                    <div class="speaker teacher">
+                        <span class="speaker-icon">👩‍🏫</span>
+                        <span>캔디 선생님 (Teacher Candy):</span>
+                    </div>
+                    <div class="message teacher">
+                        안녕하세요. 오늘은 <span class="highlight">첫 시간</span>이니 <span class="highlight">자기소개</span>를 하겠습니다. 소개할 내용은 본인의 <span class="highlight">이름</span>, <span class="highlight">가족</span>, <span class="highlight">취미</span>, <span class="highlight">특기</span>를 얘기하면 됩니다. 먼저 제 소개를 할게요. 제 이름은 캔디입니다. 가족은 <span class="highlight">고양이 두 마리</span>가 있습니다. 취미는 <span class="highlight">노래 만들기</span>, 특기는 <span class="highlight">글쓰기</span>입니다. 소설을 쓰고 있습니다. 앞으로 <span class="highlight">잘 부탁드립니다</span>.
+                        <div class="translation">
+                            Hello. Since today is our first class, we'll do self-introductions. The content you should introduce is your name, family, hobbies, and special skills. First, let me introduce myself. My name is Candy. For family, I have two cats. My hobby is making songs, and my special skill is writing. I'm writing a novel. Please take care of me going forward.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jisoo -->
+                <div class="dialogue">
+                    <div class="speaker jisoo">
+                        <span class="speaker-icon">👩</span>
+                        <span>김지수 (Kim Jisoo):</span>
+                    </div>
+                    <div class="message jisoo">
+                        안녕하세요. 제 이름은 <span class="highlight">김지수</span>예요. 한국에서 왔어요. 제 가족을 소개해 드릴게요. 우리 가족은 <span class="highlight">할머니, 할아버지, 아버지, 어머니, 남동생</span> 이렇게 <span class="highlight">여섯 명</span>이에요. 제 취미는 <span class="highlight">피아노 치기</span>이고 특기는 <span class="highlight">요리</span>입니다. 특히, <span class="highlight">한식</span>을 잘합니다. <span class="highlight">간장 게장</span>도 만들 수 있어요. 앞으로 잘 부탁드립니다.
+                        <div class="translation">
+                            Hello. My name is Kim Jisoo. I'm from Korea. Let me introduce my family. My family consists of six people: grandmother, grandfather, father, mother, younger brother, and me. My hobby is playing the piano, and my special skill is cooking. Especially, I'm good at Korean food. I can even make ganjang gejang (soy sauce marinated crab). Please take care of me going forward.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Andy -->
+                <div class="dialogue">
+                    <div class="speaker andy">
+                        <span class="speaker-icon">👨</span>
+                        <span>앤디 스미스 (Andy Smith):</span>
+                    </div>
+                    <div class="message andy">
+                        안녕하세요. 제 이름은 <span class="highlight">앤디 스미스</span>예요. 저는 <span class="highlight">미국</span>에서 왔어요. 제 가족을 소개해 드릴게요. 우리 가족은 <span class="highlight">어머니, 아버지, 누나, 여동생</span> 이렇게 다섯 명이에요. <span class="highlight">할아버지는 돌아가셨고</span>, 할머니는 <span class="highlight">버지니아</span>에 있는 <span class="highlight">큰아버지 댁</span>에서 지내세요. 제 취미는 <span class="highlight">세차</span>입니다. <span class="highlight">구석구석</span> 잘 닦아요. 특기는 <span class="highlight">잔디깎기</span>입니다. 고등학교 때부터 동네 잔디는 제가 다 깎았습니다. 앞으로 잘 부탁드려요.
+                        <div class="translation">
+                            Hello. My name is Andy Smith. I'm from the United States. Let me introduce my family. My family consists of five people: mother, father, older sister, and younger sister. My grandfather passed away, and my grandmother is living at my uncle's house in Virginia. My hobby is car washing. I clean every nook and cranny well. My special skill is lawn mowing. Since high school, I've been mowing all the lawns in the neighborhood. Please take care of me going forward.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="vocabulary-grid">
+                    <div class="vocab-item">
+                        <strong>첫 시간</strong> [cheot si-gan] - first class/time
+                    </div>
+                    <div class="vocab-item">
+                        <strong>자기소개</strong> [ja-gi-so-gae] - self-introduction
+                    </div>
+                    <div class="vocab-item">
+                        <strong>이름</strong> [i-reum] - name
+                    </div>
+                    <div class="vocab-item">
+                        <strong>가족</strong> [ga-jok] - family
+                    </div>
+                    <div class="vocab-item">
+                        <strong>취미</strong> [chwi-mi] - hobby
+                    </div>
+                    <div class="vocab-item">
+                        <strong>특기</strong> [teuk-gi] - special skill, talent
+                    </div>
+                    <div class="vocab-item">
+                        <strong>본인</strong> [bon-in] - oneself
+                    </div>
+                    <div class="vocab-item">
+                        <strong>고양이</strong> [go-yang-i] - cat
+                    </div>
+                    <div class="vocab-item">
+                        <strong>두 마리</strong> [du ma-ri] - two (animals) - counter for animals
+                    </div>
+                    <div class="vocab-item">
+                        <strong>노래 만들기</strong> [no-rae man-deul-gi] - making songs, songwriting
+                    </div>
+                    <div class="vocab-item">
+                        <strong>글쓰기</strong> [geul-sseu-gi] - writing
+                    </div>
+                    <div class="vocab-item">
+                        <strong>소설</strong> [so-seol] - novel
+                    </div>
+                    <div class="vocab-item">
+                        <strong>잘 부탁드립니다</strong> [jal bu-tak-deu-rim-ni-da] - please take care of me (formal greeting)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>~에서 왔어요</strong> [~e-seo wass-eo-yo] - I'm from~ (place)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>소개해 드릴게요</strong> [so-gae-hae deu-ril-ge-yo] - I will introduce (polite)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>할머니</strong> [hal-meo-ni] - grandmother
+                    </div>
+                    <div class="vocab-item">
+                        <strong>할아버지</strong> [ha-ra-beo-ji] - grandfather
+                    </div>
+                    <div class="vocab-item">
+                        <strong>아버지</strong> [a-beo-ji] - father
+                    </div>
+                    <div class="vocab-item">
+                        <strong>어머니</strong> [eo-meo-ni] - mother
+                    </div>
+                    <div class="vocab-item">
+                        <strong>남동생</strong> [nam-dong-saeng] - younger brother
+                    </div>
+                    <div class="vocab-item">
+                        <strong>누나</strong> [nu-na] - older sister (said by males)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>여동생</strong> [yeo-dong-saeng] - younger sister
+                    </div>
+                    <div class="vocab-item">
+                        <strong>다섯 명</strong> [da-seot myeong] - five people - counter for people
+                    </div>
+                    <div class="vocab-item">
+                        <strong>여섯 명</strong> [yeo-seot myeong] - six people - counter for people
+                    </div>
+                    <div class="vocab-item">
+                        <strong>피아노 치기</strong> [pi-a-no chi-gi] - playing the piano
+                    </div>
+                    <div class="vocab-item">
+                        <strong>요리</strong> [yo-ri] - cooking
+                    </div>
+                    <div class="vocab-item">
+                        <strong>특히</strong> [teuk-hi] - especially, particularly
+                    </div>
+                    <div class="vocab-item">
+                        <strong>한식</strong> [han-sik] - Korean food
+                    </div>
+                    <div class="vocab-item">
+                        <strong>간장 게장</strong> [gan-jang ge-jang] - soy sauce marinated crab
+                    </div>
+                    <div class="vocab-item">
+                        <strong>미국</strong> [mi-guk] - United States, America
+                    </div>
+                    <div class="vocab-item">
+                        <strong>돌아가시다</strong> [do-ra-ga-si-da] - to pass away (honorific)
+                    </div>
+                    <div class="vocab-item">
+                        <strong>큰아버지</strong> [keun-a-beo-ji] - father's older brother, uncle
+                    </div>
+                    <div class="vocab-item">
+                        <strong>댁</strong> [daek] - house (honorific), home
+                    </div>
+                    <div class="vocab-item">
+                        <strong>지내다</strong> [ji-nae-da] - to live, to stay, to spend time
+                    </div>
+                    <div class="vocab-item">
+                        <strong>세차</strong> [se-cha] - car washing
+                    </div>
+                    <div class="vocab-item">
+                        <strong>구석구석</strong> [gu-seok-gu-seok] - every nook and cranny, every corner
+                    </div>
+                    <div class="vocab-item">
+                        <strong>닦다</strong> [dak-da] - to wipe, to clean
+                    </div>
+                    <div class="vocab-item">
+                        <strong>잔디깎기</strong> [jan-di-kkak-gi] - lawn mowing
+                    </div>
+                    <div class="vocab-item">
+                        <strong>고등학교</strong> [go-deung-hak-gyo] - high school
+                    </div>
+                    <div class="vocab-item">
+                        <strong>때부터</strong> [ttae-bu-teo] - since (time), from the time
+                    </div>
+                    <div class="vocab-item">
+                        <strong>동네</strong> [dong-ne] - neighborhood
+                    </div>
+                    <div class="vocab-item">
+                        <strong>깎다</strong> [kkak-da] - to cut, to mow
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "자기소개" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">self-introduction</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">family photo</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">homework</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">Fill in the blank: 고양이 두 ____ (two cats)</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What is Teacher Candy's hobby?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">piano playing</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">making songs</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">car washing</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "특기" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">hobby</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">special skill, talent</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">family</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "Korean food" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">How many people are in Jisoo's family?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">four</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">five</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">six</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What is Jisoo's special skill?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">lawn mowing</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">cooking</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">writing</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Fill in the blank: ____ 깎기 (lawn mowing)</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "돌아가시다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to return home</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to pass away (honorific)</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to move away</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">Where is Andy from?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">Korea</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">United States</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">Canada</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">What does "구석구석" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong1')">quickly</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'correct')">every nook and cranny</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong2')">slowly</button>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">How do you write "younger brother" in Korean?</div>
+                    <input type="text" id="q12" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What is Andy's hobby?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">piano playing</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">cooking</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">car washing</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does "큰아버지" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">younger uncle</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">father's older brother</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">grandfather</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">Fill in the blank: 잘 ____ 드립니다. (please take care of me)</div>
+                    <input type="text" id="q15" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "지내다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">to live, to stay</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">to work</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">to study</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">Who can make ganjang gejang (soy sauce marinated crab)?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">Andy</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">Jisoo</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">Teacher Candy</button>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">How do you write "high school" in Korean?</div>
+                    <input type="text" id="q18" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "때부터" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">since (time), from the time</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">until</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">before</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">Who is writing a novel?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 20, 'correct')">Teacher Candy</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">Jisoo</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">Andy</button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '마리',
+            q5: '한식',
+            q8: '잔디',
+            q12: '남동생',
+            q15: '부탁',
+            q18: '고등학교',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            11: 'correct',
+            13: 'correct',
+            14: 'correct',
+            16: 'correct',
+            17: 'correct',
+            19: 'correct',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q12', 'q15', 'q18'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 11, 13, 14, 16, 17, 19, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

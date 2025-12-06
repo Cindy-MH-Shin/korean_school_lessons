@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 학습: 어떤이의 꿈 (Korean Learning: Someone's Dream)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .song-info {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .song-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .lyrics-section {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .lyrics-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .lyrics-line {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .stanza {
+            margin-bottom: 25px;
+        }
+        
+        .vocab-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .vocab-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-word {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 16px;
+            color: #764ba2;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-meaning {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-example {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .grammar-section {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .grammar-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .grammar-explanation {
+            font-size: 15px;
+            color: #5d4037;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .grammar-example {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .phrase-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .phrase-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4c6ef5;
+            margin-bottom: 15px;
+        }
+        
+        .phrase-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .phrase-ko {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .phrase-en {
+            font-size: 14px;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 한국어 학습: 어떤이의 꿈<br><small style="font-size: 18px;">Korean Learning: Someone's Dream</small></h1>
+        
+        <div class="song-info">
+            <div class="song-title">어떤이의 꿈 (Someone's Dream)</div>
+            <p><strong>노래 설명 / Song Description:</strong> This song reflects on different people's relationships with their dreams - some cherish them, some share them, some chase them, while others forget or steal them. It's a philosophical meditation on what dreams mean to different people.</p>
+        </div>
+        
+        <div class="lyrics-section">
+            <div class="lyrics-title">가사 / Lyrics</div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">어떤 이는 꿈을 간직하고 살고</div>
+                <div class="lyrics-line">어떤 이는 꿈을 나눠주고 살며</div>
+                <div class="lyrics-line">다른 이는 꿈을 이루려고 사네</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">어떤 이는 꿈을 잊은 채로 살고</div>
+                <div class="lyrics-line">어떤 이는 남의 꿈을 뺏고 살며</div>
+                <div class="lyrics-line">다른 이는 꿈은 없는 거라 하네</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">세상에 이처럼 많은 사람들과</div>
+                <div class="lyrics-line">세상에 이처럼 많은 개성들</div>
+                <div class="lyrics-line">저마다 자기가 옳다 말을 하고</div>
+                <div class="lyrics-line">꿈이란 이런 거라 말하지만..</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">나는 누굴까?</div>
+                <div class="lyrics-line">내일을 꿈꾸는가?</div>
+                <div class="lyrics-line">나는 누굴까?</div>
+                <div class="lyrics-line">아무 꿈 없질 않나?</div>
+                <div class="lyrics-line">나는 누굴까?</div>
+                <div class="lyrics-line">내일을 꿈꾸는가?</div>
+                <div class="lyrics-line">나는 누굴까?</div>
+                <div class="lyrics-line">혹 아무 꿈</div>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">📚 핵심 단어 / Key Vocabulary</div>
+            
+            <div class="vocab-grid">
+                <div class="vocab-card">
+                    <div class="vocab-word">어떤</div>
+                    <div class="vocab-pronunciation">[eo-tteon]</div>
+                    <div class="vocab-meaning">some, certain, what kind of</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">어떤 사람은 책을 좋아해요.</div>
+                        <div class="example-en">Some people like books.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">이</div>
+                    <div class="vocab-pronunciation">[i]</div>
+                    <div class="vocab-meaning">person (formal/literary)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">그 이는 좋은 사람이에요.</div>
+                        <div class="example-en">That person is a good person.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">꿈</div>
+                    <div class="vocab-pronunciation">[kkum]</div>
+                    <div class="vocab-meaning">dream</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">나의 꿈은 의사가 되는 것입니다.</div>
+                        <div class="example-en">My dream is to become a doctor.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">간직하다</div>
+                    <div class="vocab-pronunciation">[gan-jik-ha-da]</div>
+                    <div class="vocab-meaning">to cherish, to keep, to treasure</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">추억을 간직해요.</div>
+                        <div class="example-en">I cherish memories.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">살다</div>
+                    <div class="vocab-pronunciation">[sal-da]</div>
+                    <div class="vocab-meaning">to live</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">서울에서 살아요.</div>
+                        <div class="example-en">I live in Seoul.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">나눠주다</div>
+                    <div class="vocab-pronunciation">[na-nwo-ju-da]</div>
+                    <div class="vocab-meaning">to share, to give out, to distribute</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">친구들에게 사탕을 나눠줬어요.</div>
+                        <div class="example-en">I shared candy with friends.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">다른</div>
+                    <div class="vocab-pronunciation">[da-reun]</div>
+                    <div class="vocab-meaning">different, other, another</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">다른 방법을 찾아요.</div>
+                        <div class="example-en">I'm looking for a different method.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">이루다</div>
+                    <div class="vocab-pronunciation">[i-ru-da]</div>
+                    <div class="vocab-meaning">to achieve, to accomplish, to fulfill</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">꿈을 이뤘어요.</div>
+                        <div class="example-en">I achieved my dream.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">잊다</div>
+                    <div class="vocab-pronunciation">[it-da]</div>
+                    <div class="vocab-meaning">to forget</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">이름을 잊어버렸어요.</div>
+                        <div class="example-en">I forgot the name.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">채</div>
+                    <div class="vocab-pronunciation">[chae]</div>
+                    <div class="vocab-meaning">while (in a state of), without changing</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">서 있는 채로 먹어요.</div>
+                        <div class="example-en">I eat while standing.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">남</div>
+                    <div class="vocab-pronunciation">[nam]</div>
+                    <div class="vocab-meaning">others, other people</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">남의 물건을 가져가면 안 돼요.</div>
+                        <div class="example-en">You shouldn't take other people's things.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">뺏다</div>
+                    <div class="vocab-pronunciation">[ppaet-da]</div>
+                    <div class="vocab-meaning">to take away, to steal, to snatch</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">동생이 장난감을 뺏었어요.</div>
+                        <div class="example-en">My sibling took away my toy.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">세상</div>
+                    <div class="vocab-pronunciation">[se-sang]</div>
+                    <div class="vocab-meaning">world</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">세상은 넓어요.</div>
+                        <div class="example-en">The world is wide.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">이처럼</div>
+                    <div class="vocab-pronunciation">[i-cheo-reom]</div>
+                    <div class="vocab-meaning">like this, in this way, so</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">이처럼 아름다운 날씨는 처음이에요.</div>
+                        <div class="example-en">Such beautiful weather is a first.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">많은</div>
+                    <div class="vocab-pronunciation">[ma-neun]</div>
+                    <div class="vocab-meaning">many, much, a lot of</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">많은 사람들이 왔어요.</div>
+                        <div class="example-en">Many people came.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">사람</div>
+                    <div class="vocab-pronunciation">[sa-ram]</div>
+                    <div class="vocab-meaning">person, people</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">좋은 사람을 만났어요.</div>
+                        <div class="example-en">I met a good person.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">개성</div>
+                    <div class="vocab-pronunciation">[gae-seong]</div>
+                    <div class="vocab-meaning">personality, individuality, character</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">그 사람은 개성이 강해요.</div>
+                        <div class="example-en">That person has a strong personality.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">저마다</div>
+                    <div class="vocab-pronunciation">[jeo-ma-da]</div>
+                    <div class="vocab-meaning">each (one), every (one), respectively</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">저마다 생각이 달라요.</div>
+                        <div class="example-en">Each person thinks differently.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">자기</div>
+                    <div class="vocab-pronunciation">[ja-gi]</div>
+                    <div class="vocab-meaning">oneself, one's own</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">자기 일을 해요.</div>
+                        <div class="example-en">I do my own work.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">옳다</div>
+                    <div class="vocab-pronunciation">[ol-ta]</div>
+                    <div class="vocab-meaning">to be right, to be correct</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">당신이 옳아요.</div>
+                        <div class="example-en">You are right.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">말</div>
+                    <div class="vocab-pronunciation">[mal]</div>
+                    <div class="vocab-meaning">word, speech, saying</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">좋은 말을 해요.</div>
+                        <div class="example-en">I say good words.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">내일</div>
+                    <div class="vocab-pronunciation">[nae-il]</div>
+                    <div class="vocab-meaning">tomorrow</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">내일 만나요.</div>
+                        <div class="example-en">Let's meet tomorrow.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">꿈꾸다</div>
+                    <div class="vocab-pronunciation">[kkum-kku-da]</div>
+                    <div class="vocab-meaning">to dream, to dream of</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">행복을 꿈꿔요.</div>
+                        <div class="example-en">I dream of happiness.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">아무</div>
+                    <div class="vocab-pronunciation">[a-mu]</div>
+                    <div class="vocab-meaning">any, no (+ negative)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">아무것도 없어요.</div>
+                        <div class="example-en">There's nothing.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">혹</div>
+                    <div class="vocab-pronunciation">[hok]</div>
+                    <div class="vocab-meaning">perhaps, by any chance, maybe</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">혹시 시간 있어요?</div>
+                        <div class="example-en">Do you perhaps have time?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <div class="grammar-title">📖 문법 설명 / Grammar Explanations</div>
+            
+            <div class="grammar-explanation">
+                <strong>1. -고 (and, and then):</strong> Connects two actions or states
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈을 간직<span class="highlight">하고</span> 살고 - cherish dreams <span class="highlight">and</span> live</div>
+                    <div class="example-ko">• 밥을 먹<span class="highlight">고</span> 자요 - eat <span class="highlight">and then</span> sleep</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>2. -며 (and, while):</strong> Similar to -고, connects actions (more literary)
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈을 나눠주<span class="highlight">고</span> 살<span class="highlight">며</span> - share dreams <span class="highlight">and</span> live</div>
+                    <div class="example-ko">• 노래하<span class="highlight">며</span> 춤춰요 - sing <span class="highlight">while</span> dancing</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>3. -네 (ending showing observation):</strong> Expresses observation or realization
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈을 이루려고 사<span class="highlight">네</span> - (I see) they live trying to achieve dreams</div>
+                    <div class="example-ko">• 비가 오<span class="highlight">네</span> - (Oh) it's raining</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>4. -ㄴ/은 채로 (while in a state of, without changing):</strong>
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈을 잊<span class="highlight">은 채로</span> - <span class="highlight">while having forgotten</span> dreams</div>
+                    <div class="example-ko">• 선 <span class="highlight">채로</span> - <span class="highlight">while standing</span></div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>5. -려고 (in order to, intending to):</strong> Expresses intention or purpose
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈을 이루<span class="highlight">려고</span> - <span class="highlight">in order to</span> achieve dreams</div>
+                    <div class="example-ko">• 공부하<span class="highlight">려고</span> 도서관에 가요 - go to the library <span class="highlight">to</span> study</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>6. -란 = -라는 것은 (as for, when it comes to):</strong>
+                <div class="grammar-example">
+                    <div class="example-ko">• 꿈<span class="highlight">이란</span> 이런 거라 - <span class="highlight">as for</span> dreams, they are like this</div>
+                    <div class="example-ko">• 사랑<span class="highlight">이란</span> 무엇인가? - What <span class="highlight">is</span> love?</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>7. -지만 (but, however):</strong> Connects contrasting clauses
+                <div class="grammar-example">
+                    <div class="example-ko">• 말하<span class="highlight">지만</span> - they say, <span class="highlight">but</span></div>
+                    <div class="example-ko">• 비싸<span class="highlight">지만</span> 좋아요 - it's expensive, <span class="highlight">but</span> good</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>8. -ㄹ까? (question ending - wondering):</strong> Rhetorical or self-questioning
+                <div class="grammar-example">
+                    <div class="example-ko">• 나는 누구<span class="highlight">일까</span>? - Who <span class="highlight">am I?</span> (I wonder)</div>
+                    <div class="example-ko">• 언제 올<span class="highlight">까</span>? - <span class="highlight">When will</span> they come? (I wonder)</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>9. -는가? (formal question):</strong> Formal/literary question form
+                <div class="grammar-example">
+                    <div class="example-ko">• 내일을 꿈꾸<span class="highlight">는가</span>? - <span class="highlight">Do I</span> dream of tomorrow?</div>
+                    <div class="example-ko">• 행복한<span class="highlight">가</span>? - <span class="highlight">Are you</span> happy?</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>10. -질 않나? (negative question - "isn't it that..."):</strong>
+                <div class="grammar-example">
+                    <div class="example-ko">• 아무 꿈 없<span class="highlight">질 않나</span>? - <span class="highlight">Isn't it that</span> I have no dreams?</div>
+                    <div class="example-ko">• 너무 비싸<span class="highlight">질 않나</span>? - <span class="highlight">Isn't it</span> too expensive?</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phrase-section">
+            <div class="phrase-title">🎯 핵심 표현 / Key Phrases from the Song</div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">어떤 이는... 어떤 이는... 다른 이는...</div>
+                <div class="phrase-en">Some people... some people... others...</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">꿈을 간직하고 살다</div>
+                <div class="phrase-en">to live cherishing dreams</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">꿈을 나눠주다</div>
+                <div class="phrase-en">to share dreams (with others)</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">꿈을 이루려고 하다</div>
+                <div class="phrase-en">to try to achieve dreams</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">꿈을 잊은 채로</div>
+                <div class="phrase-en">while having forgotten dreams</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">남의 꿈을 뺏다</div>
+                <div class="phrase-en">to steal other people's dreams</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">세상에 이처럼 많은</div>
+                <div class="phrase-en">so many in the world</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">저마다 자기가 옳다고 말하다</div>
+                <div class="phrase-en">each person says they are right</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">나는 누굴까?</div>
+                <div class="phrase-en">Who am I? (wondering)</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">내일을 꿈꾸다</div>
+                <div class="phrase-en">to dream of tomorrow</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">아무 꿈도 없다</div>
+                <div class="phrase-en">to have no dreams at all</div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <div class="grammar-title">💭 노래의 메시지 / Song's Message</div>
+            <div class="grammar-explanation">
+                This philosophical song explores different relationships people have with their dreams:
+                <ul style="margin-top: 10px; margin-left: 20px; line-height: 1.8;">
+                    <li><strong>간직하고 살고</strong> - Some cherish and keep their dreams close</li>
+                    <li><strong>나눠주고 살며</strong> - Some share their dreams with others</li>
+                    <li><strong>이루려고 사네</strong> - Some actively work to achieve their dreams</li>
+                    <li><strong>잊은 채로 살고</strong> - Some have forgotten their dreams entirely</li>
+                    <li><strong>남의 꿈을 뺏고</strong> - Some steal or destroy others' dreams</li>
+                    <li><strong>꿈은 없는 거라 하네</strong> - Some believe dreams don't exist</li>
+                </ul>
+                <p style="margin-top: 15px;">The chorus asks the central question: <strong>"나는 누굴까?"</strong> (Who am I?) - prompting reflection on which type of person we are and whether we are truly dreaming of tomorrow or living without dreams.</p>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">✏️ 단어 퀴즈 / Vocabulary Quiz</div>
+            
+            <div style="background: #f7fafc; padding: 25px; border-radius: 15px; border: 2px solid #e2e8f0;">
+                <!-- Question 1 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does <span class="korean-word-large">간직하다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'cherish')">to cherish, to keep</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'forget')">to forget</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'share')">to share</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'steal')">to steal</button>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">What does <span class="korean-word-large">이루다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'live')">to live</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'achieve')">to achieve, to accomplish</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'give')">to give</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'dream')">to dream</button>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">Complete: 추억을 _____. (I cherish memories.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '간직해요')">간직해요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '잊어요')">잊어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '뺏어요')">뺏어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '나눠요')">나눠요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does <span class="korean-word-large">나눠주다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'take')">to take</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'share')">to share, to distribute</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'hide')">to hide</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'forget')">to forget</button>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">What does <span class="korean-word-large">뺏다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'give')">to give</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'share')">to share</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'steal')">to take away, to steal</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'keep')">to keep</button>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does <span class="korean-word-large">잊다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'remember')">to remember</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'forget')">to forget</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'learn')">to learn</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'teach')">to teach</button>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does <span class="korean-word-large">저마다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, 'each')">each one, every one</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, 'nobody')">nobody</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, 'somebody')">somebody</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, 'together')">together</button>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Complete: 꿈을 _____. (I achieved my dream.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '이뤘어요')">이뤘어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '잊었어요')">잊었어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '살았어요')">살았어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, '뺏었어요')">뺏었어요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does <span class="korean-word-large">개성</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'personality')">personality, individuality</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'dream')">dream</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'world')">world</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'hope')">hope</button>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does <span class="korean-word-large">옳다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, 'wrong')">to be wrong</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, 'right')">to be right, correct</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, 'old')">to be old</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, 'new')">to be new</button>
+                    </div>
+                </div>
+                
+                <!-- Question 11 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">What does <span class="korean-word-large">꿈꾸다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'dream')">to dream, to dream of</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'sleep')">to sleep</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'wake')">to wake up</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'think')">to think</button>
+                    </div>
+                </div>
+                
+                <!-- Question 12 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does <span class="korean-word-large">세상</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'world')">world</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'life')">life</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'sky')">sky</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'country')">country</button>
+                    </div>
+                </div>
+                
+                <!-- Question 13 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does <span class="korean-word-large">이처럼</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'like this')">like this, in this way</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'never')">never</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'always')">always</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, 'sometimes')">sometimes</button>
+                    </div>
+                </div>
+                
+                <!-- Question 14 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">Complete: 이름을 _____. (I forgot the name.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '잊어버렸어요')">잊어버렸어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '기억했어요')">기억했어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '간직했어요')">간직했어요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, '이뤘어요')">이뤘어요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 15 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does <span class="korean-word-large">남</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'others')">others, other people</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'myself')">myself</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'friend')">friend</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'family')">family</button>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkAnswers()">정답 확인 / Check Answers</button>
+                
+                <div class="quiz-results" id="results">
+                    <h2>Quiz Results</h2>
+                    <div class="score" id="score"></div>
+                    <p id="message"></p>
+                    <button class="reset-btn" onclick="resetQuiz()">다시 하기 / Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: 'cherish',
+            2: 'achieve',
+            3: '간직해요',
+            4: 'share',
+            5: 'steal',
+            6: 'forget',
+            7: 'each',
+            8: '이뤘어요',
+            9: 'personality',
+            10: 'right',
+            11: 'dream',
+            12: 'world',
+            13: 'like this',
+            14: '잊어버렸어요',
+            15: 'others'
+        };
+        
+        let userAnswers = {};
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 완벽합니다! Perfect! You have mastered the vocabulary!';
+            } else if (percentage >= 70) {
+                message = '👍 잘했어요! Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 괜찮아요! Not bad! Review the vocabulary and try again!';
+            } else {
+                message = '📚 더 공부하세요! Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+    
+    <style>
+        .quiz-question {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .korean-word-large {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0 5px;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            padding: 12px 15px;
+            background: #f7fafc;
+            border: 3px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f0f5ff;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-option.selected {
+            border-color: #667eea;
+            background: #f0f5ff;
+            font-weight: bold;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-results {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 64px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 35px;
+            font-size: 18px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .reset-btn:hover {
+            background: #f7fafc;
+        }
+    </style>
