@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>취미 - Small Talk: Hobbies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.jieun {
+            color: #e91e63;
+        }
+        
+        .speaker.michael {
+            color: #2196f3;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.jieun {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.michael {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .emotion-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f0f5ff;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+            text-align: left;
+        }
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #667eea;
+        }
+        
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 취미 🎨</h1>
+        <div class="subtitle">Small Talk: Hobbies<br>Learn to talk about hobbies in Korean</div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">💬 Conversation</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">📚 Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz')">✏️ Quiz</button>
+        </div>
+
+        <!-- Conversation Tab -->
+        <div id="conversation" class="tab-content active">
+            <!-- Conversation 1: Music -->
+            <div class="conversation-section">
+                <div class="conversation-title">대화 1: 음악 감상 (Listening to Music)</div>
+                
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        지은 씨의 <span class="highlight">취미</span>는 뭐예요?
+                        <div class="translation">What is your hobby, Jieun?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        저는 <span class="highlight">음악 감상</span>이에요.
+                        <div class="translation">My hobby is listening to music.</div>
+                        <div class="emotion-tag">취미 제시</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        음악 감상은 <span class="highlight">쉽고 재미있어요.</span>
+                        <div class="translation">Listening to music is easy and fun.</div>
+                        <div class="emotion-tag">쉬움/재미</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        마이클 씨는요?
+                        <div class="translation">How about you, Michael?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        제 취미는 <span class="highlight">사진 찍기</span>예요.
+                        <div class="translation">My hobby is taking photos.</div>
+                        <div class="emotion-tag">취미 제시</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        와, 사진 찍기는 <span class="highlight">멋있어요!</span>
+                        <div class="translation">Wow, taking photos is cool!</div>
+                        <div class="emotion-tag">멋있음</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversation 2: Cooking & Knitting -->
+            <div class="conversation-section">
+                <div class="conversation-title">대화 2: 요리와 뜨개질 (Cooking & Knitting)</div>
+                
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        <span class="highlight">주말</span>에 보통 뭐 해요?
+                        <div class="translation">What do you usually do on the weekend?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        저는 <span class="highlight">요리</span>를 배워요.
+                        <div class="translation">I learn cooking.</div>
+                        <div class="emotion-tag">취미 제시</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        요리는 조금 <span class="highlight">어려울 것 같아요.</span>
+                        <div class="translation">Cooking seems a little difficult.</div>
+                        <div class="emotion-tag">어려움</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        처음에는 어려웠지만, 지금은 <span class="highlight">재미있어요.</span>
+                        <div class="translation">It was difficult at first, but now it's fun.</div>
+                        <div class="emotion-tag">재미</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        제 취미는 <span class="highlight">뜨개질</span>이에요.
+                        <div class="translation">My hobby is knitting.</div>
+                        <div class="emotion-tag">취미 제시</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        뜨개질은 <span class="highlight">조용하고 편안하겠어요.</span>
+                        <div class="translation">Knitting must be quiet and relaxing.</div>
+                        <div class="emotion-tag">편안함</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversation 3: Games & Reading -->
+            <div class="conversation-section">
+                <div class="conversation-title">대화 3: 게임과 독서 (Games & Reading)</div>
+                
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        지은 씨, <span class="highlight">스트레스 해소</span>는 어떻게 해요?
+                        <div class="translation">Jieun, how do you relieve stress?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        저는 <span class="highlight">게임</span>을 해요. 아주 <span class="highlight">신나요!</span>
+                        <div class="translation">I play games. It's very exciting!</div>
+                        <div class="emotion-tag">신남</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        게임은 <span class="highlight">시끄러워서</span> 저는 <span class="highlight">힘들어요.</span>
+                        <div class="translation">Games are loud, so it's hard for me.</div>
+                        <div class="emotion-tag">힘듦</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        그럼 마이클 씨는 뭘 해요?
+                        <div class="translation">Then what do you do, Michael?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span> 마이클 (Michael)
+                    </div>
+                    <div class="message michael">
+                        저는 <span class="highlight">조용히 책을 읽어요.</span>
+                        <div class="translation">I quietly read a book.</div>
+                        <div class="emotion-tag">취미 제시</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span> 지은 (Jieun)
+                    </div>
+                    <div class="message jieun">
+                        <span class="highlight">독서</span>는 <span class="highlight">지루할 것 같지만,</span> 좋아요.
+                        <div class="translation">Reading seems boring, but it's good.</div>
+                        <div class="emotion-tag">지루함/좋음</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="vocabulary-grid">
+                    <div class="vocab-item"><strong>취미</strong> (chwi-mi) - hobby</div>
+                    <div class="vocab-item"><strong>음악 감상</strong> (eu-mak gam-sang) - listening to music</div>
+                    <div class="vocab-item"><strong>사진 찍기</strong> (sa-jin jjik-gi) - taking photos</div>
+                    <div class="vocab-item"><strong>요리</strong> (yo-ri) - cooking</div>
+                    <div class="vocab-item"><strong>뜨개질</strong> (tteu-gae-jil) - knitting</div>
+                    <div class="vocab-item"><strong>게임</strong> (ge-im) - game</div>
+                    <div class="vocab-item"><strong>독서</strong> (dok-seo) - reading</div>
+                    <div class="vocab-item"><strong>주말</strong> (ju-mal) - weekend</div>
+                    <div class="vocab-item"><strong>스트레스 해소</strong> (seu-teu-re-seu hae-so) - stress relief</div>
+                    <div class="vocab-item"><strong>쉽다</strong> (swip-da) - to be easy</div>
+                    <div class="vocab-item"><strong>어렵다</strong> (eo-ryeop-da) - to be difficult</div>
+                    <div class="vocab-item"><strong>재미있다</strong> (jae-mi-it-da) - to be fun, interesting</div>
+                    <div class="vocab-item"><strong>멋있다</strong> (meo-sit-da) - to be cool, awesome</div>
+                    <div class="vocab-item"><strong>편안하다</strong> (pyeo-nan-ha-da) - to be comfortable, relaxing</div>
+                    <div class="vocab-item"><strong>조용하다</strong> (jo-yong-ha-da) - to be quiet</div>
+                    <div class="vocab-item"><strong>시끄럽다</strong> (si-kkeu-reop-da) - to be loud, noisy</div>
+                    <div class="vocab-item"><strong>신나다</strong> (sin-na-da) - to be exciting, thrilling</div>
+                    <div class="vocab-item"><strong>지루하다</strong> (ji-ru-ha-da) - to be boring</div>
+                    <div class="vocab-item"><strong>힘들다</strong> (him-deul-da) - to be hard, difficult, tiring</div>
+                    <div class="vocab-item"><strong>처음에는</strong> (cheo-eu-me-neun) - at first, in the beginning</div>
+                    <div class="vocab-item"><strong>지금은</strong> (ji-geum-eun) - now</div>
+                    <div class="vocab-item"><strong>보통</strong> (bo-tong) - usually, normally</div>
+                    <div class="vocab-item"><strong>조용히</strong> (jo-yong-hi) - quietly</div>
+                    <div class="vocab-item"><strong>배우다</strong> (bae-u-da) - to learn</div>
+                    <div class="vocab-item"><strong>읽다</strong> (ik-da) - to read</div>
+                    <div class="vocab-item"><strong>~는요?</strong> (-neun-yo?) - How about...? / What about...?</div>
+                    <div class="vocab-item"><strong>~을 것 같다</strong> (-eul geot gat-da) - to seem like, to appear to be</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "취미" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">free time</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">hobby</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">interest</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "listening to music" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "사진 찍기" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">watching photos</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">taking photos</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">editing photos</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "쉽다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">to be easy</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">to be difficult</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">to be fun</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "weekend" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "요리" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">cooking</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">baking</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">eating</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "어렵다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">to be easy</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">to be difficult</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">to be boring</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "knitting" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "편안하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to be comfortable/relaxing</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to be difficult</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to be exciting</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "조용하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">to be loud</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">to be quiet</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">to be peaceful</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">What does "스트레스 해소" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong1')">having stress</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'correct')">stress relief</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong2')">work pressure</button>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">How do you write "game" in Korean?</div>
+                    <input type="text" id="q12" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "신나다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">to be tired</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">to be exciting</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">to be boring</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does "시끄럽다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">to be loud</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">to be quiet</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">to be peaceful</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">How do you write "reading" in Korean?</div>
+                    <input type="text" id="q15" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "힘들다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">to be fun</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">to be hard/tiring</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">to be happy</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">What does "지루하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">to be exciting</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">to be boring</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">to be interesting</button>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">How do you write "fun/interesting" in Korean?</div>
+                    <input type="text" id="q18" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "멋있다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">to be boring</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">to be cool/awesome</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">to be strange</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">What does "처음에는" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 20, 'correct')">at first</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">at last</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">always</button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '음악감상',
+            q5: '주말',
+            q8: '뜨개질',
+            q12: '게임',
+            q15: '독서',
+            q18: '재미있다',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            11: 'correct',
+            13: 'correct',
+            14: 'correct',
+            16: 'correct',
+            17: 'correct',
+            19: 'correct',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q12', 'q15', 'q18'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 11, 13, 14, 16, 17, 19, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

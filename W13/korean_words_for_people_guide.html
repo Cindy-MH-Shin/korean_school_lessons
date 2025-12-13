@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사람을 지칭하는 한국어 - Korean Words for Referring to People</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #764ba2;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .intro {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .word-section {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+        
+        .word-section:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        
+        .word-header {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .word-korean {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .word-pronunciation {
+            font-size: 18px;
+            color: #764ba2;
+            font-style: italic;
+        }
+        
+        .word-english {
+            font-size: 18px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .level-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: auto;
+        }
+        
+        .formal {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .neutral {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .casual {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .vulgar {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .etymology {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .etymology-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 8px;
+        }
+        
+        .usage {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .usage-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .example {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .example-ko {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .example-en {
+            font-size: 14px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .note {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 4px solid #f44336;
+        }
+        
+        .note-title {
+            font-weight: bold;
+            color: #c62828;
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .positive {
+            color: #2e7d32;
+        }
+        
+        .negative {
+            color: #c62828;
+        }
+        
+        .neutral-text {
+            color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>사람을 지칭하는 한국어<br><small style="font-size: 20px;">Korean Words for Referring to People</small></h1>
+        
+        <div class="intro">
+            <p><strong>Introduction:</strong> Korean has various words to refer to people, each with different levels of formality, respect, and emotional nuance. Understanding these differences is crucial for appropriate communication in Korean society, where social hierarchy and respect are important cultural values.</p>
+        </div>
+
+        <h2>📚 Individual Terms for People</h2>
+
+        <!-- 이 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">이</span>
+                <span class="word-pronunciation">[i]</span>
+                <span class="word-english">person (literary/formal)</span>
+                <span class="level-tag formal">FORMAL</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                Native Korean word used in formal or literary contexts. Often combined with modifiers like "어떤" (some), "그" (that), "이런" (this kind of).
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li>Used in <strong class="highlight">formal writing, literature, songs, and speeches</strong></li>
+                    <li>Creates a poetic or elevated tone</li>
+                    <li>Often used when referring to people in general or unspecified individuals</li>
+                    <li><span class="positive">✓ Respectful and dignified</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">어떤 이는 꿈을 간직하고 살고</div>
+                <div class="example-en">eo-tteon i-neun kkum-eul gan-jik-ha-go sal-go → Some people live cherishing their dreams</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">그 이는 좋은 사람이에요.</div>
+                <div class="example-en">geu i-neun jo-eun sa-ram-i-e-yo → That person is a good person.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">이런 이를 찾기 힘들어요.</div>
+                <div class="example-en">i-reon i-reul chat-gi him-deu-reo-yo → It's hard to find a person like this.</div>
+            </div>
+        </div>
+
+        <!-- 사람 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">사람</span>
+                <span class="word-pronunciation">[sa-ram]</span>
+                <span class="word-english">person, people</span>
+                <span class="level-tag neutral">NEUTRAL</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                Native Korean word. The most common and versatile term for "person" in Korean. Can be used in almost any context.
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li><strong class="highlight">The standard, everyday word for "person"</strong></li>
+                    <li>Can be used in formal and informal situations</li>
+                    <li>Combined with demonstratives: 이 사람 (this person), 그 사람 (that person), 저 사람 (that person over there)</li>
+                    <li><span class="neutral-text">✓ Safe to use in any context</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">이 사람은 제 친구예요.</div>
+                <div class="example-en">i sa-ram-eun je chin-gu-ye-yo → This person is my friend.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">저 사람을 아세요?</div>
+                <div class="example-en">jeo sa-ram-eul a-se-yo? → Do you know that person?</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">좋은 사람을 만나고 싶어요.</div>
+                <div class="example-en">jo-eun sa-ram-eul man-na-go si-peo-yo → I want to meet good people.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">많은 사람들이 왔어요.</div>
+                <div class="example-en">ma-neun sa-ram-deu-ri wass-eo-yo → Many people came.</div>
+            </div>
+        </div>
+
+        <!-- 분 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">분</span>
+                <span class="word-pronunciation">[bun]</span>
+                <span class="word-english">person (honorific)</span>
+                <span class="level-tag formal">HONORIFIC</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                Honorific form of 사람. Used to show respect to the person being referred to. Derived from Sino-Korean, but fully integrated into Korean honorific system.
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li><strong class="highlight">Used when referring to people you should respect</strong></li>
+                    <li>Elders, superiors, customers, strangers (when being polite)</li>
+                    <li>Combined with demonstratives: 이 분 (this person-honorific), 그 분 (that person-honorific), 저 분 (that person over there-honorific)</li>
+                    <li><span class="positive">✓ Shows proper respect and politeness</span></li>
+                    <li><span class="negative">✗ Do NOT use for yourself or people of lower status</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">이 분은 우리 선생님이세요.</div>
+                <div class="example-en">i bun-eun u-ri seon-saeng-nim-i-se-yo → This person is our teacher.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">저 분이 사장님이십니다.</div>
+                <div class="example-en">jeo bun-i sa-jang-nim-i-sim-ni-da → That person is the company president.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">어느 분을 찾으세요?</div>
+                <div class="example-en">eo-neu bun-eul cha-jeu-se-yo? → Which person are you looking for? (polite)</div>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">⚠️ Important Note:</div>
+                Using 분 instead of 사람 is essential in Korean business and formal settings. Using 사람 when you should use 분 can be considered rude.
+            </div>
+        </div>
+
+        <!-- 녀석 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">녀석</span>
+                <span class="word-pronunciation">[nyeo-seok]</span>
+                <span class="word-english">guy, fellow, rascal</span>
+                <span class="level-tag casual">CASUAL</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                From Sino-Korean 女(녀) meaning "female" + 石(석) meaning "stone," but the original meaning has been lost. Now used as a casual, informal way to refer to someone.
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li><strong class="highlight">Casual, familiar term - often affectionate or teasing</strong></li>
+                    <li>Used for people you're close to (friends, younger siblings, children)</li>
+                    <li>Can be affectionate: "이 녀석" (this little guy/rascal)</li>
+                    <li>Can be slightly negative: "그 녀석" (that guy - in a dismissive way)</li>
+                    <li>Commonly used for animals and pets too</li>
+                    <li><span class="positive">✓ Shows closeness and familiarity</span></li>
+                    <li><span class="negative">✗ NEVER use for elders, superiors, or people you should respect</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">이 녀석, 또 장난치네!</div>
+                <div class="example-en">i nyeo-seok, tto jang-nan-chi-ne! → This rascal is playing around again! (affectionate)</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">그 녀석은 정말 똑똑해.</div>
+                <div class="example-en">geu nyeo-seok-eun jeong-mal ttok-ttok-hae → That guy is really smart.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">우리 강아지 녀석이 너무 귀여워.</div>
+                <div class="example-en">u-ri gang-a-ji nyeo-seok-i neo-mu gwi-yeo-wo → My puppy (little guy) is so cute.</div>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">💡 Cultural Note:</div>
+                In Korean dramas, you'll often hear parents lovingly say "이 녀석" to their children. It's affectionate but casual - think "you little rascal" in English.
+            </div>
+        </div>
+
+        <!-- 놈 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">놈</span>
+                <span class="word-pronunciation">[nom]</span>
+                <span class="word-english">guy, bastard, jerk (derogatory)</span>
+                <span class="level-tag vulgar">CRUDE/VULGAR</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                Native Korean word. Historically neutral but has become primarily negative/derogatory in modern usage. Originally similar to 녀석 but now much more negative.
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li><strong class="highlight">Derogatory and disrespectful term</strong></li>
+                    <li>Used to express anger, contempt, or strong negative feelings</li>
+                    <li>Sometimes used very casually between close male friends (similar to "dude" or "bro" but cruder)</li>
+                    <li>Can be used for animals in a rough, casual way</li>
+                    <li><span class="negative">✗ Generally offensive - use with extreme caution</span></li>
+                    <li><span class="negative">✗ Never use in formal settings or with people you don't know well</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">그 놈이 날 속였어!</div>
+                <div class="example-en">geu nom-i nal sok-yeoss-eo! → That bastard deceived me! (angry)</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">이 놈아! 뭐 하는 거야?</div>
+                <div class="example-en">i nom-a! mwo ha-neun geo-ya? → Hey you! What are you doing? (very informal, among close friends or when scolding)</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">도둑놈을 잡아라!</div>
+                <div class="example-en">do-duk-nom-eul ja-ba-ra! → Catch that thief!</div>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">⚠️ Strong Warning:</div>
+                This word can be highly offensive. As a Korean learner, it's best to avoid using it except with very close friends who understand you're still learning. You'll hear it in movies and dramas, but that doesn't mean it's appropriate for you to use casually.
+            </div>
+        </div>
+
+        <!-- 자식 -->
+        <div class="word-section">
+            <div class="word-header">
+                <span class="word-korean">자식</span>
+                <span class="word-pronunciation">[ja-sik]</span>
+                <span class="word-english">child, offspring / bastard (context-dependent)</span>
+                <span class="level-tag casual">NEUTRAL → VULGAR</span>
+            </div>
+            
+            <div class="etymology">
+                <div class="etymology-title">📖 Etymology / 어원:</div>
+                From Sino-Korean 子(자) "child" + 息(식) "breath, son." Originally and still primarily means "child" or "offspring," but can also be used derogatorily similar to 놈.
+            </div>
+            
+            <div class="usage">
+                <div class="usage-title">💡 Usage / 사용법:</div>
+                <ul>
+                    <li><strong class="highlight">Primary meaning: "child" or "children" (neutral)</strong></li>
+                    <li>Used by parents to refer to their children: "우리 자식들" (our children)</li>
+                    <li><strong class="highlight">Secondary meaning: derogatory term similar to 놈</strong></li>
+                    <li>When used derogatorily: "이 자식아!" (You bastard!)</li>
+                    <li>Context is everything - tone and situation determine if it's neutral or offensive</li>
+                    <li><span class="neutral-text">✓ Acceptable when meaning "child/children"</span></li>
+                    <li><span class="negative">✗ Very offensive when used as an insult</span></li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko"><strong>Neutral usage (meaning "child"):</strong></div>
+                <div class="example-ko">제 자식은 세 명입니다.</div>
+                <div class="example-en">je ja-sik-eun se myeong-im-ni-da → I have three children.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">부모는 자식을 사랑한다.</div>
+                <div class="example-en">bu-mo-neun ja-sik-eul sa-rang-han-da → Parents love their children.</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko"><strong>Derogatory usage (insult):</strong></div>
+                <div class="example-ko">이 자식이 또 거짓말을 하네!</div>
+                <div class="example-en">i ja-sik-i tto geo-jin-ma-reul ha-ne! → This bastard is lying again! (very angry)</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-ko">그 자식 때문에 화가 나.</div>
+                <div class="example-en">geu ja-sik ttae-mu-ne hwa-ga na → I'm angry because of that jerk.</div>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">⚠️ Context is Critical:</div>
+                When 자식 is used with possessives (우리 자식, 제 자식, 내 자식), it means "child" and is neutral. When used with demonstratives (이 자식, 그 자식) especially with the vocative 아, it becomes an insult. Be very careful with usage!
+            </div>
+        </div>
+
+        <h2>📊 Comparison Table / 비교표</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Korean<br>한국어</th>
+                    <th>Pronunciation<br>발음</th>
+                    <th>English<br>영어</th>
+                    <th>Formality Level<br>격식 수준</th>
+                    <th>When to Use<br>사용 시기</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>이</strong></td>
+                    <td>[i]</td>
+                    <td>person (literary)</td>
+                    <td><span class="level-tag formal">FORMAL</span></td>
+                    <td>Literature, songs, formal speeches, poetic contexts</td>
+                </tr>
+                <tr>
+                    <td><strong>사람</strong></td>
+                    <td>[sa-ram]</td>
+                    <td>person, people</td>
+                    <td><span class="level-tag neutral">NEUTRAL</span></td>
+                    <td>Everyday use - the standard, safe choice for any situation</td>
+                </tr>
+                <tr>
+                    <td><strong>분</strong></td>
+                    <td>[bun]</td>
+                    <td>person (honorific)</td>
+                    <td><span class="level-tag formal">HONORIFIC</span></td>
+                    <td>Elders, superiors, customers - showing respect</td>
+                </tr>
+                <tr>
+                    <td><strong>녀석</strong></td>
+                    <td>[nyeo-seok]</td>
+                    <td>guy, fellow, rascal</td>
+                    <td><span class="level-tag casual">CASUAL</span></td>
+                    <td>Close friends, younger people, children, pets - affectionate or teasing</td>
+                </tr>
+                <tr>
+                    <td><strong>놈</strong></td>
+                    <td>[nom]</td>
+                    <td>guy, bastard, jerk</td>
+                    <td><span class="level-tag vulgar">CRUDE/VULGAR</span></td>
+                    <td>Expressing anger/contempt OR very casually with close male friends</td>
+                </tr>
+                <tr>
+                    <td><strong>자식</strong></td>
+                    <td>[ja-sik]</td>
+                    <td>child / bastard</td>
+                    <td><span class="level-tag casual">NEUTRAL → VULGAR</span></td>
+                    <td>Neutral: "my children" | Derogatory: insult (context-dependent)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🎯 Key Differences / 핵심 차이점</h2>
+
+        <div class="word-section">
+            <h3 style="color: #667eea;">1. 이 vs 사람 (Literary vs Standard)</h3>
+            <p><strong>이</strong> is more poetic and formal, often used in songs, literature, and formal speeches. <strong>사람</strong> is the everyday word everyone uses.</p>
+            
+            <div class="example">
+                <div class="example-ko">✓ Song lyric: "어떤 이는 꿈을 꾸고" (Some people dream...)</div>
+                <div class="example-en">→ Literary, poetic</div>
+            </div>
+            <div class="example">
+                <div class="example-ko">✓ Everyday: "어떤 사람은 꿈을 꾸고" (Some people dream...)</div>
+                <div class="example-en">→ Standard, casual</div>
+            </div>
+        </div>
+
+        <div class="word-section">
+            <h3 style="color: #667eea;">2. 사람 vs 분 (Neutral vs Honorific)</h3>
+            <p>This is about <strong>RESPECT</strong>. Use 분 when the person deserves respect (age, position, or politeness).</p>
+            
+            <div class="example">
+                <div class="example-ko">✗ Wrong: "저 사람이 사장님이에요." (That person is the president.)</div>
+                <div class="example-en">→ Not respectful enough</div>
+            </div>
+            <div class="example">
+                <div class="example-ko">✓ Correct: "저 분이 사장님이세요." (That person [hon.] is the president.)</div>
+                <div class="example-en">→ Properly respectful</div>
+            </div>
+        </div>
+
+        <div class="word-section">
+            <h3 style="color: #667eea;">3. 녀석 vs 놈 (Affectionate vs Derogatory)</h3>
+            <p><strong>녀석</strong> is generally lighter and can be affectionate. <strong>놈</strong> is harsher and usually negative.</p>
+            
+            <div class="example">
+                <div class="example-ko">✓ To a child: "이 녀석, 귀엽네!" (This little rascal is cute!)</div>
+                <div class="example-en">→ Affectionate, playful</div>
+            </div>
+            <div class="example">
+                <div class="example-ko">✗ To a child: "이 놈, 귀엽네!" (This brat is cute!)</div>
+                <div class="example-en">→ Too harsh, inappropriate</div>
+            </div>
+        </div>
+
+        <div class="word-section">
+            <h3 style="color: #667eea;">4. 자식 - The Dual Nature</h3>
+            <p><strong>자식</strong> has completely different meanings based on context:</p>
+            
+            <div class="example">
+                <div class="example-ko">✓ Neutral: "우리 자식들이 자랐어요." (Our children have grown up.)</div>
+                <div class="example-en">→ Loving parent talking about their kids</div>
+            </div>
+            <div class="example">
+                <div class="example-ko">✗ Derogatory: "이 자식아!" (You bastard!)</div>
+                <div class="example-en">→ Angry insult</div>
+            </div>
+            
+            <p><strong>Rule of thumb:</strong> With possessives (우리/내/제) = neutral "child." With demonstratives (이/그/저) = insult.</p>
+        </div>
+
+        <h2>⚠️ Safety Guidelines for Learners</h2>
+        
+        <div class="word-section">
+            <h3 style="color: #c62828;">What's Safe to Use:</h3>
+            <ul style="line-height: 2;">
+                <li>✅ <strong>사람</strong> - Always safe, use freely</li>
+                <li>✅ <strong>분</strong> - Always safe and polite, use for anyone you want to show respect to</li>
+                <li>✅ <strong>이</strong> - Safe, but sounds formal/literary</li>
+                <li>✅ <strong>자식</strong> - Safe when meaning "child/children" (with possessives)</li>
+            </ul>
+            
+            <h3 style="color: #c62828;">Use with Caution:</h3>
+            <ul style="line-height: 2;">
+                <li>⚠️ <strong>녀석</strong> - Only with very close friends, younger people, or children. Never with elders or superiors</li>
+                <li>⚠️ <strong>놈</strong> - Avoid unless you're very comfortable with Korean and the social context</li>
+                <li>⚠️ <strong>자식</strong> - When used with demonstratives (이/그), very offensive</li>
+            </ul>
+            
+            <h3 style="color: #c62828;">Best Practice for Learners:</h3>
+            <p>When in doubt, use <strong>사람</strong> for neutral situations and <strong>분</strong> when you want to be polite. These two words will cover 95% of your needs without risk of offense.</p>
+        </div>
+
+        <div class="note">
+            <div class="note-title">🎓 Final Note for Learners:</div>
+            Understanding these terms is important for comprehension (watching K-dramas, reading Korean), but using them correctly requires cultural understanding. Start with 사람 and 분, and only expand to casual/crude terms once you're confident about Korean social dynamics and have native Korean friends who can guide you.
+        </div>
+    </div>
+</body>
+</html>

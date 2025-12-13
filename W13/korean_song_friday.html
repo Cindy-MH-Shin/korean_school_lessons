@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 학습: 금요일에 만나요 (Korean Learning: See You on Friday)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .song-info {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .song-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .vocab-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-word {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 16px;
+            color: #764ba2;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-meaning {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-example {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .grammar-section {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .grammar-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .grammar-explanation {
+            font-size: 15px;
+            color: #5d4037;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .grammar-example {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .phrase-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .phrase-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4c6ef5;
+            margin-bottom: 15px;
+        }
+        
+        .phrase-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .phrase-ko {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .phrase-en {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .quiz-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            background: #f7fafc;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .option:hover {
+            background: #edf2f7;
+            border-color: #667eea;
+        }
+        
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .option.correct {
+            background: #48bb78;
+            color: white;
+            border-color: #48bb78;
+        }
+        
+        .option.incorrect {
+            background: #f56565;
+            color: white;
+            border-color: #f56565;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e6fffa;
+            color: #234e52;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 한국어 학습: 금요일에 만나요<br><small style="font-size: 18px;">Korean Learning: See You on Friday</small></h1>
+        
+        <div class="song-info">
+            <div class="song-title">금요일에 만나요 (See You on Friday) - 아이유 (IU)</div>
+            <p><strong>노래 설명 / Song Description:</strong> A sweet, upbeat song about eagerly waiting for Friday to meet someone special. The song expresses the excitement and anticipation of waiting throughout the week, with each day feeling too early, too rushed, or just not right - until Friday finally arrives.</p>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">📚 핵심 단어 / Key Vocabulary</div>
+            
+            <div class="vocab-grid">
+                <div class="vocab-card">
+                    <div class="vocab-word">월요일</div>
+                    <div class="vocab-pronunciation">[wo-ryo-il]</div>
+                    <div class="vocab-meaning">Monday</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">월요일에 회의가 있어요.</div>
+                        <div class="example-en">I have a meeting on Monday.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">화요일</div>
+                    <div class="vocab-pronunciation">[hwa-yo-il]</div>
+                    <div class="vocab-meaning">Tuesday</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">화요일은 바빠요.</div>
+                        <div class="example-en">Tuesday is busy.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">수요일</div>
+                    <div class="vocab-pronunciation">[su-yo-il]</div>
+                    <div class="vocab-meaning">Wednesday</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">수요일에 친구를 만나요.</div>
+                        <div class="example-en">I'm meeting a friend on Wednesday.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">목요일</div>
+                    <div class="vocab-pronunciation">[mo-kyo-il]</div>
+                    <div class="vocab-meaning">Thursday</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">목요일까지 숙제를 내야 해요.</div>
+                        <div class="example-en">I need to submit homework by Thursday.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">금요일</div>
+                    <div class="vocab-pronunciation">[geu-myo-il]</div>
+                    <div class="vocab-meaning">Friday</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">금요일이 기다려져요.</div>
+                        <div class="example-en">I'm looking forward to Friday.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">주말</div>
+                    <div class="vocab-pronunciation">[ju-mal]</div>
+                    <div class="vocab-meaning">weekend</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">주말에 뭐 해요?</div>
+                        <div class="example-en">What are you doing this weekend?</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">바쁘다</div>
+                    <div class="vocab-pronunciation">[ba-ppeu-da]</div>
+                    <div class="vocab-meaning">to be busy</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">요즘 너무 바빠요.</div>
+                        <div class="example-en">I'm so busy these days.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">성급하다</div>
+                    <div class="vocab-pronunciation">[seong-geu-pa-da]</div>
+                    <div class="vocab-meaning">to be hasty, to be impatient</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">성급하게 결정하지 마세요.</div>
+                        <div class="example-en">Don't make a hasty decision.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">어정쩡하다</div>
+                    <div class="vocab-pronunciation">[eo-jeong-jjeong-ha-da]</div>
+                    <div class="vocab-meaning">to be awkward, to be neither here nor there</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">시간이 어정쩡해요.</div>
+                        <div class="example-en">The time is awkward.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">느낌</div>
+                    <div class="vocab-pronunciation">[neu-kkim]</div>
+                    <div class="vocab-meaning">feeling, sense</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">좋은 느낌이 들어요.</div>
+                        <div class="example-en">I have a good feeling.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">왠지</div>
+                    <div class="vocab-pronunciation">[waen-ji]</div>
+                    <div class="vocab-meaning">somehow, for some reason</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">왠지 오늘은 좋은 일이 있을 것 같아요.</div>
+                        <div class="example-en">Somehow I feel something good will happen today.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">싫다</div>
+                    <div class="vocab-pronunciation">[si-ta]</div>
+                    <div class="vocab-meaning">to dislike, to hate</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">매운 음식은 싫어요.</div>
+                        <div class="example-en">I don't like spicy food.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">시간</div>
+                    <div class="vocab-pronunciation">[si-gan]</div>
+                    <div class="vocab-meaning">time</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">시간이 없어요.</div>
+                        <div class="example-en">I don't have time.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">기다리다</div>
+                    <div class="vocab-pronunciation">[gi-da-ri-da]</div>
+                    <div class="vocab-meaning">to wait</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">친구를 기다려요.</div>
+                        <div class="example-en">I'm waiting for my friend.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">힘들다</div>
+                    <div class="vocab-pronunciation">[him-deul-da]</div>
+                    <div class="vocab-meaning">to be hard, to be difficult, to be tough</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">운동이 힘들어요.</div>
+                        <div class="example-en">Exercise is hard.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">달리다</div>
+                    <div class="vocab-pronunciation">[dal-li-da]</div>
+                    <div class="vocab-meaning">to run</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">공원에서 달려요.</div>
+                        <div class="example-en">I run in the park.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">시계</div>
+                    <div class="vocab-pronunciation">[si-gye]</div>
+                    <div class="vocab-meaning">clock, watch</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">시계를 봐요.</div>
+                        <div class="example-en">I look at the clock.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">보채다</div>
+                    <div class="vocab-pronunciation">[bo-chae-da]</div>
+                    <div class="vocab-meaning">to whine, to fuss, to pester</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">아기가 보채요.</div>
+                        <div class="example-en">The baby is fussing.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">일분</div>
+                    <div class="vocab-pronunciation">[il-bun]</div>
+                    <div class="vocab-meaning">one minute</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">일 분만 기다려 주세요.</div>
+                        <div class="example-en">Please wait just one minute.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">일초</div>
+                    <div class="vocab-pronunciation">[il-cho]</div>
+                    <div class="vocab-meaning">one second</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">일 초도 쉬지 않았어요.</div>
+                        <div class="example-en">I didn't rest even for one second.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">달콤하다</div>
+                    <div class="vocab-pronunciation">[dal-kom-ha-da]</div>
+                    <div class="vocab-meaning">to be sweet</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">이 케이크는 달콤해요.</div>
+                        <div class="example-en">This cake is sweet.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">도대체</div>
+                    <div class="vocab-pronunciation">[do-dae-che]</div>
+                    <div class="vocab-meaning">on earth, in the world (used for emphasis)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">도대체 왜 그래요?</div>
+                        <div class="example-en">Why on earth are you like that?</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">사랑</div>
+                    <div class="vocab-pronunciation">[sa-rang]</div>
+                    <div class="vocab-meaning">love</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">사랑이 뭐예요?</div>
+                        <div class="example-en">What is love?</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">빠지다</div>
+                    <div class="vocab-pronunciation">[ppa-ji-da]</div>
+                    <div class="vocab-meaning">to fall into, to be absorbed in</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">음악에 빠졌어요.</div>
+                        <div class="example-en">I fell in love with music.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">배기다</div>
+                    <div class="vocab-pronunciation">[bae-gi-da]</div>
+                    <div class="vocab-meaning">to endure, to bear (often used negatively)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">더는 못 배기겠어요.</div>
+                        <div class="example-en">I can't bear it anymore.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">온종일</div>
+                    <div class="vocab-pronunciation">[on-jong-il]</div>
+                    <div class="vocab-meaning">all day long</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">온종일 비가 왔어요.</div>
+                        <div class="example-en">It rained all day long.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">마음</div>
+                    <div class="vocab-pronunciation">[ma-eum]</div>
+                    <div class="vocab-meaning">heart, mind, feelings</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">마음이 따뜻해요.</div>
+                        <div class="example-en">My heart is warm.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">시계바늘</div>
+                    <div class="vocab-pronunciation">[si-gye-ba-neul]</div>
+                    <div class="vocab-meaning">clock hand</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">시계바늘이 돌아가요.</div>
+                        <div class="example-en">The clock hand is moving.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">올라타다</div>
+                    <div class="vocab-pronunciation">[ol-la-ta-da]</div>
+                    <div class="vocab-meaning">to get on, to climb on, to ride</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">버스에 올라탔어요.</div>
+                        <div class="example-en">I got on the bus.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">칸</div>
+                    <div class="vocab-pronunciation">[kan]</div>
+                    <div class="vocab-meaning">section, space, notch</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">한 칸씩 올라가요.</div>
+                        <div class="example-en">I go up one notch at a time.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">가까이</div>
+                    <div class="vocab-pronunciation">[ga-kka-i]</div>
+                    <div class="vocab-meaning">close, near</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">더 가까이 와요.</div>
+                        <div class="example-en">Come closer.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">딱히</div>
+                    <div class="vocab-pronunciation">[ttak-hi]</div>
+                    <div class="vocab-meaning">particularly, especially (often used negatively)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">딱히 할 일이 없어요.</div>
+                        <div class="example-en">I don't have anything particular to do.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">보다</div>
+                    <div class="vocab-pronunciation">[bo-da]</div>
+                    <div class="vocab-meaning">to see, to watch</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">영화를 봤어요.</div>
+                        <div class="example-en">I watched a movie.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">영화</div>
+                    <div class="vocab-pronunciation">[yeong-hwa]</div>
+                    <div class="vocab-meaning">movie, film</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">영화 보러 갈까요?</div>
+                        <div class="example-en">Shall we go watch a movie?</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">먹다</div>
+                    <div class="vocab-pronunciation">[meok-da]</div>
+                    <div class="vocab-meaning">to eat</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">저녁을 먹어요.</div>
+                        <div class="example-en">I eat dinner.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">메뉴</div>
+                    <div class="vocab-pronunciation">[me-nyu]</div>
+                    <div class="vocab-meaning">menu</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">메뉴를 보여주세요.</div>
+                        <div class="example-en">Please show me the menu.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">뭔가</div>
+                    <div class="vocab-pronunciation">[mwon-ga]</div>
+                    <div class="vocab-meaning">something</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">뭔가 이상해요.</div>
+                        <div class="example-en">Something is strange.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">홀리다</div>
+                    <div class="vocab-pronunciation">[hol-li-da]</div>
+                    <div class="vocab-meaning">to be enchanted, to be bewitched</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">마법에 홀린 것 같아요.</div>
+                        <div class="example-en">I feel like I'm under a spell.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">사랑하다</div>
+                    <div class="vocab-pronunciation">[sa-rang-ha-da]</div>
+                    <div class="vocab-meaning">to love</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">당신을 사랑해요.</div>
+                        <div class="example-en">I love you.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">돌아오다</div>
+                    <div class="vocab-pronunciation">[do-ra-o-da]</div>
+                    <div class="vocab-meaning">to come back, to return</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">집에 돌아왔어요.</div>
+                        <div class="example-en">I came back home.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">이번 주</div>
+                    <div class="vocab-pronunciation">[i-beon ju]</div>
+                    <div class="vocab-meaning">this week</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">이번 주는 바빠요.</div>
+                        <div class="example-en">I'm busy this week.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">만나다</div>
+                    <div class="vocab-pronunciation">[man-na-da]</div>
+                    <div class="vocab-meaning">to meet</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">친구를 만나요.</div>
+                        <div class="example-en">I meet a friend.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">가져가다</div>
+                    <div class="vocab-pronunciation">[ga-jyeo-ga-da]</div>
+                    <div class="vocab-meaning">to take (away)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">책을 가져가세요.</div>
+                        <div class="example-en">Please take the book.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">💬 주요 표현 / Key Expressions</div>
+            
+            <div class="phrase-section">
+                <div class="phrase-title">문법 표현 (Grammar Expressions)</div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~지 않을까</div>
+                    <div class="phrase-en">I wonder if..., wouldn't...?</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~지 안 그래</div>
+                    <div class="phrase-en">don't you think?, isn't it?</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~은/는 뭔가...</div>
+                    <div class="phrase-en">...is somehow..., ...feels like...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">시간 어때요?</div>
+                    <div class="phrase-en">How about the time? / Are you free?</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~까지 기다리다</div>
+                    <div class="phrase-en">to wait until...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~고 싶다</div>
+                    <div class="phrase-en">to want to...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~에 빠지다</div>
+                    <div class="phrase-en">to fall into..., to be absorbed in...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">못 배기다</div>
+                    <div class="phrase-en">can't help but..., can't stand not to...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~에 올라타다</div>
+                    <div class="phrase-en">to get on..., to ride on...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~씩</div>
+                    <div class="phrase-en">each, at a time (distributive suffix)</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~에게 더 가까이</div>
+                    <div class="phrase-en">closer to...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~것 같다</div>
+                    <div class="phrase-en">it seems like..., I think...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~지 않고는</div>
+                    <div class="phrase-en">without doing..., unless...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~에 만나요</div>
+                    <div class="phrase-en">let's meet on/at...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">~아/어 주다</div>
+                    <div class="phrase-en">to do (something) for (someone)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">📖 문법 포인트 / Grammar Points</div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">1. ~지 않을까 (I wonder if...)</div>
+                <div class="grammar-explanation">
+                    Used to express conjecture or wondering about something. Often expresses a negative assumption or concern.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">월요일엔 아마 <span class="highlight">바쁘지 않을까</span></div>
+                    <div class="example-en">Monday will probably be busy, won't it?</div>
+                </div>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">2. ~어 보이다 (to look/seem...)</div>
+                <div class="grammar-explanation">
+                    Used to express how something appears or seems from observation.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">화요일도 <span class="highlight">성급해 보이지</span></div>
+                    <div class="example-en">Tuesday also seems hasty, doesn't it?</div>
+                </div>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">3. ~은/는 느낌 (feeling that...)</div>
+                <div class="grammar-explanation">
+                    Used to express a subjective feeling or impression about something.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">수요일은 뭔가 <span class="highlight">어정쩡한 느낌</span></div>
+                    <div class="example-en">Wednesday has a somewhat awkward feeling</div>
+                </div>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">4. 왠지 (somehow, for some reason)</div>
+                <div class="grammar-explanation">
+                    An adverb expressing that there's no clear reason but you have a certain feeling or intuition.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">목요일은 그냥 내가 <span class="highlight">왠지</span> 싫어</div>
+                    <div class="example-en">Thursday, I just somehow don't like it</div>
+                </div>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">5. ~지 않고는 못 배기다 (can't help but...)</div>
+                <div class="grammar-explanation">
+                    Expresses that one cannot endure or resist doing something. A strong expression of inevitability.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">사랑에 <span class="highlight">빠지지 않곤 못 배기겠어</span></div>
+                    <div class="example-en">I can't help but fall in love</div>
+                </div>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="grammar-title">6. ~씩 (each, at a time)</div>
+                <div class="grammar-explanation">
+                    A distributive particle that means "each" or "at a time", showing gradual progression.
+                </div>
+                <div class="grammar-example">
+                    <div class="example-ko">한 칸<span class="highlight">씩</span> 그대에게 더 가까이</div>
+                    <div class="example-en">One notch at a time, closer to you</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">🎭 노래 속 상황 표현 / Situational Expressions from the Song</div>
+            
+            <div class="phrase-section">
+                <div class="phrase-item">
+                    <div class="phrase-ko">시간아 달려라</div>
+                    <div class="phrase-en">Run, time! (urging time to pass quickly)</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">시계를 더 보채고 싶지만</div>
+                    <div class="phrase-en">I want to pester the clock more, but...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">일분 일초가 달콤해</div>
+                    <div class="phrase-en">Every minute and second is sweet</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">이 남자 도대체 뭐야</div>
+                    <div class="phrase-en">What on earth is this guy?</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">내 맘은 저기 시계바늘 위에 올라타</div>
+                    <div class="phrase-en">My heart rides on that clock hand over there</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">딱히 보고 싶은 영화는 없지만</div>
+                    <div class="phrase-en">There's no particular movie I want to see, but...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">딱히 먹고 싶은 메뉴는 없지만</div>
+                    <div class="phrase-en">There's no particular menu I want to eat, but...</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">나 뭔가에 홀린 것 같아</div>
+                    <div class="phrase-en">I feel like I'm enchanted by something</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">그날 내 맘을 더 가져가줘요</div>
+                    <div class="phrase-en">Take more of my heart that day</div>
+                </div>
+                
+                <div class="phrase-item">
+                    <div class="phrase-ko">더 가까이 와요</div>
+                    <div class="phrase-en">Come closer</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <div class="quiz-title">📝 단어 퀴즈 / Vocabulary Quiz</div>
+            
+            <form id="quizForm">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "금요일" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a"> Monday
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b"> Friday
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c"> Sunday
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d"> Saturday
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "weekend" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "바쁘다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a"> to be free
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b"> to be busy
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c"> to be tired
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="d"> to be happy
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "성급하다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a"> to be slow
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b"> to be calm
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c"> to be hasty
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="d"> to be careful
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "feeling" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "왠지" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a"> always
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b"> never
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c"> somehow, for some reason
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="d"> definitely
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "기다리다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a"> to go
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b"> to come
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c"> to wait
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="d"> to leave
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "time" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "달콤하다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="a"> to be bitter
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="b"> to be sweet
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="c"> to be sour
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="d"> to be salty
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "도대체" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a"> maybe
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b"> on earth, in the world (for emphasis)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c"> sometimes
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="d"> always
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "love" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does "빠지다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a"> to rise up
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b"> to fall into, to be absorbed in
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="c"> to escape
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="d"> to avoid
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "온종일" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a"> all day long
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b"> half day
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c"> one hour
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="d"> one minute
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "heart/mind" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "가까이" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a"> far away
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b"> close, near
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="c"> high up
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="d"> down low
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "딱히" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q16" value="a"> very much
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="b"> particularly (often used negatively)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="c"> absolutely
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="d"> extremely
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you write "movie" in Korean?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "홀리다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q18" value="a"> to be enchanted, to be bewitched
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="b"> to be bored
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="c"> to be tired
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="d"> to be angry
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "만나다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q19" value="a"> to leave
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="b"> to meet
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="c"> to separate
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="d"> to forget
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "this week" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            q2: '주말',
+            q5: '느낌',
+            q8: '시간',
+            q11: '사랑',
+            q14: '마음',
+            q17: '영화',
+            q20: '이번주',
+            q1: 'b',
+            q3: 'b',
+            q4: 'c',
+            q6: 'c',
+            q7: 'c',
+            q9: 'b',
+            q10: 'b',
+            q12: 'b',
+            q13: 'a',
+            q15: 'b',
+            q16: 'b',
+            q18: 'a',
+            q19: 'b'
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#48bb78';
+                } else {
+                    input.style.borderColor = '#f56565';
+                }
+            });
+
+            // Check multiple choice
+            ['q1', 'q3', 'q4', 'q6', 'q7', 'q9', 'q10', 'q12', 'q13', 'q15', 'q16', 'q18', 'q19'].forEach(id => {
+                const selectedOption = document.querySelector(`input[name="${id}"]:checked`);
+                if (selectedOption && selectedOption.value === answers[id]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+            resultDiv.style.color = percentage >= 70 ? '#234e52' : '#742a2a';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add click handlers for options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
