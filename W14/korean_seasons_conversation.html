@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>계절 - Small Talk: Seasons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.jieun {
+            color: #e91e63;
+        }
+        
+        .speaker.michael {
+            color: #2196f3;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.jieun {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.michael {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .emotion-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f0f5ff;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>계절 🌸☀️🍂❄️</h1>
+        <div class="subtitle">Small Talk: Seasons<br>Learn to discuss your favorite season in Korean!</div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">💬 Conversation</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">📚 Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz')">✍️ Quiz</button>
+        </div>
+
+        <!-- Conversation Tab -->
+        <div id="conversation" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">좋아하는 계절 이야기</div>
+                
+                <!-- Dialogue 1 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        마이클 씨, <span class="highlight">좋아하는 계절</span>이 뭐예요?
+                        <div class="translation">Michael, what's your favorite season?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 2 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        저는 <span class="highlight">가을</span>을 좋아해요. <span class="highlight">날씨</span>가 <span class="highlight">선선</span>하고 <span class="highlight">단풍</span>이 <span class="highlight">아름다워</span>서 좋아요.
+                        <div class="translation">I like autumn. I like it because the weather is cool and the fall foliage is beautiful.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 3 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        저도 가을을 좋아해요! 가을에는 <span class="highlight">등산</span>하기 좋아요.
+                        <div class="translation">I like autumn too! It's good for hiking in autumn.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 4 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        지은 씨는 <span class="highlight">여름</span>은 어때요?
+                        <div class="translation">Jieun, how about summer?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 5 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        여름은 너무 <span class="highlight">덥고</span> <span class="highlight">습해</span>서 별로예요. 하지만 <span class="highlight">바다</span>에 갈 수 있어서 좋아요.
+                        <div class="translation">Summer is not my favorite because it's too hot and humid. But it's nice because I can go to the beach.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 6 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        맞아요. <span class="highlight">겨울</span>은 어때요?
+                        <div class="translation">Right. How about winter?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 7 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        겨울도 좋아요! 겨울에는 <span class="highlight">하얀 눈</span>이 <span class="highlight">내려</span>서 좋아요. 그리고 <span class="highlight">스키</span> 타러 갈 수 있어요.
+                        <div class="translation">I like winter too! I like it because white snow falls in winter. And I can go skiing.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 8 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        저는 겨울은 <span class="highlight">춥고</span> <span class="highlight">건조</span>해서 별로예요.
+                        <div class="translation">I don't really like winter because it's cold and dry.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 9 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        <span class="highlight">봄</span>은 어때요?
+                        <div class="translation">How about spring?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 10 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        봄도 좋아요. <span class="highlight">따뜻</span>하고 <span class="highlight">꽃</span>이 <span class="highlight">피어</span>서 예뻐요. 특히 <span class="highlight">벚꽃</span>이 정말 <span class="highlight">화려</span>해요!
+                        <div class="translation">I like spring too. It's warm and the flowers bloom, so it's pretty. Especially cherry blossoms are really gorgeous!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 11 -->
+                <div class="dialogue">
+                    <div class="speaker jieun">
+                        <span class="speaker-icon">👩</span>
+                        <span>지은</span>
+                    </div>
+                    <div class="message jieun">
+                        맞아요! 하지만 봄에는 <span class="highlight">미세먼지</span>가 <span class="highlight">심해</span>서 조금 힘들어요.
+                        <div class="translation">That's right! But in spring, the fine dust is severe, so it's a bit difficult.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 12 -->
+                <div class="dialogue">
+                    <div class="speaker michael">
+                        <span class="speaker-icon">👨</span>
+                        <span>Michael</span>
+                    </div>
+                    <div class="message michael">
+                        아, 그렇군요. 그래도 <span class="highlight">각 계절마다</span> 좋은 점이 있네요!
+                        <div class="translation">Oh, I see. Still, each season has its good points!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="vocabulary-grid">
+                    <div class="vocab-item"><strong>계절</strong> (gye-jeol) - season</div>
+                    <div class="vocab-item"><strong>봄</strong> (bom) - spring</div>
+                    <div class="vocab-item"><strong>여름</strong> (yeo-reum) - summer</div>
+                    <div class="vocab-item"><strong>가을</strong> (ga-eul) - autumn/fall</div>
+                    <div class="vocab-item"><strong>겨울</strong> (gyeo-ul) - winter</div>
+                    <div class="vocab-item"><strong>날씨</strong> (nal-ssi) - weather</div>
+                    <div class="vocab-item"><strong>덥다</strong> (deop-da) - to be hot</div>
+                    <div class="vocab-item"><strong>춥다</strong> (chup-da) - to be cold</div>
+                    <div class="vocab-item"><strong>따뜻하다</strong> (tta-tteu-ta-da) - to be warm</div>
+                    <div class="vocab-item"><strong>선선하다</strong> (seon-seon-ha-da) - to be cool (pleasant)</div>
+                    <div class="vocab-item"><strong>습하다</strong> (seu-pa-da) - to be humid</div>
+                    <div class="vocab-item"><strong>건조하다</strong> (geon-jo-ha-da) - to be dry</div>
+                    <div class="vocab-item"><strong>눈</strong> (nun) - snow</div>
+                    <div class="vocab-item"><strong>내리다</strong> (nae-ri-da) - to fall (rain, snow)</div>
+                    <div class="vocab-item"><strong>하얗다</strong> (ha-ya-ta) - to be white</div>
+                    <div class="vocab-item"><strong>꽃</strong> (kkot) - flower</div>
+                    <div class="vocab-item"><strong>피다</strong> (pi-da) - to bloom</div>
+                    <div class="vocab-item"><strong>벚꽃</strong> (beot-kkot) - cherry blossom</div>
+                    <div class="vocab-item"><strong>단풍</strong> (dan-pung) - fall foliage</div>
+                    <div class="vocab-item"><strong>아름답다</strong> (a-reum-dap-da) - to be beautiful</div>
+                    <div class="vocab-item"><strong>예쁘다</strong> (ye-ppeu-da) - to be pretty</div>
+                    <div class="vocab-item"><strong>화려하다</strong> (hwa-ryeo-ha-da) - to be gorgeous/splendid</div>
+                    <div class="vocab-item"><strong>바다</strong> (ba-da) - sea/ocean</div>
+                    <div class="vocab-item"><strong>등산</strong> (deung-san) - hiking</div>
+                    <div class="vocab-item"><strong>스키</strong> (seu-ki) - skiing</div>
+                    <div class="vocab-item"><strong>미세먼지</strong> (mi-se-meon-ji) - fine dust</div>
+                    <div class="vocab-item"><strong>심하다</strong> (sim-ha-da) - to be severe/serious</div>
+                    <div class="vocab-item"><strong>각</strong> (gak) - each</div>
+                    <div class="vocab-item"><strong>~마다</strong> (ma-da) - every/each (suffix)</div>
+                    <div class="vocab-item"><strong>별로</strong> (byeol-lo) - not really/not particularly</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "봄" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">spring</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">summer</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">autumn</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "summer" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "가을" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">spring</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">autumn/fall</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">winter</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "덥다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">to be hot</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">to be cold</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">to be warm</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "winter" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "춥다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">to be hot</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">to be cold</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">to be cool</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "따뜻하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">to be warm</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">to be hot</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">to be dry</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "snow" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "습하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to be dry</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to be humid</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to be wet</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "선선하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">to be hot</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">to be cool (pleasant)</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">to be cold</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">What does "건조하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong1')">to be humid</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'correct')">to be dry</button>
+                        <button class="option" onclick="selectAnswer(this, 11, 'wrong2')">to be wet</button>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">How do you write "flower" in Korean?</div>
+                    <input type="text" id="q12" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "피다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">to bloom</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">to fall</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">to grow</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does "벚꽃" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong1')">rose</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'correct')">cherry blossom</button>
+                        <button class="option" onclick="selectAnswer(this, 14, 'wrong2')">tulip</button>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">How do you write "fall foliage" in Korean?</div>
+                    <input type="text" id="q15" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "아름답다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">to be beautiful</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">to be ugly</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">to be big</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">What does "화려하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">to be simple</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">to be gorgeous/splendid</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">to be small</button>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">How do you write "sea/ocean" in Korean?</div>
+                    <input type="text" id="q18" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "내리다" mean (in the context of weather)?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">to fall (rain, snow)</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">to rise</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">to shine</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">What does "미세먼지" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong1')">rain</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'correct')">fine dust</button>
+                        <button class="option" onclick="selectAnswer(this, 20, 'wrong2')">snow</button>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '여름',
+            q5: '겨울',
+            q8: '눈',
+            q12: '꽃',
+            q15: '단풍',
+            q18: '바다',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            11: 'correct',
+            13: 'correct',
+            14: 'correct',
+            16: 'correct',
+            17: 'correct',
+            19: 'correct',
+            20: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q12', 'q15', 'q18'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 11, 13, 14, 16, 17, 19, 20].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e8f5e9' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#2e7d32' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

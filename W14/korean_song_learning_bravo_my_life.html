@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 학습: Bravo My Life (Korean Learning: Bravo My Life)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #f5576c;
+            text-align: center;
+            border-bottom: 3px solid #f093fb;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .song-info {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #f5576c;
+        }
+        
+        .song-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .lyrics-section {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .lyrics-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .lyrics-line {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .stanza {
+            margin-bottom: 25px;
+        }
+        
+        .vocab-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .vocab-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #f5576c;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-word {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 16px;
+            color: #f093fb;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-meaning {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .vocab-example {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        
+        .example-ko {
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        .example-en {
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .grammar-section {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .grammar-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .grammar-explanation {
+            font-size: 15px;
+            color: #5d4037;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .grammar-example {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .phrase-section {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .phrase-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 15px;
+        }
+        
+        .phrase-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #f5576c;
+        }
+        
+        .phrase-ko {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .phrase-en {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .quiz-question {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f5576c;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .korean-word-large {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 0 5px;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            padding: 12px 15px;
+            background: #f7fafc;
+            border: 3px solid #cbd5e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .quiz-option:hover {
+            border-color: #f5576c;
+            background: #fff5f7;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-option.selected {
+            border-color: #f5576c;
+            background: #fff5f7;
+            font-weight: bold;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 22px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .quiz-results {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 64px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 35px;
+            font-size: 18px;
+            background: white;
+            color: #f5576c;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .reset-btn:hover {
+            background: #f7fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 한국어 학습: Bravo My Life<br><small style="font-size: 18px;">Korean Learning: Bravo My Life</small></h1>
+        
+        <div class="song-info">
+            <div class="song-title">Bravo My Life (브라보 마이 라이프)</div>
+            <p><strong>노래 설명 / Song Description:</strong> An uplifting anthem about courage, hope, and moving forward in life despite difficulties. The song encourages us to celebrate our journey, acknowledge our courage, and embrace a bright future. It's about finding the strength to keep going and making your own path in this wide world.</p>
+        </div>
+        
+        <div class="lyrics-section">
+            <div class="lyrics-title">가사 / Lyrics</div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">해 저문 어느 오후 집으로 향한 걸음 뒤엔</div>
+                <div class="translation">On an afternoon when the sun has set, behind my steps heading home</div>
+                <div class="lyrics-line">서툴게 살아왔던 후회로 가득한 지난날</div>
+                <div class="translation">Past days filled with regrets of having lived clumsily</div>
+                <div class="lyrics-line">그리 좋진 않지만 그리 나쁜 것만도 아녔어</div>
+                <div class="translation">It wasn't that good, but it wasn't only bad either</div>
+                <div class="lyrics-line">석양도 없는 저녁 내일 하루도 흐리겠지</div>
+                <div class="translation">An evening without sunset, tomorrow will be cloudy too</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">힘든 일도 있지 드넓은 세상 살다 보면</div>
+                <div class="translation">There are hard times, living in this vast world</div>
+                <div class="lyrics-line">하지만 앞으로 나가 내가 가는 곳이 길이다</div>
+                <div class="translation">But go forward, where I go becomes the road</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">Bravo Bravo My Life 나의 인생아</div>
+                <div class="translation">Bravo Bravo My Life, my life</div>
+                <div class="lyrics-line">지금껏 달려온 너의 용기를 위해</div>
+                <div class="translation">For your courage that has run until now</div>
+                <div class="lyrics-line">Bravo Bravo My Life 나의 인생아</div>
+                <div class="translation">Bravo Bravo My Life, my life</div>
+                <div class="lyrics-line">찬란한 우리의 미래를 위해</div>
+                <div class="translation">For our brilliant future</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">내일은 떠났겠지 그런 작은 희망 하나로</div>
+                <div class="translation">Tomorrow will come, with such a small hope</div>
+                <div class="lyrics-line">사랑할 수 있다면 힘든 1년도 버틸 거야</div>
+                <div class="translation">If I can love, I'll endure even a hard year</div>
+                <div class="lyrics-line">일어나 앞으로 나가 너가 가는 곳이 길이다</div>
+                <div class="translation">Stand up, go forward, where you go becomes the road</div>
+            </div>
+            
+            <div class="stanza">
+                <div class="lyrics-line">고개 들어 하늘을 봐 창문을 가르는 새들</div>
+                <div class="translation">Lift your head and look at the sky, birds crossing the window</div>
+                <div class="lyrics-line">너의 어깨에 잠자고 있는 아름다운 날개를 펼쳐라</div>
+                <div class="translation">Spread the beautiful wings sleeping on your shoulders</div>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">📚 핵심 단어 / Key Vocabulary</div>
+            
+            <div class="vocab-grid">
+                <div class="vocab-card">
+                    <div class="vocab-word">해</div>
+                    <div class="vocab-pronunciation">[hae]</div>
+                    <div class="vocab-meaning">sun</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">해가 떴어요.</div>
+                        <div class="example-en">The sun rose.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">저물다</div>
+                    <div class="vocab-pronunciation">[jeo-mul-da]</div>
+                    <div class="vocab-meaning">to set (sun), to come to an end</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">해가 저물었어요.</div>
+                        <div class="example-en">The sun set.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">오후</div>
+                    <div class="vocab-pronunciation">[o-hu]</div>
+                    <div class="vocab-meaning">afternoon</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">오후 3시에 만나요.</div>
+                        <div class="example-en">Let's meet at 3 PM.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">향하다</div>
+                    <div class="vocab-pronunciation">[hyang-ha-da]</div>
+                    <div class="vocab-meaning">to head toward, to face</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">집으로 향해요.</div>
+                        <div class="example-en">I'm heading home.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">걸음</div>
+                    <div class="vocab-pronunciation">[geo-reum]</div>
+                    <div class="vocab-meaning">step, footstep, pace</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">천천히 걸음을 옮겨요.</div>
+                        <div class="example-en">I take steps slowly.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">서툴다</div>
+                    <div class="vocab-pronunciation">[seo-teul-da]</div>
+                    <div class="vocab-meaning">to be clumsy, unskilled, awkward</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">한국어가 아직 서툴러요.</div>
+                        <div class="example-en">My Korean is still clumsy.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">후회</div>
+                    <div class="vocab-pronunciation">[hu-hoe]</div>
+                    <div class="vocab-meaning">regret, remorse</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">후회가 많아요.</div>
+                        <div class="example-en">I have many regrets.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">가득하다</div>
+                    <div class="vocab-pronunciation">[ga-deuk-ha-da]</div>
+                    <div class="vocab-meaning">to be full of, filled with</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">사랑으로 가득해요.</div>
+                        <div class="example-en">It's filled with love.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">지난날</div>
+                    <div class="vocab-pronunciation">[ji-nan-nal]</div>
+                    <div class="vocab-meaning">past days, bygone days</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">지난날을 돌아봐요.</div>
+                        <div class="example-en">I look back on past days.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">그리</div>
+                    <div class="vocab-pronunciation">[geu-ri]</div>
+                    <div class="vocab-meaning">so, that much (degree)</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">그리 좋지 않아요.</div>
+                        <div class="example-en">It's not that good.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">석양</div>
+                    <div class="vocab-pronunciation">[seok-yang]</div>
+                    <div class="vocab-meaning">sunset, setting sun</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">석양이 아름다워요.</div>
+                        <div class="example-en">The sunset is beautiful.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">저녁</div>
+                    <div class="vocab-pronunciation">[jeo-nyeok]</div>
+                    <div class="vocab-meaning">evening, dinner</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">저녁을 먹어요.</div>
+                        <div class="example-en">I eat dinner.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">흐리다</div>
+                    <div class="vocab-pronunciation">[heu-ri-da]</div>
+                    <div class="vocab-meaning">to be cloudy, overcast</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">내일은 흐릴 거예요.</div>
+                        <div class="example-en">Tomorrow will be cloudy.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">힘들다</div>
+                    <div class="vocab-pronunciation">[him-deul-da]</div>
+                    <div class="vocab-meaning">to be difficult, hard, tough</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">일이 힘들어요.</div>
+                        <div class="example-en">Work is tough.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">드넓다</div>
+                    <div class="vocab-pronunciation">[deu-neol-ta]</div>
+                    <div class="vocab-meaning">to be very wide, vast, expansive</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">드넓은 바다가 보여요.</div>
+                        <div class="example-en">I see the vast ocean.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">앞으로</div>
+                    <div class="vocab-pronunciation">[ap-eu-ro]</div>
+                    <div class="vocab-meaning">forward, ahead, in the future</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">앞으로 나가요.</div>
+                        <div class="example-en">I go forward.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">길</div>
+                    <div class="vocab-pronunciation">[gil]</div>
+                    <div class="vocab-meaning">road, path, way</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">내가 가는 곳이 길이에요.</div>
+                        <div class="example-en">Where I go is the path.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">인생</div>
+                    <div class="vocab-pronunciation">[in-saeng]</div>
+                    <div class="vocab-meaning">life</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">인생은 아름다워요.</div>
+                        <div class="example-en">Life is beautiful.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">지금껏</div>
+                    <div class="vocab-pronunciation">[ji-geum-kkeot]</div>
+                    <div class="vocab-meaning">until now, so far, up to this point</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">지금껏 열심히 살았어요.</div>
+                        <div class="example-en">I've lived diligently until now.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">달리다</div>
+                    <div class="vocab-pronunciation">[dal-li-da]</div>
+                    <div class="vocab-meaning">to run</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">빨리 달려요.</div>
+                        <div class="example-en">I run fast.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">용기</div>
+                    <div class="vocab-pronunciation">[yong-gi]</div>
+                    <div class="vocab-meaning">courage, bravery</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">용기를 내요.</div>
+                        <div class="example-en">I gather courage.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">찬란하다</div>
+                    <div class="vocab-pronunciation">[chan-ran-ha-da]</div>
+                    <div class="vocab-meaning">to be brilliant, splendid, radiant</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">찬란한 미래를 꿈꿔요.</div>
+                        <div class="example-en">I dream of a brilliant future.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">미래</div>
+                    <div class="vocab-pronunciation">[mi-rae]</div>
+                    <div class="vocab-meaning">future</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">미래가 기대돼요.</div>
+                        <div class="example-en">I look forward to the future.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">희망</div>
+                    <div class="vocab-pronunciation">[hui-mang]</div>
+                    <div class="vocab-meaning">hope</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">희망을 가져요.</div>
+                        <div class="example-en">I have hope.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">버티다</div>
+                    <div class="vocab-pronunciation">[beo-ti-da]</div>
+                    <div class="vocab-meaning">to endure, hold out, persevere</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">힘들어도 버텨요.</div>
+                        <div class="example-en">I endure even when it's hard.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">일어나다</div>
+                    <div class="vocab-pronunciation">[i-reo-na-da]</div>
+                    <div class="vocab-meaning">to stand up, get up, rise</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">아침에 일어나요.</div>
+                        <div class="example-en">I wake up in the morning.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">고개</div>
+                    <div class="vocab-pronunciation">[go-gae]</div>
+                    <div class="vocab-meaning">head, neck</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">고개를 들어요.</div>
+                        <div class="example-en">I lift my head.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">들다</div>
+                    <div class="vocab-pronunciation">[deul-da]</div>
+                    <div class="vocab-meaning">to lift, raise, hold</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">손을 들어요.</div>
+                        <div class="example-en">I raise my hand.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">하늘</div>
+                    <div class="vocab-pronunciation">[ha-neul]</div>
+                    <div class="vocab-meaning">sky, heaven</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">하늘이 파래요.</div>
+                        <div class="example-en">The sky is blue.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">창문</div>
+                    <div class="vocab-pronunciation">[chang-mun]</div>
+                    <div class="vocab-meaning">window</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">창문을 열어요.</div>
+                        <div class="example-en">I open the window.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">가르다</div>
+                    <div class="vocab-pronunciation">[ga-reu-da]</div>
+                    <div class="vocab-meaning">to cut through, divide, part</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">새가 하늘을 가르며 날아요.</div>
+                        <div class="example-en">The bird flies cutting through the sky.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">새</div>
+                    <div class="vocab-pronunciation">[sae]</div>
+                    <div class="vocab-meaning">bird</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">새가 노래해요.</div>
+                        <div class="example-en">The bird sings.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">어깨</div>
+                    <div class="vocab-pronunciation">[eo-kkae]</div>
+                    <div class="vocab-meaning">shoulder</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">어깨가 아파요.</div>
+                        <div class="example-en">My shoulder hurts.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">잠자다</div>
+                    <div class="vocab-pronunciation">[jam-ja-da]</div>
+                    <div class="vocab-meaning">to sleep</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">푹 잠자요.</div>
+                        <div class="example-en">I sleep deeply.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">날개</div>
+                    <div class="vocab-pronunciation">[nal-gae]</div>
+                    <div class="vocab-meaning">wing</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">새의 날개가 아름다워요.</div>
+                        <div class="example-en">The bird's wings are beautiful.</div>
+                    </div>
+                </div>
+                
+                <div class="vocab-card">
+                    <div class="vocab-word">펼치다</div>
+                    <div class="vocab-pronunciation">[pyeol-chi-da]</div>
+                    <div class="vocab-meaning">to spread, unfold, expand</div>
+                    <div class="vocab-example">
+                        <div class="example-ko">날개를 펼쳐요.</div>
+                        <div class="example-en">I spread my wings.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <div class="grammar-title">📖 문법 설명 / Grammar Explanations</div>
+            
+            <div class="grammar-explanation">
+                <strong>1. -ㄴ/은 (past tense modifier):</strong> Modifies nouns with past tense
+                <div class="grammar-example">
+                    <div class="example-ko">• 해 저문 오후 - an afternoon when the sun <span class="highlight">has set</span></div>
+                    <div class="example-ko">• 지난날 - <span class="highlight">past</span> days</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>2. -게 (adverb ending):</strong> Turns adjectives into adverbs
+                <div class="grammar-example">
+                    <div class="example-ko">• 서툴<span class="highlight">게</span> 살아왔던 - lived <span class="highlight">clumsily</span></div>
+                    <div class="example-ko">• 예쁘<span class="highlight">게</span> - <span class="highlight">beautifully</span></div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>3. -로 가득하다 (to be full of):</strong> Expression meaning "filled with"
+                <div class="grammar-example">
+                    <div class="example-ko">• 후회<span class="highlight">로 가득한</span> - <span class="highlight">filled with</span> regret</div>
+                    <div class="example-ko">• 사랑<span class="highlight">으로 가득해요</span> - <span class="highlight">full of</span> love</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>4. -지만 (but):</strong> Contrasting conjunction
+                <div class="grammar-example">
+                    <div class="example-ko">• 그리 좋진 않<span class="highlight">지만</span> - not that good, <span class="highlight">but</span></div>
+                    <div class="example-ko">• 비싸<span class="highlight">지만</span> 좋아요 - expensive <span class="highlight">but</span> good</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>5. -겠지 (will probably, I suppose):</strong> Assumption/supposition
+                <div class="grammar-example">
+                    <div class="example-ko">• 내일 하루도 흐리<span class="highlight">겠지</span> - tomorrow will <span class="highlight">probably</span> be cloudy too</div>
+                    <div class="example-ko">• 올 <span class="highlight">겠지</span> - <span class="highlight">will probably</span> come</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>6. -다 보면 (if you keep doing):</strong> Conditional expressing ongoing action
+                <div class="grammar-example">
+                    <div class="example-ko">• 살<span class="highlight">다 보면</span> - <span class="highlight">if you keep</span> living / as you live</div>
+                    <div class="example-ko">• 공부하<span class="highlight">다 보면</span> - <span class="highlight">as you keep</span> studying</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>7. -을/를 위해 (for the sake of):</strong> Purpose/benefit
+                <div class="grammar-example">
+                    <div class="example-ko">• 너의 용기<span class="highlight">를 위해</span> - <span class="highlight">for the sake of</span> your courage</div>
+                    <div class="example-ko">• 미래<span class="highlight">를 위해</span> - <span class="highlight">for</span> the future</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>8. -ㄴ/은 채로 (in a state of, while):</strong> Continuing state
+                <div class="grammar-example">
+                    <div class="example-ko">• 작은 희망 하나<span class="highlight">로</span> - <span class="highlight">with</span> just one small hope</div>
+                    <div class="example-ko">• 잠자고 있는 - <span class="highlight">that is sleeping</span></div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>9. -ㄹ/을 거야 (will, going to):</strong> Future tense (casual)
+                <div class="grammar-example">
+                    <div class="example-ko">• 버틸 <span class="highlight">거야</span> - <span class="highlight">will</span> endure</div>
+                    <div class="example-ko">• 갈 <span class="highlight">거야</span> - <span class="highlight">will</span> go</div>
+                </div>
+            </div>
+            
+            <div class="grammar-explanation">
+                <strong>10. 명령형 -아/어라 (imperative, command):</strong> Strong command form
+                <div class="grammar-example">
+                    <div class="example-ko">• 펼치<span class="highlight">라</span> - <span class="highlight">spread!</span> (command)</div>
+                    <div class="example-ko">• 일어나<span class="highlight">라</span> - <span class="highlight">stand up!</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phrase-section">
+            <div class="phrase-title">🎯 핵심 표현 / Key Phrases from the Song</div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">해 저문 어느 오후</div>
+                <div class="phrase-en">one afternoon when the sun has set</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">집으로 향한 걸음</div>
+                <div class="phrase-en">steps heading home</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">서툴게 살아왔던</div>
+                <div class="phrase-en">having lived clumsily</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">후회로 가득하다</div>
+                <div class="phrase-en">to be filled with regret</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">그리 좋진 않지만</div>
+                <div class="phrase-en">not that good, but...</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">드넓은 세상</div>
+                <div class="phrase-en">vast world</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">앞으로 나가다</div>
+                <div class="phrase-en">to go forward, move ahead</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">내가 가는 곳이 길이다</div>
+                <div class="phrase-en">where I go is the path (you make your own way)</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">지금껏 달려온</div>
+                <div class="phrase-en">having run until now</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">용기를 내다</div>
+                <div class="phrase-en">to gather courage</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">찬란한 미래</div>
+                <div class="phrase-en">brilliant/radiant future</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">작은 희망 하나로</div>
+                <div class="phrase-en">with just one small hope</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">버틸 거야</div>
+                <div class="phrase-en">I will endure/persevere</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">고개 들어 하늘을 봐</div>
+                <div class="phrase-en">lift your head and look at the sky</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">창문을 가르는 새들</div>
+                <div class="phrase-en">birds cutting through the window (sky)</div>
+            </div>
+            
+            <div class="phrase-item">
+                <div class="phrase-ko">날개를 펼치다</div>
+                <div class="phrase-en">to spread one's wings</div>
+            </div>
+        </div>
+        
+        <div class="grammar-section">
+            <div class="grammar-title">💭 노래의 메시지 / Song's Message</div>
+            <div class="grammar-explanation">
+                This uplifting song is an anthem of encouragement and self-celebration:
+                <ul style="margin-top: 10px; margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Acknowledging the past:</strong> The song begins by recognizing past struggles, regrets, and difficult times - life wasn't always good, but it wasn't all bad either.</li>
+                    <li><strong>Finding courage to move forward:</strong> Despite hardships in this vast world, the message is to keep moving forward - "where you go is your path."</li>
+                    <li><strong>Celebrating your journey:</strong> "Bravo My Life" celebrates the courage it took to come this far and honors the perseverance shown.</li>
+                    <li><strong>Hope for the future:</strong> With even one small hope, we can endure difficult times and look forward to a brilliant future.</li>
+                    <li><strong>Spreading your wings:</strong> The song ends with a powerful image - lift your head, look at the sky like the birds, and spread your beautiful wings that have been sleeping on your shoulders.</li>
+                </ul>
+                <p style="margin-top: 15px;">The central philosophy: <strong>"내가 가는 곳이 길이다"</strong> (Where I go is the path) - you create your own way in life. This is a song about resilience, self-celebration, and the courage to keep going.</p>
+            </div>
+        </div>
+        
+        <div class="vocab-section">
+            <div class="section-title">✏️ 단어 퀴즈 / Vocabulary Quiz</div>
+            
+            <div style="background: #f7fafc; padding: 25px; border-radius: 15px; border: 2px solid #e2e8f0;">
+                <!-- Question 1 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does <span class="korean-word-large">저물다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'set')">to set (sun), come to an end</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'rise')">to rise</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'shine')">to shine</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 1, 'sleep')">to sleep</button>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">What does <span class="korean-word-large">향하다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'return')">to return</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'head')">to head toward, face</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'stop')">to stop</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 2, 'walk')">to walk</button>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">Complete: 한국어가 아직 _____. (My Korean is still clumsy.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '서툴러요')">서툴러요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '좋아요')">좋아요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '쉬워요')">쉬워요</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 3, '힘들어요')">힘들어요</button>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does <span class="korean-word-large">후회</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'regret')">regret, remorse</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'hope')">hope</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'joy')">joy</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 4, 'anger')">anger</button>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">What does <span class="korean-word-large">가득하다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'empty')">to be empty</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'full')">to be full of, filled with</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'small')">to be small</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 5, 'large')">to be large</button>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does <span class="korean-word-large">드넓다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'narrow')">to be narrow</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'vast')">to be very wide, vast</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'short')">to be short</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 6, 'deep')">to be deep</button>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Complete: _____ 나가요. (I go forward.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '앞으로')">앞으로</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '뒤로')">뒤로</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '옆으로')">옆으로</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 7, '아래로')">아래로</button>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">What does <span class="korean-word-large">용기</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, 'courage')">courage, bravery</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, 'fear')">fear</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, 'sadness')">sadness</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 8, 'anger')">anger</button>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does <span class="korean-word-large">찬란하다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'brilliant')">to be brilliant, radiant</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'dark')">to be dark</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'cold')">to be cold</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 9, 'sad')">to be sad</button>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">Complete: _____ 을 가져요. (I have hope.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '희망')">희망</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '후회')">후회</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '걸음')">걸음</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 10, '석양')">석양</button>
+                    </div>
+                </div>
+                
+                <!-- Question 11 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">What does <span class="korean-word-large">버티다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'endure')">to endure, persevere</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'quit')">to quit</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'run')">to run</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 11, 'sleep')">to sleep</button>
+                    </div>
+                </div>
+                
+                <!-- Question 12 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does <span class="korean-word-large">일어나다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'stand')">to stand up, get up</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'sit')">to sit down</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'sleep')">to sleep</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 12, 'run')">to run</button>
+                    </div>
+                </div>
+                
+                <!-- Question 13 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">Complete: _____ 을 들어요. (I lift my head.)</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '고개')">고개</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '날개')">날개</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '창문')">창문</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 13, '하늘')">하늘</button>
+                    </div>
+                </div>
+                
+                <!-- Question 14 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">What does <span class="korean-word-large">날개</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, 'wing')">wing</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, 'feather')">feather</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, 'bird')">bird</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 14, 'sky')">sky</button>
+                    </div>
+                </div>
+                
+                <!-- Question 15 -->
+                <div class="quiz-question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does <span class="korean-word-large">펼치다</span> mean?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'spread')">to spread, unfold</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'close')">to close</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'hide')">to hide</button>
+                        <button class="quiz-option" onclick="selectAnswer(this, 15, 'break')">to break</button>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkAnswers()">정답 확인 / Check Answers</button>
+                
+                <div class="quiz-results" id="results">
+                    <h2>Quiz Results</h2>
+                    <div class="score" id="score"></div>
+                    <p id="message"></p>
+                    <button class="reset-btn" onclick="resetQuiz()">다시 하기 / Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: 'set',
+            2: 'head',
+            3: '서툴러요',
+            4: 'regret',
+            5: 'full',
+            6: 'vast',
+            7: '앞으로',
+            8: 'courage',
+            9: 'brilliant',
+            10: '희망',
+            11: 'endure',
+            12: 'stand',
+            13: '고개',
+            14: 'wing',
+            15: 'spread'
+        };
+        
+        let userAnswers = {};
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 완벽합니다! Bravo! You have mastered the vocabulary!';
+            } else if (percentage >= 70) {
+                message = '👍 잘했어요! Good job! Keep practicing!';
+            } else if (percentage >= 50) {
+                message = '💪 괜찮아요! Not bad! Review and try again!';
+            } else {
+                message = '📚 더 공부하세요! Keep studying! You can do it!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

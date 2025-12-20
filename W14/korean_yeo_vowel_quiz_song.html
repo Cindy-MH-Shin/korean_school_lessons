@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 퀴즈: ㅕ 발음 (Korean Quiz: ㅕ Sound)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #e67e22;
+            padding-bottom: 15px;
+        }
+        .song-section {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        .song-section h2 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .audio-player {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .song-link {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .song-link:hover {
+            background-color: #ffb300;
+        }
+        .quiz-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question {
+            background-color: #fef5e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #e67e22;
+        }
+        .question-text {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        .option {
+            background-color: white;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        .option:hover {
+            background-color: #ecf0f1;
+            border-color: #e67e22;
+        }
+        .option.selected {
+            background-color: #e67e22;
+            color: white;
+            border-color: #d35400;
+        }
+        .option.correct {
+            background-color: #27ae60;
+            color: white;
+            border-color: #229954;
+        }
+        .option.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .submit-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #d35400;
+        }
+        .submit-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .score {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fef5e7;
+            border-radius: 8px;
+            display: none;
+        }
+        .reset-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        .reset-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>한국어 퀴즈: ㅕ 발음<br><small style="font-size: 18px;">Korean Quiz: ㅕ Sound</small></h1>
+
+    <div class="song-section">
+        <h2>🎵 한글 노래 듣기 (Listen to Hangeul Song)</h2>
+        <p>퀴즈를 시작하기 전에 한글 노래를 들어보세요!</p>
+        <p>Listen to the Hangeul song before starting the quiz!</p>
+        <a href="https://suno.com/s/6pcQbjkW0F6SiYSY" target="_blank" class="song-link">
+            🎵 한글 노래 듣기 / Listen to Song
+        </a>
+    </div>
+
+    <div class="quiz-container">
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-text">1. "겨울에는 눈이 많이 와요" - What does "겨울" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a"> Spring
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b"> Summer
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c"> Autumn
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d"> Winter
+                    </label>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-text">2. Which word contains the vowel "녀" (nyeo)?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a"> 남자 (man)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b"> 남녀 (man and woman)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c"> 여자 (woman)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d"> 노인 (elderly)
+                    </label>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-text">3. "회복 속도가 생각보다 더뎌서 걱정이에요" - What does "더뎌" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="a"> Fast
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b"> Slow
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c"> Good
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="d"> Bad
+                    </label>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-text">4. "타인을 향한 작은 배려가 세상을 따뜻하게 만듭니다" - What does "배려" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="a"> Love
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b"> Respect
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c"> Consideration
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="d"> Kindness
+                    </label>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-text">5. "우리 할머니는 며느리를 무척 아끼십니다" - What does "며느리" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="a"> Son-in-law
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="b"> Daughter-in-law
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="c"> Granddaughter
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="d"> Sister-in-law
+                    </label>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-text">6. "가을이 되면 논에 벼가 황금빛으로 익습니다" - What does "벼" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="a"> Wheat
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="b"> Corn
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="c"> Rice plant
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="d"> Barley
+                    </label>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-text">7. "역 앞에서 매시 정각에 셔틀버스가 출발합니다" - What is "셔틀버스"?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="a"> Taxi
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="b"> Subway
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="c"> Shuttle bus
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="d"> Express bus
+                    </label>
+                </div>
+                <div class="feedback" id="feedback7"></div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-text">8. "여우는 정말 영리한 동물이에요" - What does "여우" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="a"> Wolf
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="b"> Fox
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="c"> Cat
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="d"> Dog
+                    </label>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-text">9. Which word contains the vowel "져" (jyeo)?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="a"> 가다 (go)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="b"> 가져 (take)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="c"> 가지 (eggplant)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="d"> 가지다 (have)
+                    </label>
+                </div>
+                <div class="feedback" id="feedback9"></div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-text">10. "고장 난 컴퓨터를 스스로 고쳐 봤어요" - What does "고쳐" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="a"> Buy
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="b"> Fix
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="c"> Sell
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="d"> Use
+                    </label>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-text">11. "어두우니 불을 좀 켜 줄래?" - What does "켜다" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q11" value="a"> Turn off
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="b"> Turn on
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="c"> Break
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="d"> Close
+                    </label>
+                </div>
+                <div class="feedback" id="feedback11"></div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-text">12. "힘들어도 조금만 더 버텨 봐" - What does "버텨" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q12" value="a"> Give up
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="b"> Hold on
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="c"> Rest
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="d"> Sleep
+                    </label>
+                </div>
+                <div class="feedback" id="feedback12"></div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-text">13. "비가 오니까 우산을 펴다" - What does "펴다" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q13" value="a"> Close
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="b"> Open
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="c"> Buy
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="d"> Sell
+                    </label>
+                </div>
+                <div class="feedback" id="feedback13"></div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-text">14. "뜨거운 국을 먹다가 혀를 데었어요" - What does "혀" mean?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q14" value="a"> Tooth
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="b"> Tongue
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="c"> Lip
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="d"> Throat
+                    </label>
+                </div>
+                <div class="feedback" id="feedback14"></div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-text">15. "남녀평등은 중요합니다" - "남녀"는 무엇을 말하나요?</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q15" value="a"> Young and old
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q15" value="b"> Man and woman
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q15" value="c"> Rich and poor
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q15" value="d"> Old and young
+                    </label>
+                </div>
+                <div class="feedback" id="feedback15"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        </form>
+
+        <div class="score" id="scoreSection">
+            <h2>Your Score</h2>
+            <p id="scoreText"></p>
+            <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        const answers = {
+            q1: 'd',
+            q2: 'b',
+            q3: 'b',
+            q4: 'c',
+            q5: 'b',
+            q6: 'c',
+            q7: 'c',
+            q8: 'b',
+            q9: 'b',
+            q10: 'b',
+            q11: 'b',
+            q12: 'b',
+            q13: 'b',
+            q14: 'b',
+            q15: 'b'
+        };
+
+        const feedbackMessages = {
+            q1: { correct: "정답! 겨울은 winter입니다. (Correct! 겨울 means winter.)", incorrect: "오답. 겨울은 winter입니다. (Incorrect. 겨울 means winter.)" },
+            q2: { correct: "정답! '남녀'에 '녀'가 있습니다. (Correct! '남녀' contains '녀'.)", incorrect: "오답. '남녀'가 맞습니다. (Incorrect. The answer is '남녀'.)" },
+            q3: { correct: "정답! 더뎌는 slow입니다. (Correct! 더뎌 means slow.)", incorrect: "오답. 더뎌는 slow입니다. (Incorrect. 더뎌 means slow.)" },
+            q4: { correct: "정답! 배려는 consideration입니다. (Correct! 배려 means consideration.)", incorrect: "오답. 배려는 consideration입니다. (Incorrect. 배려 means consideration.)" },
+            q5: { correct: "정답! 며느리는 daughter-in-law입니다. (Correct! 며느리 means daughter-in-law.)", incorrect: "오답. 며느리는 daughter-in-law입니다. (Incorrect. 며느리 means daughter-in-law.)" },
+            q6: { correct: "정답! 벼는 rice plant입니다. (Correct! 벼 means rice plant.)", incorrect: "오답. 벼는 rice plant입니다. (Incorrect. 벼 means rice plant.)" },
+            q7: { correct: "정답! 셔틀버스는 shuttle bus입니다. (Correct! 셔틀버스 means shuttle bus.)", incorrect: "오답. 셔틀버스는 shuttle bus입니다. (Incorrect. 셔틀버스 means shuttle bus.)" },
+            q8: { correct: "정답! 여우는 fox입니다. (Correct! 여우 means fox.)", incorrect: "오답. 여우는 fox입니다. (Incorrect. 여우 means fox.)" },
+            q9: { correct: "정답! '가져'에 '져'가 있습니다. (Correct! '가져' contains '져'.)", incorrect: "오답. '가져'가 맞습니다. (Incorrect. The answer is '가져'.)" },
+            q10: { correct: "정답! 고쳐는 fix입니다. (Correct! 고쳐 means fix.)", incorrect: "오답. 고쳐는 fix입니다. (Incorrect. 고쳐 means fix.)" },
+            q11: { correct: "정답! 켜다는 turn on입니다. (Correct! 켜다 means turn on.)", incorrect: "오답. 켜다는 turn on입니다. (Incorrect. 켜다 means turn on.)" },
+            q12: { correct: "정답! 버텨는 hold on입니다. (Correct! 버텨 means hold on.)", incorrect: "오답. 버텨는 hold on입니다. (Incorrect. 버텨 means hold on.)" },
+            q13: { correct: "정답! 펴다는 open입니다. (Correct! 펴다 means open.)", incorrect: "오답. 펴다는 open입니다. (Incorrect. 펴다 means open.)" },
+            q14: { correct: "정답! 혀는 tongue입니다. (Correct! 혀 means tongue.)", incorrect: "오답. 혀는 tongue입니다. (Incorrect. 혀 means tongue.)" },
+            q15: { correct: "정답! 남녀는 man and woman입니다. (Correct! 남녀 means man and woman.)", incorrect: "오답. 남녀는 man and woman입니다. (Incorrect. 남녀 means man and woman.)" }
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            let total = 15;
+
+            for (let i = 1; i <= total; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                const feedback = document.getElementById('feedback' + i);
+                const options = document.querySelectorAll(`input[name="${questionName}"]`);
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.value;
+                    const correctAnswer = answers[questionName];
+
+                    options.forEach(option => {
+                        const label = option.parentElement;
+                        if (option.value === correctAnswer) {
+                            label.classList.add('correct');
+                        } else if (option.checked) {
+                            label.classList.add('incorrect');
+                        }
+                        option.disabled = true;
+                    });
+
+                    if (userAnswer === correctAnswer) {
+                        score++;
+                        feedback.className = 'feedback correct';
+                        feedback.textContent = feedbackMessages[questionName].correct;
+                    } else {
+                        feedback.className = 'feedback incorrect';
+                        feedback.textContent = feedbackMessages[questionName].incorrect;
+                    }
+                }
+            }
+
+            const percentage = Math.round((score / total) * 100);
+            const scoreText = document.getElementById('scoreText');
+            const scoreSection = document.getElementById('scoreSection');
+
+            scoreText.innerHTML = `You got <strong>${score}</strong> out of <strong>${total}</strong> questions correct!<br>Your score: <strong>${percentage}%</strong>`;
+            scoreSection.style.display = 'block';
+
+            document.querySelector('.submit-btn').disabled = true;
+            scoreSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            document.getElementById('quizForm').reset();
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            const inputs = document.querySelectorAll('input[type="radio"]');
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+
+            const feedbacks = document.querySelectorAll('.feedback');
+            feedbacks.forEach(feedback => {
+                feedback.style.display = 'none';
+                feedback.className = 'feedback';
+            });
+
+            document.getElementById('scoreSection').style.display = 'none';
+            document.querySelector('.submit-btn').disabled = false;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add click handlers for options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (!radio.disabled) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
