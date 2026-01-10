@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 문법: 피동과 사동 (Korean Grammar: Passive & Causative)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .intro-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .subsection-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .concept-box {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .concept-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .concept-text {
+            font-size: 16px;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        
+        .example-box {
+            background: #f0f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .example-ko {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .example-en {
+            font-size: 15px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .comparison-table th {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+        
+        .comparison-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #d84315;
+        }
+        
+        .key-point {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .key-point-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+        
+        .key-point-text {
+            font-size: 15px;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            font-size: 15px;
+            color: #bf360c;
+            line-height: 1.6;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+        
+        .formula-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .arrow {
+            font-size: 28px;
+            color: #764ba2;
+            margin: 0 10px;
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .quiz-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            background: #f7fafc;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f5ff;
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Malgun Gothic', sans-serif;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            white-space: pre-line;
+            display: none;
+        }
+        
+        .emoji-icon {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+        
+        .correct-answer {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 5px;
+            font-size: 15px;
+            color: #1b5e20;
+            display: none;
+        }
+        
+        .correct-answer.show {
+            display: block;
+        }
+        
+        .correct-answer strong {
+            color: #2e7d32;
+        }
+        
+        .option.correct-option {
+            border-color: #4caf50 !important;
+            background: #e8f5e9 !important;
+            color: #1b5e20 !important;
+        }
+        
+        .option.correct-option::after {
+            content: " ✓ 정답";
+            color: #2e7d32;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 한국어 문법: 피동과 사동</h1>
+        <h2 style="text-align: center; color: #718096; margin-top: -20px; margin-bottom: 30px;">Korean Grammar: Passive & Causative</h2>
+        
+        <div class="intro-section">
+            <p class="intro-text">
+                <strong>이 학습서에서 배울 내용:</strong><br>
+                피동(Passive)과 사동(Causative)은 한국어 문법의 핵심 개념입니다. 
+                이 두 문법 형태는 형태가 비슷하여 혼동하기 쉽지만, 의미와 용법이 완전히 다릅니다. 
+                이 학습서를 통해 피동과 사동의 차이를 명확히 이해하고, 올바르게 사용하는 방법을 익힐 수 있습니다.
+            </p>
+        </div>
+
+        <!-- Section 1: What is Passive? -->
+        <div class="section-title">1️⃣ 피동이란 무엇인가? (What is Passive?)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 개념 (Concept)</div>
+            <div class="concept-text">
+                피동은 행동의 주체가 아니라, <span class="highlight">영향을 받는 대상</span>이 주어가 되는 문장 형태입니다.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko"><strong>능동문 (Active):</strong> 내가 문을 열었다.</div>
+            <div class="example-en">I opened the door.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko"><strong>피동문 (Passive):</strong> 문이 열렸다.</div>
+            <div class="example-en">The door was opened.</div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">✅ 핵심 포인트</div>
+            <div class="key-point-text">
+                능동문에서는 "내가" 행동의 주체이지만, 피동문에서는 "문이" 행동의 영향을 받는 대상입니다.
+            </div>
+        </div>
+
+        <!-- Section 2: Passive Method 1 -->
+        <div class="section-title">2️⃣ 피동사를 만드는 방법 ① (-이/-히/-리/-기)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 가장 전통적인 한국어 피동 장치</div>
+            <div class="concept-text">
+                동사 어간에 <span class="highlight">-이, -히, -리, -기</span>를 붙여 피동사를 만듭니다.
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>능동사 (Active)</th>
+                    <th>피동사 (Passive)</th>
+                    <th>접미사 (Suffix)</th>
+                    <th>영어 (English)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>열다</td>
+                    <td>열리다</td>
+                    <td>-리</td>
+                    <td>be opened</td>
+                </tr>
+                <tr>
+                    <td>닫다</td>
+                    <td>닫히다</td>
+                    <td>-히</td>
+                    <td>be closed</td>
+                </tr>
+                <tr>
+                    <td>잡다</td>
+                    <td>잡히다</td>
+                    <td>-히</td>
+                    <td>be caught</td>
+                </tr>
+                <tr>
+                    <td>안다</td>
+                    <td>안기다</td>
+                    <td>-기</td>
+                    <td>be held</td>
+                </tr>
+                <tr>
+                    <td>보다</td>
+                    <td>보이다</td>
+                    <td>-이</td>
+                    <td>be seen</td>
+                </tr>
+                <tr>
+                    <td>쓰다</td>
+                    <td>쓰이다</td>
+                    <td>-이</td>
+                    <td>be written/used</td>
+                </tr>
+                <tr>
+                    <td>듣다</td>
+                    <td>들리다</td>
+                    <td>-리</td>
+                    <td>be heard</td>
+                </tr>
+                <tr>
+                    <td>먹다</td>
+                    <td>먹히다</td>
+                    <td>-히</td>
+                    <td>be eaten</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">📌 예문 (Example Sentences)</div>
+        
+        <div class="example-box">
+            <div class="example-ko">문이 <span class="highlight">열렸어요</span>.</div>
+            <div class="example-en">The door was opened.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">글씨가 잘 <span class="highlight">보입니다</span>.</div>
+            <div class="example-en">The letters are clearly visible.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">범인이 경찰에게 <span class="highlight">잡혔어요</span>.</div>
+            <div class="example-en">The criminal was caught by the police.</div>
+        </div>
+
+        <!-- Section 3: Passive Method 2 -->
+        <div class="section-title">3️⃣ 피동사를 만드는 방법 ② (-아/어지다)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 현대 한국어에서 가장 많이 쓰이는 피동 표현</div>
+            <div class="concept-text">
+                동사에 <span class="highlight">-아/어지다</span>를 붙여 피동의 의미를 표현합니다.<br>
+                이 형태는 <strong>자연 변화</strong>와 <strong>피동</strong> 둘 다 표현할 수 있어 성인 학습자에게 특히 중요합니다.
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>능동사 (Active)</th>
+                    <th>피동사 (Passive)</th>
+                    <th>영어 (English)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>깨다</td>
+                    <td>깨지다</td>
+                    <td>be broken</td>
+                </tr>
+                <tr>
+                    <td>바꾸다</td>
+                    <td>바뀌다</td>
+                    <td>be changed</td>
+                </tr>
+                <tr>
+                    <td>열다</td>
+                    <td>열리다 / 열어지다</td>
+                    <td>be opened</td>
+                </tr>
+                <tr>
+                    <td>정리하다</td>
+                    <td>정리되다</td>
+                    <td>be organized</td>
+                </tr>
+                <tr>
+                    <td>찢다</td>
+                    <td>찢어지다</td>
+                    <td>be torn</td>
+                </tr>
+                <tr>
+                    <td>녹다</td>
+                    <td>녹아지다</td>
+                    <td>be melted</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">📌 예문 (Example Sentences)</div>
+        
+        <div class="example-box">
+            <div class="example-ko">유리가 <span class="highlight">깨졌어요</span>.</div>
+            <div class="example-en">The glass broke.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">계획이 <span class="highlight">바뀌었어요</span>.</div>
+            <div class="example-en">The plan changed.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">책이 <span class="highlight">찢어졌어요</span>.</div>
+            <div class="example-en">The book was torn.</div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ 중요한 차이점</div>
+            <div class="warning-text">
+                "-아/어지다"는 자연스러운 변화를 나타낼 때도 사용됩니다:<br>
+                • 날씨가 추워졌어요. (The weather became cold.)<br>
+                • 키가 커졌어요. (I grew taller.)<br>
+                이런 경우는 피동이 아니라 상태 변화입니다.
+            </div>
+        </div>
+
+        <!-- Section 4: Passive Method 3 -->
+        <div class="section-title">4️⃣ 피동사를 만드는 방법 ③ (-되다)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 한자어 + 되다 = 피동의 대표 공식</div>
+            <div class="concept-text">
+                한자어 동사에 <span class="highlight">-되다</span>를 붙여 피동을 만듭니다.
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                한자어 동사 <span class="arrow">➜</span> -하다를 -되다로 변경
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>능동사 (Active)</th>
+                    <th>피동사 (Passive)</th>
+                    <th>영어 (English)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>결정하다</td>
+                    <td>결정되다</td>
+                    <td>be decided</td>
+                </tr>
+                <tr>
+                    <td>선택하다</td>
+                    <td>선택되다</td>
+                    <td>be chosen</td>
+                </tr>
+                <tr>
+                    <td>준비하다</td>
+                    <td>준비되다</td>
+                    <td>be prepared</td>
+                </tr>
+                <tr>
+                    <td>완료하다</td>
+                    <td>완료되다</td>
+                    <td>be completed</td>
+                </tr>
+                <tr>
+                    <td>제출하다</td>
+                    <td>제출되다</td>
+                    <td>be submitted</td>
+                </tr>
+                <tr>
+                    <td>승인하다</td>
+                    <td>승인되다</td>
+                    <td>be approved</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">📌 예문 (Example Sentences)</div>
+        
+        <div class="example-box">
+            <div class="example-ko">회의 일정이 <span class="highlight">결정됐어요</span>.</div>
+            <div class="example-en">The meeting schedule was decided.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">보고서가 <span class="highlight">제출됐습니다</span>.</div>
+            <div class="example-en">The report was submitted.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">프로젝트가 <span class="highlight">완료됐어요</span>.</div>
+            <div class="example-en">The project was completed.</div>
+        </div>
+
+        <!-- Section 5: What is Causative? -->
+        <div class="section-title">5️⃣ 사동이란 무엇인가? (What is Causative?)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 개념 (Concept)</div>
+            <div class="concept-text">
+                사동은 다른 사람이나 대상에게 <span class="highlight">행동을 하게 하는</span> 문장 형태입니다.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko"><strong>기본문:</strong> 아이가 밥을 먹었다.</div>
+            <div class="example-en">The child ate rice.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko"><strong>사동문:</strong> 내가 아이에게 밥을 먹였다.</div>
+            <div class="example-en">I fed the child (made the child eat).</div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">✅ 핵심 포인트</div>
+            <div class="key-point-text">
+                사동문에서는 "내가" 아이에게 밥을 먹게 만드는 행동의 주체입니다.
+            </div>
+        </div>
+
+        <!-- Section 6: Causative Method 1 -->
+        <div class="section-title">6️⃣ 사동사를 만드는 방법 ① (-이/-히/-리/-기)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 전통적인 사동 형태</div>
+            <div class="concept-text">
+                동사 어간에 <span class="highlight">-이, -히, -리, -기</span>를 붙여 사동사를 만듭니다.<br>
+                <strong>피동과 같은 접미사를 사용하므로 의미로 구분해야 합니다!</strong>
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>기본 동사</th>
+                    <th>사동사</th>
+                    <th>접미사</th>
+                    <th>영어 (English)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>먹다</td>
+                    <td>먹이다</td>
+                    <td>-이</td>
+                    <td>make someone eat, feed</td>
+                </tr>
+                <tr>
+                    <td>자다</td>
+                    <td>재우다</td>
+                    <td>-우</td>
+                    <td>make someone sleep</td>
+                </tr>
+                <tr>
+                    <td>죽다</td>
+                    <td>죽이다</td>
+                    <td>-이</td>
+                    <td>kill (make someone die)</td>
+                </tr>
+                <tr>
+                    <td>앉다</td>
+                    <td>앉히다</td>
+                    <td>-히</td>
+                    <td>make someone sit</td>
+                </tr>
+                <tr>
+                    <td>서다</td>
+                    <td>세우다</td>
+                    <td>-우</td>
+                    <td>make someone stand</td>
+                </tr>
+                <tr>
+                    <td>입다</td>
+                    <td>입히다</td>
+                    <td>-히</td>
+                    <td>dress someone</td>
+                </tr>
+                <tr>
+                    <td>신다</td>
+                    <td>신기다</td>
+                    <td>-기</td>
+                    <td>put shoes on someone</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">📌 예문 (Example Sentences)</div>
+        
+        <div class="example-box">
+            <div class="example-ko">아이에게 밥을 <span class="highlight">먹였어요</span>.</div>
+            <div class="example-en">I fed the child.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">아기를 <span class="highlight">재웠어요</span>.</div>
+            <div class="example-en">I put the baby to sleep.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">손님을 의자에 <span class="highlight">앉혔어요</span>.</div>
+            <div class="example-en">I seated the guest in a chair.</div>
+        </div>
+
+        <!-- Section 7: Causative Method 2 -->
+        <div class="section-title">7️⃣ 사동사를 만드는 방법 ② (-게 하다)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">🔹 가장 안전하고 명확한 사동 표현</div>
+            <div class="concept-text">
+                동사 어간에 <span class="highlight">-게 하다</span>를 붙여 사동을 만듭니다.<br>
+                모든 동사에 적용 가능하며, 의미가 명확합니다.
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                동사 어간 + -게 하다 <span class="arrow">=</span> 사동
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>기본 동사</th>
+                    <th>-게 하다 사동</th>
+                    <th>영어 (English)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>앉다</td>
+                    <td>앉게 하다</td>
+                    <td>make someone sit</td>
+                </tr>
+                <tr>
+                    <td>먹다</td>
+                    <td>먹게 하다</td>
+                    <td>make someone eat</td>
+                </tr>
+                <tr>
+                    <td>공부하다</td>
+                    <td>공부하게 하다</td>
+                    <td>make someone study</td>
+                </tr>
+                <tr>
+                    <td>기다리다</td>
+                    <td>기다리게 하다</td>
+                    <td>make someone wait</td>
+                </tr>
+                <tr>
+                    <td>생각하다</td>
+                    <td>생각하게 하다</td>
+                    <td>make someone think</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">📌 예문 (Example Sentences)</div>
+        
+        <div class="example-box">
+            <div class="example-ko">아이를 의자에 <span class="highlight">앉게 했어요</span>.</div>
+            <div class="example-en">I made the child sit in a chair.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">학생들을 <span class="highlight">공부하게 했어요</span>.</div>
+            <div class="example-en">I made the students study.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">손님을 <span class="highlight">기다리게 했어요</span>.</div>
+            <div class="example-en">I made the guest wait.</div>
+        </div>
+
+        <!-- Section 8: Comparison Table -->
+        <div class="section-title">8️⃣ 피동 vs 사동 한눈에 비교 (Passive vs Causative Comparison)</div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>피동 (Passive)</th>
+                    <th>사동 (Causative)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>의미</strong></td>
+                    <td>당하다 / 되다<br>(being affected)</td>
+                    <td>시키다 / 하게 하다<br>(making someone do)</td>
+                </tr>
+                <tr>
+                    <td><strong>주어</strong></td>
+                    <td>영향을 받음<br>(receives action)</td>
+                    <td>행동을 시킴<br>(causes action)</td>
+                </tr>
+                <tr>
+                    <td><strong>예문</strong></td>
+                    <td>문이 <strong>열렸다</strong><br>(door was opened)</td>
+                    <td>문을 <strong>열게 했다</strong><br>(made door open)</td>
+                </tr>
+                <tr>
+                    <td><strong>형태</strong></td>
+                    <td>-이/-히/-리/-기<br>-아/어지다<br>-되다</td>
+                    <td>-이/-히/-리/-기<br>-게 하다</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">🔍 같은 형태, 다른 의미 (Same Form, Different Meaning)</div>
+        
+        <div class="warning-box">
+            <div class="warning-title">⚠️ 매우 중요!</div>
+            <div class="warning-text">
+                <strong>-이/-히/-리/-기</strong>는 피동에도 쓰이고, 사동에도 쓰입니다.<br>
+                그래서 <span class="highlight">문맥과 의미로 판단</span>해야 합니다!
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>기본 동사</th>
+                    <th>-이/-히/-리/-기 형태</th>
+                    <th>피동 의미</th>
+                    <th>사동 의미</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>먹다</td>
+                    <td>먹히다</td>
+                    <td>✓ 밥이 먹히다<br>(be eaten)</td>
+                    <td>✗ (먹이다 = 사동)</td>
+                </tr>
+                <tr>
+                    <td>먹다</td>
+                    <td>먹이다</td>
+                    <td>✗</td>
+                    <td>✓ 아이에게 먹이다<br>(feed)</td>
+                </tr>
+                <tr>
+                    <td>보다</td>
+                    <td>보이다</td>
+                    <td>✓ 별이 보이다<br>(be seen)</td>
+                    <td>✓ 사진을 보이다<br>(show)</td>
+                </tr>
+                <tr>
+                    <td>죽다</td>
+                    <td>죽이다</td>
+                    <td>✗</td>
+                    <td>✓ 벌레를 죽이다<br>(kill)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 9: Key Summary -->
+        <div class="section-title">9️⃣ 핵심 정리 (Key Summary)</div>
+        
+        <div class="key-point">
+            <div class="key-point-title">✨ 피동 (Passive) 핵심 장치</div>
+            <div class="key-point-text">
+                1️⃣ <strong>-이/-히/-리/-기</strong>: 열다 → 열리다, 잡다 → 잡히다<br>
+                2️⃣ <strong>-아/어지다</strong>: 깨다 → 깨지다, 바꾸다 → 바뀌다<br>
+                3️⃣ <strong>-되다</strong>: 결정하다 → 결정되다, 완료하다 → 완료되다
+            </div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">✨ 사동 (Causative) 핵심 장치</div>
+            <div class="key-point-text">
+                1️⃣ <strong>-이/-히/-리/-기</strong>: 먹다 → 먹이다, 자다 → 재우다, 죽다 → 죽이다<br>
+                2️⃣ <strong>-게 하다</strong>: 앉다 → 앉게 하다, 공부하다 → 공부하게 하다
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">🎯 교사/학습자를 위한 한 줄 요약</div>
+            <div class="warning-text">
+                <strong>-이/-히/-리/-기</strong>는 피동에도 쓰이고, 사동에도 쓰입니다.<br>
+                따라서 <span class="highlight">의미와 문맥</span>으로 반드시 구분해야 합니다!<br><br>
+                
+                <strong>구분 방법:</strong><br>
+                • 피동: 주어가 영향을 받음 (문이 <strong>열렸다</strong>)<br>
+                • 사동: 주어가 남을 시킴 (아이에게 밥을 <strong>먹였다</strong>)
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-title">📝 학습 확인 퀴즈 (Practice Quiz)</div>
+            
+            <form id="quiz-form">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What is the passive form of "열다" (to open)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a"> 열이다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b"> 열리다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c"> 열게 하다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d"> 열어지다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "be decided" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q2"><strong>정답:</strong> 결정되다</div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">Is "먹이다" passive or causative?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a"> Passive (피동)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b"> Causative (사동)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c"> Both (둘 다)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "깨지다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a"> to break (something)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b"> be broken
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c"> make someone break
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "make someone eat" using -게 하다?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q5"><strong>정답:</strong> 먹게 하다</div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What is the passive form of "잡다" (to catch)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a"> 잡이다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b"> 잡리다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c"> 잡히다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="d"> 잡기다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Complete: 문이 _____. (The door was opened.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a"> 열었다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b"> 열렸다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c"> 열이다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "be prepared" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q8"><strong>정답:</strong> 준비되다</div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What is the causative form of "자다" (to sleep)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="a"> 자이다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="b"> 재우다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="c"> 자히다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">Is "보이다" passive, causative, or both?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a"> Only Passive (피동만)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b"> Only Causative (사동만)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c"> Both (둘 다)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "be changed" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q11"><strong>정답:</strong> 바뀌다</div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Complete: 아이에게 밥을 _____. (I fed the child.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a"> 먹었어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b"> 먹혔어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="c"> 먹였어요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "죽이다" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a"> to die
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b"> to kill
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c"> be killed
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "be completed" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q14"><strong>정답:</strong> 완료되다</div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What is the passive form of "듣다" (to hear)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a"> 듣이다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b"> 들이다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="c"> 들리다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Which sentence is PASSIVE?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q16" value="a"> 아이를 앉혔어요.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="b"> 의자에 앉았어요.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="c"> 문이 닫혔어요.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you write "make someone study" using -게 하다?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q17"><strong>정답:</strong> 공부하게 하다</div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">Which suffix is used ONLY for causative (not passive)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q18" value="a"> -이/-히/-리/-기
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="b"> -아/어지다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="c"> -게 하다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">Complete: 유리가 _____. (The glass broke.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q19" value="a"> 깼어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="b"> 깨졌어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="c"> 깨이었어요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "be seen" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q20"><strong>정답:</strong> 보이다</div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            q2: '결정되다',
+            q5: '먹게 하다',
+            q8: '준비되다',
+            q11: '바뀌다',
+            q14: '완료되다',
+            q17: '공부하게 하다',
+            q20: '보이다',
+            q1: 'b',
+            q3: 'b',
+            q4: 'b',
+            q6: 'c',
+            q7: 'b',
+            q9: 'b',
+            q10: 'c',
+            q12: 'c',
+            q13: 'b',
+            q15: 'c',
+            q16: 'c',
+            q18: 'c',
+            q19: 'b'
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // First, hide all correct answers and remove correct-option class
+            document.querySelectorAll('.correct-answer').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.option').forEach(el => el.classList.remove('correct-option'));
+
+            // Check text inputs with normalization (allow spaces)
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s+/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s+/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#48bb78';
+                } else {
+                    input.style.borderColor = '#f56565';
+                    // Show correct answer
+                    const answerDiv = document.getElementById('answer-' + id);
+                    if (answerDiv) {
+                        answerDiv.classList.add('show');
+                    }
+                }
+            });
+
+            // Check multiple choice
+            ['q1', 'q3', 'q4', 'q6', 'q7', 'q9', 'q10', 'q12', 'q13', 'q15', 'q16', 'q18', 'q19'].forEach(id => {
+                const selectedOption = document.querySelector(`input[name="${id}"]:checked`);
+                const isCorrect = selectedOption && selectedOption.value === answers[id];
+                
+                if (isCorrect) {
+                    correct++;
+                } else {
+                    // Highlight the correct answer
+                    const correctOption = document.querySelector(`input[name="${id}"][value="${answers[id]}"]`);
+                    if (correctOption) {
+                        correctOption.parentElement.classList.add('correct-option');
+                    }
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+            resultDiv.style.color = percentage >= 70 ? '#234e52' : '#742a2a';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add click handlers for options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

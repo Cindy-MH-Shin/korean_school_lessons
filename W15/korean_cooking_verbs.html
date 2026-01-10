@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Cooking Verbs - Verb Forms Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #ff6b6b;
+            background: white;
+            border-bottom: 4px solid #ff6b6b;
+        }
+        
+        .nav-tab:hover {
+            background: #edf2f7;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #ff6b6b;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #ff6b6b;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .level-basic {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+        }
+        
+        .level-polite {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-past {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .form-labels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 0 12px;
+        }
+        
+        .form-label {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #fff5f5;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .example-korean {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .example-english {
+            font-size: 14px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .question-number {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .korean-word-large {
+            color: #ff6b6b;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .quiz-option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+        
+        .quiz-option.selected {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .quiz-results {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .quiz-results h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-results p {
+            font-size: 20px;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .reset-btn {
+            background: #4a5568;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍳 Korean Cooking Verbs 🥘</h1>
+            <p class="subtitle">Master Essential Korean Cooking Vocabulary</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('vocabulary')">📚 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('quiz')">📝 Quiz</button>
+        </div>
+        
+        <div class="content">
+            <!-- VOCABULARY SECTION -->
+            <div id="vocabulary-section" class="section active">
+                
+                <!-- Category 1: 불을 사용하는 조리 동사 -->
+                <div class="category-header">🔥 불을 사용하는 조리 동사 (Cooking with Heat)</div>
+                
+                <div class="vocab-grid">
+                    <!-- 1. 볶다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">1</div>
+                            <div class="vocab-word">볶다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[bok-da]</div>
+                        <div class="vocab-meaning">to stir-fry</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">볶다</div>
+                            <div class="level-box level-polite">볶아요</div>
+                            <div class="level-box level-past">볶았어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">김치를 볶아요.</div>
+                            <div class="example-english">I stir-fry kimchi.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2. 튀기다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">2</div>
+                            <div class="vocab-word">튀기다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[twi-gi-da]</div>
+                        <div class="vocab-meaning">to deep-fry</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">튀기다</div>
+                            <div class="level-box level-polite">튀겨요</div>
+                            <div class="level-box level-past">튀겼어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">닭을 튀겼어요.</div>
+                            <div class="example-english">I deep-fried chicken.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3. 굽다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">3</div>
+                            <div class="vocab-word">굽다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[gup-da]</div>
+                        <div class="vocab-meaning">to grill, bake, roast</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">굽다</div>
+                            <div class="level-box level-polite">구워요</div>
+                            <div class="level-box level-past">구웠어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">고기를 구워요.</div>
+                            <div class="example-english">I grill meat.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4. 끓이다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">4</div>
+                            <div class="vocab-word">끓이다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[kkeur-i-da]</div>
+                        <div class="vocab-meaning">to boil</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">끓이다</div>
+                            <div class="level-box level-polite">끓여요</div>
+                            <div class="level-box level-past">끓였어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">물을 끓였어요.</div>
+                            <div class="example-english">I boiled water.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5. 졸이다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">5</div>
+                            <div class="vocab-word">졸이다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[jo-ri-da]</div>
+                        <div class="vocab-meaning">to simmer down, reduce</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">졸이다</div>
+                            <div class="level-box level-polite">졸여요</div>
+                            <div class="level-box level-past">졸였어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">양념을 졸여요.</div>
+                            <div class="example-english">I reduce the sauce.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6. 데우다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">6</div>
+                            <div class="vocab-word">데우다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[de-u-da]</div>
+                        <div class="vocab-meaning">to heat up, warm up</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">데우다</div>
+                            <div class="level-box level-polite">데워요</div>
+                            <div class="level-box level-past">데웠어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">밥을 데웠어요.</div>
+                            <div class="example-english">I heated up rice.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 2: 자르기 관련 동사 -->
+                <div class="category-header">🔪 자르기 관련 동사 (Cutting Verbs)</div>
+                
+                <div class="vocab-grid">
+                    <!-- 7. 자르다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">7</div>
+                            <div class="vocab-word">자르다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ja-reu-da]</div>
+                        <div class="vocab-meaning">to cut</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">자르다</div>
+                            <div class="level-box level-polite">잘라요</div>
+                            <div class="level-box level-past">잘랐어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">양파를 잘라요.</div>
+                            <div class="example-english">I cut onions.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 8. 썰다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">8</div>
+                            <div class="vocab-word">썰다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[sseol-da]</div>
+                        <div class="vocab-meaning">to slice, chop</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">썰다</div>
+                            <div class="level-box level-polite">썰어요</div>
+                            <div class="level-box level-past">썰었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">무를 채 썰어요.</div>
+                            <div class="example-english">I julienne radish.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 3: 섞는 동사 -->
+                <div class="category-header">🥄 섞는 동사 (Mixing Verbs)</div>
+                
+                <div class="vocab-grid">
+                    <!-- 9. 넣다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">9</div>
+                            <div class="vocab-word">넣다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[neot-da]</div>
+                        <div class="vocab-meaning">to put in, add</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">넣다</div>
+                            <div class="level-box level-polite">넣어요</div>
+                            <div class="level-box level-past">넣었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">소금을 넣어요.</div>
+                            <div class="example-english">I add salt.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 10. 섞다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">10</div>
+                            <div class="vocab-word">섞다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[seok-da]</div>
+                        <div class="vocab-meaning">to mix</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">섞다</div>
+                            <div class="level-box level-polite">섞어요</div>
+                            <div class="level-box level-past">섞었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">재료를 섞어요.</div>
+                            <div class="example-english">I mix the ingredients.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 11. 버무리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">11</div>
+                            <div class="vocab-word">버무리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[beo-mu-ri-da]</div>
+                        <div class="vocab-meaning">to toss, mix thoroughly</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">버무리다</div>
+                            <div class="level-box level-polite">버무려요</div>
+                            <div class="level-box level-past">버무렸어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">김치를 양념에 버무려요.</div>
+                            <div class="example-english">I toss kimchi with seasoning.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 12. 풀다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">12</div>
+                            <div class="vocab-word">풀다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[pul-da]</div>
+                        <div class="vocab-meaning">to beat, whisk (eggs)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">풀다</div>
+                            <div class="level-box level-polite">풀어요</div>
+                            <div class="level-box level-past">풀었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">계란을 풀어요.</div>
+                            <div class="example-english">I beat eggs.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 13. 뿌리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">13</div>
+                            <div class="vocab-word">뿌리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ppu-ri-da]</div>
+                        <div class="vocab-meaning">to sprinkle, spread</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">뿌리다</div>
+                            <div class="level-box level-polite">뿌려요</div>
+                            <div class="level-box level-past">뿌렸어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">참깨를 뿌려요.</div>
+                            <div class="example-english">I sprinkle sesame seeds.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 4: 마무리 동사 -->
+                <div class="category-header">🍽️ 마무리 동사 (Finishing Verbs)</div>
+                
+                <div class="vocab-grid">
+                    <!-- 14. 말다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">14</div>
+                            <div class="vocab-word">말다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[mal-da]</div>
+                        <div class="vocab-meaning">to roll up</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">말다</div>
+                            <div class="level-box level-polite">말아요</div>
+                            <div class="level-box level-past">말았어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">김밥을 말아요.</div>
+                            <div class="example-english">I roll kimbap.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 15. 담다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">15</div>
+                            <div class="vocab-word">담다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[dam-da]</div>
+                        <div class="vocab-meaning">to serve, put (food in dish)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">담다</div>
+                            <div class="level-box level-polite">담아요</div>
+                            <div class="level-box level-past">담았어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">그릇에 담아요.</div>
+                            <div class="example-english">I put it in a bowl.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 16. 먹다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">16</div>
+                            <div class="vocab-word">먹다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[meok-da]</div>
+                        <div class="vocab-meaning">to eat</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">먹다</div>
+                            <div class="level-box level-polite">먹어요</div>
+                            <div class="level-box level-past">먹었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">맛있게 먹어요.</div>
+                            <div class="example-english">I eat deliciously.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 17. 맛보다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">17</div>
+                            <div class="vocab-word">맛보다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[mat-bo-da]</div>
+                        <div class="vocab-meaning">to taste</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">맛보다</div>
+                            <div class="level-box level-polite">맛봐요</div>
+                            <div class="level-box level-past">맛봤어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-korean">국을 맛봤어요.</div>
+                            <div class="example-english">I tasted the soup.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QUIZ SECTION -->
+            <div id="quiz-section" class="section">
+                <div class="quiz-container">
+                    <h2 style="text-align: center; color: #2d3748; margin-bottom: 30px;">Test Your Knowledge!</h2>
+                    
+                    <!-- Question 1 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">볶다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '볶아요')">볶아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '볶어요')">볶어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '볶았어요')">볶았어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '볶요')">볶요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">Complete: 닭을 _____. (I deep-fried chicken.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '튀기다')">튀기다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '튀겨요')">튀겨요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '튀겼어요')">튀겼어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '튀기요')">튀기요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What does <span class="korean-word-large">굽다</span> mean?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to grill, bake, roast')">to grill, bake, roast</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to boil')">to boil</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to steam')">to steam</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to fry')">to fry</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 4</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">끓이다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끓여요')">끓여요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끓였어요')">끓였어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끓이어요')">끓이어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끓이요')">끓이요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 5</div>
+                        <div class="question-text">Complete: 양념을 _____. (I reduce the sauce.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '졸이다')">졸이다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '졸여요')">졸여요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '졸였어요')">졸였어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '졸이요')">졸이요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 6</div>
+                        <div class="question-text">What verb form progression is correct?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '데우다→데워요→데웠어요')">데우다 → 데워요 → 데웠어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '데우다→데우요→데우었어요')">데우다 → 데우요 → 데우었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '데우다→데와요→데왔어요')">데우다 → 데와요 → 데왔어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '데워요→데우다→데웠어요')">데워요 → 데우다 → 데웠어요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 7 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 7</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">자르다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '잘라요')">잘라요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '자르요')">자르요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '잘러요')">잘러요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '자라요')">자라요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 8 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 8</div>
+                        <div class="question-text">What does "무를 채 썰어요" mean?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, 'I julienne radish')">I julienne radish</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, 'I boil radish')">I boil radish</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, 'I cut radish')">I cut radish</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, 'I wash radish')">I wash radish</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 9 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 9</div>
+                        <div class="question-text">Complete: 소금을 _____. (I add salt.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '넣어요')">넣어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '넣다')">넣다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '넣었어요')">넣었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '넣요')">넣요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 10 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 10</div>
+                        <div class="question-text">What is the difference between 섞다 and 버무리다?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, '섞다 = mix, 버무리다 = toss/mix thoroughly')">섞다 = mix, 버무리다 = toss/mix thoroughly</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'same')">They mean the same thing</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'heat vs cold')">섞다 = hot, 버무리다 = cold</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'liquid vs solid')">섞다 = liquid, 버무리다 = solid</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 11 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 11</div>
+                        <div class="question-text">What does <span class="korean-word-large">풀다</span> mean in cooking context?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to beat, whisk (eggs)')">to beat, whisk (eggs)</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to boil')">to boil</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to fry')">to fry</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to cut')">to cut</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 12 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 12</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">뿌리다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '뿌려요')">뿌려요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '뿌리요')">뿌리요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '뿌렸어요')">뿌렸어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '뿌르요')">뿌르요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 13 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 13</div>
+                        <div class="question-text">Complete: 김밥을 _____. (I roll kimbap.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '말아요')">말아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '말다')">말다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '말요')">말요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '말았어요')">말았어요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 14 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 14</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">담다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '담았어요')">담았어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '담어요')">담어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '담아요')">담아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '담요')">담요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 15 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 15</div>
+                        <div class="question-text">What verb form progression is correct?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '먹다→먹어요→먹었어요')">먹다 → 먹어요 → 먹었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '먹다→먹요→먹었어요')">먹다 → 먹요 → 먹었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '먹어요→먹다→먹었어요')">먹어요 → 먹다 → 먹었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '먹다→먹었어요→먹어요')">먹다 → 먹었어요 → 먹어요</button>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+                    
+                    <div class="quiz-results" id="results">
+                        <h2>Quiz Results</h2>
+                        <div class="score" id="score"></div>
+                        <p id="message"></p>
+                        <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: '볶아요',
+            2: '튀겼어요',
+            3: 'to grill, bake, roast',
+            4: '끓였어요',
+            5: '졸여요',
+            6: '데우다→데워요→데웠어요',
+            7: '잘라요',
+            8: 'I julienne radish',
+            9: '넣어요',
+            10: '섞다 = mix, 버무리다 = toss/mix thoroughly',
+            11: 'to beat, whisk (eggs)',
+            12: '뿌려요',
+            13: '말아요',
+            14: '담았어요',
+            15: '먹다→먹어요→먹었어요'
+        };
+        
+        let userAnswers = {};
+        
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            if (section === 'vocabulary') {
+                document.getElementById('vocabulary-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (section === 'quiz') {
+                document.getElementById('quiz-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            }
+        }
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! You have mastered these cooking verbs!';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 Not bad! Review the verb forms and try again!';
+            } else {
+                message = '📚 Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
