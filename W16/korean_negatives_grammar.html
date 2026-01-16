@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 문법: "안" vs "못" 부정문 (Korean Grammar: Negatives)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .intro-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .subsection-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .concept-box {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .concept-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .concept-text {
+            font-size: 16px;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        
+        .example-box {
+            background: #f0f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .example-ko {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .example-en {
+            font-size: 15px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .comparison-table th {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+        
+        .comparison-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #d84315;
+        }
+        
+        .key-point {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .key-point-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+        
+        .key-point-text {
+            font-size: 15px;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            font-size: 15px;
+            color: #bf360c;
+            line-height: 1.6;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+        
+        .formula-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .arrow {
+            font-size: 28px;
+            color: #764ba2;
+            margin: 0 10px;
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .quiz-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .option:hover {
+            background: #edf2f7;
+            border-color: #667eea;
+        }
+        
+        .option.selected {
+            background: #e6f2ff;
+            border-color: #667eea;
+        }
+        
+        .option.correct-option {
+            background: #c6f6d5;
+            border-color: #48bb78;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .correct-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #c6f6d5;
+            border-radius: 5px;
+            color: #22543d;
+            font-size: 14px;
+        }
+        
+        .correct-answer.show {
+            display: block;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .incorrect-mark {
+            color: #e53e3e;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .two-column-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .column-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .column-title {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .column-title.an {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+
+        .column-title.mot {
+            background: linear-gradient(135deg, #ed64a6 0%, #d53f8c 100%);
+        }
+
+        .category-section {
+            margin-bottom: 20px;
+        }
+
+        .category-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #718096;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-row {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 4px;
+        }
+
+        .form-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>한국어 부정문: "안" vs "못"<br>Korean Negatives: "안" (won't) vs "못" (can't)</h1>
+        
+        <div class="intro-section">
+            <div class="intro-text">
+                <strong>Korean has TWO ways to make negative sentences:</strong><br><br>
+                • <span class="highlight">안 (an)</span>: Expresses <strong>will/intention</strong> - "do not want to" or "will not"<br>
+                • <span class="highlight">못 (mot)</span>: Expresses <strong>inability/impossibility</strong> - "cannot" or "unable to"<br><br>
+                Both forms can be used in two structures: <strong>Short Form</strong> (안/못 + verb) and <strong>Long Form</strong> (verb stem + 지 않다/못하다)
+            </div>
+        </div>
+
+        <div class="section-title">📊 Complete Comparison Chart (비교표)</div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 12%;"></th>
+                    <th style="width: 15%;"></th>
+                    <th style="width: 23%;">의지 (Will, Intention)</th>
+                    <th style="width: 23%;">능력, 다른 이유 (Capability, Other Reasons)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #e3f2fd;">
+                    <td style="background: #bbdefb;"></td>
+                    <td style="background: #bbdefb;"></td>
+                    <td style="background: #90caf9; font-size: 20px; font-weight: bold;">Negative "안"</td>
+                    <td style="background: #f8bbd0; font-size: 20px; font-weight: bold;">Negative "못"</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="background: #f3e5f5; font-weight: bold; font-size: 18px;">Verb<br>동사</td>
+                    <td style="background: #e1bee7; font-weight: bold;">Short<br>짧은 형태</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #1565c0;">안 먹다</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #c2185b;">못 먹다</td>
+                </tr>
+                <tr>
+                    <td style="background: #e1bee7; font-weight: bold;">Long<br>긴 형태</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #1565c0;">먹지 <span class="highlight">않다</span></td>
+                    <td style="font-size: 20px; font-weight: bold; color: #c2185b;">먹지 <span class="highlight">못 하다</span></td>
+                </tr>
+                <tr style="background: #fff9c4;">
+                    <td rowspan="2" style="background: #f3e5f5; font-weight: bold; font-size: 18px;">Adjective<br>형용사</td>
+                    <td style="background: #e1bee7; font-weight: bold;">Short<br>짧은 형태</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #1565c0;">안 예쁘다</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #e53e3e;"><del>못 예쁘다</del> ✗<br><span style="font-size: 14px;">(NOT used)</span></td>
+                </tr>
+                <tr style="background: #fff9c4;">
+                    <td style="background: #e1bee7; font-weight: bold;">Long<br>긴 형태</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #1565c0;">예쁘지 않다</td>
+                    <td style="font-size: 20px; font-weight: bold; color: #e53e3e;"><del>예쁘지 못하다</del> ✗<br><span style="font-size: 14px;">(NOT used)</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background: #e1f5fe; font-weight: bold; font-size: 16px;">상태 (Status/Situation)</td>
+                    <td style="font-size: 18px; font-weight: bold; color: #1565c0;">✓ 사용 가능<br>(Can be used)</td>
+                    <td style="font-size: 18px; color: #9e9e9e;">N/A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">1️⃣ 안 (AN) - Negative of Will/Intention</div>
+
+        <div class="concept-box">
+            <div class="concept-title">💡 When to use "안"</div>
+            <div class="concept-text">
+                Use <span class="highlight">안</span> when someone <strong>chooses not to do something</strong> or <strong>doesn't want to</strong> do it. It's about intention and will.<br><br>
+                <strong>English equivalents:</strong> "do not," "does not," "will not," "don't want to"
+            </div>
+        </div>
+
+        <div class="subsection-title">Structure 1: Short Form (짧은 부정)</div>
+        
+        <div class="formula-box">
+            <div class="formula-text">
+                안 + Verb/Adjective
+                <span class="arrow">→</span>
+                안 + 먹다, 안 + 가다, 안 + 예쁘다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">나는 고기를 <span class="highlight">안 먹어요</span>.</div>
+            <div class="example-en">I do not eat meat. (by choice)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">오늘은 학교에 <span class="highlight">안 가요</span>.</div>
+            <div class="example-en">I'm not going to school today. (my decision)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">이 옷은 <span class="highlight">안 예뻐요</span>.</div>
+            <div class="example-en">This clothing is not pretty.</div>
+        </div>
+
+        <div class="subsection-title">Structure 2: Long Form (긴 부정)</div>
+        
+        <div class="formula-box">
+            <div class="formula-text">
+                Verb/Adjective Stem + 지 않다
+                <span class="arrow">→</span>
+                먹다 → 먹지 않다, 가다 → 가지 않다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">나는 고기를 <span class="highlight">먹지 않아요</span>.</div>
+            <div class="example-en">I do not eat meat. (more formal)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">오늘은 학교에 <span class="highlight">가지 않아요</span>.</div>
+            <div class="example-en">I'm not going to school today.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">이 옷은 <span class="highlight">예쁘지 않아요</span>.</div>
+            <div class="example-en">This clothing is not pretty.</div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">✅ Key Point about 안</div>
+            <div class="key-point-text">
+                • Can be used with BOTH verbs and adjectives<br>
+                • Can describe situations or states (상태): 안 좋다 (not good), 안 맞다 (doesn't fit)<br>
+                • More commonly used than 못 in everyday conversation
+            </div>
+        </div>
+
+        <div class="section-title">2️⃣ 못 (MOT) - Negative of Ability/Possibility</div>
+
+        <div class="concept-box">
+            <div class="concept-title">💡 When to use "못"</div>
+            <div class="concept-text">
+                Use <span class="highlight">못</span> when someone <strong>is unable to do something</strong> or when something is <strong>impossible</strong>. It's about ability and external circumstances.<br><br>
+                <strong>English equivalents:</strong> "cannot," "unable to," "can't," "couldn't"
+            </div>
+        </div>
+
+        <div class="subsection-title">Structure 1: Short Form (짧은 부정)</div>
+        
+        <div class="formula-box">
+            <div class="formula-text">
+                못 + Verb (ONLY)
+                <span class="arrow">→</span>
+                못 + 먹다, 못 + 가다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">너무 배가 불러서 <span class="highlight">못 먹어요</span>.</div>
+            <div class="example-en">I'm too full, so I can't eat. (physically unable)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">아파서 학교에 <span class="highlight">못 가요</span>.</div>
+            <div class="example-en">I'm sick, so I can't go to school. (unable due to circumstances)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">한국어를 <span class="highlight">못 해요</span>.</div>
+            <div class="example-en">I can't speak Korean. (don't have the ability)</div>
+        </div>
+
+        <div class="subsection-title">Structure 2: Long Form (긴 부정)</div>
+        
+        <div class="formula-box">
+            <div class="formula-text">
+                Verb Stem + 지 못하다
+                <span class="arrow">→</span>
+                먹다 → 먹지 못하다, 가다 → 가지 못하다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">너무 배가 불러서 <span class="highlight">먹지 못해요</span>.</div>
+            <div class="example-en">I'm too full, so I can't eat.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">아파서 학교에 <span class="highlight">가지 못해요</span>.</div>
+            <div class="example-en">I'm sick, so I can't go to school.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">한국어를 <span class="highlight">하지 못해요</span>.</div>
+            <div class="example-en">I can't speak Korean.</div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ IMPORTANT: 못 is NOT used with adjectives!</div>
+            <div class="warning-text">
+                ❌ 못 예뻐요 (WRONG)<br>
+                ❌ 예쁘지 못해요 (WRONG)<br>
+                ✅ 안 예뻐요 (CORRECT)<br>
+                ✅ 예쁘지 않아요 (CORRECT)<br><br>
+                Adjectives describe states, not actions, so they cannot express "inability."
+            </div>
+        </div>
+
+        <div class="section-title">3️⃣ Direct Comparison Examples (비교 예문)</div>
+
+        <div class="subsection-title">Example 1: 먹다 (to eat)</div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">안 (Will/Choice)</th>
+                    <th style="width: 50%;">못 (Ability/Circumstance)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">안 먹어요</strong><br>
+                        <span style="color: #718096;">I don't eat it. (I don't want to)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">못 먹어요</strong><br>
+                        <span style="color: #718096;">I can't eat it. (I'm too full / allergic)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">먹지 않아요</strong><br>
+                        <span style="color: #718096;">I do not eat it. (my choice)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">먹지 못해요</strong><br>
+                        <span style="color: #718096;">I cannot eat it. (unable to)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">Example 2: 가다 (to go)</div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">안 (Will/Choice)</th>
+                    <th style="width: 50%;">못 (Ability/Circumstance)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">파티에 안 가요</strong><br>
+                        <span style="color: #718096;">I'm not going to the party. (I don't want to)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">파티에 못 가요</strong><br>
+                        <span style="color: #718096;">I can't go to the party. (I'm too busy / sick)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">파티에 가지 않아요</strong><br>
+                        <span style="color: #718096;">I do not go to the party. (my decision)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">파티에 가지 못해요</strong><br>
+                        <span style="color: #718096;">I cannot go to the party. (impossible)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">Example 3: 자다 (to sleep)</div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">안 (Will/Choice)</th>
+                    <th style="width: 50%;">못 (Ability/Circumstance)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">오늘 밤에 안 자요</strong><br>
+                        <span style="color: #718096;">I'm not sleeping tonight. (I choose to stay up)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">오늘 밤에 못 자요</strong><br>
+                        <span style="color: #718096;">I can't sleep tonight. (too much noise / insomnia)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #1565c0;">자지 않아요</strong><br>
+                        <span style="color: #718096;">I don't sleep. (I won't sleep)</span>
+                    </td>
+                    <td style="text-align: left; padding: 15px;">
+                        <strong style="color: #c2185b;">자지 못해요</strong><br>
+                        <span style="color: #718096;">I can't sleep. (unable to fall asleep)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">4️⃣ Special Cases & Tips (특별한 경우)</div>
+
+        <div class="key-point">
+            <div class="key-point-title">✅ 안 with 있다/없다</div>
+            <div class="key-point-text">
+                <strong>안 있어요</strong> = (someone) is not there / doesn't stay<br>
+                <strong>없어요</strong> = doesn't exist / there isn't any<br><br>
+                Example:<br>
+                • 집에 <span class="highlight">안 있어요</span>. (I'm not staying home. / I won't be home.)<br>
+                • 돈이 <span class="highlight">없어요</span>. (There's no money. / I don't have money.)
+            </div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">✅ 못 with Adjectives: The Exception</div>
+            <div class="key-point-text">
+                While 못 cannot be used directly with adjectives, there is ONE exception pattern:<br><br>
+                <strong>못 + Adjective + -게 생기다</strong> = "look/appear (in a certain way)"<br><br>
+                Example:<br>
+                • 그는 <span class="highlight">못 생겼어요</span>. (He's ugly. / He looks bad.)<br>
+                  [literally: "can't-be-well-looking"]<br><br>
+                This is a fixed expression and the ONLY common use of 못 with adjective-like meanings.
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ Common Mistakes to Avoid</div>
+            <div class="warning-text">
+                ❌ 못 예뻐요 (Wrong: 못 + adjective)<br>
+                ✅ 안 예뻐요 (Correct)<br><br>
+                ❌ 안 먹지 못해요 (Wrong: mixing both negatives)<br>
+                ✅ 안 먹어요 OR 못 먹어요 (Correct: use only one)<br><br>
+                ❌ 먹지 안 해요 (Wrong: incorrect long form with 안)<br>
+                ✅ 먹지 않아요 (Correct: use 않다, not 안 하다)
+            </div>
+        </div>
+
+        <div class="section-title">5️⃣ Practice Sentences (연습 문장)</div>
+
+        <div class="subsection-title">Determine: Should you use 안 or 못?</div>
+
+        <div class="example-box">
+            <div class="example-ko">1. 저는 매운 음식을 _____ 먹어요. (I don't eat spicy food - personal preference)</div>
+            <div class="example-en" style="color: #1565c0; font-weight: bold;">Answer: 안 (choice/preference)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">2. 배가 아파서 _____ 먹어요. (I can't eat because my stomach hurts)</div>
+            <div class="example-en" style="color: #c2185b; font-weight: bold;">Answer: 못 (physical inability)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">3. 오늘은 바빠서 영화를 _____ 봐요. (I can't watch a movie because I'm busy)</div>
+            <div class="example-en" style="color: #c2185b; font-weight: bold;">Answer: 못 (circumstantial inability)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">4. 저는 공포 영화를 _____ 봐요. (I don't watch horror movies - I don't like them)</div>
+            <div class="example-en" style="color: #1565c0; font-weight: bold;">Answer: 안 (preference/choice)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">5. 이 케이크는 _____ 달아요. (This cake is not sweet)</div>
+            <div class="example-en" style="color: #1565c0; font-weight: bold;">Answer: 안 (only 안 works with adjectives)</div>
+        </div>
+
+        <div class="section-title">6️⃣ Summary Table (요약표)</div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>안 (AN)</th>
+                    <th>못 (MOT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">Meaning</td>
+                    <td>Will not, do not (choice/intention)</td>
+                    <td>Cannot, unable to (ability/circumstance)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">With Verbs</td>
+                    <td>✓ Yes</td>
+                    <td>✓ Yes</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">With Adjectives</td>
+                    <td>✓ Yes</td>
+                    <td>✗ No (except 못 생기다)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Short Form</td>
+                    <td>안 + verb/adj</td>
+                    <td>못 + verb (only)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Long Form</td>
+                    <td>stem + 지 않다</td>
+                    <td>stem + 지 못하다</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Usage Frequency</td>
+                    <td>Very common</td>
+                    <td>Common with verbs</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Formality</td>
+                    <td>Long form more formal</td>
+                    <td>Long form more formal</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quiz-section">
+            <div class="quiz-title">📝 Quiz: Test Your Understanding</div>
+            
+            <form id="quiz-form">
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What is the difference between "안" and "못"?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a"> They mean the same thing
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b"> 안 = won't/don't (choice), 못 = can't (ability)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c"> 안 is formal, 못 is casual
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you say "I don't eat meat" (by choice) in Korean? (short form)</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q2"><strong>정답:</strong> 고기를 안 먹어요 OR 안 먹어요</div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">Which is CORRECT for "This dress is not pretty"?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a"> 이 옷은 못 예뻐요.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b"> 이 옷은 안 예뻐요.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c"> 이 옷은 예쁘지 못해요.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">Complete: 아파서 학교에 _____ 가요. (I can't go to school because I'm sick.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a"> 안
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b"> 못
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c"> both are correct
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "I cannot speak Korean" in the long form?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q5"><strong>정답:</strong> 한국어를 하지 못해요 OR 하지 못해요</div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "먹지 않아요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a"> I can't eat
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b"> I don't eat (choice)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c"> I didn't eat
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Can 못 be used with adjectives?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a"> Yes, always
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b"> No, never (except 못 생기다)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c"> Only in formal situations
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you say "I'm not going" (my choice) using the short form?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q8"><strong>정답:</strong> 안 가요</div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">Complete: 너무 배가 불러서 _____ 먹어요. (I'm too full so I can't eat.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="a"> 안
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="b"> 못
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="c"> 없어
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What is the long form of "안 먹어요"?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a"> 먹지 못해요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b"> 먹지 않아요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c"> 먹지 안 해요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "I don't drink coffee" (personal preference)?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q11"><strong>정답:</strong> 커피를 안 마셔요 OR 안 마셔요</div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Which sentence means "I'm not sleeping tonight" (by choice)?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a"> 오늘 밤에 못 자요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b"> 오늘 밤에 안 자요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="c"> Both are the same
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "가지 못해요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a"> I don't go (choice)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b"> I can't go (unable)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c"> I didn't go
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "It's not expensive" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q14"><strong>정답:</strong> 안 비싸요 OR 비싸지 않아요</div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">Complete: 저는 공포 영화를 _____ 봐요. (I don't watch horror movies - I don't like them.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a"> 안
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b"> 못
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="c"> Both work
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Which is the correct long form for 못?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q16" value="a"> verb stem + 지 않다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="b"> verb stem + 지 못하다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="c"> verb stem + 못 하다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you say "I can't sleep" (insomnia)?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q17"><strong>정답:</strong> 못 자요 OR 자지 못해요</div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "예쁘지 않아요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q18" value="a"> She can't be pretty
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="b"> She's not pretty
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="c"> She wasn't pretty
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">Complete: 시간이 없어서 파티에 _____ 가요. (No time, so can't go to the party.)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q19" value="a"> 안
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="b"> 못
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="c"> Either one
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "I don't like it" using the long form?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q20"><strong>정답:</strong> 좋아하지 않아요 OR 안 좋아해요</div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            q2: ['고기를안먹어요', '안먹어요'],
+            q5: ['한국어를하지못해요', '하지못해요'],
+            q8: '안가요',
+            q11: ['커피를안마셔요', '안마셔요'],
+            q14: ['안비싸요', '비싸지않아요'],
+            q17: ['못자요', '자지못해요'],
+            q20: ['좋아하지않아요', '안좋아해요'],
+            q1: 'b',
+            q3: 'b',
+            q4: 'b',
+            q6: 'b',
+            q7: 'b',
+            q9: 'b',
+            q10: 'b',
+            q12: 'b',
+            q13: 'b',
+            q15: 'a',
+            q16: 'b',
+            q18: 'b',
+            q19: 'b'
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // First, hide all correct answers and remove correct-option class
+            document.querySelectorAll('.correct-answer').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.option').forEach(el => el.classList.remove('correct-option'));
+
+            // Check text inputs with normalization (remove all spaces)
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s+/g, '');
+                
+                let isCorrect = false;
+                if (Array.isArray(answers[id])) {
+                    // Multiple correct answers
+                    isCorrect = answers[id].some(ans => userAnswer === ans.normalize('NFC').replace(/\s+/g, ''));
+                } else {
+                    const correctAnswer = answers[id].normalize('NFC').replace(/\s+/g, '');
+                    isCorrect = userAnswer === correctAnswer;
+                }
+                
+                if (isCorrect) {
+                    correct++;
+                    input.style.borderColor = '#48bb78';
+                } else {
+                    input.style.borderColor = '#f56565';
+                    // Show correct answer
+                    const answerDiv = document.getElementById('answer-' + id);
+                    if (answerDiv) {
+                        answerDiv.classList.add('show');
+                    }
+                }
+            });
+
+            // Check multiple choice
+            ['q1', 'q3', 'q4', 'q6', 'q7', 'q9', 'q10', 'q12', 'q13', 'q15', 'q16', 'q18', 'q19'].forEach(id => {
+                const selectedOption = document.querySelector(`input[name="${id}"]:checked`);
+                const isCorrect = selectedOption && selectedOption.value === answers[id];
+                
+                if (isCorrect) {
+                    correct++;
+                } else {
+                    // Highlight the correct answer
+                    const correctOption = document.querySelector(`input[name="${id}"][value="${answers[id]}"]`);
+                    if (correctOption) {
+                        correctOption.parentElement.classList.add('correct-option');
+                    }
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+            resultDiv.style.color = percentage >= 70 ? '#234e52' : '#742a2a';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add click handlers for options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Sports Verbs - Verb Forms Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #4a90e2;
+            background: white;
+            border-bottom: 4px solid #4a90e2;
+        }
+        
+        .nav-tab:hover {
+            background: #edf2f7;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #4a90e2;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #4a90e2;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #4a90e2;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .level-basic {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+        }
+        
+        .level-polite {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-past {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .form-labels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 0 12px;
+        }
+        
+        .form-label {
+            flex: 1;
+            font-size: 13px;
+            color: #718096;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .example-sentence {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .korean-sentence {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .english-sentence {
+            font-size: 15px;
+            color: #718096;
+        }
+        
+        .quiz-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .question-number {
+            background: #4a90e2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .korean-word-large {
+            font-size: 24px;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 3px solid #e2e8f0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .quiz-option:hover {
+            border-color: #4a90e2;
+            background: #f0f8ff;
+        }
+        
+        .quiz-option.selected {
+            background: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
+        }
+        
+        .quiz-results {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+            border: 3px solid #4a90e2;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .quiz-results h2 {
+            color: #4a90e2;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 20px 0;
+        }
+        
+        .quiz-results p {
+            font-size: 20px;
+            color: #4a5568;
+            margin: 15px 0;
+        }
+        
+        .reset-btn {
+            background: white;
+            color: #4a90e2;
+            border: 3px solid #4a90e2;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background: #4a90e2;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏃‍♂️ Korean Sports Verbs 🏀</h1>
+            <div class="subtitle">Learn Essential Verbs for Sports & Athletics</div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('vocabulary')">📚 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('quiz')">✏️ Quiz</button>
+        </div>
+        
+        <div class="content">
+            <!-- Vocabulary Section -->
+            <div id="vocabulary-section" class="section active">
+                
+                <!-- Category 1: Basic Action Verbs -->
+                <div class="category-header">1. 기본 동작 동사 (Basic Actions)</div>
+                
+                <div class="vocab-grid">
+                    <!-- Verb 1: 던지다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">1</div>
+                            <div class="vocab-word">던지다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[deon-ji-da]</div>
+                        <div class="vocab-meaning">to throw</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">던지다</div>
+                            <div class="level-box level-polite">던져요</div>
+                            <div class="level-box level-past">던졌어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">투수가 공을 던져요.</div>
+                            <div class="english-sentence">The pitcher throws the ball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">그는 빠르게 던졌어요.</div>
+                            <div class="english-sentence">He threw it fast.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 2: 잡다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">2</div>
+                            <div class="vocab-word">잡다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[jap-da]</div>
+                        <div class="vocab-meaning">to catch, to grab</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">잡다</div>
+                            <div class="level-box level-polite">잡아요</div>
+                            <div class="level-box level-past">잡았어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">외야수가 공을 잡아요.</div>
+                            <div class="english-sentence">The outfielder catches the ball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">그녀가 공을 잡았어요.</div>
+                            <div class="english-sentence">She caught the ball.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 3: 차다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">3</div>
+                            <div class="vocab-word">차다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[cha-da]</div>
+                        <div class="vocab-meaning">to kick</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">차다</div>
+                            <div class="level-box level-polite">차요</div>
+                            <div class="level-box level-past">찼어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">선수가 공을 세게 차요.</div>
+                            <div class="english-sentence">The player kicks the ball hard.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">메시가 골을 찼어요.</div>
+                            <div class="english-sentence">Messi kicked a goal.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 4: 치다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">4</div>
+                            <div class="vocab-word">치다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[chi-da]</div>
+                        <div class="vocab-meaning">to hit, to strike</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">치다</div>
+                            <div class="level-box level-polite">쳐요</div>
+                            <div class="level-box level-past">쳤어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">타자가 공을 쳐요.</div>
+                            <div class="english-sentence">The batter hits the ball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">홈런을 쳤어요!</div>
+                            <div class="english-sentence">He hit a home run!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 5: 받다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">5</div>
+                            <div class="vocab-word">받다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[bat-da]</div>
+                        <div class="vocab-meaning">to receive, to catch</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">받다</div>
+                            <div class="level-box level-polite">받아요</div>
+                            <div class="level-box level-past">받았어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">리시버가 패스를 받아요.</div>
+                            <div class="english-sentence">The receiver catches the pass.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">그가 공을 잘 받았어요.</div>
+                            <div class="english-sentence">He received the ball well.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 2: Hand-Related Actions -->
+                <div class="category-header">2. 손을 사용하는 동작 (Hand-Related Actions)</div>
+                
+                <div class="vocab-grid">
+                    <!-- Verb 6: 패스하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">6</div>
+                            <div class="vocab-word">패스하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[pae-seu-ha-da]</div>
+                        <div class="vocab-meaning">to pass</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">패스하다</div>
+                            <div class="level-box level-polite">패스해요</div>
+                            <div class="level-box level-past">패스했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">가드가 동료에게 패스해요.</div>
+                            <div class="english-sentence">The guard passes to his teammate.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">완벽하게 패스했어요.</div>
+                            <div class="english-sentence">He passed it perfectly.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 7: 전달하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">7</div>
+                            <div class="vocab-word">전달하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[jeon-dal-ha-da]</div>
+                        <div class="vocab-meaning">to deliver, to transfer</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">전달하다</div>
+                            <div class="level-box level-polite">전달해요</div>
+                            <div class="level-box level-past">전달했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 팀원에게 전달해요.</div>
+                            <div class="english-sentence">He delivers the ball to his teammate.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">바통을 전달했어요.</div>
+                            <div class="english-sentence">She passed the baton.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 8: 때리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">8</div>
+                            <div class="vocab-word">때리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ttae-ri-da]</div>
+                        <div class="vocab-meaning">to hit, to strike (forcefully)</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">때리다</div>
+                            <div class="level-box level-polite">때려요</div>
+                            <div class="level-box level-past">때렸어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 세게 때려요.</div>
+                            <div class="english-sentence">He hits the ball hard.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">스매시를 때렸어요.</div>
+                            <div class="english-sentence">She hit a smash.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 9: 튀기다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">9</div>
+                            <div class="vocab-word">튀기다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[twi-gi-da]</div>
+                        <div class="vocab-meaning">to bounce, to dribble</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">튀기다</div>
+                            <div class="level-box level-polite">튀겨요</div>
+                            <div class="level-box level-past">튀겼어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">농구공을 튀겨요.</div>
+                            <div class="english-sentence">He dribbles the basketball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 빠르게 튀겼어요.</div>
+                            <div class="english-sentence">She bounced the ball quickly.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 10: 넣다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">10</div>
+                            <div class="vocab-word">넣다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[neot-da]</div>
+                        <div class="vocab-meaning">to put in, to make (a shot/serve)</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">넣다</div>
+                            <div class="level-box level-polite">넣어요</div>
+                            <div class="level-box level-past">넣었어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">서브를 넣어요.</div>
+                            <div class="english-sentence">He serves (puts in the serve).</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">슛을 넣었어요!</div>
+                            <div class="english-sentence">She made the shot!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 3: Foot-Related Actions -->
+                <div class="category-header">3. 발을 사용하는 동작 (Foot-Related Actions)</div>
+                
+                <div class="vocab-grid">
+                    <!-- Verb 11: 달리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">11</div>
+                            <div class="vocab-word">달리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[dal-li-da]</div>
+                        <div class="vocab-meaning">to run</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">달리다</div>
+                            <div class="level-box level-polite">달려요</div>
+                            <div class="level-box level-past">달렸어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">선수가 빠르게 달려요.</div>
+                            <div class="english-sentence">The player runs fast.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">100미터를 달렸어요.</div>
+                            <div class="english-sentence">He ran 100 meters.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 12: 전력 질주하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">12</div>
+                            <div class="vocab-word">전력 질주하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[jeon-ryeok jil-ju-ha-da]</div>
+                        <div class="vocab-meaning">to sprint (at full speed)</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">전력 질주하다</div>
+                            <div class="level-box level-polite">전력 질주해요</div>
+                            <div class="level-box level-past">전력 질주했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">결승선까지 전력 질주해요.</div>
+                            <div class="english-sentence">He sprints to the finish line.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">마지막 100미터를 전력 질주했어요.</div>
+                            <div class="english-sentence">She sprinted the last 100 meters.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 13: 몰다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">13</div>
+                            <div class="vocab-word">몰다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[mol-da]</div>
+                        <div class="vocab-meaning">to drive, to dribble (ball forward)</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">몰다</div>
+                            <div class="level-box level-polite">몰아요</div>
+                            <div class="level-box level-past">몰았어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 앞으로 몰아요.</div>
+                            <div class="english-sentence">He drives the ball forward.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">골 지역까지 공을 몰았어요.</div>
+                            <div class="english-sentence">She dribbled the ball to the goal area.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 14: 점프하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">14</div>
+                            <div class="vocab-word">점프하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[jeom-peu-ha-da]</div>
+                        <div class="vocab-meaning">to jump</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">점프하다</div>
+                            <div class="level-box level-polite">점프해요</div>
+                            <div class="level-box level-past">점프했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">높이 점프해요.</div>
+                            <div class="english-sentence">He jumps high.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 잡으려고 점프했어요.</div>
+                            <div class="english-sentence">She jumped to catch the ball.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 15: 뛰어오르다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">15</div>
+                            <div class="vocab-word">뛰어오르다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ttwi-eo-o-reu-da]</div>
+                        <div class="vocab-meaning">to jump up, to leap up</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">뛰어오르다</div>
+                            <div class="level-box level-polite">뛰어올라요</div>
+                            <div class="level-box level-past">뛰어올랐어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">리바운드를 위해 뛰어올라요.</div>
+                            <div class="english-sentence">He jumps up for the rebound.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">헤딩을 하려고 뛰어올랐어요.</div>
+                            <div class="english-sentence">She jumped up to head the ball.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 16: 슬라이딩하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">16</div>
+                            <div class="vocab-word">슬라이딩하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[seul-la-i-ding-ha-da]</div>
+                        <div class="vocab-meaning">to slide</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">슬라이딩하다</div>
+                            <div class="level-box level-polite">슬라이딩해요</div>
+                            <div class="level-box level-past">슬라이딩했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">베이스로 슬라이딩해요.</div>
+                            <div class="english-sentence">He slides into the base.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">2루로 슬라이딩했어요.</div>
+                            <div class="english-sentence">She slid into second base.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 4: Full Body/Tool Actions -->
+                <div class="category-header">4. 몸 전체나 도구를 쓰는 동작 (Full Body or Tool-Using Actions)</div>
+                
+                <div class="vocab-grid">
+                    <!-- Verb 17: 휘두르다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">17</div>
+                            <div class="vocab-word">휘두르다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[hwi-du-reu-da]</div>
+                        <div class="vocab-meaning">to swing</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">휘두르다</div>
+                            <div class="level-box level-polite">휘둘러요</div>
+                            <div class="level-box level-past">휘둘렀어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">배트를 세게 휘둘러요.</div>
+                            <div class="english-sentence">He swings the bat hard.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">라켓을 빠르게 휘둘렀어요.</div>
+                            <div class="english-sentence">She swung the racket quickly.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 18: 막다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">18</div>
+                            <div class="vocab-word">막다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[mak-da]</div>
+                        <div class="vocab-meaning">to block, to stop</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">막다</div>
+                            <div class="level-box level-polite">막아요</div>
+                            <div class="level-box level-past">막았어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">골키퍼가 슛을 막아요.</div>
+                            <div class="english-sentence">The goalkeeper blocks the shot.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공격을 막았어요.</div>
+                            <div class="english-sentence">He stopped the attack.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 19: 방어하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">19</div>
+                            <div class="vocab-word">방어하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[bang-eo-ha-da]</div>
+                        <div class="vocab-meaning">to defend, to guard</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">방어하다</div>
+                            <div class="level-box level-polite">방어해요</div>
+                            <div class="level-box level-past">방어했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">수비수가 상대를 방어해요.</div>
+                            <div class="english-sentence">The defender guards the opponent.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">완벽하게 방어했어요.</div>
+                            <div class="english-sentence">She defended perfectly.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 20: 태클하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">20</div>
+                            <div class="vocab-word">태클하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[tae-keul-ha-da]</div>
+                        <div class="vocab-meaning">to tackle</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">태클하다</div>
+                            <div class="level-box level-polite">태클해요</div>
+                            <div class="level-box level-past">태클했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">상대 선수를 태클해요.</div>
+                            <div class="english-sentence">He tackles the opponent.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">깨끗하게 태클했어요.</div>
+                            <div class="english-sentence">She made a clean tackle.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 21: 뺏다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">21</div>
+                            <div class="vocab-word">뺏다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[ppaet-da]</div>
+                        <div class="vocab-meaning">to steal, to take away</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">뺏다</div>
+                            <div class="level-box level-polite">뺏어요</div>
+                            <div class="level-box level-past">뺏었어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 뺏어요.</div>
+                            <div class="english-sentence">He steals the ball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">상대에게서 공을 뺏었어요.</div>
+                            <div class="english-sentence">She took the ball away from the opponent.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 22: 다이빙하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">22</div>
+                            <div class="vocab-word">다이빙하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[da-i-bing-ha-da]</div>
+                        <div class="vocab-meaning">to dive</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">다이빙하다</div>
+                            <div class="level-box level-polite">다이빙해요</div>
+                            <div class="level-box level-past">다이빙했어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">골키퍼가 다이빙해요.</div>
+                            <div class="english-sentence">The goalkeeper dives.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 잡기 위해 다이빙했어요.</div>
+                            <div class="english-sentence">He dived to catch the ball.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 23: 몸을 날리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">23</div>
+                            <div class="vocab-word">몸을 날리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[mom-eul nal-li-da]</div>
+                        <div class="vocab-meaning">to throw one's body</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">몸을 날리다</div>
+                            <div class="level-box level-polite">몸을 날려요</div>
+                            <div class="level-box level-past">몸을 날렸어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">공을 막으려고 몸을 날려요.</div>
+                            <div class="english-sentence">He throws his body to block the ball.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">몸을 날려서 공을 막았어요.</div>
+                            <div class="english-sentence">She threw her body and blocked the ball.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 24: 오르다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">24</div>
+                            <div class="vocab-word">오르다</div>
+                        </div>
+                        <div class="vocab-pronunciation">[o-reu-da]</div>
+                        <div class="vocab-meaning">to climb, to ascend</div>
+                        
+                        <div class="form-labels">
+                            <div class="form-label">Basic</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        
+                        <div class="level-progression">
+                            <div class="level-box level-basic">오르다</div>
+                            <div class="level-box level-polite">올라요</div>
+                            <div class="level-box level-past">올랐어요</div>
+                        </div>
+                        
+                        <div class="example-sentence">
+                            <div class="korean-sentence">벽을 올라요.</div>
+                            <div class="english-sentence">He climbs the wall.</div>
+                        </div>
+                        <div class="example-sentence">
+                            <div class="korean-sentence">산 정상에 올랐어요.</div>
+                            <div class="english-sentence">She climbed to the mountain peak.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 5: Sport-Specific Verbs -->
+                <div class="category-header">5. 종목별 동사 (Sport-Specific Verbs)</div>
+                
+                <div style="background: #f7fafc; border: 3px solid #e2e8f0; border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                    <h3 style="color: #4a90e2; font-size: 24px; margin-bottom: 20px;">⚽ 축구 (Soccer/Football)</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">(공을) 몰다</strong> - to drive/dribble the ball forward
+                            <div style="color: #718096; margin-top: 5px;">예: 메시가 공을 몰아요. (Messi drives the ball.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">패스하다</strong> - to pass
+                            <div style="color: #718096; margin-top: 5px;">예: 미드필더가 패스해요. (The midfielder passes.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">막다</strong> - to block/stop
+                            <div style="color: #718096; margin-top: 5px;">예: 골키퍼가 슛을 막아요. (The goalkeeper blocks the shot.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">뺏다</strong> - to steal/take away
+                            <div style="color: #718096; margin-top: 5px;">예: 수비수가 공을 뺏어요. (The defender steals the ball.)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f7fafc; border: 3px solid #e2e8f0; border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                    <h3 style="color: #4a90e2; font-size: 24px; margin-bottom: 20px;">⚾ 야구 (Baseball)</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">던지다</strong> - to throw/pitch
+                            <div style="color: #718096; margin-top: 5px;">예: 투수가 공을 던져요. (The pitcher throws the ball.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">치다</strong> - to hit/bat
+                            <div style="color: #718096; margin-top: 5px;">예: 타자가 공을 쳐요. (The batter hits the ball.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">달리다</strong> - to run
+                            <div style="color: #718096; margin-top: 5px;">예: 주자가 달려요. (The runner runs.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">잡다</strong> - to catch
+                            <div style="color: #718096; margin-top: 5px;">예: 외야수가 공을 잡아요. (The outfielder catches the ball.)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #f7fafc; border: 3px solid #e2e8f0; border-radius: 15px; padding: 30px;">
+                    <h3 style="color: #4a90e2; font-size: 24px; margin-bottom: 20px;">🏀 농구 (Basketball)</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">던지다</strong> - to throw/shoot
+                            <div style="color: #718096; margin-top: 5px;">예: 선수가 3점슛을 던져요. (The player shoots a 3-pointer.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">튀기다</strong> - to dribble/bounce
+                            <div style="color: #718096; margin-top: 5px;">예: 가드가 공을 튀겨요. (The guard dribbles the ball.)</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #4a90e2;">
+                            <strong style="color: #2d3748; font-size: 18px;">가로채다</strong> - to steal/intercept
+                            <div style="color: #718096; margin-top: 5px;">예: 수비수가 패스를 가로채요. (The defender steals the pass.)</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Quiz Section -->
+            <div id="quiz-section" class="section">
+                <div class="quiz-section">
+                    <div class="category-header">🏆 Korean Sports Verbs Quiz</div>
+                    <div style="text-align: center; color: #718096; margin-bottom: 30px; font-size: 18px;">
+                        Test your knowledge of Korean sports verbs and their conjugations!
+                    </div>
+                    
+                    <!-- Question 1 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">던지다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '던져요')">던져요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '던지요')">던지요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '던졌어요')">던졌어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '던질요')">던질요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">Complete: 타자가 공을 _____. (The batter hit the ball.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '쳤어요')">쳤어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '쳐요')">쳐요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '치다')">치다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '치요')">치요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What does <span class="korean-word-large">튀기다</span> mean in basketball?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to dribble, to bounce')">to dribble, to bounce</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to shoot')">to shoot</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to pass')">to pass</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, 'to run')">to run</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 4</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">달리다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '달렸어요')">달렸어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '달려요')">달려요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '달았어요')">달았어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '달리었어요')">달리었어요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 5</div>
+                        <div class="question-text">Complete: 골키퍼가 슛을 _____. (The goalkeeper blocks the shot.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '막아요')">막아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '막다')">막다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '막요')">막요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '막았어요')">막았어요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 6</div>
+                        <div class="question-text">What verb form progression is correct?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '차다→차요→찼어요')">차다 → 차요 → 찼어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '차다→차아요→차었어요')">차다 → 차아요 → 차었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '차요→차다→찼어요')">차요 → 차다 → 찼어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '차다→찼어요→차요')">차다 → 찼어요 → 차요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 7 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 7</div>
+                        <div class="question-text">What does "공을 몰아요" mean in soccer?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, 'drive/dribble the ball forward')">drive/dribble the ball forward</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, 'throw the ball')">throw the ball</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, 'catch the ball')">catch the ball</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, 'stop the ball')">stop the ball</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 8 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 8</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">잡다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '잡아요')">잡아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '잡요')">잡요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '잡어요')">잡어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '잡았어요')">잡았어요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 9 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 9</div>
+                        <div class="question-text">Complete: 선수가 배트를 _____. (The player swung the bat.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '휘둘렀어요')">휘둘렀어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '휘둘러요')">휘둘러요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '휘두르다')">휘두르다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '휘두러요')">휘두러요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 10 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 10</div>
+                        <div class="question-text">What is the difference between 점프하다 and 뛰어오르다?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'similar but 뛰어오르다 emphasizes upward motion')">similar but 뛰어오르다 emphasizes upward motion</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'completely different')">completely different meanings</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, '점프하다 = jump, 뛰어오르다 = run')">점프하다 = jump, 뛰어오르다 = run</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'same meaning')">exactly the same meaning</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 11 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 11</div>
+                        <div class="question-text">What does <span class="korean-word-large">뺏다</span> mean in sports?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to steal, to take away')">to steal, to take away</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to pass')">to pass</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to throw')">to throw</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, 'to catch')">to catch</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 12 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 12</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">패스하다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '패스해요')">패스해요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '패스하요')">패스하요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '패스했어요')">패스했어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, '패스아요')">패스아요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 13 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 13</div>
+                        <div class="question-text">Which verb is used for "dribbling" in basketball?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '튀기다')">튀기다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '몰다')">몰다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '던지다')">던지다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '달리다')">달리다</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 14 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 14</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">받다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '받았어요')">받았어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '받어요')">받어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '받아요')">받아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '받요')">받요</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 15 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 15</div>
+                        <div class="question-text">Complete: 베이스로 _____. (He slid into the base.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '슬라이딩했어요')">슬라이딩했어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '슬라이딩해요')">슬라이딩해요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '슬라이딩하다')">슬라이딩하다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '슬라이딩하요')">슬라이딩하요</button>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+                    
+                    <div class="quiz-results" id="results">
+                        <h2>Quiz Results</h2>
+                        <div class="score" id="score"></div>
+                        <p id="message"></p>
+                        <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: '던져요',
+            2: '쳤어요',
+            3: 'to dribble, to bounce',
+            4: '달렸어요',
+            5: '막아요',
+            6: '차다→차요→찼어요',
+            7: 'drive/dribble the ball forward',
+            8: '잡아요',
+            9: '휘둘렀어요',
+            10: 'similar but 뛰어오르다 emphasizes upward motion',
+            11: 'to steal, to take away',
+            12: '패스해요',
+            13: '튀기다',
+            14: '받았어요',
+            15: '슬라이딩했어요'
+        };
+        
+        let userAnswers = {};
+        
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            if (section === 'vocabulary') {
+                document.getElementById('vocabulary-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (section === 'quiz') {
+                document.getElementById('quiz-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            }
+        }
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            for (let i = 1; i <= total; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    correct++;
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! You have mastered these sports verbs!';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 Not bad! Review the verb forms and try again!';
+            } else {
+                message = '📚 Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

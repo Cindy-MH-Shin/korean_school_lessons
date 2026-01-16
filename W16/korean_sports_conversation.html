@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>학교에서 스포츠 이야기 - Sports Talk at School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a90e2;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #4a90e2;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a90e2;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.suni {
+            color: #e91e63;
+        }
+        
+        .speaker.minsu {
+            color: #2196f3;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.suni {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.minsu {
+            border-left: 4px solid #2196f3;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .instruction-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #e3f2fd;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #4a90e2;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #4a90e2;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .question-number {
+            color: #4a90e2;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .question-text {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.selected {
+            background: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏃‍♂️ 학교에서 스포츠 이야기 ⚽</h1>
+        <div class="subtitle">
+            Sports Talk at School<br>
+            Learn Korean through a conversation between Suni and Minsu
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">Conversation 대화</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">Vocabulary 단어</button>
+            <button class="tab-button" onclick="openTab('quiz')">Quiz 퀴즈</button>
+        </div>
+
+        <div id="conversation" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">🏫 체육 시간 후 (After PE Class)</div>
+
+                <!-- Dialogue 1 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        민수야, 오늘 <span class="highlight">체육 시간</span> 정말 재미있었어!
+                        <div class="translation">Minsu, today's PE class was really fun!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 2 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        맞아! 특히 <span class="highlight">축구</span>할 때가 제일 좋았어. 너 <span class="highlight">골</span> 넣은 거 봤어?
+                        <div class="translation">Right! Especially when we played soccer. Did you see me score a goal?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 3 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        응! 네가 공을 <span class="highlight">차는</span> 모습이 정말 멋있었어. 어떻게 그렇게 <span class="highlight">빠르게 달릴</span> 수 있어?
+                        <div class="translation">Yes! You looked really cool kicking the ball. How can you run so fast?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 4 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        나는 매일 아침 <span class="highlight">운동</span>을 해. 그리고 방과 후에 <span class="highlight">축구 동아리</span>에서 연습해.
+                        <div class="translation">I exercise every morning. And I practice at the soccer club after school.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 5 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        와, 대단하다! 나는 <span class="highlight">농구</span>를 더 좋아해. 다음 주 체육 시간에 농구 하기로 했잖아?
+                        <div class="translation">Wow, that's amazing! I like basketball better. We're playing basketball in PE class next week, right?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 6 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        맞아! 너는 농구를 잘 <span class="highlight">쏘잖아</span>. 특히 <span class="highlight">3점슛</span>!
+                        <div class="translation">Right! You're good at shooting basketball. Especially 3-pointers!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 7 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        고마워! 나는 집에서 매일 <span class="highlight">공을 튀기면서</span> 연습해. <span class="highlight">드리블</span> 실력이 많이 늘었어.
+                        <div class="translation">Thanks! I practice dribbling the ball at home every day. My dribbling skills have improved a lot.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 8 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        다음 주에는 우리가 같은 팀이면 좋겠다. 내가 <span class="highlight">패스</span>하면 네가 <span class="highlight">슛</span> 넣는 거야!
+                        <div class="translation">I hope we're on the same team next week. I'll pass and you shoot!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 9 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        좋아! 그리고 난 네가 <span class="highlight">리바운드</span>를 <span class="highlight">잡는</span> 걸 도와줄게. 우리 팀이 꼭 이길 거야!
+                        <div class="translation">Great! And I'll help you grab rebounds. Our team will definitely win!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 10 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        그런데 오늘 <span class="highlight">야구</span>도 재미있었어. 지훈이가 <span class="highlight">공을 던지는</span> 게 정말 빨랐어!
+                        <div class="translation">By the way, baseball was fun today too. Jihoon's pitching was really fast!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 11 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        맞아! 그리고 선생님이 우리에게 <span class="highlight">배트를 휘두르는</span> 방법을 가르쳐 주셨어. 어려웠지만 재미있었어.
+                        <div class="translation">Right! And the teacher taught us how to swing the bat. It was difficult but fun.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 12 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        나는 다음에 <span class="highlight">홈런</span>을 치고 싶어! 열심히 연습해야겠어.
+                        <div class="translation">I want to hit a home run next time! I need to practice hard.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 13 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        넌 할 수 있어! 나는 <span class="highlight">공을 잡는</span> 연습을 더 해야 돼. <span class="highlight">외야수</span>가 되고 싶거든.
+                        <div class="translation">You can do it! I need to practice catching more. I want to be an outfielder.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 14 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        좋은 생각이야! 우리 내일 <span class="highlight">운동장</span>에서 같이 연습할래?
+                        <div class="translation">Good idea! Want to practice together at the playground tomorrow?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 15 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        그래! 나는 농구공도 가져올게. 우리 <span class="highlight">점프슛</span>도 연습하자!
+                        <div class="translation">Sure! I'll bring a basketball too. Let's practice jump shots too!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 16 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        완벽해! 그럼 내일 방과 후 4시에 <span class="highlight">운동장</span>에서 만나자. <span class="highlight">운동화</span> 꼭 신고 와!
+                        <div class="translation">Perfect! Then let's meet at the playground at 4 pm after school tomorrow. Make sure to wear sneakers!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 17 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        알았어! 운동할 때는 항상 <span class="highlight">준비 운동</span>을 먼저 해야 해. 다치면 안 되니까!
+                        <div class="translation">Okay! We should always warm up first when exercising. We shouldn't get hurt!</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 18 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        맞아! 그리고 <span class="highlight">물</span>도 많이 가져와야 해. 운동하고 나면 목이 마르거든.
+                        <div class="translation">Right! And we should bring plenty of water. We get thirsty after exercising.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 19 -->
+                <div class="dialogue">
+                    <div class="speaker suni">
+                        <span class="speaker-icon">👧</span> 수니 (Suni):
+                    </div>
+                    <div class="message suni">
+                        좋아! 나는 <span class="highlight">수건</span>도 가져올게. 땀을 많이 흘리니까.
+                        <div class="translation">Good! I'll bring a towel too. We sweat a lot.</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 20 -->
+                <div class="dialogue">
+                    <div class="speaker minsu">
+                        <span class="speaker-icon">👦</span> 민수 (Minsu):
+                    </div>
+                    <div class="message minsu">
+                        그래! 열심히 연습하면 우리 둘 다 <span class="highlight">운동선수</span>가 될 수 있을 거야!
+                        <div class="translation">Yes! If we practice hard, we can both become athletes!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="conversation-title">📚 Key Vocabulary (주요 단어)</div>
+                <div class="vocabulary-grid">
+                    <div class="vocab-item"><strong>체육 시간</strong> [che-yuk si-gan] - PE class, physical education class</div>
+                    <div class="vocab-item"><strong>축구</strong> [chuk-gu] - soccer, football</div>
+                    <div class="vocab-item"><strong>농구</strong> [nong-gu] - basketball</div>
+                    <div class="vocab-item"><strong>야구</strong> [ya-gu] - baseball</div>
+                    <div class="vocab-item"><strong>골</strong> [gol] - goal</div>
+                    <div class="vocab-item"><strong>슛</strong> [syut] - shot</div>
+                    <div class="vocab-item"><strong>3점슛</strong> [sam-jeom-syut] - 3-pointer, 3-point shot</div>
+                    <div class="vocab-item"><strong>홈런</strong> [hom-reon] - home run</div>
+                    <div class="vocab-item"><strong>리바운드</strong> [ri-ba-un-deu] - rebound</div>
+                    <div class="vocab-item"><strong>패스</strong> [pae-seu] - pass</div>
+                    <div class="vocab-item"><strong>드리블</strong> [deu-ri-beul] - dribble</div>
+                    <div class="vocab-item"><strong>점프슛</strong> [jeom-peu-syut] - jump shot</div>
+                    <div class="vocab-item"><strong>차다</strong> [cha-da] - to kick</div>
+                    <div class="vocab-item"><strong>던지다</strong> [deon-ji-da] - to throw, to pitch</div>
+                    <div class="vocab-item"><strong>잡다</strong> [jap-da] - to catch, to grab</div>
+                    <div class="vocab-item"><strong>치다</strong> [chi-da] - to hit, to strike</div>
+                    <div class="vocab-item"><strong>쏘다</strong> [sso-da] - to shoot</div>
+                    <div class="vocab-item"><strong>튀기다</strong> [twi-gi-da] - to bounce, to dribble</div>
+                    <div class="vocab-item"><strong>달리다</strong> [dal-li-da] - to run</div>
+                    <div class="vocab-item"><strong>휘두르다</strong> [hwi-du-reu-da] - to swing</div>
+                    <div class="vocab-item"><strong>운동</strong> [un-dong] - exercise, sports</div>
+                    <div class="vocab-item"><strong>운동선수</strong> [un-dong-seon-su] - athlete, player</div>
+                    <div class="vocab-item"><strong>외야수</strong> [oe-ya-su] - outfielder</div>
+                    <div class="vocab-item"><strong>축구 동아리</strong> [chuk-gu dong-a-ri] - soccer club</div>
+                    <div class="vocab-item"><strong>운동장</strong> [un-dong-jang] - playground, sports field</div>
+                    <div class="vocab-item"><strong>운동화</strong> [un-dong-hwa] - sneakers, athletic shoes</div>
+                    <div class="vocab-item"><strong>준비 운동</strong> [jun-bi un-dong] - warm-up, warm-up exercise</div>
+                    <div class="vocab-item"><strong>팀</strong> [tim] - team</div>
+                    <div class="vocab-item"><strong>배트</strong> [bae-teu] - bat</div>
+                    <div class="vocab-item"><strong>공</strong> [gong] - ball</div>
+                    <div class="vocab-item"><strong>물</strong> [mul] - water</div>
+                    <div class="vocab-item"><strong>수건</strong> [su-geon] - towel</div>
+                    <div class="vocab-item"><strong>빠르게</strong> [pppa-reu-ge] - fast, quickly</div>
+                    <div class="vocab-item"><strong>열심히</strong> [yeol-sim-hi] - hard, diligently</div>
+                    <div class="vocab-item"><strong>매일</strong> [mae-il] - every day, daily</div>
+                    <div class="vocab-item"><strong>방과 후</strong> [bang-gwa hu] - after school</div>
+                    <div class="vocab-item"><strong>다치다</strong> [da-chi-da] - to get hurt, to be injured</div>
+                    <div class="vocab-item"><strong>땀을 흘리다</strong> [ttam-eul heul-li-da] - to sweat</div>
+                    <div class="vocab-item"><strong>목이 마르다</strong> [mog-i ma-reu-da] - to be thirsty</div>
+                    <div class="vocab-item"><strong>연습하다</strong> [yeon-seup-ha-da] - to practice</div>
+                    <div class="vocab-item"><strong>이기다</strong> [i-gi-da] - to win</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <div class="conversation-title">✏️ Test Your Knowledge (퀴즈)</div>
+
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "체육 시간" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">lunch time</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">PE class</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">math class</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "soccer" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "차다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">to throw</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">to kick</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">to catch</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "빠르게 달리다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">to run fast</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">to walk slowly</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">to jump high</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "basketball" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "튀기다" mean in basketball?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">to shoot</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">to dribble, to bounce</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">to pass</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "3점슛" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">3-pointer, 3-point shot</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">free throw</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">dunk</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "baseball" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "던지다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to throw, to pitch</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to catch</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to run</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "홈런" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">home run</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">strike</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">foul ball</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "goal" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does "휘두르다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 12, 'correct')">to swing</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">to kick</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">to roll</button>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "준비 운동" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">warm-up</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">cool down</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">competition</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "playground" or "sports field" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "열심히 연습하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">to practice hard</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">to play casually</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">to rest quietly</button>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "다치다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">to win</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">to get hurt, to be injured</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">to lose</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you write "athlete" or "player" in Korean?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "땀을 흘리다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 18, 'correct')">to sweat</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">to drink water</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">to rest</button>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "방과 후" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">after school</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">before school</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">during class</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "sneakers" or "athletic shoes" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '축구',
+            q5: '농구',
+            q8: '야구',
+            q11: '골',
+            q14: '운동장',
+            q17: '운동선수',
+            q20: '운동화',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            13: 'correct',
+            15: 'correct',
+            16: 'correct',
+            18: 'correct',
+            19: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 16, 18, 19].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e3f2fd' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#1565c0' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
