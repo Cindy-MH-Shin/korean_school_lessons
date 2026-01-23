@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 문법: 기초 필수 문법 Top 3 (Korean Grammar: Essential Basics Top 3)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .intro-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .subsection-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .concept-box {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .concept-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 12px;
+        }
+        
+        .concept-text {
+            font-size: 16px;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        
+        .example-box {
+            background: #f0f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .example-ko {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .example-en {
+            font-size: 15px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .comparison-table th {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+        
+        .comparison-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #d84315;
+        }
+        
+        .key-point {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .key-point-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+        
+        .key-point-text {
+            font-size: 15px;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .warning-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            font-size: 15px;
+            color: #bf360c;
+            line-height: 1.6;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+        
+        .formula-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .arrow {
+            font-size: 28px;
+            color: #764ba2;
+            margin: 0 10px;
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .quiz-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+        }
+        
+        .option:hover {
+            background: #f7fafc;
+            border-color: #667eea;
+        }
+        
+        .option.selected {
+            background: #e6f2ff;
+            border-color: #667eea;
+        }
+        
+        .option.correct-option {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Malgun Gothic', sans-serif;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .correct-answer {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 5px;
+            color: #2e7d32;
+            display: none;
+        }
+        
+        .correct-answer.show {
+            display: block;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>한국어 문법: 기초 필수 문법 Top 3</h1>
+        <div class="intro-section">
+            <div class="intro-text">
+                초급 학습자가 반드시 알아야 할 가장 기본적이고 실용적인 문법 3가지를 배웁니다:<br><br>
+                <strong>1.</strong> 장소 조사: <strong>에</strong> vs <strong>에서</strong><br>
+                <strong>2.</strong> 의무와 허락: <strong>-아/어야 하다</strong> vs <strong>-아/어도 되다</strong><br>
+                <strong>3.</strong> 포함과 한정: <strong>도</strong> vs <strong>만</strong>
+            </div>
+        </div>
+
+        <!-- Section 1: Location Particles -->
+        <div class="section-title">1️⃣ 장소 조사: 에 vs 에서 (Location Particles)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">📌 핵심 개념</div>
+            <div class="concept-text">
+                두 조사 모두 장소를 나타내지만, 함께 쓰이는 동사가 다릅니다.
+            </div>
+        </div>
+
+        <div class="subsection-title">에 (존재/위치)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>존재하는 위치</strong>를 나타낼 때<br>
+                • <span class="highlight">있다/없다, 살다, 가다/오다</span>와 함께 사용<br>
+                • 정적인 위치를 표현
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                장소 + 에 + 있다/없다/살다/가다/오다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">옷이 옷장<span class="highlight">에</span> 있어요. ✓</div>
+            <div class="example-en">The clothes are in the closet.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">저는 서울<span class="highlight">에</span> 살아요. ✓</div>
+            <div class="example-en">I live in Seoul.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">친구가 집<span class="highlight">에</span> 왔어요. ✓</div>
+            <div class="example-en">My friend came to my house.</div>
+        </div>
+
+        <div class="subsection-title">에서 (동작 장소)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>동작이 일어나는 장소</strong>를 나타낼 때<br>
+                • <span class="highlight">먹다, 사다, 공부하다, 일하다</span> 등 동작 동사와 함께<br>
+                • 동적인 활동의 장소를 표현
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                장소 + 에서 + 동작동사
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">백화점<span class="highlight">에서</span> 옷을 샀어요. ✓</div>
+            <div class="example-en">I bought clothes at the department store.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">학교<span class="highlight">에서</span> 공부해요. ✓</div>
+            <div class="example-en">I study at school.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">카페<span class="highlight">에서</span> 친구를 만났어요. ✓</div>
+            <div class="example-en">I met my friend at the cafe.</div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ 주의할 점</div>
+            <div class="warning-text">
+                <strong>잘못된 예:</strong><br>
+                ✗ 백화점에 옷을 샀어요. (동작 동사이므로 '에서' 사용)<br>
+                ✓ 백화점에서 옷을 샀어요.<br><br>
+                ✗ 집에서 있어요. (존재 동사이므로 '에' 사용)<br>
+                ✓ 집에 있어요.
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>에</th>
+                    <th>에서</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>의미</strong></td>
+                    <td>존재/위치</td>
+                    <td>동작 장소</td>
+                </tr>
+                <tr>
+                    <td><strong>동사</strong></td>
+                    <td>있다, 없다, 살다, 가다, 오다</td>
+                    <td>먹다, 사다, 만나다, 공부하다</td>
+                </tr>
+                <tr>
+                    <td><strong>예문</strong></td>
+                    <td>옷장에 있어요</td>
+                    <td>백화점에서 샀어요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 2: Obligation vs Permission -->
+        <div class="section-title">2️⃣ 의무와 허락: -아/어야 하다 vs -아/어도 되다</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">📌 핵심 개념</div>
+            <div class="concept-text">
+                "must" vs "may" - 무엇을 꼭 해야 하는지, 또는 해도 괜찮은지를 구분합니다.
+            </div>
+        </div>
+
+        <div class="subsection-title">-아/어야 하다 (Obligation - must)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>의무, 필수</strong>를 나타낼 때<br>
+                • "반드시 ~해야 한다"<br>
+                • 안 하면 문제가 생기거나 규칙/규정상 해야 함
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                Verb Stem + 아/어야 하다
+            </div>
+            <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                • ㅏ, ㅗ vowel → 아야 하다<br>
+                • Other vowels → 어야 하다<br>
+                • 하다 → 해야 하다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">회의에서 정장을 입<span class="highlight">어야 해요</span>. ✓</div>
+            <div class="example-en">You must wear a suit to the meeting.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">숙제를 <span class="highlight">해야 해요</span>. ✓</div>
+            <div class="example-en">I must do my homework.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">내일 일찍 일어나<span class="highlight">야 해요</span>. ✓</div>
+            <div class="example-en">I have to wake up early tomorrow.</div>
+        </div>
+
+        <div class="subsection-title">-아/어도 되다 (Permission - may)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>허락, 허용</strong>을 나타낼 때<br>
+                • "~해도 괜찮다"<br>
+                • 선택의 자유가 있음
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                Verb Stem + 아/어도 되다
+            </div>
+            <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                • ㅏ, ㅗ vowel → 아도 되다<br>
+                • Other vowels → 어도 되다<br>
+                • 하다 → 해도 되다
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">집에서는 편한 옷을 입<span class="highlight">어도 돼요</span>. ✓</div>
+            <div class="example-en">You may wear comfortable clothes at home.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">여기에 앉<span class="highlight">아도 돼요</span>? ✓</div>
+            <div class="example-en">May I sit here?</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">내일은 안 와<span class="highlight">도 돼요</span>. ✓</div>
+            <div class="example-en">You don't have to come tomorrow. (It's okay not to come)</div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">💡 부정형 비교</div>
+            <div class="key-point-text">
+                <strong>안 -아/어야 해요</strong> = must not (금지)<br>
+                예: 여기서 담배를 피우면 <strong>안 돼요</strong>. (You must not smoke here.)<br><br>
+                <strong>안 -아/어도 돼요</strong> = don't have to (선택)<br>
+                예: 오늘은 <strong>안 와도 돼요</strong>. (You don't have to come today.)
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>의미</th>
+                    <th>-아/어야 하다</th>
+                    <th>-아/어도 되다</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>성격</strong></td>
+                    <td>의무 (must)</td>
+                    <td>허락 (may)</td>
+                </tr>
+                <tr>
+                    <td><strong>선택권</strong></td>
+                    <td>없음 (필수)</td>
+                    <td>있음 (선택)</td>
+                </tr>
+                <tr>
+                    <td><strong>긍정 예문</strong></td>
+                    <td>입어야 해요</td>
+                    <td>입어도 돼요</td>
+                </tr>
+                <tr>
+                    <td><strong>부정 예문</strong></td>
+                    <td>입으면 안 돼요 (금지)</td>
+                    <td>안 입어도 돼요 (선택)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 3: Also vs Only -->
+        <div class="section-title">3️⃣ 포함과 한정: 도 vs 만 (Also vs Only)</div>
+        
+        <div class="concept-box">
+            <div class="concept-title">📌 핵심 개념</div>
+            <div class="concept-text">
+                간단하지만 매우 자주 쓰이는 조사입니다. "~도" (also/too)와 "~만" (only)의 차이를 명확히 이해하면 표현력이 크게 향상됩니다.
+            </div>
+        </div>
+
+        <div class="subsection-title">도 (Also, Too)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>추가, 포함</strong>을 나타낼 때<br>
+                • "~도, ~역시"<br>
+                • 이/가, 을/를 대신 사용<br>
+                • 여러 개를 포함함
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                명사 + 도
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">바지<span class="highlight">도</span> 샀어요. ✓</div>
+            <div class="example-en">I bought pants too. (In addition to other things)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">저<span class="highlight">도</span> 그 모자를 좋아해요. ✓</div>
+            <div class="example-en">I also like that hat.</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">치마<span class="highlight">도</span> 예쁘고 원피스<span class="highlight">도</span> 예뻐요. ✓</div>
+            <div class="example-en">The skirt is pretty and the dress is pretty too.</div>
+        </div>
+
+        <div class="subsection-title">만 (Only, Just)</div>
+        <div class="concept-box">
+            <div class="concept-title">사용법</div>
+            <div class="concept-text">
+                • <strong>한정, 제한</strong>을 나타낼 때<br>
+                • "~만, 오직"<br>
+                • 이/가, 을/를 대신 사용<br>
+                • 그것 하나뿐임
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-text">
+                명사 + 만
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">바지<span class="highlight">만</span> 샀어요. ✓</div>
+            <div class="example-en">I bought only pants. (Nothing else)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">저<span class="highlight">만</span> 그 모자를 좋아해요. ✓</div>
+            <div class="example-en">Only I like that hat. (Nobody else)</div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-ko">검은색<span class="highlight">만</span> 입어요. ✓</div>
+            <div class="example-en">I wear only black.</div>
+        </div>
+
+        <div class="key-point">
+            <div class="key-point-title">💡 실전 비교</div>
+            <div class="key-point-text">
+                <strong>쇼핑 상황:</strong><br>
+                Q: "뭐 샀어요?" (What did you buy?)<br><br>
+                A1: "바지<strong>도</strong> 샀어요." = I bought pants too (+ other things)<br>
+                A2: "바지<strong>만</strong> 샀어요." = I bought only pants (nothing else)<br><br>
+                <strong>수량과 함께:</strong><br>
+                • "두 개<strong>만</strong> 주세요" = Please give me only two<br>
+                • "두 개<strong>도</strong> 괜찮아요" = Two is also okay
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ 조사 대체 규칙</div>
+            <div class="warning-text">
+                <strong>'도'와 '만'은 이/가, 을/를을 대체합니다:</strong><br><br>
+                ✗ 바지를도 샀어요<br>
+                ✓ 바지도 샀어요<br><br>
+                ✗ 바지를만 샀어요<br>
+                ✓ 바지만 샀어요<br><br>
+                <strong>하지만 '에, 에서, 한테' 등은 유지됩니다:</strong><br>
+                ✓ 집<strong>에도</strong> 있어요 (also at home)<br>
+                ✓ 친구<strong>한테만</strong> 말했어요 (told only to my friend)
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>의미</th>
+                    <th>도</th>
+                    <th>만</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>의미</strong></td>
+                    <td>추가 (also, too)</td>
+                    <td>한정 (only)</td>
+                </tr>
+                <tr>
+                    <td><strong>범위</strong></td>
+                    <td>여러 개 포함</td>
+                    <td>하나만 선택</td>
+                </tr>
+                <tr>
+                    <td><strong>영어</strong></td>
+                    <td>also, too, as well</td>
+                    <td>only, just</td>
+                </tr>
+                <tr>
+                    <td><strong>예문</strong></td>
+                    <td>치마도 샀어요</td>
+                    <td>치마만 샀어요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-title">✏️ Practice Quiz (20 Questions)</div>
+            <form>
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">옷이 옷장_____ 있어요. (존재)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you say "I bought only a hat" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q2"><strong>정답:</strong> 모자만 샀어요</div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">백화점_____ 옷을 샀어요. (동작)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "정장을 입어야 해요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a"> You may wear a suit
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b"> You must wear a suit
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c"> You don't have to wear a suit
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you say "I also like that dress" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q5"><strong>정답:</strong> 저도 그 원피스를 좋아해요 OR 나도그원피스를좋아해요</div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">저는 서울_____ 살아요. (존재)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Complete: 집에서는 편한 옷을 _____. (허락)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a"> 입어야 해요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b"> 입어도 돼요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you say "You must do homework" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q8"><strong>정답:</strong> 숙제를 해야 해요 OR 숙제를해야해요</div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">카페_____ 친구를 만났어요. (동작)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What's the difference between "바지도 샀어요" and "바지만 샀어요"?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a"> Same meaning
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b"> "also bought pants" vs "bought only pants"
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c"> Past vs present
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you say "May I sit here?" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q11"><strong>정답:</strong> 여기에 앉아도 돼요 OR 여기앉아도돼요</div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">친구가 집_____ 왔어요. (이동)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "안 와도 돼요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a"> You must not come
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b"> You don't have to come
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c"> You can't come
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you say "I wear only black" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q14"><strong>정답:</strong> 검은색만 입어요 OR 검은색만입어요</div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">학교_____ 공부해요. (동작)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Which particle is used with 있다/없다?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q16" value="a"> 에
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="b"> 에서
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you say "I must wake up early" in Korean?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q17"><strong>정답:</strong> 일찍 일어나야 해요 OR 일찍일어나야해요</div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "치마도 예쁘고 원피스도 예뻐요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q18" value="a"> Only the skirt is pretty
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="b"> The skirt is pretty and the dress is pretty too
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="c"> The skirt is prettier than the dress
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">Complete: 여기서 담배를 피우면 _____. (금지)</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q19" value="a"> 안 돼요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q19" value="b"> 안 피워도 돼요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you say "Please give me only two" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                    <div class="correct-answer" id="answer-q20"><strong>정답:</strong> 두 개만 주세요 OR 두개만주세요</div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            q2: ['모자만샀어요', '모자만 샀어요', '나는모자만샀어요', '나는 모자만 샀어요', '저는모자만샀어요', '저는 모자만 샀어요'],
+            q5: ['저도그원피스를좋아해요', '나도그원피스를좋아해요', '저도 그 원피스를 좋아해요', '나도 그 원피스를 좋아해요', '나는그원피스를좋아해요', '나는 그 원피스를 좋아해요', '저는그원피스를좋아해요', '저는 그 원피스를 좋아해요', '그원피스를좋아해요', '그 원피스를 좋아해요', '나는그드레스를좋아해요', '나는 그 드레스를 좋아해요', '저는그드레스를좋아해요', '저는 그 드레스를 좋아해요', '나도그드레스를좋아해요', '나도 그 드레스를 좋아해요', '저도그드레스를좋아해요', '저도 그 드레스를 좋아해요', '그드레스를좋아해요', '그 드레스를 좋아해요'],
+            q8: ['숙제를해야해요', '숙제를 해야 해요', '숙제를해야하요', '나는숙제를해야해요', '나는 숙제를 해야 해요', '저는숙제를해야해요', '저는 숙제를 해야 해요'],
+            q11: ['여기에앉아도돼요', '여기앉아도돼요', '여기에 앉아도 돼요', '여기 앉아도 돼요', '제가여기에앉아도돼요', '제가 여기에 앉아도 돼요', '내가여기에앉아도돼요', '내가 여기에 앉아도 돼요', '제가여기앉아도돼요', '제가 여기 앉아도 돼요', '내가여기앉아도돼요', '내가 여기 앉아도 돼요'],
+            q14: ['검은색만입어요', '검은색만 입어요', '나는검은색만입어요', '나는 검은색만 입어요', '저는검은색만입어요', '저는 검은색만 입어요'],
+            q17: ['일찍일어나야해요', '일찍 일어나야 해요', '나는일찍일어나야해요', '나는 일찍 일어나야 해요', '저는일찍일어나야해요', '저는 일찍 일어나야 해요'],
+            q20: ['두개만주세요', '두 개만 주세요', '저에게두개만주세요', '저에게 두 개만 주세요', '나에게두개만주세요', '나에게 두 개만 주세요'],
+            q1: 'a',
+            q3: 'b',
+            q4: 'b',
+            q6: 'a',
+            q7: 'b',
+            q9: 'b',
+            q10: 'b',
+            q12: 'a',
+            q13: 'b',
+            q15: 'b',
+            q16: 'a',
+            q18: 'b',
+            q19: 'a'
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // First, hide all correct answers and remove correct-option class
+            document.querySelectorAll('.correct-answer').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.option').forEach(el => el.classList.remove('correct-option'));
+
+            // Check text inputs with normalization (remove all spaces)
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s+/g, '');
+                
+                let isCorrect = false;
+                if (Array.isArray(answers[id])) {
+                    // Multiple correct answers
+                    isCorrect = answers[id].some(ans => userAnswer === ans.normalize('NFC').replace(/\s+/g, ''));
+                } else {
+                    const correctAnswer = answers[id].normalize('NFC').replace(/\s+/g, '');
+                    isCorrect = userAnswer === correctAnswer;
+                }
+                
+                if (isCorrect) {
+                    correct++;
+                    input.style.borderColor = '#48bb78';
+                } else {
+                    input.style.borderColor = '#f56565';
+                    // Show correct answer
+                    const answerDiv = document.getElementById('answer-' + id);
+                    if (answerDiv) {
+                        answerDiv.classList.add('show');
+                    }
+                }
+            });
+
+            // Check multiple choice
+            ['q1', 'q3', 'q4', 'q6', 'q7', 'q9', 'q10', 'q12', 'q13', 'q15', 'q16', 'q18', 'q19'].forEach(id => {
+                const selectedOption = document.querySelector(`input[name="${id}"]:checked`);
+                const isCorrect = selectedOption && selectedOption.value === answers[id];
+                
+                if (isCorrect) {
+                    correct++;
+                } else {
+                    // Highlight the correct answer
+                    const correctOption = document.querySelector(`input[name="${id}"][value="${answers[id]}"]`);
+                    if (correctOption) {
+                        correctOption.parentElement.classList.add('correct-option');
+                    }
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+            resultDiv.style.color = percentage >= 70 ? '#234e52' : '#742a2a';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add click handlers for options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

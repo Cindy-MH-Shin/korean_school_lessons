@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Clothing Verbs - Verb Forms Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #9b59b6;
+            background: white;
+            border-bottom: 4px solid #9b59b6;
+        }
+        
+        .nav-tab:hover {
+            background: #edf2f7;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .vocab-card:hover {
+            border-color: #9b59b6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.15);
+        }
+        
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .vocab-number {
+            background: #9b59b6;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .vocab-word {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .vocab-pronunciation {
+            font-size: 18px;
+            color: #9b59b6;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .vocab-meaning {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .level-progression {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .level-box {
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .level-basic {
+            background: #e6f7ff;
+            border: 2px solid #1890ff;
+            color: #1890ff;
+        }
+        
+        .level-polite {
+            background: #fff7e6;
+            border: 2px solid #fa8c16;
+            color: #fa8c16;
+        }
+        
+        .level-past {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #52c41a;
+        }
+        
+        .form-labels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 0 12px;
+        }
+        
+        .form-label {
+            flex: 1;
+            font-size: 13px;
+            color: #718096;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .example-box {
+            background: white;
+            border-left: 4px solid #9b59b6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        
+        .example-label {
+            font-size: 12px;
+            color: #9b59b6;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .example-korean {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .example-english {
+            font-size: 14px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .usage-note {
+            background: #fff9e6;
+            border: 2px solid #ffd666;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #735c0f;
+        }
+        
+        .usage-note strong {
+            color: #8b4513;
+        }
+        
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .question-number {
+            background: #9b59b6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .korean-word-large {
+            font-size: 28px;
+            font-weight: bold;
+            color: #9b59b6;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 3px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .quiz-option:hover {
+            border-color: #9b59b6;
+            background: #faf5ff;
+        }
+        
+        .quiz-option.selected {
+            border-color: #9b59b6;
+            background: #9b59b6;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .question-explanation {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .question-explanation.show {
+            display: block;
+        }
+        
+        .question-explanation.correct {
+            background: #f6ffed;
+            border: 2px solid #52c41a;
+            color: #237804;
+        }
+        
+        .question-explanation.incorrect {
+            background: #fff1f0;
+            border: 2px solid #ff4d4f;
+            color: #a8071a;
+        }
+        
+        .question-explanation.partial {
+            background: #fffbe6;
+            border: 2px solid #faad14;
+            color: #ad6800;
+        }
+        
+        .explanation-icon {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.3);
+        }
+        
+        .quiz-results {
+            background: #f7fafc;
+            border: 3px solid #9b59b6;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .quiz-results.show {
+            display: block;
+        }
+        
+        .quiz-results h2 {
+            color: #9b59b6;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-results p {
+            font-size: 20px;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .reset-btn {
+            background: #718096;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👔 Korean Clothing Verbs</h1>
+            <div class="subtitle">의복 관련 동사 - Master verbs for wearing and removing clothes</div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('vocabulary')">Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('quiz')">Quiz</button>
+        </div>
+        
+        <div class="content">
+            <!-- Vocabulary Section -->
+            <div id="vocabulary-section" class="section active">
+                
+                <!-- Category 1: Basic Wearing Verb -->
+                <div class="category-header">1. 몸에 걸치는 기본 동사 - Basic Wearing Verb</div>
+                <div class="vocab-grid">
+                    <!-- Verb 1: 입다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">1</div>
+                            <div class="vocab-word">입다</div>
+                        </div>
+                        <div class="vocab-pronunciation">ip-da</div>
+                        <div class="vocab-meaning">to wear, to put on (clothes)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">입다</div>
+                            <div class="level-box level-polite">입어요</div>
+                            <div class="level-box level-past">입었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">추우니까 코트를 입으세요.</div>
+                            <div class="example-english">It's cold, so please wear a coat.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> Used for clothes that cover the body: pants, shirts, coats, skirts, dresses, underwear
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 2: Body Part-Specific Verbs -->
+                <div class="category-header">2. 신체 부위별 특수 동사 - Body Part-Specific Verbs</div>
+                <div class="vocab-grid">
+                    <!-- Verb 2: 쓰다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">2</div>
+                            <div class="vocab-word">쓰다</div>
+                        </div>
+                        <div class="vocab-pronunciation">sseu-da</div>
+                        <div class="vocab-meaning">to wear (on head)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">쓰다</div>
+                            <div class="level-box level-polite">써요</div>
+                            <div class="level-box level-past">썼어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">햇빛이 강해서 모자를 썼어요.</div>
+                            <div class="example-english">The sun was strong, so I wore a hat.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For items worn on the head: hats, caps, wigs, (glasses too!)
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 3: 신다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">3</div>
+                            <div class="vocab-word">신다</div>
+                        </div>
+                        <div class="vocab-pronunciation">sin-da</div>
+                        <div class="vocab-meaning">to wear (on feet)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">신다</div>
+                            <div class="level-box level-polite">신어요</div>
+                            <div class="level-box level-past">신었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">오늘은 운동화를 신고 나갔어요.</div>
+                            <div class="example-english">Today I went out wearing sneakers.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For footwear: shoes, socks, sneakers, slippers, boots
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 4: 끼다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">4</div>
+                            <div class="vocab-word">끼다</div>
+                        </div>
+                        <div class="vocab-pronunciation">kki-da</div>
+                        <div class="vocab-meaning">to wear (on hands/fingers)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">끼다</div>
+                            <div class="level-box level-polite">껴요</div>
+                            <div class="level-box level-past">꼈어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">추워서 장갑을 꼈어요.</div>
+                            <div class="example-english">I wore gloves because it was cold.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For items worn by inserting hands/fingers: gloves, rings
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 5: 차다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">5</div>
+                            <div class="vocab-word">차다</div>
+                        </div>
+                        <div class="vocab-pronunciation">cha-da</div>
+                        <div class="vocab-meaning">to wear (accessories)</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">차다</div>
+                            <div class="level-box level-polite">차요</div>
+                            <div class="level-box level-past">찼어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">새 시계를 차고 있어요.</div>
+                            <div class="example-english">I'm wearing a new watch.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For accessories worn around wrist, waist, or neck: watches, bracelets, belts (also 매다)
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 6: 두르다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">6</div>
+                            <div class="vocab-word">두르다</div>
+                        </div>
+                        <div class="vocab-pronunciation">du-reu-da</div>
+                        <div class="vocab-meaning">to wrap around</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">두르다</div>
+                            <div class="level-box level-polite">둘러요</div>
+                            <div class="level-box level-past">둘렀어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">목도리를 두르고 나갔어요.</div>
+                            <div class="example-english">I went out with a scarf wrapped around my neck.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For items wrapped around neck or shoulders: scarves, shawls, blankets
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 7: 매다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">7</div>
+                            <div class="vocab-word">매다</div>
+                        </div>
+                        <div class="vocab-pronunciation">mae-da</div>
+                        <div class="vocab-meaning">to tie, to fasten</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">매다</div>
+                            <div class="level-box level-polite">매요</div>
+                            <div class="level-box level-past">맸어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">넥타이를 매고 회사에 갔어요.</div>
+                            <div class="example-english">I tied my tie and went to work.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For items that need to be tied: neckties, ribbons, shoelaces, belts
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 3: Removing Verbs -->
+                <div class="category-header">3. 탈착 관련 동사 - Removing Verbs</div>
+                <div class="vocab-grid">
+                    <!-- Verb 8: 벗다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">8</div>
+                            <div class="vocab-word">벗다</div>
+                        </div>
+                        <div class="vocab-pronunciation">beot-da</div>
+                        <div class="vocab-meaning">to take off, to remove</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">벗다</div>
+                            <div class="level-box level-polite">벗어요</div>
+                            <div class="level-box level-past">벗었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">집에 들어가기 전에 신발을 벗으세요.</div>
+                            <div class="example-english">Please take off your shoes before entering the house.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> Universal verb for removing clothes, hats, shoes, gloves - anything you wear
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 9: 풀다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">9</div>
+                            <div class="vocab-word">풀다</div>
+                        </div>
+                        <div class="vocab-pronunciation">pul-da</div>
+                        <div class="vocab-meaning">to untie, to loosen</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">풀다</div>
+                            <div class="level-box level-polite">풀어요</div>
+                            <div class="level-box level-past">풀었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">회의가 끝나서 넥타이를 풀었어요.</div>
+                            <div class="example-english">The meeting ended, so I loosened my tie.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For untying or releasing fastened items: neckties, watches, belts, knots
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 10: 빼다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">10</div>
+                            <div class="vocab-word">빼다</div>
+                        </div>
+                        <div class="vocab-pronunciation">ppae-da</div>
+                        <div class="vocab-meaning">to remove, to pull out</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">빼다</div>
+                            <div class="level-box level-polite">빼요</div>
+                            <div class="level-box level-past">뺐어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">잠자기 전에 반지를 뺐어요.</div>
+                            <div class="example-english">I took off my ring before sleeping.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For removing items that are inserted or stuck in: rings, earrings
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 4: Clothing Actions and States -->
+                <div class="category-header">4. 의복의 상태나 동작 관련 동사 - Clothing Actions and States</div>
+                <div class="vocab-grid">
+                    <!-- Verb 11: 걸치다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">11</div>
+                            <div class="vocab-word">걸치다</div>
+                        </div>
+                        <div class="vocab-pronunciation">geol-chi-da</div>
+                        <div class="vocab-meaning">to put on (casually), to drape over</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">걸치다</div>
+                            <div class="level-box level-polite">걸쳐요</div>
+                            <div class="level-box level-past">걸쳤어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">재킷을 어깨에 걸쳤어요.</div>
+                            <div class="example-english">I draped the jacket over my shoulders.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For wearing clothes casually, not fully putting them on properly
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 12: 껴입다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">12</div>
+                            <div class="vocab-word">껴입다</div>
+                        </div>
+                        <div class="vocab-pronunciation">kkyeo-ip-da</div>
+                        <div class="vocab-meaning">to layer, to wear multiple layers</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">껴입다</div>
+                            <div class="level-box level-polite">껴입어요</div>
+                            <div class="level-box level-past">껴입었어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">날씨가 추워서 옷을 껴입었어요.</div>
+                            <div class="example-english">It was cold, so I layered my clothes.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For wearing multiple layers of clothes because of cold weather
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 13: 맞추다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">13</div>
+                            <div class="vocab-word">맞추다</div>
+                        </div>
+                        <div class="vocab-pronunciation">mat-chu-da</div>
+                        <div class="vocab-meaning">to get tailored, to have made to fit</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">맞추다</div>
+                            <div class="level-box level-polite">맞춰요</div>
+                            <div class="level-box level-past">맞췄어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">결혼식을 위해 정장을 맞췄어요.</div>
+                            <div class="example-english">I had a suit tailored for the wedding.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For having clothes custom-made to fit your measurements
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 14: 수선하다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">14</div>
+                            <div class="vocab-word">수선하다</div>
+                        </div>
+                        <div class="vocab-pronunciation">su-seon-ha-da</div>
+                        <div class="vocab-meaning">to mend, to alter, to repair</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">수선하다</div>
+                            <div class="level-box level-polite">수선해요</div>
+                            <div class="level-box level-past">수선했어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">바지가 커서 수선했어요.</div>
+                            <div class="example-english">The pants were too big, so I had them altered.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For fixing, altering, or repairing clothes that are damaged or don't fit
+                        </div>
+                    </div>
+                    
+                    <!-- Verb 15: 다리다 -->
+                    <div class="vocab-card">
+                        <div class="vocab-header">
+                            <div class="vocab-number">15</div>
+                            <div class="vocab-word">다리다</div>
+                        </div>
+                        <div class="vocab-pronunciation">da-ri-da</div>
+                        <div class="vocab-meaning">to iron, to press</div>
+                        <div class="form-labels">
+                            <div class="form-label">Basic (다)</div>
+                            <div class="form-label">Polite (요)</div>
+                            <div class="form-label">Past (었어요)</div>
+                        </div>
+                        <div class="level-progression">
+                            <div class="level-box level-basic">다리다</div>
+                            <div class="level-box level-polite">다려요</div>
+                            <div class="level-box level-past">다렸어요</div>
+                        </div>
+                        <div class="example-box">
+                            <div class="example-label">Example</div>
+                            <div class="example-korean">셔츠를 다려서 입었어요.</div>
+                            <div class="example-english">I ironed the shirt and wore it.</div>
+                        </div>
+                        <div class="usage-note">
+                            <strong>Usage:</strong> For removing wrinkles from clothes using an iron
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Section -->
+            <div id="quiz-section" class="section">
+                <div class="quiz-container">
+                    <div class="category-header">Test Your Knowledge</div>
+                    
+                    <!-- Question 1 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">입다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '입어요')">입어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '입아요')">입아요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '입요')">입요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 1, '입었어요')">입었어요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-1"></div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">Complete: 햇빛이 강해서 모자를 _____. (The sun was strong, so I wore a hat.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '썼어요')">썼어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '쓰어요')">쓰어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '입었어요')">입었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 2, '싸요')">싸요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-2"></div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">Which verb is used for wearing shoes?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, '신다')">신다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, '입다')">입다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, '쓰다')">쓰다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 3, '끼다')">끼다</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-3"></div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 4</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">끼다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '꼈어요')">꼈어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끼었어요')">끼었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끼어요')">끼어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 4, '끼요')">끼요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-4"></div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 5</div>
+                        <div class="question-text">Complete: 새 시계를 _____. (I'm wearing a new watch.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '차고 있어요')">차고 있어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '입고 있어요')">입고 있어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '쓰고 있어요')">쓰고 있어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 5, '매고 있어요')">매고 있어요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-5"></div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 6</div>
+                        <div class="question-text">Which verb means "to wrap around" (for scarves)?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '두르다')">두르다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '매다')">매다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '입다')">입다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 6, '걸치다')">걸치다</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-6"></div>
+                    </div>
+                    
+                    <!-- Question 7 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 7</div>
+                        <div class="question-text">What is the polite (요) form of <span class="korean-word-large">매다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '매요')">매요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '맸어요')">맸어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '매어요')">매어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 7, '마요')">마요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-7"></div>
+                    </div>
+                    
+                    <!-- Question 8 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 8</div>
+                        <div class="question-text">Complete: 집에 들어가기 전에 신발을 _____. (Please take off your shoes before entering.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '벗으세요')">벗으세요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '신으세요')">신으세요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '입으세요')">입으세요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 8, '풀으세요')">풀으세요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-8"></div>
+                    </div>
+                    
+                    <!-- Question 9 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 9</div>
+                        <div class="question-text">Which verb is used for untying or loosening a necktie?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '풀다')">풀다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '벗다')">벗다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '빼다')">빼다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 9, '매다')">매다</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-9"></div>
+                    </div>
+                    
+                    <!-- Question 10 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 10</div>
+                        <div class="question-text">What does <span class="korean-word-large">빼다</span> mean?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'to remove, to pull out (rings, earrings)')">to remove, to pull out (rings, earrings)</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'to untie')">to untie</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'to wear')">to wear</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 10, 'to take off (general)')">to take off (general)</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-10"></div>
+                    </div>
+                    
+                    <!-- Question 11 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 11</div>
+                        <div class="question-text">Complete: 재킷을 어깨에 _____. (I draped the jacket over my shoulders.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, '걸쳤어요')">걸쳤어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, '입었어요')">입었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, '껴입었어요')">껴입었어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 11, '두르었어요')">두르었어요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-11"></div>
+                    </div>
+                    
+                    <!-- Question 12 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 12</div>
+                        <div class="question-text">What does <span class="korean-word-large">껴입다</span> mean?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, 'to layer clothes (because of cold)')">to layer clothes (because of cold)</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, 'to put on casually')">to put on casually</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, 'to take off')">to take off</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 12, 'to iron')">to iron</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-12"></div>
+                    </div>
+                    
+                    <!-- Question 13 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 13</div>
+                        <div class="question-text">Which verb means to get clothes tailored or custom-made?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '맞추다')">맞추다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '수선하다')">수선하다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '다리다')">다리다</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 13, '입다')">입다</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-13"></div>
+                    </div>
+                    
+                    <!-- Question 14 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 14</div>
+                        <div class="question-text">What is the past (었어요) form of <span class="korean-word-large">수선하다</span>?</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '수선했어요')">수선했어요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '수선해요')">수선해요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '수선하요')">수선하요</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 14, '수선하였어요')">수선하였어요</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-14"></div>
+                    </div>
+                    
+                    <!-- Question 15 -->
+                    <div class="quiz-question">
+                        <div class="question-number">Question 15</div>
+                        <div class="question-text">Complete: 셔츠를 _____ 입었어요. (I ironed the shirt and wore it.)</div>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '다려서')">다려서</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '맞춰서')">맞춰서</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '수선해서')">수선해서</button>
+                            <button class="quiz-option" onclick="selectAnswer(this, 15, '걸쳐서')">걸쳐서</button>
+                        </div>
+                        <div class="question-explanation" id="explanation-15"></div>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="checkAnswers()">Check Answers</button>
+                    
+                    <div class="quiz-results" id="results">
+                        <h2>Quiz Results</h2>
+                        <div class="score" id="score"></div>
+                        <p id="message"></p>
+                        <button class="reset-btn" onclick="resetQuiz()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            1: ['입어요'],
+            2: ['썼어요'],
+            3: ['신다'],
+            4: ['꼈어요', '끼었어요'],
+            5: ['차고 있어요'],
+            6: ['두르다'],
+            7: ['매요', '매어요'],
+            8: ['벗으세요'],
+            9: ['풀다'],
+            10: ['to remove, to pull out (rings, earrings)'],
+            11: ['걸쳤어요'],
+            12: ['to layer clothes (because of cold)'],
+            13: ['맞추다'],
+            14: ['수선했어요'],
+            15: ['다려서']
+        };
+        
+        const explanations = {
+            4: '끼다의 과거형은 "꼈어요"와 "끼었어요" 둘 다 맞습니다. 불규칙 활용(ㅕ 탈락)과 규칙 활용 모두 사용됩니다.',
+            7: '매다의 요형은 "매요"와 "매어요" 둘 다 맞습니다. 불규칙 활용(ㅓ 탈락)과 규칙 활용 모두 사용됩니다.'
+        };
+        
+        let userAnswers = {};
+        
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            if (section === 'vocabulary') {
+                document.getElementById('vocabulary-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+            } else if (section === 'quiz') {
+                document.getElementById('quiz-section').classList.add('active');
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+            }
+        }
+        
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+        
+        function checkAnswers() {
+            let correct = 0;
+            const total = 15;
+            
+            // Hide all previous explanations
+            for (let i = 1; i <= total; i++) {
+                const explDiv = document.getElementById(`explanation-${i}`);
+                if (explDiv) {
+                    explDiv.classList.remove('show', 'correct', 'incorrect', 'partial');
+                }
+            }
+            
+            for (let i = 1; i <= total; i++) {
+                const userAnswer = userAnswers[i];
+                const correctAnswers = answers[i];
+                const explDiv = document.getElementById(`explanation-${i}`);
+                
+                if (!userAnswer) {
+                    // No answer selected
+                    if (explDiv) {
+                        explDiv.innerHTML = '<span class="explanation-icon">❌</span>No answer selected. Correct answer: <strong>' + correctAnswers.join('</strong> or <strong>') + '</strong>';
+                        explDiv.classList.add('show', 'incorrect');
+                    }
+                    continue;
+                }
+                
+                const isCorrect = correctAnswers.includes(userAnswer);
+                
+                if (isCorrect) {
+                    correct++;
+                    if (explDiv) {
+                        let explanationText = '<span class="explanation-icon">✓</span>Correct!';
+                        
+                        // Add special explanation for questions with multiple answers
+                        if (explanations[i]) {
+                            explanationText += ' ' + explanations[i];
+                        } else if (correctAnswers.length > 1) {
+                            explanationText += ' (Also accepted: <strong>' + correctAnswers.filter(a => a !== userAnswer).join('</strong>, <strong>') + '</strong>)';
+                        }
+                        
+                        explDiv.innerHTML = explanationText;
+                        explDiv.classList.add('show', 'correct');
+                    }
+                } else {
+                    if (explDiv) {
+                        explDiv.innerHTML = '<span class="explanation-icon">✗</span>Incorrect. Correct answer: <strong>' + correctAnswers.join('</strong> or <strong>') + '</strong>';
+                        explDiv.classList.add('show', 'incorrect');
+                    }
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDiv = document.getElementById('score');
+            const messageDiv = document.getElementById('message');
+            const resultsDiv = document.getElementById('results');
+            
+            scoreDiv.textContent = `${correct}/${total}`;
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! You have mastered these clothing verbs!';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Keep practicing to improve further!';
+            } else if (percentage >= 50) {
+                message = '💪 Not bad! Review the verb forms and try again!';
+            } else {
+                message = '📚 Keep studying! Practice makes perfect!';
+            }
+            
+            messageDiv.textContent = message;
+            resultsDiv.classList.add('show');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function resetQuiz() {
+            userAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.question-explanation').forEach(expl => {
+                expl.classList.remove('show', 'correct', 'incorrect', 'partial');
+            });
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>쇼핑몰에서 옷 구경 - Shopping for Clothes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #9b59b6;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #9b59b6;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.jimin {
+            color: #e91e63;
+        }
+        
+        .speaker.yuna {
+            color: #9c27b0;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.jimin {
+            border-left: 4px solid #e91e63;
+        }
+        
+        .message.yuna {
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .instruction-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #9b59b6;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f3e5f5;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #9b59b6;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .question-number {
+            color: #9b59b6;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .question-text {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px;
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .option:hover {
+            background: #f3e5f5;
+            border-color: #9b59b6;
+        }
+        
+        .option.selected {
+            background: #9b59b6;
+            color: white;
+            border-color: #9b59b6;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #9b59b6;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .tab-button {
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👔 쇼핑몰에서 옷 구경</h1>
+        <div class="subtitle">
+            Shopping for Clothes at the Mall<br>
+            지민이와 유나가 주말에 쇼핑몰에서 옷을 구경하고 있어요
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation-tab')">Conversation</button>
+            <button class="tab-button" onclick="openTab('vocabulary-tab')">Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz-tab')">Quiz</button>
+        </div>
+
+        <!-- Conversation Tab -->
+        <div id="conversation-tab" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">📍 의류 매장에서 (At the Clothing Store)</div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        유나야, 이 <span class="highlight">원피스</span> 어때? 예쁘지 않아?
+                        <div class="translation">Yuna, how about this dress? Isn't it pretty?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        응, 정말 예뻐! 그런데 <span class="highlight">색깔</span>이 좀 밝은 것 같아.
+                        <div class="translation">Yes, it's really pretty! But I think the color is a bit bright.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        그럼 이 검은색은 어때? 나는 <span class="highlight">검은색 옷</span>을 좋아해.
+                        <div class="translation">Then how about this black one? I like black clothes.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        좋아 보여! 한번 <span class="highlight">입어봐</span>. 탈의실은 저기 있어.
+                        <div class="translation">It looks good! Try it on once. The fitting room is over there.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        (잠시 후) 어때? 나한테 <span class="highlight">잘 어울려</span>?
+                        <div class="translation">(After a moment) How is it? Does it suit me well?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        정말 잘 어울려! 근데 <span class="highlight">사이즈</span>가 좀 큰 것 같은데?
+                        <div class="translation">It suits you really well! But doesn't the size seem a bit big?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        그래? 그럼 한 <span class="highlight">사이즈 작은 것</span>으로 가져올게.
+                        <div class="translation">Really? Then I'll get one size smaller.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversation-section">
+                <div class="conversation-title">👕 계산대에서 (At the Checkout Counter)</div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        이거 <span class="highlight">얼마예요</span>?
+                        <div class="translation">How much is this?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker">
+                        <span class="speaker-icon">👔</span>점원 (Store Clerk)
+                    </div>
+                    <div class="message">
+                        5만 원입니다. 지금 <span class="highlight">세일 중</span>이에요.
+                        <div class="translation">It's 50,000 won. It's on sale right now.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        좋아요! <span class="highlight">카드로 계산</span>할게요.
+                        <div class="translation">Great! I'll pay by card.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        지민아, 나는 저기 <span class="highlight">신발 가게</span>에 좀 들러야 해.
+                        <div class="translation">Jimin, I need to stop by that shoe store over there.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        좋아! 나도 <span class="highlight">운동화</span> 한 켤레 사고 싶어.
+                        <div class="translation">Okay! I also want to buy a pair of sneakers.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        그래? 그럼 같이 가자! 요즘 <span class="highlight">편한 신발</span>이 필요해.
+                        <div class="translation">Really? Then let's go together! I need comfortable shoes these days.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversation-section">
+                <div class="conversation-title">👟 신발 가게에서 (At the Shoe Store)</div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        저기요, 이 <span class="highlight">하얀 운동화</span> 있어요?
+                        <div class="translation">Excuse me, do you have these white sneakers?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker">
+                        <span class="speaker-icon">👔</span>점원
+                    </div>
+                    <div class="message">
+                        네, 있어요. <span class="highlight">발 사이즈</span>가 어떻게 되세요?
+                        <div class="translation">Yes, we have them. What's your shoe size?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        240이에요. 한번 <span class="highlight">신어봐도</span> 될까요?
+                        <div class="translation">It's 240. May I try them on?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker">
+                        <span class="speaker-icon">👔</span>점원
+                    </div>
+                    <div class="message">
+                        네, 물론이죠. 여기 <span class="highlight">신어보세요</span>.
+                        <div class="translation">Yes, of course. Please try them on here.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        (신어보고) 음... 조금 <span class="highlight">작은 것 같아요</span>. 245 있어요?
+                        <div class="translation">(After trying them on) Hmm... They seem a bit small. Do you have 245?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker jimin">
+                        <span class="speaker-icon">👩</span>지민
+                    </div>
+                    <div class="message jimin">
+                        유나야, 나는 이 <span class="highlight">검은색 신발</span> 살 거야. 너무 예쁘다!
+                        <div class="translation">Yuna, I'm going to buy these black shoes. They're so pretty!</div>
+                    </div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="speaker yuna">
+                        <span class="speaker-icon">👧</span>유나
+                    </div>
+                    <div class="message yuna">
+                        정말 예뻐! 우리 오늘 <span class="highlight">좋은 쇼핑</span> 했다!
+                        <div class="translation">Really pretty! We did good shopping today!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary-tab" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="conversation-title">📚 Key Vocabulary</div>
+                <div class="vocabulary-grid">
+                    <div class="vocab-item"><strong>원피스</strong> (won-pi-seu) - dress, one-piece</div>
+                    <div class="vocab-item"><strong>색깔</strong> (saek-kkal) - color</div>
+                    <div class="vocab-item"><strong>검은색</strong> (geom-eun-saek) - black color</div>
+                    <div class="vocab-item"><strong>입어봐</strong> (ib-eo-bwa) - try it on (informal)</div>
+                    <div class="vocab-item"><strong>탈의실</strong> (tal-ui-sil) - fitting room, changing room</div>
+                    <div class="vocab-item"><strong>잘 어울려</strong> (jal eo-ul-lyeo) - suits well, looks good on you</div>
+                    <div class="vocab-item"><strong>사이즈</strong> (sa-i-jeu) - size</div>
+                    <div class="vocab-item"><strong>얼마예요?</strong> (eol-ma-ye-yo?) - How much is it?</div>
+                    <div class="vocab-item"><strong>세일 중</strong> (se-il jung) - on sale</div>
+                    <div class="vocab-item"><strong>카드로 계산</strong> (ka-deu-ro gye-san) - pay by card</div>
+                    <div class="vocab-item"><strong>신발 가게</strong> (sin-bal ga-ge) - shoe store</div>
+                    <div class="vocab-item"><strong>운동화</strong> (un-dong-hwa) - sneakers, athletic shoes</div>
+                    <div class="vocab-item"><strong>편한 신발</strong> (pyeon-han sin-bal) - comfortable shoes</div>
+                    <div class="vocab-item"><strong>하얀</strong> (ha-yan) - white</div>
+                    <div class="vocab-item"><strong>발 사이즈</strong> (bal sa-i-jeu) - shoe size (lit. foot size)</div>
+                    <div class="vocab-item"><strong>신어봐도 될까요?</strong> (sin-eo-bwa-do doel-kka-yo?) - May I try them on?</div>
+                    <div class="vocab-item"><strong>작은 것 같아요</strong> (jak-eun geot gat-a-yo) - seems small</div>
+                    <div class="vocab-item"><strong>좋은 쇼핑</strong> (jo-eun syo-ping) - good shopping</div>
+                    <div class="vocab-item"><strong>옷</strong> (ot) - clothes</div>
+                    <div class="vocab-item"><strong>바지</strong> (ba-ji) - pants, trousers</div>
+                    <div class="vocab-item"><strong>치마</strong> (chi-ma) - skirt</div>
+                    <div class="vocab-item"><strong>티셔츠</strong> (ti-syeo-cheu) - T-shirt</div>
+                    <div class="vocab-item"><strong>코트</strong> (ko-teu) - coat</div>
+                    <div class="vocab-item"><strong>재킷</strong> (jae-kit) - jacket</div>
+                    <div class="vocab-item"><strong>모자</strong> (mo-ja) - hat, cap</div>
+                    <div class="vocab-item"><strong>장갑</strong> (jang-gap) - gloves</div>
+                    <div class="vocab-item"><strong>목도리</strong> (mok-do-ri) - scarf, muffler</div>
+                    <div class="vocab-item"><strong>입다</strong> (ip-da) - to wear (clothes)</div>
+                    <div class="vocab-item"><strong>신다</strong> (sin-da) - to wear (shoes)</div>
+                    <div class="vocab-item"><strong>쓰다</strong> (sseu-da) - to wear (hat)</div>
+                    <div class="vocab-item"><strong>벗다</strong> (beot-da) - to take off</div>
+                    <div class="vocab-item"><strong>큰</strong> (keun) - big, large</div>
+                    <div class="vocab-item"><strong>작은</strong> (jak-eun) - small</div>
+                    <div class="vocab-item"><strong>비싸다</strong> (bi-ssa-da) - expensive</div>
+                    <div class="vocab-item"><strong>싸다</strong> (ssa-da) - cheap</div>
+                    <div class="vocab-item"><strong>예쁘다</strong> (ye-ppeu-da) - pretty, beautiful</div>
+                    <div class="vocab-item"><strong>편하다</strong> (pyeon-ha-da) - comfortable</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz-tab" class="tab-content">
+            <div class="quiz-section">
+                <div class="conversation-title">✏️ Test Your Understanding</div>
+
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">What does "원피스" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">dress, one-piece</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">shirt</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">pants</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "black color" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "탈의실" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">fitting room, changing room</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">bathroom</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">exit</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">What does "잘 어울려" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">suits well, looks good on you</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">it's expensive</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">it's too big</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "size" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "얼마예요?" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">What color is it?</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">How much is it?</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">What size is it?</button>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">What does "세일 중" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">on sale</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">sold out</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">too expensive</button>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "sneakers" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "입다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">to wear (clothes)</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">to take off</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">to buy</button>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "신다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">to wear (shoes)</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">to wear (hat)</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">to wear (gloves)</button>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "shoe store" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What does "벗다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 12, 'correct')">to take off</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">to put on</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">to wash</button>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "편하다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">comfortable</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">expensive</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">colorful</button>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "pants" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "쓰다" mean in the context of clothing?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">to wear (hat)</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">to write</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">to use</button>
+                    </div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">What does "비싸다" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong1')">cheap</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'correct')">expensive</button>
+                        <button class="option" onclick="selectAnswer(this, 16, 'wrong2')">beautiful</button>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">How do you write "coat" in Korean?</div>
+                    <input type="text" id="q17" placeholder="Type in Korean">
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">What does "작은 것 같아요" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 18, 'correct')">seems small</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong1')">seems big</button>
+                        <button class="option" onclick="selectAnswer(this, 18, 'wrong2')">seems expensive</button>
+                    </div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What does "카드로 계산" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">pay by card</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">pay by cash</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">free</button>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">How do you write "hat" in Korean?</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '검은색',
+            q5: '사이즈',
+            q8: '운동화',
+            q11: '신발가게',
+            q14: '바지',
+            q17: '코트',
+            q20: '모자',
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            13: 'correct',
+            15: 'correct',
+            16: 'correct',
+            18: 'correct',
+            19: 'correct'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Check text inputs with normalization
+            ['q2', 'q5', 'q8', 'q11', 'q14', 'q17', 'q20'].forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                } else {
+                    input.style.borderColor = '#f44336';
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 16, 18, 19].forEach(num => {
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#f3e5f5' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#6a1b9a' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
