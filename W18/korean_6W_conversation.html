@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>6하원칙 대화 연습 - Six Question Words Conversation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .conversation-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .conversation-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .dialogue {
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .speaker.minji {
+            color: #667eea;
+        }
+        
+        .speaker.sarah {
+            color: #764ba2;
+        }
+        
+        .speaker-icon {
+            font-size: 1.2em;
+        }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .message.minji {
+            border-left: 4px solid #667eea;
+        }
+        
+        .message.sarah {
+            border-left: 4px solid #764ba2;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+        
+        .translation {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .instruction-tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #f0f5ff;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .vocabulary-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .vocabulary-grid::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-section {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .option:hover {
+            background: #edf2f7;
+            border-color: #667eea;
+        }
+        
+        .option.selected {
+            background: #e6f2ff;
+            border-color: #667eea;
+            font-weight: bold;
+        }
+        
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            white-space: pre-line;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation.correct {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .explanation.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>6하원칙 대화 연습</h1>
+        <p class="subtitle">Six Question Words Conversation Practice<br>누가, 언제, 어디서, 무엇을, 어떻게, 왜</p>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('conversation')">대화 Conversation</button>
+            <button class="tab-button" onclick="openTab('vocabulary')">단어 Vocabulary</button>
+            <button class="tab-button" onclick="openTab('quiz')">퀴즈 Quiz</button>
+        </div>
+
+        <!-- Conversation Tab -->
+        <div id="conversation" class="tab-content active">
+            <div class="conversation-section">
+                <div class="conversation-title">📱 민지와 Sarah의 대화</div>
+                
+                <!-- Dialogue 1 -->
+                <div class="dialogue">
+                    <div class="speaker minji">
+                        <span class="speaker-icon">👩</span>
+                        민지 (Minji):
+                    </div>
+                    <div class="message minji">
+                        Sarah, <span class="highlight">언제</span> 한국에 왔어요?
+                        <div class="translation">Sarah, when did you come to Korea?</div>
+                        <div class="instruction-tag">언제 = When</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 2 -->
+                <div class="dialogue">
+                    <div class="speaker sarah">
+                        <span class="speaker-icon">👩‍🦰</span>
+                        Sarah:
+                    </div>
+                    <div class="message sarah">
+                        지난주에 왔어요. <span class="highlight">누가</span> 같이 왔냐고요? 친구랑 왔어요.
+                        <div class="translation">I came last week. Who came with me? I came with a friend.</div>
+                        <div class="instruction-tag">누가 = Who</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 3 -->
+                <div class="dialogue">
+                    <div class="speaker minji">
+                        <span class="speaker-icon">👩</span>
+                        민지:
+                    </div>
+                    <div class="message minji">
+                        <span class="highlight">어디서</span> 묵고 있어요?
+                        <div class="translation">Where are you staying?</div>
+                        <div class="instruction-tag">어디서 = Where</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 4 -->
+                <div class="dialogue">
+                    <div class="speaker sarah">
+                        <span class="speaker-icon">👩‍🦰</span>
+                        Sarah:
+                    </div>
+                    <div class="message sarah">
+                        홍대 근처 호텔에서 묵고 있어요. 오늘 <span class="highlight">무엇을</span> 할 거예요?
+                        <div class="translation">I'm staying at a hotel near Hongdae. What are you going to do today?</div>
+                        <div class="instruction-tag">무엇을 = What</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 5 -->
+                <div class="dialogue">
+                    <div class="speaker minji">
+                        <span class="speaker-icon">👩</span>
+                        민지:
+                    </div>
+                    <div class="message minji">
+                        명동에 쇼핑하러 갈 거예요. <span class="highlight">어떻게</span> 갈 거냐고요? 지하철로 갈 거예요.
+                        <div class="translation">I'm going shopping in Myeongdong. How will I go? I'll go by subway.</div>
+                        <div class="instruction-tag">어떻게 = How</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 6 -->
+                <div class="dialogue">
+                    <div class="speaker sarah">
+                        <span class="speaker-icon">👩‍🦰</span>
+                        Sarah:
+                    </div>
+                    <div class="message sarah">
+                        <span class="highlight">왜</span> 명동에 가요?
+                        <div class="translation">Why are you going to Myeongdong?</div>
+                        <div class="instruction-tag">왜 = Why</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 7 -->
+                <div class="dialogue">
+                    <div class="speaker minji">
+                        <span class="speaker-icon">👩</span>
+                        민지:
+                    </div>
+                    <div class="message minji">
+                        선물을 사야 해서요. 같이 갈래요?
+                        <div class="translation">Because I need to buy gifts. Do you want to go together?</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 8 -->
+                <div class="dialogue">
+                    <div class="speaker sarah">
+                        <span class="speaker-icon">👩‍🦰</span>
+                        Sarah:
+                    </div>
+                    <div class="message sarah">
+                        네, 좋아요! <span class="highlight">언제</span> 만날까요?
+                        <div class="translation">Yes, sounds good! When shall we meet?</div>
+                        <div class="instruction-tag">언제 = When</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 9 -->
+                <div class="dialogue">
+                    <div class="speaker minji">
+                        <span class="speaker-icon">👩</span>
+                        민지:
+                    </div>
+                    <div class="message minji">
+                        2시에 만나요. <span class="highlight">어디서</span> 만날까요? 명동역 3번 출구에서 만나요.
+                        <div class="translation">Let's meet at 2 o'clock. Where shall we meet? Let's meet at Myeongdong Station Exit 3.</div>
+                        <div class="instruction-tag">어디서 = Where</div>
+                    </div>
+                </div>
+
+                <!-- Dialogue 10 -->
+                <div class="dialogue">
+                    <div class="speaker sarah">
+                        <span class="speaker-icon">👩‍🦰</span>
+                        Sarah:
+                    </div>
+                    <div class="message sarah">
+                        알겠어요. 그럼 2시에 봐요!
+                        <div class="translation">Got it. See you at 2!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Tab -->
+        <div id="vocabulary" class="tab-content">
+            <div class="vocabulary-section">
+                <div class="conversation-title">📚 주요 단어 Key Vocabulary</div>
+                <div class="vocabulary-grid">
+                    <div class="vocab-item"><strong>누가</strong> (nuga) - who</div>
+                    <div class="vocab-item"><strong>언제</strong> (eonje) - when</div>
+                    <div class="vocab-item"><strong>어디서</strong> (eodiseo) - where (at/from)</div>
+                    <div class="vocab-item"><strong>어디에</strong> (eodie) - where (to)</div>
+                    <div class="vocab-item"><strong>무엇을</strong> (mueoseul) - what (object)</div>
+                    <div class="vocab-item"><strong>무엇이</strong> (mueosi) - what (subject)</div>
+                    <div class="vocab-item"><strong>어떻게</strong> (eotteoke) - how</div>
+                    <div class="vocab-item"><strong>왜</strong> (wae) - why</div>
+                    <div class="vocab-item"><strong>오다</strong> (oda) - to come → 왔어요 (came)</div>
+                    <div class="vocab-item"><strong>가다</strong> (gada) - to go → 갈 거예요 (will go)</div>
+                    <div class="vocab-item"><strong>만나다</strong> (mannada) - to meet → 만나요 (meet)</div>
+                    <div class="vocab-item"><strong>묵다</strong> (mukda) - to stay (overnight) → 묵고 있어요 (am staying)</div>
+                    <div class="vocab-item"><strong>하다</strong> (hada) - to do → 할 거예요 (will do)</div>
+                    <div class="vocab-item"><strong>사다</strong> (sada) - to buy → 사야 해요 (have to buy)</div>
+                    <div class="vocab-item"><strong>지난주</strong> (jinanju) - last week</div>
+                    <div class="vocab-item"><strong>친구</strong> (chingu) - friend</div>
+                    <div class="vocab-item"><strong>호텔</strong> (hotel) - hotel</div>
+                    <div class="vocab-item"><strong>근처</strong> (geuncheo) - nearby, vicinity</div>
+                    <div class="vocab-item"><strong>쇼핑</strong> (syoping) - shopping</div>
+                    <div class="vocab-item"><strong>지하철</strong> (jihacheol) - subway</div>
+                    <div class="vocab-item"><strong>선물</strong> (seonmul) - gift</div>
+                    <div class="vocab-item"><strong>출구</strong> (chulgu) - exit</div>
+                    <div class="vocab-item"><strong>같이</strong> (gachi) - together</div>
+                    <div class="vocab-item"><strong>-랑</strong> (-rang) - with (informal)</div>
+                    <div class="vocab-item"><strong>-로</strong> (-ro) - by (means of transportation)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-section">
+                <div class="conversation-title">✏️ 퀴즈 Quiz</div>
+
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">Which question word means "who"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 1, 'correct')">누가</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">언제</button>
+                        <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">왜</button>
+                    </div>
+                    <div class="explanation" id="exp1"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">How do you write "when" in Korean?</div>
+                    <input type="text" id="q2" placeholder="Type in Korean">
+                    <div class="explanation" id="exp2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "어디서" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">when</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'correct')">where (at/from)</button>
+                        <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">how</button>
+                    </div>
+                    <div class="explanation" id="exp3"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">Which word means "what" (as an object)?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong1')">어떻게</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'correct')">무엇을</button>
+                        <button class="option" onclick="selectAnswer(this, 4, 'wrong2')">어디서</button>
+                    </div>
+                    <div class="explanation" id="exp4"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">How do you write "how" in Korean?</div>
+                    <input type="text" id="q5" placeholder="Type in Korean">
+                    <div class="explanation" id="exp5"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What does "왜" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">when</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">who</button>
+                        <button class="option" onclick="selectAnswer(this, 6, 'correct')">why</button>
+                    </div>
+                    <div class="explanation" id="exp6"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Complete: _____ 한국에 왔어요? (When did you come to Korea?)</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 7, 'correct')">언제</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">누가</button>
+                        <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">왜</button>
+                    </div>
+                    <div class="explanation" id="exp7"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">How do you write "where (at/from)" in Korean?</div>
+                    <input type="text" id="q8" placeholder="Type in Korean">
+                    <div class="explanation" id="exp8"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">Complete: _____ 명동에 가요? (Why are you going to Myeongdong?)</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">언제</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">어떻게</button>
+                        <button class="option" onclick="selectAnswer(this, 9, 'correct')">왜</button>
+                    </div>
+                    <div class="explanation" id="exp9"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">What does "어떻게 갈 거예요?" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 10, 'correct')">How will you go?</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">When will you go?</button>
+                        <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">Why will you go?</button>
+                    </div>
+                    <div class="explanation" id="exp10"></div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">How do you write "why" in Korean?</div>
+                    <input type="text" id="q11" placeholder="Type in Korean">
+                    <div class="explanation" id="exp11"></div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">Complete: _____ 같이 왔어요? (Who came with you?)</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 12, 'correct')">누가</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">언제</button>
+                        <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">무엇을</button>
+                    </div>
+                    <div class="explanation" id="exp12"></div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">What does "무엇을 할 거예요?" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">When will you do it?</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'correct')">What will you do?</button>
+                        <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">Where will you do it?</button>
+                    </div>
+                    <div class="explanation" id="exp13"></div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">How do you write "what (object)" in Korean?</div>
+                    <input type="text" id="q14" placeholder="Type in Korean">
+                    <div class="explanation" id="exp14"></div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">Complete: _____ 만날까요? (Where shall we meet?)</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 15, 'correct')">어디서</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">언제</button>
+                        <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">왜</button>
+                    </div>
+                    <div class="explanation" id="exp15"></div>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-number">Question 16</div>
+                    <div class="question-text">Translate to Korean: "When shall we meet?"</div>
+                    <input type="text" id="q16" placeholder="Type in Korean">
+                    <div class="explanation" id="exp16"></div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-number">Question 17</div>
+                    <div class="question-text">What does "지하철로 갈 거예요" mean?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 17, 'correct')">I'll go by subway</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong1')">I'll go by bus</button>
+                        <button class="option" onclick="selectAnswer(this, 17, 'wrong2')">I'll go by taxi</button>
+                    </div>
+                    <div class="explanation" id="exp17"></div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-number">Question 18</div>
+                    <div class="question-text">How do you say "with a friend" in Korean?</div>
+                    <input type="text" id="q18" placeholder="Type in Korean">
+                    <div class="explanation" id="exp18"></div>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <div class="question-number">Question 19</div>
+                    <div class="question-text">What particle is used for "by (means of transportation)"?</div>
+                    <div class="options">
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong1')">-에</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'correct')">-로</button>
+                        <button class="option" onclick="selectAnswer(this, 19, 'wrong2')">-을</button>
+                    </div>
+                    <div class="explanation" id="exp19"></div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-number">Question 20</div>
+                    <div class="question-text">Translate to Korean: "Why are you going?"</div>
+                    <input type="text" id="q20" placeholder="Type in Korean">
+                    <div class="explanation" id="exp20"></div>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        const answers = {
+            q2: '언제',
+            q5: '어떻게',
+            q8: '어디서',
+            q11: '왜',
+            q14: '무엇을',
+            q16: ['언제만날까요', '언제 만날까요', '언제만날까요?', '언제 만날까요?'],
+            q18: ['친구랑', '친구와', '친구랑함께', '친구랑 함께', '친구와함께', '친구와 함께'],
+            q20: ['왜가요', '왜 가요', '왜가요?', '왜 가요?', '왜가나요', '왜 가나요', '왜가나요?', '왜 가나요?'],
+            1: 'correct',
+            3: 'correct',
+            4: 'correct',
+            6: 'correct',
+            7: 'correct',
+            9: 'correct',
+            10: 'correct',
+            12: 'correct',
+            13: 'correct',
+            15: 'correct',
+            17: 'correct',
+            19: 'correct'
+        };
+
+        const explanations = {
+            1: '✓ "누가" means "who" and is used to ask about a person who performs an action.',
+            2: '✓ "언제" (eonje) means "when" and is used to ask about time. Example: 언제 왔어요? (When did you come?)',
+            3: '✓ "어디서" means "where at/from" and is used with action verbs. It indicates the location where an action takes place.',
+            4: '✓ "무엇을" (or "뭐를" in casual speech) means "what" as an object. The particle "-을" marks the object of the sentence.',
+            5: '✓ "어떻게" (eotteoke) means "how" and is used to ask about method or manner. Example: 어떻게 가요? (How do you go?)',
+            6: '✓ "왜" (wae) means "why" and is used to ask for reasons. Example: 왜 배워요? (Why do you learn?)',
+            7: '✓ "언제" is the correct word for "when". The sentence asks "When did you come to Korea?"',
+            8: '✓ "어디서" is used with action verbs to ask where an action takes place. It combines "어디" (where) + "-서" (at/from).',
+            9: '✓ "왜" is the question word for "why". The sentence asks for the reason for going to Myeongdong.',
+            10: '✓ "어떻게" asks about the method/manner, so "어떻게 갈 거예요?" means "How will you go?"',
+            11: '✓ "왜" (wae) is the Korean word for "why". It\'s one of the six fundamental question words.',
+            12: '✓ "누가" means "who" and asks about the subject or person. "누가 같이 왔어요?" = "Who came with you?"',
+            13: '✓ "무엇을" asks "what" as the object. The full meaning is "What will you do?"',
+            14: '✓ "무엇을" (formal) or "뭐를" (casual) means "what" when asking about the object of an action.',
+            15: '✓ "어디서" is used to ask where an action will take place. "어디서 만날까요?" = "Where shall we meet?"',
+            16: '✓ "언제 만날까요?" uses "언제" (when) + "만나다" (to meet) + "-ㄹ까요?" (shall we?)',
+            17: '✓ "지하철로" means "by subway". The particle "-로" indicates the means of transportation.',
+            18: '✓ "친구랑" or "친구와" both mean "with a friend". "-랑" is more casual, "-와" is more formal. You can also add "함께" (together) to say "친구와 함께" (together with a friend).',
+            19: '✓ The particle "-로" is used to indicate the means or method of doing something, including transportation.',
+            20: '✓ "왜 가요?" = "Why are you going?" "왜" (why) + "가다" (to go) + "요" (polite ending). You can also use "왜 가나요?" which is slightly more formal/literary.'
+        };
+
+        let userAnswers = {};
+
+        function selectAnswer(button, questionNum, answer) {
+            const options = button.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            button.classList.add('selected');
+            userAnswers[questionNum] = answer;
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 20;
+
+            // Hide all previous explanations
+            for (let i = 1; i <= total; i++) {
+                const expDiv = document.getElementById(`exp${i}`);
+                if (expDiv) {
+                    expDiv.classList.remove('show', 'correct', 'incorrect');
+                }
+            }
+
+            // Check text inputs with single answer
+            ['q2', 'q5', 'q8', 'q11', 'q14'].forEach(id => {
+                const qNum = id.substring(1);
+                const input = document.getElementById(id);
+                const expDiv = document.getElementById(`exp${qNum}`);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswer = answers[id].normalize('NFC').replace(/\s/g, '');
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                    if (expDiv) {
+                        expDiv.textContent = explanations[qNum];
+                        expDiv.classList.add('show', 'correct');
+                    }
+                } else {
+                    input.style.borderColor = '#f44336';
+                    if (expDiv) {
+                        expDiv.textContent = `✗ Correct answer: ${answers[id]}. ${explanations[qNum]}`;
+                        expDiv.classList.add('show', 'incorrect');
+                    }
+                }
+            });
+
+            // Check text inputs with multiple possible answers
+            ['q16', 'q18', 'q20'].forEach(id => {
+                const qNum = id.substring(1);
+                const input = document.getElementById(id);
+                const expDiv = document.getElementById(`exp${qNum}`);
+                const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+                const correctAnswers = answers[id].map(ans => ans.normalize('NFC').replace(/\s/g, ''));
+                
+                if (correctAnswers.includes(userAnswer)) {
+                    correct++;
+                    input.style.borderColor = '#4caf50';
+                    if (expDiv) {
+                        expDiv.textContent = explanations[qNum];
+                        expDiv.classList.add('show', 'correct');
+                    }
+                } else {
+                    input.style.borderColor = '#f44336';
+                    if (expDiv) {
+                        expDiv.textContent = `✗ Correct answers: ${answers[id].join(' or ')}. ${explanations[qNum]}`;
+                        expDiv.classList.add('show', 'incorrect');
+                    }
+                }
+            });
+
+            // Check multiple choice
+            [1, 3, 4, 6, 7, 9, 10, 12, 13, 15, 17, 19].forEach(num => {
+                const expDiv = document.getElementById(`exp${num}`);
+                if (userAnswers[num] === answers[num]) {
+                    correct++;
+                    if (expDiv) {
+                        expDiv.textContent = explanations[num];
+                        expDiv.classList.add('show', 'correct');
+                    }
+                } else {
+                    if (expDiv) {
+                        expDiv.textContent = `✗ You selected an incorrect answer. ${explanations[num]}`;
+                        expDiv.classList.add('show', 'incorrect');
+                    }
+                }
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! 완벽해요!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! 잘했어요!\n';
+            } else {
+                message = '💪 Keep practicing! 더 연습해봐요!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6f2ff' : '#fff3e0';
+            resultDiv.style.color = percentage >= 70 ? '#1e40af' : '#e65100';
+            
+            // Scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
