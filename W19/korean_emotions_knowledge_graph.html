@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감정 표현 Knowledge Graph</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #f5576c;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        #graph-container {
+            width: 100%;
+            height: 900px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #ffffff 0%, #fff8f8 50%, #ffe8ef 100%);
+        }
+
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .node:hover {
+            transform: scale(1.15);
+            z-index: 100;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .node-content {
+            padding: 8px;
+            line-height: 1.3;
+        }
+
+        .korean {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .romanization {
+            font-size: 11px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .english {
+            font-size: 10px;
+            display: block;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Emotion noun nodes - center layer */
+        .node-noun {
+            width: 120px;
+            height: 120px;
+            font-size: 18px;
+            border: 5px solid white;
+            z-index: 50;
+        }
+
+        .noun-gippeum {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+        }
+
+        .noun-seulpeum {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .noun-bunno {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            color: white;
+        }
+
+        .noun-gongpo {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+        }
+
+        .noun-aejeong {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+        }
+
+        .noun-jiltu {
+            background: linear-gradient(135deg, #fab1a0 0%, #e17055 100%);
+            color: white;
+        }
+
+        .noun-huimang {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+        }
+
+        .noun-jeolmang {
+            background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+            color: white;
+        }
+
+        .noun-boram {
+            background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
+            color: #2d3436;
+        }
+
+        .noun-seollem {
+            background: linear-gradient(135deg, #ffeaa7 0%, #ff7675 100%);
+            color: #2d3436;
+        }
+
+        /* Word nodes - outer layer (adjectives and verbs) */
+        .node-word {
+            width: 85px;
+            height: 85px;
+            font-size: 13px;
+            border: 3px solid white;
+            z-index: 40;
+        }
+
+        .word-gippeum {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
+            color: #856404;
+            border-color: #fdcb6e;
+        }
+
+        .word-seulpeum {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #01579b;
+            border-color: #0984e3;
+        }
+
+        .word-bunno {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            color: #b71c1c;
+            border-color: #d63031;
+        }
+
+        .word-gongpo {
+            background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
+            color: #311b92;
+            border-color: #6c5ce7;
+        }
+
+        .word-aejeong {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            color: #880e4f;
+            border-color: #e84393;
+        }
+
+        .word-jiltu {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            color: #e65100;
+            border-color: #e17055;
+        }
+
+        .word-huimang {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #1b5e20;
+            border-color: #00b894;
+        }
+
+        .word-jeolmang {
+            background: linear-gradient(135deg, #eceff1 0%, #cfd8dc 100%);
+            color: #263238;
+            border-color: #2d3436;
+        }
+
+        .word-boram {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            color: #006064;
+            border-color: #00cec9;
+        }
+
+        .word-seollem {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffebee 100%);
+            color: #b71c1c;
+            border-color: #ff7675;
+        }
+
+        .connection {
+            position: absolute;
+            height: 2px;
+            transform-origin: left center;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .connection-gippeum { background: #fdcb6e; }
+        .connection-seulpeum { background: #0984e3; }
+        .connection-bunno { background: #d63031; }
+        .connection-gongpo { background: #6c5ce7; }
+        .connection-aejeong { background: #e84393; }
+        .connection-jiltu { background: #e17055; }
+        .connection-huimang { background: #00b894; }
+        .connection-jeolmang { background: #2d3436; }
+        .connection-boram { background: #00cec9; }
+        .connection-seollem { background: #ff7675; }
+
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .legend-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 15px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .legend-text {
+            flex: 1;
+        }
+
+        .legend-ko {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 15px;
+        }
+
+        .legend-en {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .info-panel.active {
+            right: 0;
+        }
+
+        .info-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .info-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .info-close:hover {
+            background: white;
+            color: #f5576c;
+            transform: rotate(90deg);
+        }
+
+        .info-content {
+            padding: 25px;
+        }
+
+        .info-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .info-subtitle {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fce4ec;
+        }
+
+        .info-words {
+            margin-bottom: 20px;
+        }
+
+        .info-words-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .word-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 6px 12px;
+            border-radius: 15px;
+            margin: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info-examples {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-example {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .info-example:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .example-ko {
+            font-size: 15px;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .example-en {
+            font-size: 13px;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .badge-adjective {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .badge-verb {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .badge-noun {
+            background: #fce4ec;
+            color: #880e4f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>감정 표현 Knowledge Graph 💝</h1>
+        <div class="subtitle">Korean Emotional Expressions - Interactive Network</div>
+        
+        <div id="graph-container"></div>
+
+        <div class="legend">
+            <div class="legend-title">📚 Emotion Categories (Click on nodes to explore)</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color noun-gippeum"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">기쁨</div>
+                        <div class="legend-en">Joy / Happiness</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-seulpeum"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">슬픔</div>
+                        <div class="legend-en">Sadness</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-bunno"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">분노</div>
+                        <div class="legend-en">Anger</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-gongpo"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">공포</div>
+                        <div class="legend-en">Fear</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-aejeong"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">애정</div>
+                        <div class="legend-en">Affection</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-jiltu"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">질투</div>
+                        <div class="legend-en">Jealousy</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-huimang"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">희망</div>
+                        <div class="legend-en">Hope</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-jeolmang"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">절망</div>
+                        <div class="legend-en">Despair</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-boram"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">보람</div>
+                        <div class="legend-en">Accomplishment</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color noun-seollem"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">설렘</div>
+                        <div class="legend-en">Excitement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div id="info-panel" class="info-panel">
+        <div class="info-header">
+            <div class="info-close" onclick="closeInfo()">×</div>
+        </div>
+        <div id="info-content" class="info-content">
+        </div>
+    </div>
+
+    <script>
+        const graphData = {
+            nouns: [
+                { 
+                    id: 'gippeum', 
+                    korean: '기쁨', 
+                    romanization: 'gi-ppeum', 
+                    english: 'Joy',
+                    description: '기쁨은 긍정적이고 즐거운 감정 상태를 나타냅니다. 성공, 성취, 좋은 소식 등으로 인해 느끼는 행복한 마음입니다.',
+                    examples: [
+                        { ko: '성공의 기쁨을 느꼈어요.', en: 'I felt the joy of success.' },
+                        { ko: '아기의 웃음이 큰 기쁨이에요.', en: "The baby's smile brings great joy." }
+                    ]
+                },
+                { 
+                    id: 'seulpeum', 
+                    korean: '슬픔', 
+                    romanization: 'seul-peum', 
+                    english: 'Sadness',
+                    description: '슬픔은 부정적인 감정으로, 상실, 이별, 실망 등으로 인해 느끼는 마음의 아픔입니다.',
+                    examples: [
+                        { ko: '이별의 슬픔이 컸어요.', en: 'The sadness of parting was great.' },
+                        { ko: '슬픔을 이겨내는 게 쉽지 않아요.', en: "It's not easy to overcome sadness." }
+                    ]
+                },
+                { 
+                    id: 'bunno', 
+                    korean: '분노', 
+                    romanization: 'bun-no', 
+                    english: 'Anger',
+                    description: '분노는 불만, 좌절, 부당함에 대해 느끼는 강렬하고 격한 감정입니다.',
+                    examples: [
+                        { ko: '분노를 참을 수 없었어요.', en: "I couldn't contain my anger." },
+                        { ko: '부당한 대우에 분노를 느꼈어요.', en: 'I felt anger at the unfair treatment.' }
+                    ]
+                },
+                { 
+                    id: 'gongpo', 
+                    korean: '공포', 
+                    romanization: 'gong-po', 
+                    english: 'Fear',
+                    description: '공포는 위험이나 위협을 느낄 때 생기는 강렬한 두려움의 감정입니다.',
+                    examples: [
+                        { ko: '공포 영화를 못 봐요.', en: "I can't watch horror movies." },
+                        { ko: '밤에 혼자 있으면 공포를 느껴요.', en: 'I feel fear when alone at night.' }
+                    ]
+                },
+                { 
+                    id: 'aejeong', 
+                    korean: '애정', 
+                    romanization: 'ae-jeong', 
+                    english: 'Affection',
+                    description: '애정은 다른 사람이나 대상에 대해 느끼는 사랑과 관심의 마음입니다.',
+                    examples: [
+                        { ko: '가족에 대한 애정이 깊어요.', en: 'My affection for my family is deep.' },
+                        { ko: '애정 표현을 자주 해요.', en: 'I often express affection.' }
+                    ]
+                },
+                { 
+                    id: 'jiltu', 
+                    korean: '질투', 
+                    romanization: 'jil-tu', 
+                    english: 'Jealousy',
+                    description: '질투는 다른 사람이 가진 것을 부러워하거나 경쟁심을 느끼는 감정입니다.',
+                    examples: [
+                        { ko: '질투는 관계를 망쳐요.', en: 'Jealousy ruins relationships.' },
+                        { ko: '친구의 성공에 질투를 느꼈어요.', en: "I felt jealous of my friend's success." }
+                    ]
+                },
+                { 
+                    id: 'huimang', 
+                    korean: '희망', 
+                    romanization: 'hui-mang', 
+                    english: 'Hope',
+                    description: '희망은 미래에 대한 긍정적인 기대와 바람을 나타내는 감정입니다.',
+                    examples: [
+                        { ko: '희망을 잃지 마세요.', en: "Don't lose hope." },
+                        { ko: '새로운 시작에 희망을 품었어요.', en: 'I have hope for a new beginning.' }
+                    ]
+                },
+                { 
+                    id: 'jeolmang', 
+                    korean: '절망', 
+                    romanization: 'jeol-mang', 
+                    english: 'Despair',
+                    description: '절망은 희망이 없다고 느끼는 깊은 좌절과 낙담의 감정입니다.',
+                    examples: [
+                        { ko: '절망 속에서도 포기하지 않았어요.', en: "I didn't give up even in despair." },
+                        { ko: '절망을 극복하는 게 어려웠어요.', en: 'It was hard to overcome despair.' }
+                    ]
+                },
+                { 
+                    id: 'boram', 
+                    korean: '보람', 
+                    romanization: 'bo-ram', 
+                    english: 'Fulfillment',
+                    description: '보람은 노력한 일에 대한 만족감과 성취감을 나타내는 감정입니다.',
+                    examples: [
+                        { ko: '일의 보람을 느껴요.', en: 'I feel a sense of accomplishment in my work.' },
+                        { ko: '봉사활동이 정말 보람 있어요.', en: 'Volunteer work is really fulfilling.' }
+                    ]
+                },
+                { 
+                    id: 'seollem', 
+                    korean: '설렘', 
+                    romanization: 'seol-lem', 
+                    english: 'Excitement',
+                    description: '설렘은 기대감으로 인해 가슴이 두근거리는 즐거운 긴장감입니다.',
+                    examples: [
+                        { ko: '첫 데이트의 설렘을 기억해요.', en: 'I remember the excitement of the first date.' },
+                        { ko: '여행 전날 밤 설렘으로 잠을 못 잤어요.', en: "I couldn't sleep the night before the trip from excitement." }
+                    ]
+                }
+            ],
+            
+            words: [
+                // 기쁨 (Joy) related
+                { korean: '기쁘다', romanization: 'gi-ppeu-da', english: 'happy/glad', type: 'adjective', category: 'gippeum',
+                  examples: [
+                    { ko: '시험에 합격해서 정말 기뻐요.', en: "I'm really happy because I passed the exam." }
+                  ]
+                },
+                { korean: '즐겁다', romanization: 'jeul-geop-da', english: 'joyful/pleasant', type: 'adjective', category: 'gippeum',
+                  examples: [
+                    { ko: '친구들과 노는 것은 항상 즐거워요.', en: 'Playing with friends is always pleasant.' }
+                  ]
+                },
+                { korean: '행복하다', romanization: 'haeng-bok-ha-da', english: 'happy (deep)', type: 'adjective', category: 'gippeum',
+                  examples: [
+                    { ko: '우리 가족은 정말 행복해요.', en: 'Our family is really happy.' }
+                  ]
+                },
+
+                // 슬픔 (Sadness) related
+                { korean: '슬프다', romanization: 'seul-peu-da', english: 'sad', type: 'adjective', category: 'seulpeum',
+                  examples: [
+                    { ko: '이 영화는 너무 슬퍼요.', en: 'This movie is so sad.' }
+                  ]
+                },
+                { korean: '외롭다', romanization: 'oe-rop-da', english: 'lonely', type: 'adjective', category: 'seulpeum',
+                  examples: [
+                    { ko: '혼자 있으면 가끔 외로워요.', en: 'I sometimes feel lonely when alone.' }
+                  ]
+                },
+                { korean: '그리워하다', romanization: 'geu-ri-wo-ha-da', english: 'to miss', type: 'verb', category: 'seulpeum',
+                  examples: [
+                    { ko: '고향을 많이 그리워해요.', en: 'I miss my hometown a lot.' }
+                  ]
+                },
+
+                // 분노 (Anger) related
+                { korean: '화나다', romanization: 'hwa-na-da', english: 'angry', type: 'adjective', category: 'bunno',
+                  examples: [
+                    { ko: '약속을 어겨서 화가 났어요.', en: "I'm angry because you broke your promise." }
+                  ]
+                },
+                { korean: '답답하다', romanization: 'dap-dap-ha-da', english: 'frustrated', type: 'adjective', category: 'bunno',
+                  examples: [
+                    { ko: '일이 잘 안 풀려서 마음이 답답해요.', en: "I feel frustrated because things aren't working out." }
+                  ]
+                },
+                { korean: '미워하다', romanization: 'mi-wo-ha-da', english: 'to hate', type: 'verb', category: 'bunno',
+                  examples: [
+                    { ko: '거짓말하는 사람을 미워해요.', en: 'I hate people who lie.' }
+                  ]
+                },
+
+                // 공포 (Fear) related
+                { korean: '무섭다', romanization: 'mu-seop-da', english: 'scared', type: 'adjective', category: 'gongpo',
+                  examples: [
+                    { ko: '밤에 혼자 걷는 게 무서워요.', en: "I'm afraid of walking alone at night." }
+                  ]
+                },
+                { korean: '긴장하다', romanization: 'gin-jang-ha-da', english: 'to be nervous', type: 'verb', category: 'gongpo',
+                  examples: [
+                    { ko: '면접 전에 많이 긴장했어요.', en: 'I was very nervous before the interview.' }
+                  ]
+                },
+                { korean: '걱정하다', romanization: 'geok-jeong-ha-da', english: 'to worry', type: 'verb', category: 'gongpo',
+                  examples: [
+                    { ko: '시험 때문에 너무 걱정해요.', en: "I'm so worried because of the exam." }
+                  ]
+                },
+
+                // 애정 (Affection) related
+                { korean: '사랑하다', romanization: 'sa-rang-ha-da', english: 'to love', type: 'verb', category: 'aejeong',
+                  examples: [
+                    { ko: '나는 당신을 사랑해요.', en: 'I love you.' }
+                  ]
+                },
+                { korean: '감동하다', romanization: 'gam-dong-ha-da', english: 'to be moved', type: 'verb', category: 'aejeong',
+                  examples: [
+                    { ko: '그 이야기에 정말 감동했어요.', en: 'I was really touched by that story.' }
+                  ]
+                },
+
+                // 질투 (Jealousy) related
+                { korean: '부끄럽다', romanization: 'bu-kkeu-reop-da', english: 'shy/ashamed', type: 'adjective', category: 'jiltu',
+                  examples: [
+                    { ko: '사람들 앞에서 말하는 게 부끄러워요.', en: "I'm shy about speaking in front of people." }
+                  ]
+                },
+
+                // 희망 (Hope) related
+                { korean: '기대하다', romanization: 'gi-dae-ha-da', english: 'to look forward to', type: 'verb', category: 'huimang',
+                  examples: [
+                    { ko: '주말 여행을 정말 기대해요.', en: "I'm really looking forward to the weekend trip." }
+                  ]
+                },
+                { korean: '안심하다', romanization: 'an-sim-ha-da', english: 'to feel relieved', type: 'verb', category: 'huimang',
+                  examples: [
+                    { ko: '소식을 듣고 안심했어요.', en: 'I felt relieved after hearing the news.' }
+                  ]
+                },
+
+                // 절망 (Despair) related
+                { korean: '실망하다', romanization: 'sil-mang-ha-da', english: 'to be disappointed', type: 'verb', category: 'jeolmang',
+                  examples: [
+                    { ko: '결과에 많이 실망했어요.', en: 'I was very disappointed with the result.' }
+                  ]
+                },
+                { korean: '후회하다', romanization: 'hu-hoe-ha-da', english: 'to regret', type: 'verb', category: 'jeolmang',
+                  examples: [
+                    { ko: '그 결정을 지금도 후회해요.', en: 'I still regret that decision.' }
+                  ]
+                },
+
+                // 보람 (Fulfillment) related
+                { korean: '피곤하다', romanization: 'pi-gon-ha-da', english: 'tired', type: 'adjective', category: 'boram',
+                  examples: [
+                    { ko: '어제 잠을 못 자서 너무 피곤해요.', en: "I'm so tired because I couldn't sleep last night." }
+                  ]
+                },
+
+                // 설렘 (Excitement) related
+            ]
+        };
+
+        function createGraph() {
+            const container = document.getElementById('graph-container');
+            container.innerHTML = '';
+            
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            // Position noun nodes in inner circle
+            const nounRadius = Math.min(width, height) * 0.22;
+            graphData.nouns.forEach((noun, index) => {
+                const angle = (index / graphData.nouns.length) * 2 * Math.PI - Math.PI / 2;
+                const x = centerX + nounRadius * Math.cos(angle) - 60;
+                const y = centerY + nounRadius * Math.sin(angle) - 60;
+
+                const node = document.createElement('div');
+                node.className = `node node-noun noun-${noun.id}`;
+                node.style.left = x + 'px';
+                node.style.top = y + 'px';
+                node.innerHTML = `
+                    <div class="node-content">
+                        <span class="korean">${noun.korean}</span>
+                        <span class="romanization">${noun.romanization}</span>
+                        <span class="english">${noun.english}</span>
+                    </div>
+                `;
+                node.onclick = () => showNounInfo(noun);
+                container.appendChild(node);
+
+                // Store position for connections
+                noun.x = x + 60;
+                noun.y = y + 60;
+            });
+
+            // Position word nodes in outer circle, grouped by category
+            const wordRadius = Math.min(width, height) * 0.42;
+            const categoryGroups = {};
+            
+            // Group words by their category (noun)
+            graphData.words.forEach(word => {
+                const categoryId = word.category;
+                if (!categoryGroups[categoryId]) {
+                    categoryGroups[categoryId] = [];
+                }
+                categoryGroups[categoryId].push(word);
+            });
+
+            Object.keys(categoryGroups).forEach((categoryId, groupIndex) => {
+                const wordsInGroup = categoryGroups[categoryId];
+                const categoryAngle = (groupIndex / Object.keys(categoryGroups).length) * 2 * Math.PI - Math.PI / 2;
+                
+                wordsInGroup.forEach((word, wordIndexInGroup) => {
+                    const spreadAngle = (wordsInGroup.length > 1) ? 
+                        (wordIndexInGroup / (wordsInGroup.length - 1) - 0.5) * 0.8 : 0;
+                    const angle = categoryAngle + spreadAngle;
+                    
+                    const x = centerX + wordRadius * Math.cos(angle) - 42.5;
+                    const y = centerY + wordRadius * Math.sin(angle) - 42.5;
+
+                    const node = document.createElement('div');
+                    node.className = `node node-word word-${categoryId}`;
+                    node.style.left = x + 'px';
+                    node.style.top = y + 'px';
+                    node.innerHTML = `
+                        <div class="node-content">
+                            <span class="korean">${word.korean}</span>
+                            <span class="romanization">${word.romanization}</span>
+                            <span class="english">${word.english}</span>
+                        </div>
+                    `;
+                    node.onclick = () => showWordInfo(word);
+                    container.appendChild(node);
+
+                    // Store position
+                    word.x = x + 42.5;
+                    word.y = y + 42.5;
+
+                    // Create connection to noun
+                    const noun = graphData.nouns.find(n => n.id === categoryId);
+                    if (noun) {
+                        createConnection(noun, word, categoryId);
+                    }
+                });
+            });
+        }
+
+        function createConnection(from, to, type) {
+            const container = document.getElementById('graph-container');
+            const dx = to.x - from.x;
+            const dy = to.y - from.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+            const connection = document.createElement('div');
+            connection.className = `connection connection-${type}`;
+            connection.style.width = distance + 'px';
+            connection.style.left = from.x + 'px';
+            connection.style.top = from.y + 'px';
+            connection.style.transform = `rotate(${angle}deg)`;
+            container.appendChild(connection);
+        }
+
+        function showNounInfo(noun) {
+            const relatedWords = graphData.words.filter(w => w.category === noun.id);
+            const adjectives = relatedWords.filter(w => w.type === 'adjective');
+            const verbs = relatedWords.filter(w => w.type === 'verb');
+            
+            const content = `
+                <div class="info-title">${noun.korean} (${noun.romanization})</div>
+                <div class="info-subtitle"><span class="badge-noun">명사 Noun</span> ${noun.english}</div>
+                
+                <div class="info-section">
+                    <div class="info-section-title">📝 설명 (Description)</div>
+                    <p style="color: #4a5568; line-height: 1.6;">${noun.description}</p>
+                </div>
+
+                ${adjectives.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">🎨 Related Adjectives (형용사) - ${adjectives.length}</div>
+                    ${adjectives.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                ${verbs.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">⚡ Related Verbs (동사) - ${verbs.length}</div>
+                    ${verbs.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 예문 (Example Sentences)</div>
+                    <div class="info-examples">
+                        ${noun.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function showWordInfo(word) {
+            const noun = graphData.nouns.find(n => n.id === word.category);
+            const typeLabel = word.type === 'adjective' ? '형용사 Adjective' : '동사 Verb';
+            const badgeClass = word.type === 'adjective' ? 'badge-adjective' : 'badge-verb';
+            
+            const content = `
+                <div class="info-title">${word.korean}</div>
+                <div class="info-subtitle">
+                    <span class="${badgeClass}">${typeLabel}</span>
+                    ${word.romanization} - ${word.english}
+                </div>
+                
+                <div class="info-words">
+                    <div class="info-words-title">💝 감정 카테고리 (Emotion Category)</div>
+                    <span class="word-tag" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        ${noun.korean} (${noun.english})
+                    </span>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 사용 예시 (Usage Examples)</div>
+                    <div class="info-examples">
+                        ${word.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">📌 관련 정보 (Related Info)</div>
+                    <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong style="color: #2d3748;">품사:</strong>
+                            <span style="color: #718096;">${typeLabel}</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong style="color: #2d3748;">발음:</strong>
+                            <span style="color: #718096;">[${word.romanization}]</span>
+                        </div>
+                        <div>
+                            <strong style="color: #2d3748;">의미:</strong>
+                            <span style="color: #718096;">${word.english}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function closeInfo() {
+            document.getElementById('info-panel').classList.remove('active');
+        }
+
+        // Initialize graph on load
+        window.addEventListener('load', createGraph);
+        window.addEventListener('resize', createGraph);
+    </script>
+</body>
+</html>

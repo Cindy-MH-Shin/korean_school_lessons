@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>긍정 감정 Knowledge Graph</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        #graph-container {
+            width: 100%;
+            height: 900px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #ffffff 0%, #fffef7 50%, #fff9e6 100%);
+        }
+
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .node:hover {
+            transform: scale(1.15);
+            z-index: 100;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .node-content {
+            padding: 8px;
+            line-height: 1.3;
+        }
+
+        .korean {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .romanization {
+            font-size: 11px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .english {
+            font-size: 10px;
+            display: block;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Emotion noun nodes - center layer */
+        .node-noun {
+            width: 130px;
+            height: 130px;
+            font-size: 18px;
+            border: 5px solid white;
+            z-index: 50;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+        }
+
+        /* Word nodes - outer layer */
+        .node-word {
+            width: 90px;
+            height: 90px;
+            font-size: 13px;
+            border: 3px solid white;
+            z-index: 40;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8a1 100%);
+            color: #856404;
+            border-color: #fdcb6e;
+        }
+
+        .connection {
+            position: absolute;
+            height: 2px;
+            transform-origin: left center;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            background: #fdcb6e;
+        }
+
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff9e6;
+            border-radius: 10px;
+        }
+
+        .legend-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .legend-text {
+            flex: 1;
+        }
+
+        .legend-ko {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 15px;
+        }
+
+        .legend-en {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .info-panel.active {
+            right: 0;
+        }
+
+        .info-header {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .info-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid #2d3436;
+            color: #2d3436;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .info-close:hover {
+            background: #2d3436;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .info-content {
+            padding: 25px;
+        }
+
+        .info-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .info-subtitle {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fff9e6;
+        }
+
+        .info-words {
+            margin-bottom: 20px;
+        }
+
+        .info-words-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .word-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 6px 12px;
+            border-radius: 15px;
+            margin: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info-examples {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-example {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ffe8a1;
+        }
+
+        .info-example:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .example-ko {
+            font-size: 15px;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .example-en {
+            font-size: 13px;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .badge-noun {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .badge-adjective {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .badge-verb {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>긍정 감정 Knowledge Graph 😊</h1>
+        <div class="subtitle">Positive Emotions - Interactive Network</div>
+        
+        <div id="graph-container"></div>
+
+        <div class="legend">
+            <div class="legend-title">📚 긍정 감정 카테고리 (Positive Emotion Categories)</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">기쁨 (Joy)</div>
+                        <div class="legend-en">성공과 성취로 인한 행복</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">설렘 (Excitement)</div>
+                        <div class="legend-en">기대감으로 두근거리는 마음</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">보람 (Fulfillment)</div>
+                        <div class="legend-en">노력에 대한 만족감</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">희망 (Hope)</div>
+                        <div class="legend-en">미래에 대한 긍정적 기대</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">애정 (Affection)</div>
+                        <div class="legend-en">사랑과 관심의 마음</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div id="info-panel" class="info-panel">
+        <div class="info-header">
+            <div class="info-close" onclick="closeInfo()">×</div>
+        </div>
+        <div id="info-content" class="info-content">
+        </div>
+    </div>
+
+    <script>
+        const graphData = {
+            nouns: [
+                { id: 'gippeum', korean: '기쁨', romanization: 'gi-ppeum', english: 'Joy',
+                  description: '성공, 성취, 좋은 소식 등으로 인해 느끼는 행복한 마음입니다.',
+                  examples: [
+                    { ko: '성공의 기쁨을 느꼈어요.', en: 'I felt the joy of success.' },
+                    { ko: '아기의 웃음이 큰 기쁨이에요.', en: "The baby's smile brings great joy." }
+                  ]
+                },
+                { id: 'seollem', korean: '설렘', romanization: 'seol-lem', english: 'Excitement',
+                  description: '기대감으로 인해 가슴이 두근거리는 즐거운 긴장감입니다.',
+                  examples: [
+                    { ko: '첫 데이트의 설렘을 기억해요.', en: 'I remember the excitement of the first date.' },
+                    { ko: '여행 전날 밤 설렘으로 잠을 못 잤어요.', en: "I couldn't sleep the night before the trip from excitement." }
+                  ]
+                },
+                { id: 'boram', korean: '보람', romanization: 'bo-ram', english: 'Fulfillment',
+                  description: '노력한 일에 대한 만족감과 성취감을 나타내는 감정입니다.',
+                  examples: [
+                    { ko: '일의 보람을 느껴요.', en: 'I feel a sense of accomplishment in my work.' },
+                    { ko: '봉사활동이 정말 보람 있어요.', en: 'Volunteer work is really fulfilling.' }
+                  ]
+                },
+                { id: 'huimang', korean: '희망', romanization: 'hui-mang', english: 'Hope',
+                  description: '미래에 대한 긍정적인 기대와 바람을 나타내는 감정입니다.',
+                  examples: [
+                    { ko: '희망을 잃지 마세요.', en: "Don't lose hope." },
+                    { ko: '새로운 시작에 희망을 품었어요.', en: 'I have hope for a new beginning.' }
+                  ]
+                },
+                { id: 'aejeong', korean: '애정', romanization: 'ae-jeong', english: 'Affection',
+                  description: '다른 사람이나 대상에 대해 느끼는 사랑과 관심의 마음입니다.',
+                  examples: [
+                    { ko: '가족에 대한 애정이 깊어요.', en: 'My affection for my family is deep.' },
+                    { ko: '애정 표현을 자주 해요.', en: 'I often express affection.' }
+                  ]
+                }
+            ],
+            
+            words: [
+                // 기쁨
+                { korean: '기쁘다', romanization: 'gi-ppeu-da', english: 'happy/glad', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '시험에 합격해서 정말 기뻐요.', en: "I'm really happy because I passed the exam." }]
+                },
+                { korean: '즐겁다', romanization: 'jeul-geop-da', english: 'joyful', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '친구들과 노는 것은 항상 즐거워요.', en: 'Playing with friends is always pleasant.' }]
+                },
+                { korean: '행복하다', romanization: 'haeng-bok-ha-da', english: 'happy (deep)', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '우리 가족은 정말 행복해요.', en: 'Our family is really happy.' }]
+                },
+
+                // 설렘
+                { korean: '두근거리다', romanization: 'du-geun-geo-ri-da', english: 'to flutter', type: 'verb', noun: 'seollem',
+                  examples: [{ ko: '심장이 두근거려요.', en: 'My heart is fluttering.' }]
+                },
+                { korean: '설레다', romanization: 'seol-le-da', english: 'to be excited', type: 'verb', noun: 'seollem',
+                  examples: [{ ko: '내일 만날 생각에 설레요.', en: "I'm excited about meeting tomorrow." }]
+                },
+
+                // 보람
+                { korean: '뿌듯하다', romanization: 'ppeu-deu-ta-da', english: 'proud/satisfied', type: 'adjective', noun: 'boram',
+                  examples: [{ ko: '열심히 한 결과가 뿌듯해요.', en: "I'm proud of the result of my hard work." }]
+                },
+                { korean: '보람차다', romanization: 'bo-ram-cha-da', english: 'rewarding', type: 'adjective', noun: 'boram',
+                  examples: [{ ko: '오늘 하루가 참 보람찼어요.', en: 'Today was really rewarding.' }]
+                },
+
+                // 희망
+                { korean: '기대하다', romanization: 'gi-dae-ha-da', english: 'to look forward to', type: 'verb', noun: 'huimang',
+                  examples: [{ ko: '주말 여행을 정말 기대해요.', en: "I'm really looking forward to the weekend trip." }]
+                },
+                { korean: '안심하다', romanization: 'an-sim-ha-da', english: 'to feel relieved', type: 'verb', noun: 'huimang',
+                  examples: [{ ko: '소식을 듣고 안심했어요.', en: 'I felt relieved after hearing the news.' }]
+                },
+                { korean: '희망적이다', romanization: 'hui-mang-jeog-i-da', english: 'hopeful', type: 'adjective', noun: 'huimang',
+                  examples: [{ ko: '상황이 희망적이에요.', en: 'The situation is hopeful.' }]
+                },
+
+                // 애정
+                { korean: '사랑하다', romanization: 'sa-rang-ha-da', english: 'to love', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '나는 당신을 사랑해요.', en: 'I love you.' }]
+                },
+                { korean: '감동하다', romanization: 'gam-dong-ha-da', english: 'to be moved', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '그 이야기에 정말 감동했어요.', en: 'I was really touched by that story.' }]
+                },
+                { korean: '좋아하다', romanization: 'jo-a-ha-da', english: 'to like', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '당신을 정말 좋아해요.', en: 'I really like you.' }]
+                }
+            ]
+        };
+
+        function createGraph() {
+            const container = document.getElementById('graph-container');
+            container.innerHTML = '';
+            
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            // Position noun nodes in inner circle
+            const nounRadius = Math.min(width, height) * 0.22;
+            graphData.nouns.forEach((noun, index) => {
+                const angle = (index / graphData.nouns.length) * 2 * Math.PI - Math.PI / 2;
+                const x = centerX + nounRadius * Math.cos(angle) - 65;
+                const y = centerY + nounRadius * Math.sin(angle) - 65;
+
+                const node = document.createElement('div');
+                node.className = 'node node-noun';
+                node.style.left = x + 'px';
+                node.style.top = y + 'px';
+                node.innerHTML = `
+                    <div class="node-content">
+                        <span class="korean">${noun.korean}</span>
+                        <span class="romanization">${noun.romanization}</span>
+                        <span class="english">${noun.english}</span>
+                    </div>
+                `;
+                node.onclick = () => showNounInfo(noun);
+                container.appendChild(node);
+
+                noun.x = x + 65;
+                noun.y = y + 65;
+            });
+
+            // Position word nodes in outer circle
+            const wordRadius = Math.min(width, height) * 0.42;
+            const wordGroups = {};
+            
+            graphData.words.forEach(word => {
+                const nounId = word.noun;
+                if (!wordGroups[nounId]) {
+                    wordGroups[nounId] = [];
+                }
+                wordGroups[nounId].push(word);
+            });
+
+            Object.keys(wordGroups).forEach((nounId, groupIndex) => {
+                const wordsInGroup = wordGroups[nounId];
+                const nounAngle = (groupIndex / Object.keys(wordGroups).length) * 2 * Math.PI - Math.PI / 2;
+                
+                wordsInGroup.forEach((word, wordIndexInGroup) => {
+                    const spreadAngle = (wordsInGroup.length > 1) ? 
+                        (wordIndexInGroup / (wordsInGroup.length - 1) - 0.5) * 0.8 : 0;
+                    const angle = nounAngle + spreadAngle;
+                    
+                    const x = centerX + wordRadius * Math.cos(angle) - 45;
+                    const y = centerY + wordRadius * Math.sin(angle) - 45;
+
+                    const node = document.createElement('div');
+                    node.className = 'node node-word';
+                    node.style.left = x + 'px';
+                    node.style.top = y + 'px';
+                    node.innerHTML = `
+                        <div class="node-content">
+                            <span class="korean">${word.korean}</span>
+                            <span class="romanization">${word.romanization}</span>
+                            <span class="english">${word.english}</span>
+                        </div>
+                    `;
+                    node.onclick = () => showWordInfo(word);
+                    container.appendChild(node);
+
+                    word.x = x + 45;
+                    word.y = y + 45;
+
+                    const noun = graphData.nouns.find(n => n.id === nounId);
+                    if (noun) {
+                        createConnection(noun, word);
+                    }
+                });
+            });
+        }
+
+        function createConnection(from, to) {
+            const container = document.getElementById('graph-container');
+            const dx = to.x - from.x;
+            const dy = to.y - from.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+            const connection = document.createElement('div');
+            connection.className = 'connection';
+            connection.style.width = distance + 'px';
+            connection.style.left = from.x + 'px';
+            connection.style.top = from.y + 'px';
+            connection.style.transform = `rotate(${angle}deg)`;
+            container.appendChild(connection);
+        }
+
+        function showNounInfo(noun) {
+            const relatedWords = graphData.words.filter(w => w.noun === noun.id);
+            const adjectives = relatedWords.filter(w => w.type === 'adjective');
+            const verbs = relatedWords.filter(w => w.type === 'verb');
+            
+            const content = `
+                <div class="info-title">${noun.korean} (${noun.romanization})</div>
+                <div class="info-subtitle"><span class="badge-noun">명사 Noun</span> ${noun.english}</div>
+                
+                <div class="info-section">
+                    <div class="info-section-title">📝 설명 (Description)</div>
+                    <p style="color: #4a5568; line-height: 1.6;">${noun.description}</p>
+                </div>
+
+                ${adjectives.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">🎨 형용사 (Adjectives) - ${adjectives.length}개</div>
+                    ${adjectives.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                ${verbs.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">⚡ 동사 (Verbs) - ${verbs.length}개</div>
+                    ${verbs.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 예문 (Example Sentences)</div>
+                    <div class="info-examples">
+                        ${noun.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function showWordInfo(word) {
+            const noun = graphData.nouns.find(n => n.id === word.noun);
+            const typeLabel = word.type === 'adjective' ? '형용사 Adjective' : '동사 Verb';
+            const badgeClass = word.type === 'adjective' ? 'badge-adjective' : 'badge-verb';
+            
+            const content = `
+                <div class="info-title">${word.korean}</div>
+                <div class="info-subtitle">
+                    <span class="${badgeClass}">${typeLabel}</span>
+                    ${word.romanization} - ${word.english}
+                </div>
+                
+                <div class="info-words">
+                    <div class="info-words-title">💝 감정 카테고리</div>
+                    <span class="word-tag">
+                        ${noun.korean} (${noun.english})
+                    </span>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 사용 예시 (Usage Examples)</div>
+                    <div class="info-examples">
+                        ${word.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">📌 상세 정보</div>
+                    <div style="background: #fff9e6; padding: 15px; border-radius: 8px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>품사:</strong> ${typeLabel}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>발음:</strong> [${word.romanization}]
+                        </div>
+                        <div>
+                            <strong>의미:</strong> ${word.english}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function closeInfo() {
+            document.getElementById('info-panel').classList.remove('active');
+        }
+
+        window.addEventListener('load', createGraph);
+        window.addEventListener('resize', createGraph);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positive Emotions Knowledge Graph</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        #graph-container {
+            width: 100%;
+            height: 900px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #ffffff 0%, #fffef7 50%, #fff9e6 100%);
+        }
+
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .node:hover {
+            transform: scale(1.15);
+            z-index: 100;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .node-content {
+            padding: 8px;
+            line-height: 1.3;
+        }
+
+        .korean {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .romanization {
+            font-size: 11px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .english {
+            font-size: 10px;
+            display: block;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .node-noun {
+            width: 130px;
+            height: 130px;
+            font-size: 18px;
+            border: 5px solid white;
+            z-index: 50;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+        }
+
+        .node-word {
+            width: 90px;
+            height: 90px;
+            font-size: 13px;
+            border: 3px solid white;
+            z-index: 40;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe8a1 100%);
+            color: #856404;
+            border-color: #fdcb6e;
+        }
+
+        .connection {
+            position: absolute;
+            height: 2px;
+            transform-origin: left center;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            background: #fdcb6e;
+        }
+
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff9e6;
+            border-radius: 10px;
+        }
+
+        .legend-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .legend-text {
+            flex: 1;
+        }
+
+        .legend-ko {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 15px;
+        }
+
+        .legend-en {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .info-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .info-panel.active {
+            right: 0;
+        }
+
+        .info-header {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .info-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.5);
+            border: 2px solid #2d3436;
+            color: #2d3436;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .info-close:hover {
+            background: #2d3436;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .info-content {
+            padding: 25px;
+        }
+
+        .info-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .info-subtitle {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fff9e6;
+        }
+
+        .info-words {
+            margin-bottom: 20px;
+        }
+
+        .info-words-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .word-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            padding: 6px 12px;
+            border-radius: 15px;
+            margin: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info-examples {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-example {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ffe8a1;
+        }
+
+        .info-example:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .example-ko {
+            font-size: 15px;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .example-en {
+            font-size: 13px;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .badge-noun {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .badge-adjective {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .badge-verb {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        /* Differences Section */
+        .differences-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #fff9e6;
+            border-radius: 15px;
+        }
+
+        .differences-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .difference-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #fdcb6e;
+        }
+
+        .difference-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .difference-content {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f0f5ff;
+            border-radius: 15px;
+        }
+
+        .quiz-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .question-number {
+            background: #fdcb6e;
+            color: #2d3436;
+            padding: 5px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+        }
+
+        .option:hover {
+            background: #fff9e6;
+            border-color: #fdcb6e;
+        }
+
+        .option.selected {
+            background: #fff9e6;
+            border-color: #fdcb6e;
+        }
+
+        .option.correct-option {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            font-weight: bold;
+        }
+
+        .option.wrong-option {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #2d3436;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Positive Emotions Knowledge Graph 😊</h1>
+        <div class="subtitle">긍정 감정 - Interactive Network</div>
+        
+        <div id="graph-container"></div>
+
+        <div class="legend">
+            <div class="legend-title">📚 Positive Emotion Categories (긍정 감정 카테고리)</div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">기쁨 (Joy)</div>
+                        <div class="legend-en">Happiness from success and achievement</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">설렘 (Excitement)</div>
+                        <div class="legend-en">Heart-fluttering anticipation</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">보람 (Fulfillment)</div>
+                        <div class="legend-en">Satisfaction from hard work</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">희망 (Hope)</div>
+                        <div class="legend-en">Positive expectations for the future</div>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color"></div>
+                    <div class="legend-text">
+                        <div class="legend-ko">애정 (Affection)</div>
+                        <div class="legend-en">Love and care for others</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Differences Section -->
+        <div class="differences-section">
+            <div class="differences-title">🔍 Understanding the Differences (감정의 차이점)</div>
+            
+            <div class="difference-box">
+                <div class="difference-header">기쁨 (Joy) vs 행복 (Happiness)</div>
+                <div class="difference-content">
+                    <strong>기쁨</strong> is momentary joy triggered by specific events (passing a test, receiving good news). It's more immediate and reactive.<br><br>
+                    <strong>행복</strong> is a deeper, more lasting state of happiness. It's broader and encompasses overall life satisfaction, not just single moments.
+                </div>
+            </div>
+
+            <div class="difference-box">
+                <div class="difference-header">설렘 (Excitement) vs 기쁨 (Joy)</div>
+                <div class="difference-content">
+                    <strong>설렘</strong> is anticipatory excitement - you feel it <em>before</em> something happens (before a first date, before a trip). Your heart flutters with expectation.<br><br>
+                    <strong>기쁨</strong> is joy you feel <em>when or after</em> something good happens. It's the emotion of experiencing success, not anticipating it.
+                </div>
+            </div>
+
+            <div class="difference-box">
+                <div class="difference-header">보람 (Fulfillment) vs 기쁨 (Joy)</div>
+                <div class="difference-content">
+                    <strong>보람</strong> specifically comes from effort and hard work paying off. It's the satisfaction of "this was worth it" - like completing a difficult project or helping someone.<br><br>
+                    <strong>기쁨</strong> can come from any positive event, whether you worked for it or not (a surprise gift, unexpected good news).
+                </div>
+            </div>
+
+            <div class="difference-box">
+                <div class="difference-header">희망 (Hope) vs 기대 (Expectation)</div>
+                <div class="difference-content">
+                    <strong>희망</strong> is hope for the future, often in uncertain situations. It carries a sense of wishing and believing things will get better.<br><br>
+                    <strong>기대하다</strong> (to look forward to) is anticipating something specific that's likely to happen. You're more confident it will occur.
+                </div>
+            </div>
+
+            <div class="difference-box">
+                <div class="difference-header">애정 (Affection) vs 사랑 (Love)</div>
+                <div class="difference-content">
+                    <strong>애정</strong> is affection, care, and fondness. It's warmer and can apply to family, pets, hobbies, or your hometown. It emphasizes caring and cherishing.<br><br>
+                    <strong>사랑</strong> is love - deeper and more intense, typically romantic love, but also deep family love. It's stronger than 애정.
+                </div>
+            </div>
+
+            <div class="difference-box">
+                <div class="difference-header">기쁘다 vs 즐겁다 vs 행복하다</div>
+                <div class="difference-content">
+                    <strong>기쁘다</strong>: Happy/glad about a specific event (I'm happy I passed!)<br>
+                    <strong>즐겁다</strong>: Joyful/pleasant - enjoying an activity or experience (playing is fun/enjoyable)<br>
+                    <strong>행복하다</strong>: Happy in a deeper sense - contentment with life (my family is happy)
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-title">✏️ Practice Quiz (15 Questions)</div>
+            <form>
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">Which emotion describes heart-fluttering anticipation BEFORE something happens?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a"> 기쁨 (Joy)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b"> 설렘 (Excitement)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c"> 보람 (Fulfillment)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text">You worked hard on a project for months and finally completed it. Which feeling best describes your satisfaction?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="a"> 설렘 (Excitement)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="b"> 보람 (Fulfillment)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="c"> 희망 (Hope)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text">What does "심장이 두근거려요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a"> My heart hurts
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b"> My heart is fluttering/pounding
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c"> My heart is broken
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <div class="question-number">Question 4</div>
+                    <div class="question-text">Which word specifically refers to love and care for people, pets, or things you cherish?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a"> 기쁨 (Joy)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b"> 희망 (Hope)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c"> 애정 (Affection)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-number">Question 5</div>
+                    <div class="question-text">You just received great news that you got the job. What do you feel?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="a"> 기쁨 (Joy)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="b"> 보람 (Fulfillment)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="c"> 설렘 (Excitement)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-number">Question 6</div>
+                    <div class="question-text">What's the difference between 기쁘다 and 행복하다?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a"> They mean exactly the same thing
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b"> 기쁘다 is momentary joy, 행복하다 is deeper, lasting happiness
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c"> 행복하다 is only for sad occasions
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-number">Question 7</div>
+                    <div class="question-text">Which emotion best describes looking forward to positive outcomes in the future?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a"> 희망 (Hope)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b"> 애정 (Affection)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c"> 보람 (Fulfillment)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-number">Question 8</div>
+                    <div class="question-text">Choose the correct sentence: "Playing with friends is always pleasant."</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q8" value="a"> 친구들과 노는 것은 항상 즐거워요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="b"> 친구들과 노는 것은 항상 설레요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="c"> 친구들과 노는 것은 항상 뿌듯해요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <div class="question-number">Question 9</div>
+                    <div class="question-text">What does "오늘 하루가 참 보람찼어요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="a"> Today was really tiring
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="b"> Today was really rewarding/fulfilling
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="c"> Today was really exciting
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-number">Question 10</div>
+                    <div class="question-text">It's the night before your trip to Korea. Your heart is racing with anticipation. What do you feel?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a"> 설렘 (Excitement)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b"> 보람 (Fulfillment)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c"> 기쁨 (Joy)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-number">Question 11</div>
+                    <div class="question-text">Which verb means "to be moved" or "to be touched" emotionally?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q11" value="a"> 기대하다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="b"> 감동하다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="c"> 두근거리다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-number">Question 12</div>
+                    <div class="question-text">What's the best translation for "I felt relieved after hearing the news"?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a"> 소식을 듣고 기뻤어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b"> 소식을 듣고 안심했어요
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="c"> 소식을 듣고 설렜어요
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-number">Question 13</div>
+                    <div class="question-text">You spent all day volunteering at an animal shelter. You're tired but feel it was worthwhile. What do you feel?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a"> 설렘 (Excitement)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b"> 보람 (Fulfillment)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c"> 희망 (Hope)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <div class="question-number">Question 14</div>
+                    <div class="question-text">Which word describes the deepest, most lasting form of happiness?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q14" value="a"> 기쁘다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q14" value="b"> 즐겁다
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q14" value="c"> 행복하다
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-number">Question 15</div>
+                    <div class="question-text">What does "희망을 잃지 마세요" mean?</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a"> Don't lose hope
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b"> Don't lose your joy
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="c"> Don't lose your excitement
+                        </label>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div id="info-panel" class="info-panel">
+        <div class="info-header">
+            <div class="info-close" onclick="closeInfo()">×</div>
+        </div>
+        <div id="info-content" class="info-content">
+        </div>
+    </div>
+    
+    <script>
+        const graphData = {
+            nouns: [
+                { id: 'gippeum', korean: '기쁨', romanization: 'gi-ppeum', english: 'Joy',
+                  description: 'Happiness felt from success, achievement, or good news. A momentary feeling of joy triggered by specific positive events.',
+                  descriptionKo: '성공, 성취, 좋은 소식 등으로 인해 느끼는 행복한 마음입니다.',
+                  examples: [
+                    { ko: '성공의 기쁨을 느꼈어요.', en: 'I felt the joy of success.' },
+                    { ko: '아기의 웃음이 큰 기쁨이에요.', en: "The baby's smile brings great joy." }
+                  ]
+                },
+                { id: 'seollem', korean: '설렘', romanization: 'seol-lem', english: 'Excitement',
+                  description: 'Heart-fluttering anticipation due to expectation. A pleasant nervousness felt before something you look forward to.',
+                  descriptionKo: '기대감으로 인해 가슴이 두근거리는 즐거운 긴장감입니다.',
+                  examples: [
+                    { ko: '첫 데이트의 설렘을 기억해요.', en: 'I remember the excitement of the first date.' },
+                    { ko: '여행 전날 밤 설렘으로 잠을 못 잤어요.', en: "I couldn't sleep the night before the trip from excitement." }
+                  ]
+                },
+                { id: 'boram', korean: '보람', romanization: 'bo-ram', english: 'Fulfillment',
+                  description: 'Satisfaction and sense of accomplishment from hard work. The feeling that your effort was worthwhile.',
+                  descriptionKo: '노력한 일에 대한 만족감과 성취감을 나타내는 감정입니다.',
+                  examples: [
+                    { ko: '일의 보람을 느껴요.', en: 'I feel a sense of accomplishment in my work.' },
+                    { ko: '봉사활동이 정말 보람 있어요.', en: 'Volunteer work is really fulfilling.' }
+                  ]
+                },
+                { id: 'huimang', korean: '희망', romanization: 'hui-mang', english: 'Hope',
+                  description: 'Positive expectation and wishes for the future. A belief that good things will happen.',
+                  descriptionKo: '미래에 대한 긍정적인 기대와 바람을 나타내는 감정입니다.',
+                  examples: [
+                    { ko: '희망을 잃지 마세요.', en: "Don't lose hope." },
+                    { ko: '새로운 시작에 희망을 품었어요.', en: 'I have hope for a new beginning.' }
+                  ]
+                },
+                { id: 'aejeong', korean: '애정', romanization: 'ae-jeong', english: 'Affection',
+                  description: 'Love and care felt toward people or things. A warm feeling of fondness and cherishing.',
+                  descriptionKo: '다른 사람이나 대상에 대해 느끼는 사랑과 관심의 마음입니다.',
+                  examples: [
+                    { ko: '가족에 대한 애정이 깊어요.', en: 'My affection for my family is deep.' },
+                    { ko: '애정 표현을 자주 해요.', en: 'I often express affection.' }
+                  ]
+                }
+            ],
+            
+            words: [
+                { korean: '기쁘다', romanization: 'gi-ppeu-da', english: 'happy/glad', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '시험에 합격해서 정말 기뻐요.', en: "I'm really happy because I passed the exam." }]
+                },
+                { korean: '즐겁다', romanization: 'jeul-geop-da', english: 'joyful/pleasant', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '친구들과 노는 것은 항상 즐거워요.', en: 'Playing with friends is always pleasant.' }]
+                },
+                { korean: '행복하다', romanization: 'haeng-bok-ha-da', english: 'happy (deep)', type: 'adjective', noun: 'gippeum',
+                  examples: [{ ko: '우리 가족은 정말 행복해요.', en: 'Our family is really happy.' }]
+                },
+                { korean: '두근거리다', romanization: 'du-geun-geo-ri-da', english: 'to flutter', type: 'verb', noun: 'seollem',
+                  examples: [{ ko: '심장이 두근거려요.', en: 'My heart is fluttering.' }]
+                },
+                { korean: '설레다', romanization: 'seol-le-da', english: 'to be excited', type: 'verb', noun: 'seollem',
+                  examples: [{ ko: '내일 만날 생각에 설레요.', en: "I'm excited about meeting tomorrow." }]
+                },
+                { korean: '뿌듯하다', romanization: 'ppeu-deu-ta-da', english: 'proud/satisfied', type: 'adjective', noun: 'boram',
+                  examples: [{ ko: '열심히 한 결과가 뿌듯해요.', en: "I'm proud of the result of my hard work." }]
+                },
+                { korean: '보람차다', romanization: 'bo-ram-cha-da', english: 'rewarding', type: 'adjective', noun: 'boram',
+                  examples: [{ ko: '오늘 하루가 참 보람찼어요.', en: 'Today was really rewarding.' }]
+                },
+                { korean: '기대하다', romanization: 'gi-dae-ha-da', english: 'to look forward to', type: 'verb', noun: 'huimang',
+                  examples: [{ ko: '주말 여행을 정말 기대해요.', en: "I'm really looking forward to the weekend trip." }]
+                },
+                { korean: '안심하다', romanization: 'an-sim-ha-da', english: 'to feel relieved', type: 'verb', noun: 'huimang',
+                  examples: [{ ko: '소식을 듣고 안심했어요.', en: 'I felt relieved after hearing the news.' }]
+                },
+                { korean: '희망적이다', romanization: 'hui-mang-jeog-i-da', english: 'hopeful', type: 'adjective', noun: 'huimang',
+                  examples: [{ ko: '상황이 희망적이에요.', en: 'The situation is hopeful.' }]
+                },
+                { korean: '사랑하다', romanization: 'sa-rang-ha-da', english: 'to love', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '나는 당신을 사랑해요.', en: 'I love you.' }]
+                },
+                { korean: '감동하다', romanization: 'gam-dong-ha-da', english: 'to be moved', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '그 이야기에 정말 감동했어요.', en: 'I was really touched by that story.' }]
+                },
+                { korean: '좋아하다', romanization: 'jo-a-ha-da', english: 'to like', type: 'verb', noun: 'aejeong',
+                  examples: [{ ko: '당신을 정말 좋아해요.', en: 'I really like you.' }]
+                }
+            ]
+        };
+
+        function createGraph() {
+            const container = document.getElementById('graph-container');
+            container.innerHTML = '';
+            
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            const nounRadius = Math.min(width, height) * 0.22;
+            graphData.nouns.forEach((noun, index) => {
+                const angle = (index / graphData.nouns.length) * 2 * Math.PI - Math.PI / 2;
+                const x = centerX + nounRadius * Math.cos(angle) - 65;
+                const y = centerY + nounRadius * Math.sin(angle) - 65;
+
+                const node = document.createElement('div');
+                node.className = 'node node-noun';
+                node.style.left = x + 'px';
+                node.style.top = y + 'px';
+                node.innerHTML = `
+                    <div class="node-content">
+                        <span class="korean">${noun.korean}</span>
+                        <span class="romanization">${noun.romanization}</span>
+                        <span class="english">${noun.english}</span>
+                    </div>
+                `;
+                node.onclick = () => showNounInfo(noun);
+                container.appendChild(node);
+
+                noun.x = x + 65;
+                noun.y = y + 65;
+            });
+
+            const wordRadius = Math.min(width, height) * 0.42;
+            const wordGroups = {};
+            
+            graphData.words.forEach(word => {
+                const nounId = word.noun;
+                if (!wordGroups[nounId]) {
+                    wordGroups[nounId] = [];
+                }
+                wordGroups[nounId].push(word);
+            });
+
+            Object.keys(wordGroups).forEach((nounId, groupIndex) => {
+                const wordsInGroup = wordGroups[nounId];
+                const nounAngle = (groupIndex / Object.keys(wordGroups).length) * 2 * Math.PI - Math.PI / 2;
+                
+                wordsInGroup.forEach((word, wordIndexInGroup) => {
+                    const spreadAngle = (wordsInGroup.length > 1) ? 
+                        (wordIndexInGroup / (wordsInGroup.length - 1) - 0.5) * 0.8 : 0;
+                    const angle = nounAngle + spreadAngle;
+                    
+                    const x = centerX + wordRadius * Math.cos(angle) - 45;
+                    const y = centerY + wordRadius * Math.sin(angle) - 45;
+
+                    const node = document.createElement('div');
+                    node.className = 'node node-word';
+                    node.style.left = x + 'px';
+                    node.style.top = y + 'px';
+                    node.innerHTML = `
+                        <div class="node-content">
+                            <span class="korean">${word.korean}</span>
+                            <span class="romanization">${word.romanization}</span>
+                            <span class="english">${word.english}</span>
+                        </div>
+                    `;
+                    node.onclick = () => showWordInfo(word);
+                    container.appendChild(node);
+
+                    word.x = x + 45;
+                    word.y = y + 45;
+
+                    const noun = graphData.nouns.find(n => n.id === nounId);
+                    if (noun) {
+                        createConnection(noun, word);
+                    }
+                });
+            });
+        }
+
+        function createConnection(from, to) {
+            const container = document.getElementById('graph-container');
+            const dx = to.x - from.x;
+            const dy = to.y - from.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+            const connection = document.createElement('div');
+            connection.className = 'connection';
+            connection.style.width = distance + 'px';
+            connection.style.left = from.x + 'px';
+            connection.style.top = from.y + 'px';
+            connection.style.transform = `rotate(${angle}deg)`;
+            container.appendChild(connection);
+        }
+
+        function showNounInfo(noun) {
+            const relatedWords = graphData.words.filter(w => w.noun === noun.id);
+            const adjectives = relatedWords.filter(w => w.type === 'adjective');
+            const verbs = relatedWords.filter(w => w.type === 'verb');
+            
+            const content = `
+                <div class="info-title">${noun.korean} (${noun.romanization})</div>
+                <div class="info-subtitle"><span class="badge-noun">Noun 명사</span> ${noun.english}</div>
+                
+                <div class="info-section">
+                    <div class="info-section-title">📝 Description (설명)</div>
+                    <p style="color: #4a5568; line-height: 1.6; margin-bottom: 10px;">${noun.description}</p>
+                    <p style="color: #718096; line-height: 1.6; font-size: 14px;">${noun.descriptionKo}</p>
+                </div>
+
+                ${adjectives.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">🎨 Adjectives (형용사) - ${adjectives.length}개</div>
+                    ${adjectives.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                ${verbs.length > 0 ? `
+                <div class="info-words">
+                    <div class="info-words-title">⚡ Verbs (동사) - ${verbs.length}개</div>
+                    ${verbs.map(w => `<span class="word-tag">${w.korean} (${w.english})</span>`).join('')}
+                </div>
+                ` : ''}
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 Example Sentences (예문)</div>
+                    <div class="info-examples">
+                        ${noun.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function showWordInfo(word) {
+            const noun = graphData.nouns.find(n => n.id === word.noun);
+            const typeLabel = word.type === 'adjective' ? 'Adjective 형용사' : 'Verb 동사';
+            const badgeClass = word.type === 'adjective' ? 'badge-adjective' : 'badge-verb';
+            
+            const content = `
+                <div class="info-title">${word.korean}</div>
+                <div class="info-subtitle">
+                    <span class="${badgeClass}">${typeLabel}</span>
+                    ${word.romanization} - ${word.english}
+                </div>
+                
+                <div class="info-words">
+                    <div class="info-words-title">💝 Emotion Category (감정 카테고리)</div>
+                    <span class="word-tag">
+                        ${noun.korean} (${noun.english})
+                    </span>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">💬 Usage Example (사용 예시)</div>
+                    <div class="info-examples">
+                        ${word.examples.map(ex => `
+                            <div class="info-example">
+                                <div class="example-ko">${ex.ko}</div>
+                                <div class="example-en">${ex.en}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">📌 Details (상세 정보)</div>
+                    <div style="background: #fff9e6; padding: 15px; border-radius: 8px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Part of Speech:</strong> ${typeLabel}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Pronunciation:</strong> [${word.romanization}]
+                        </div>
+                        <div>
+                            <strong>Meaning:</strong> ${word.english}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('info-content').innerHTML = content;
+            document.getElementById('info-panel').classList.add('active');
+        }
+
+        function closeInfo() {
+            document.getElementById('info-panel').classList.remove('active');
+        }
+
+        // Quiz functionality
+        const answers = {
+            q1: 'b', q2: 'b', q3: 'b', q4: 'c', q5: 'a',
+            q6: 'b', q7: 'a', q8: 'a', q9: 'b', q10: 'a',
+            q11: 'b', q12: 'b', q13: 'b', q14: 'c', q15: 'a'
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 15;
+
+            document.querySelectorAll('.option').forEach(el => {
+                el.classList.remove('correct-option', 'wrong-option');
+            });
+
+            for (let i = 1; i <= total; i++) {
+                const qId = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${qId}"]:checked`);
+                
+                if (selectedOption) {
+                    const isCorrect = selectedOption.value === answers[qId];
+                    
+                    if (isCorrect) {
+                        correct++;
+                        selectedOption.parentElement.classList.add('correct-option');
+                    } else {
+                        selectedOption.parentElement.classList.add('wrong-option');
+                        const correctOption = document.querySelector(`input[name="${qId}"][value="${answers[qId]}"]`);
+                        if (correctOption) {
+                            correctOption.parentElement.classList.add('correct-option');
+                        }
+                    }
+                } else {
+                    const correctOption = document.querySelector(`input[name="${qId}"][value="${answers[qId]}"]`);
+                    if (correctOption) {
+                        correctOption.parentElement.classList.add('correct-option');
+                    }
+                }
+            }
+
+            const percentage = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = '🎉 Excellent! Perfect!\n';
+            } else if (percentage >= 70) {
+                message = '👍 Good job! Well done!\n';
+            } else {
+                message = '💪 Keep practicing!\n';
+            }
+            
+            resultDiv.textContent = `${message}You got ${correct} out of ${total} questions correct!\n${percentage}%`;
+            resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+            resultDiv.style.color = percentage >= 70 ? '#234e52' : '#742a2a';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+
+        window.addEventListener('load', createGraph);
+        window.addEventListener('resize', createGraph);
+    </script>
+</body>
+</html>
