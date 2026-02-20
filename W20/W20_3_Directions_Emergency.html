@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇰🇷 길 묻기 · 응급 상황</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#0B2472;--red:#CD2E3A;--bg:#F7F8FC;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 100%);color:white;padding:30px 40px 24px;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.03) 20px,rgba(255,255,255,0.03) 40px);}
+.flag-badge{display:inline-block;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);padding:6px 18px;border-radius:30px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;margin-bottom:10px;}
+.header h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;text-shadow:3px 3px 0 rgba(0,0,0,0.25);line-height:1;}
+.header-sub{font-size:16px;opacity:.9;margin-top:6px;}
+.header-tags{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.tag{background:rgba(255,255,255,0.18);padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600;}
+.nav-wrapper{background:white;border-bottom:3px solid #e5e7eb;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex-shrink:0;padding:14px 22px;font-size:15px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#9ca3af;transition:all .25s;border-bottom:4px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.nav-tab:hover{background:#f9fafb;color:#374151;}
+.nav-tab.active{color:var(--active);border-bottom-color:var(--active);background:#fafafa;}
+.content{padding:32px 36px;max-width:1300px;margin:0 auto;}
+.section{display:none;}.section.active{display:block;}
+.section-hero{border-radius:16px;padding:28px 32px;margin-bottom:28px;color:white;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
+.section-hero::after{content:attr(data-emoji);position:absolute;right:20px;bottom:-10px;font-size:90px;opacity:0.15;}
+.hero-emoji{font-size:42px;}
+.hero-title{font-size:30px;font-weight:900;margin-bottom:4px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;}
+.hero-sub{font-size:16px;opacity:.9;}
+.phrases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:28px;}
+.phrase-card{background:white;border-radius:14px;padding:20px;border:2px solid #e5e7eb;transition:all .25s;position:relative;overflow:hidden;}
+.phrase-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--cat-color);border-radius:14px 0 0 14px;}
+.phrase-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,0.1);border-color:var(--cat-color);}
+.situation-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:8px;text-transform:uppercase;}
+.phrase-ko{font-family:'Noto Sans KR',sans-serif;font-size:26px;font-weight:900;color:#111827;line-height:1.3;margin-bottom:5px;}
+.phrase-ro{font-size:13px;color:#9ca3af;font-style:italic;margin-bottom:5px;}
+.phrase-en{font-size:15px;color:#374151;font-weight:600;margin-bottom:10px;}
+.phrase-tip{background:#f9fafb;border-radius:8px;padding:9px 12px;font-size:13px;color:#6b7280;line-height:1.6;border-left:3px solid var(--cat-color);}
+.phrase-tip strong{color:var(--cat-color);}
+.dialog-box{background:white;border-radius:14px;padding:24px 28px;border:2px solid #e5e7eb;margin-bottom:20px;}
+.dialog-title{font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:18px;text-transform:uppercase;}
+.dialog-row{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+.dialog-row.right{flex-direction:row-reverse;}
+.d-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.d-you{background:#EEF2FF;border:2px solid #c7d2fe;}
+.d-them{background:#F0FDF4;border:2px solid #bbf7d0;}
+.d-bubble{background:#f9fafb;border-radius:12px;padding:12px 16px;max-width:80%;}
+.dialog-row.right .d-bubble{background:#EEF2FF;}
+.d-ko{font-size:16px;font-weight:700;color:#111827;font-family:'Noto Sans KR',sans-serif;margin-bottom:3px;}
+.d-ro{font-size:11px;color:#9ca3af;margin-bottom:2px;}
+.d-en{font-size:13px;color:#6b7280;font-style:italic;}
+.emergency-card{background:linear-gradient(135deg,#fef2f2,#fff1f2);border:3px solid #fca5a5;border-radius:14px;padding:20px;position:relative;overflow:hidden;}
+.emergency-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#CD2E3A;border-radius:14px 0 0 14px;}
+.emergency-card .phrase-ko{color:#CD2E3A;}
+.urgent-badge{display:inline-block;background:#CD2E3A;color:white;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:6px;margin-bottom:6px;text-transform:uppercase;}
+.kpop-card{background:linear-gradient(135deg,#fdf4ff,#fce7f3);border:2px solid #e9d5ff;border-radius:14px;padding:20px;}
+.numbers-box{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:20px 24px;margin-bottom:20px;}
+.numbers-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:14px;}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
+.num-item{background:#f9fafb;border-radius:10px;padding:10px;text-align:center;border:2px solid #e5e7eb;}
+.num-ko{font-size:22px;font-weight:900;font-family:'Noto Sans KR',sans-serif;color:#111827;}
+.num-ro{font-size:11px;color:#9ca3af;}
+.num-en{font-size:13px;font-weight:600;color:#374151;}
+.cat-header{display:flex;align-items:center;gap:12px;margin:24px 0 16px;}
+.cat-header-line{flex:1;height:2px;background:#e5e7eb;}
+.cat-header-label{background:var(--cat-color);color:white;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;white-space:nowrap;}
+.pron-guide{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:22px;font-size:14px;line-height:1.9;color:#92400e;}
+.pron-guide strong{color:#b45309;}
+.pron-guide.red{background:#fef2f2;border-color:#fca5a5;color:#7f1d1d;}
+.quiz-intro{background:linear-gradient(135deg,var(--navy) 0%,#1a3a8f 100%);color:white;padding:28px;border-radius:16px;margin-bottom:24px;text-align:center;}
+.quiz-intro h2{font-size:30px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:6px;}
+.quiz-intro p{font-size:15px;opacity:.9;}
+.quiz-q{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:24px;margin-bottom:16px;}
+.q-num{background:var(--navy);color:white;display:inline-block;padding:5px 14px;border-radius:14px;font-size:13px;font-weight:700;margin-bottom:12px;}
+.q-text{font-size:18px;color:#111827;font-weight:700;margin-bottom:16px;line-height:1.5;}
+.q-ko{color:var(--navy);font-family:'Noto Sans KR',sans-serif;font-size:22px;}
+.q-opts{display:grid;gap:9px;}
+.q-opt{background:#f9fafb;border:2px solid #e5e7eb;border-radius:10px;padding:12px 16px;font-size:16px;cursor:pointer;text-align:left;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.q-opt:hover{border-color:var(--navy);background:#eef2ff;transform:translateX(4px);}
+.q-opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;font-weight:700;}
+.q-opt.wrong{border-color:#dc2626;background:#fef2f2;color:#b91c1c;}
+.q-explain{margin-top:10px;padding:12px;border-radius:8px;font-size:14px;display:none;}
+.q-explain.show{display:block;}
+.q-explain.correct{background:#f0fdf4;border:2px solid #86efac;color:#166534;}
+.q-explain.incorrect{background:#fef2f2;border:2px solid #fca5a5;color:#991b1b;}
+.submit-btn{background:linear-gradient(135deg,var(--navy),var(--red));color:white;border:none;padding:16px 52px;font-size:18px;font-weight:700;border-radius:30px;cursor:pointer;display:block;margin:26px auto;box-shadow:0 6px 18px rgba(11,36,114,0.3);font-family:'DM Sans',sans-serif;}
+.submit-btn:hover{transform:translateY(-2px);}
+.quiz-results{display:none;background:linear-gradient(135deg,#16a34a,#15803d);color:white;padding:40px;border-radius:16px;text-align:center;margin-top:24px;}
+.quiz-results.show{display:block;}
+.quiz-results h2{font-size:36px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:10px;}
+.result-score{font-size:72px;font-weight:900;margin:14px 0;}
+.result-msg{font-size:20px;opacity:.95;margin-bottom:24px;}
+.reset-btn{background:white;color:#16a34a;border:none;padding:14px 40px;font-size:16px;font-weight:700;border-radius:24px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.reset-btn:hover{transform:scale(1.05);}
+@media(max-width:768px){.header h1{font-size:36px;}.content{padding:20px 16px;}.phrases-grid{grid-template-columns:1fr;}.nav-tab{padding:12px;font-size:13px;}.section-hero{padding:20px;}}
+
+</style>
+</head>
+<body style="--c1:#2E7D32;--c2:#CD2E3A;">
+<div class="header">
+  <div class="flag-badge">🇰🇷 WEEK 20 · MARCH TRIP</div>
+  <h1>길 묻기 · 응급 상황</h1>
+  <div class="header-sub">Directions · Emergency  |  초급 Beginner  |  🇰🇷 3월 March</div>
+  <div class="header-tags"><span class="tag">🗺️ 길 묻기</span><span class="tag">🚨 응급</span><span class="tag">✍️ 퀴즈</span></div>
+</div>
+<div class="nav-wrapper">
+  <div class="nav-tabs">
+    <button class="nav-tab active" style="--active:#2E7D32" onclick="show('direction',this)">🗺️ 길 묻기</button>
+    <button class="nav-tab" style="--active:#CD2E3A" onclick="show('emergency',this)">🚨 응급</button>
+    <button class="nav-tab" style="--active:#1F2937" onclick="show('quiz',this)">✍️ 퀴즈</button>
+  </div>
+</div>
+<div class="content">
+
+<div id="direction-section" class="section active" style="--cat-color:#2E7D32">
+  <div class="section-hero" style="background:linear-gradient(135deg,#2E7D32,#1b5e20)" data-emoji="🗺️">
+    <div class="hero-emoji">🗺️</div>
+    <div><div class="hero-title">길 묻기 · 장소 찾기</div><div class="hero-sub">Asking Directions · Finding Places</div></div>
+  </div>
+  <div class="pron-guide">
+    💡 <strong>꿀팁:</strong> Use <strong>Naver Maps (네이버 지도)</strong> or <strong>Kakao Maps</strong> — far more accurate in Korea than Google Maps! Both have English modes. Show your phone map to locals.
+  </div>
+  <div class="phrases-grid">
+    <div class="phrase-card"><div class="situation-label">Finding a Place</div><div class="phrase-ko">___이/가 어디에 있어요?</div><div class="phrase-ro">___ i/ga eo-di-e it-seo-yo?</div><div class="phrase-en">Where is ___?</div><div class="phrase-tip">💡 Example: <strong>"화장실이 어디에 있어요?"</strong> (Where is the bathroom?). Just fill in the place name!</div></div>
+    <div class="phrase-card"><div class="situation-label">Where Am I?</div><div class="phrase-ko">여기가 어디예요?</div><div class="phrase-ro">yeo-gi-ga eo-di-e-yo?</div><div class="phrase-en">Where is this? / Where am I?</div><div class="phrase-tip">💡 If you're lost, ask while showing a local your phone map. They can point to where you are!</div></div>
+    <div class="phrase-card"><div class="situation-label">Walking Distance</div><div class="phrase-ko">걸어서 얼마나 걸려요?</div><div class="phrase-ro">geol-eo-seo eol-ma-na geol-lyeo-yo?</div><div class="phrase-en">How long does it take on foot?</div><div class="phrase-tip">💡 Koreans will answer in minutes: <strong>"오 분"</strong> (5 min), <strong>"십 분"</strong> (10 min). <strong>"멀어요"</strong> (it's far) → take a taxi!</div></div>
+    <div class="phrase-card"><div class="situation-label">How to Get There</div><div class="phrase-ko">여기 어떻게 가요?</div><div class="phrase-ro">yeo-gi eo-tteo-ke ga-yo?</div><div class="phrase-en">How do I get here? (pointing at map)</div><div class="phrase-tip">💡 Point to your destination on Naver Maps while asking. Koreans will often walk you partway!</div></div>
+    <div class="phrase-card"><div class="situation-label">Direction Words</div><div class="phrase-ko">오른쪽 / 왼쪽 / 직진</div><div class="phrase-ro">o-reun-jjok / wen-jjok / jik-jin</div><div class="phrase-en">Right / Left / Straight ahead</div><div class="phrase-tip">💡 Also: <strong>앞</strong> = in front, <strong>뒤</strong> = behind, <strong>옆</strong> = beside, <strong>건너편</strong> = across. Memory tip: 오른쪽 → "or right?" = right!</div></div>
+    <div class="phrase-card"><div class="situation-label">Is It Far?</div><div class="phrase-ko">거기 멀어요?</div><div class="phrase-ro">geo-gi meol-eo-yo?</div><div class="phrase-en">Is it far?</div><div class="phrase-tip">💡 멀어요 = far, 가까워요 = close. Seoul addresses often include the nearest subway station name!</div></div>
+    <div class="phrase-card"><div class="situation-label">I'm Lost!</div><div class="phrase-ko">길을 잃었어요.</div><div class="phrase-ro">gi-reul i-reo-sseo-yo</div><div class="phrase-en">I'm lost.</div><div class="phrase-tip">💡 Koreans are very helpful to tourists! Most young Koreans speak some English. Show your phone map + this phrase works perfectly.</div></div>
+    <div class="phrase-card"><div class="situation-label">Restroom</div><div class="phrase-ko">화장실이 어디에 있어요?</div><div class="phrase-ro">hwa-jang-sil-i eo-di-e it-seo-yo?</div><div class="phrase-en">Where is the restroom?</div><div class="phrase-tip">💡 Public restrooms in Korea are usually clean and free! Subway stations, parks, tourist spots all have them. Look for 화장실 or WC signs.</div></div>
+  </div>
+</div>
+
+<div id="emergency-section" class="section" style="--cat-color:#CD2E3A">
+  <div class="section-hero" style="background:linear-gradient(135deg,#CD2E3A,#8b0000)" data-emoji="🚨">
+    <div class="hero-emoji">🚨</div>
+    <div><div class="hero-title">응급 상황 · 도움 요청</div><div class="hero-sub">Emergency · Getting Help · Medical</div></div>
+  </div>
+  <div class="pron-guide red">
+    🚨 <strong>한국 긴급 번호 Emergency Numbers:</strong> &nbsp;
+    <strong style="font-size:18px;">119</strong> = 소방/응급 Ambulance/Fire &nbsp;|&nbsp;
+    <strong style="font-size:18px;">112</strong> = 경찰 Police &nbsp;|&nbsp;
+    <strong style="font-size:18px;">1330</strong> = 관광 안내 Tourist Hotline (English 24/7!)
+  </div>
+  <div class="phrases-grid">
+    <div class="emergency-card phrase-card"><div class="urgent-badge">URGENT</div><div class="situation-label">Call for Help</div><div class="phrase-ko">도와주세요!</div><div class="phrase-ro">do-wa-ju-se-yo!</div><div class="phrase-en">Help me! / Help!</div><div class="phrase-tip">💡 Shout loudly. Koreans will respond immediately. Follow with 119 or 112 if needed.</div></div>
+    <div class="emergency-card phrase-card"><div class="urgent-badge">URGENT</div><div class="situation-label">Ambulance</div><div class="phrase-ko">119 불러 주세요!</div><div class="phrase-ro">il-il-gu bul-leo ju-se-yo!</div><div class="phrase-en">Please call 119! (Ambulance)</div><div class="phrase-tip">💡 119 dispatchers have English support. State your location clearly. Show your Naver Maps location to the helper.</div></div>
+    <div class="emergency-card phrase-card"><div class="urgent-badge">URGENT</div><div class="situation-label">Police</div><div class="phrase-ko">경찰 불러 주세요!</div><div class="phrase-ro">gyeong-chal bul-leo ju-se-yo!</div><div class="phrase-en">Please call the police!</div><div class="phrase-tip">💡 Police = 112. Tourist hotline 1330 also has English help 24/7.</div></div>
+    <div class="phrase-card"><div class="situation-label">Medical — Pain</div><div class="phrase-ko">아파요. ___이/가 아파요.</div><div class="phrase-ro">a-pa-yo. ___ i/ga a-pa-yo.</div><div class="phrase-en">I'm in pain. My ___ hurts.</div><div class="phrase-tip">💡 Body parts: <strong>머리</strong> (head), <strong>배</strong> (stomach), <strong>다리</strong> (leg), <strong>팔</strong> (arm), <strong>목</strong> (throat). Point to the area!</div></div>
+    <div class="phrase-card"><div class="situation-label">Finding a Hospital</div><div class="phrase-ko">병원이 어디에 있어요?</div><div class="phrase-ro">byeong-won-i eo-di-e it-seo-yo?</div><div class="phrase-en">Where is the hospital?</div><div class="phrase-tip">💡 For minor issues, find a <strong>약국 (pharmacy)</strong> first — pharmacists can give basic medicine without a prescription.</div></div>
+    <div class="phrase-card"><div class="situation-label">Pharmacy</div><div class="phrase-ko">약국이 어디에 있어요?</div><div class="phrase-ro">yak-guk-i eo-di-e it-seo-yo?</div><div class="phrase-en">Where is the pharmacy?</div><div class="phrase-tip">💡 약국 = pharmacy. Look for the green 약 cross sign. Everywhere in Korea! Cold medicine, band-aids, pain relief available without prescription.</div></div>
+    <div class="phrase-card"><div class="situation-label">Lost Wallet</div><div class="phrase-ko">지갑을 잃어버렸어요.</div><div class="phrase-ro">ji-gab-eul i-reo-beo-ryeo-sseo-yo</div><div class="phrase-en">I lost my wallet.</div><div class="phrase-tip">💡 Korea has a very high rate of lost items being returned! Report to police box (파출소) or call 1330 for English help.</div></div>
+    <div class="phrase-card"><div class="situation-label">Lost Passport</div><div class="phrase-ko">여권을 잃어버렸어요.</div><div class="phrase-ro">yeo-gwon-eul i-reo-beo-ryeo-sseo-yo</div><div class="phrase-en">I lost my passport.</div><div class="phrase-tip">💡 Report to: (1) nearest police station, (2) your country's embassy in Seoul. Keep a photo of your passport on your phone!</div></div>
+    <div class="phrase-card"><div class="situation-label">English Help</div><div class="phrase-ko">영어 할 수 있어요?</div><div class="phrase-ro">yeong-eo hal su it-seo-yo?</div><div class="phrase-en">Can you speak English?</div><div class="phrase-tip">💡 Or call <strong>1330</strong> — free, 24/7, English/Chinese/Japanese support for any tourist issue!</div></div>
+  </div>
+</div>
+<!-- QUIZ -->
+<div id="quiz-section" class="section">
+
+<div class="quiz-intro">
+  <h2>✍️ 퀴즈 Quiz — 길 묻기 · 응급</h2>
+  <p>길 묻기와 응급 상황 표현을 얼마나 기억하나요? · 6 questions</p>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q1 · 길 묻기</div>
+  <div class="q-text">"Where is the restroom?" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q1')">① 여기가 어디예요?</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">② 걸어서 얼마나 걸려요?</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">③ 길을 잃었어요.</button>
+    <button class="q-opt" onclick="pick(this,true,'q1')">④ 화장실이 어디에 있어요?</button>
+  </div>
+  <div id="q1-exp" class="q-explain">✅ <strong>화장실이 어디에 있어요?</strong> = "Where is the restroom?" 화장실 = restroom/bathroom. 어디에 있어요 = where is it? This template works for any location!</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q2 · 길 묻기</div>
+  <div class="q-text"><span class="q-ko">오른쪽 / 왼쪽 / 직진</span> — 올바른 뜻은?<br><small style="font-weight:400;font-size:14px">(Correct meanings)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q2')">① 오른쪽=left  /  왼쪽=right  /  직진=back</button>
+    <button class="q-opt" onclick="pick(this,true,'q2')">② 오른쪽=right  /  왼쪽=left  /  직진=straight</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">③ 오른쪽=straight  /  왼쪽=right  /  직진=left</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">④ 오른쪽=back  /  왼쪽=left  /  직진=right</button>
+  </div>
+  <div id="q2-exp" class="q-explain">✅ <strong>오른쪽</strong>=right  /  <strong>왼쪽</strong>=left  /  <strong>직진</strong>=straight ahead. Memory tip: 오른쪽 sounds like "or right?" = right! 직진 = go direct (straight).</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q3 · 길 묻기</div>
+  <div class="q-text">한국에서 가장 정확한 지도(map) 앱은?<br><small style="font-weight:400;font-size:14px">(Most accurate map app in Korea)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q3')">① Google Maps</button>
+    <button class="q-opt" onclick="pick(this,true,'q3')">② Naver Maps (네이버 지도) or Kakao Maps</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">③ Apple Maps</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">④ Waze</button>
+  </div>
+  <div id="q3-exp" class="q-explain">✅ <strong>Naver Maps</strong> and <strong>Kakao Maps</strong> are far more accurate in Korea. Google Maps has limited real-time transit data in Korea. Both have English language mode!</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q4 · 응급</div>
+  <div class="q-text">한국에서 영어로 24시간 도움받을 수 있는 관광 안내 전화번호는?<br><small style="font-weight:400;font-size:14px">(24/7 English tourist helpline number in Korea)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q4')">① 119 (Ambulance)</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">② 112 (Police)</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">③ 1588</button>
+    <button class="q-opt" onclick="pick(this,true,'q4')">④ 1330 (Tourism Hotline)</button>
+  </div>
+  <div id="q4-exp" class="q-explain">✅ <strong>1330</strong> = Korea Tourism Hotline — free, 24/7, English/Chinese/Japanese. 119 = ambulance, 112 = police. Save ALL THREE in your phone before arriving! 📱</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q5 · 응급</div>
+  <div class="q-text">"My stomach hurts" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q5')">① 도와주세요!</button>
+    <button class="q-opt" onclick="pick(this,true,'q5')">② 배가 아파요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">③ 길을 잃었어요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">④ 병원이 어디에 있어요?</button>
+  </div>
+  <div id="q5-exp" class="q-explain">✅ <strong>배가 아파요</strong> = "My stomach hurts." 배 = stomach, 아파요 = hurts/is painful. Other body parts: 머리 (head), 다리 (leg), 팔 (arm), 목 (throat/neck).</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q6 · 응급</div>
+  <div class="q-text">"Please call an ambulance!" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q6')">① 경찰 불러 주세요!</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">② 도와주세요!</button>
+    <button class="q-opt" onclick="pick(this,true,'q6')">③ 119 불러 주세요!</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">④ 약국이 어디에 있어요?</button>
+  </div>
+  <div id="q6-exp" class="q-explain">✅ <strong>119 불러 주세요!</strong> = "Please call 119!" 불러 주세요 = please call/summon. 경찰 불러 주세요 = please call the police (112). Know the difference!</div>
+</div>
+  <button class="submit-btn" onclick="submitQ(6)">🇰🇷 결과 보기 See My Score!</button>
+  <div id="quiz-results" class="quiz-results">
+    <h2>🇰🇷 결과 Results!</h2>
+    <div class="result-score" id="score-disp">0/6</div>
+    <div class="result-msg" id="result-msg"></div>
+    <button class="reset-btn" onclick="resetQ()">🔄 다시 하기 Try Again</button>
+  </div>
+</div>
+</div>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id+'-section').classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const ans={};
+function pick(btn,correct,id){
+  if(ans[id]!==undefined)return;
+  const parent=btn.closest('.quiz-q');
+  const opts=parent.querySelectorAll('.q-opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  btn.classList.add(correct?'correct':'wrong');
+  if(!correct)opts.forEach(o=>{if(o.onclick.toString().includes('true'))o.classList.add('correct');});
+  ans[id]=correct;
+  const exp=document.getElementById(id+'-exp');
+  if(exp){exp.classList.add('show',correct?'correct':'incorrect');}
+}
+function submitQ(total){
+  let c=0;
+  for(let i=1;i<=total;i++)if(ans['q'+i]===true)c++;
+  const r=document.getElementById('quiz-results');
+  r.classList.add('show');
+  document.getElementById('score-disp').textContent=c+'/'+total;
+  const msgs=[
+    [total,'🌟 완벽해요! Perfect score!'],
+    [Math.ceil(total*0.8),'🎉 아주 잘했어요! Almost perfect!'],
+    [Math.ceil(total*0.6),'🌸 잘했어요! Good job!'],
+    [0,'💪 화이팅! Keep studying!']
+  ];
+  const msg=msgs.find(([min])=>c>=min)||msgs[msgs.length-1];
+  document.getElementById('result-msg').textContent=msg[1];
+  r.scrollIntoView({behavior:'smooth'});
+}
+function resetQ(){
+  for(let k in ans)delete ans[k];
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.pointerEvents='';});
+  document.querySelectorAll('.q-explain').forEach(e=>e.classList.remove('show','correct','incorrect'));
+  document.getElementById('quiz-results').classList.remove('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

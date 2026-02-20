@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇰🇷 식당 · 카페 · 쇼핑</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#0B2472;--red:#CD2E3A;--bg:#F7F8FC;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 100%);color:white;padding:30px 40px 24px;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.03) 20px,rgba(255,255,255,0.03) 40px);}
+.flag-badge{display:inline-block;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);padding:6px 18px;border-radius:30px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;margin-bottom:10px;}
+.header h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;text-shadow:3px 3px 0 rgba(0,0,0,0.25);line-height:1;}
+.header-sub{font-size:16px;opacity:.9;margin-top:6px;}
+.header-tags{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.tag{background:rgba(255,255,255,0.18);padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600;}
+.nav-wrapper{background:white;border-bottom:3px solid #e5e7eb;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex-shrink:0;padding:14px 22px;font-size:15px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#9ca3af;transition:all .25s;border-bottom:4px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.nav-tab:hover{background:#f9fafb;color:#374151;}
+.nav-tab.active{color:var(--active);border-bottom-color:var(--active);background:#fafafa;}
+.content{padding:32px 36px;max-width:1300px;margin:0 auto;}
+.section{display:none;}.section.active{display:block;}
+.section-hero{border-radius:16px;padding:28px 32px;margin-bottom:28px;color:white;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
+.section-hero::after{content:attr(data-emoji);position:absolute;right:20px;bottom:-10px;font-size:90px;opacity:0.15;}
+.hero-emoji{font-size:42px;}
+.hero-title{font-size:30px;font-weight:900;margin-bottom:4px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;}
+.hero-sub{font-size:16px;opacity:.9;}
+.phrases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:28px;}
+.phrase-card{background:white;border-radius:14px;padding:20px;border:2px solid #e5e7eb;transition:all .25s;position:relative;overflow:hidden;}
+.phrase-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--cat-color);border-radius:14px 0 0 14px;}
+.phrase-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,0.1);border-color:var(--cat-color);}
+.situation-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:8px;text-transform:uppercase;}
+.phrase-ko{font-family:'Noto Sans KR',sans-serif;font-size:26px;font-weight:900;color:#111827;line-height:1.3;margin-bottom:5px;}
+.phrase-ro{font-size:13px;color:#9ca3af;font-style:italic;margin-bottom:5px;}
+.phrase-en{font-size:15px;color:#374151;font-weight:600;margin-bottom:10px;}
+.phrase-tip{background:#f9fafb;border-radius:8px;padding:9px 12px;font-size:13px;color:#6b7280;line-height:1.6;border-left:3px solid var(--cat-color);}
+.phrase-tip strong{color:var(--cat-color);}
+.dialog-box{background:white;border-radius:14px;padding:24px 28px;border:2px solid #e5e7eb;margin-bottom:20px;}
+.dialog-title{font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:18px;text-transform:uppercase;}
+.dialog-row{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+.dialog-row.right{flex-direction:row-reverse;}
+.d-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.d-you{background:#EEF2FF;border:2px solid #c7d2fe;}
+.d-them{background:#F0FDF4;border:2px solid #bbf7d0;}
+.d-bubble{background:#f9fafb;border-radius:12px;padding:12px 16px;max-width:80%;}
+.dialog-row.right .d-bubble{background:#EEF2FF;}
+.d-ko{font-size:16px;font-weight:700;color:#111827;font-family:'Noto Sans KR',sans-serif;margin-bottom:3px;}
+.d-ro{font-size:11px;color:#9ca3af;margin-bottom:2px;}
+.d-en{font-size:13px;color:#6b7280;font-style:italic;}
+.emergency-card{background:linear-gradient(135deg,#fef2f2,#fff1f2);border:3px solid #fca5a5;border-radius:14px;padding:20px;position:relative;overflow:hidden;}
+.emergency-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#CD2E3A;border-radius:14px 0 0 14px;}
+.emergency-card .phrase-ko{color:#CD2E3A;}
+.urgent-badge{display:inline-block;background:#CD2E3A;color:white;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:6px;margin-bottom:6px;text-transform:uppercase;}
+.kpop-card{background:linear-gradient(135deg,#fdf4ff,#fce7f3);border:2px solid #e9d5ff;border-radius:14px;padding:20px;}
+.numbers-box{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:20px 24px;margin-bottom:20px;}
+.numbers-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:14px;}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
+.num-item{background:#f9fafb;border-radius:10px;padding:10px;text-align:center;border:2px solid #e5e7eb;}
+.num-ko{font-size:22px;font-weight:900;font-family:'Noto Sans KR',sans-serif;color:#111827;}
+.num-ro{font-size:11px;color:#9ca3af;}
+.num-en{font-size:13px;font-weight:600;color:#374151;}
+.cat-header{display:flex;align-items:center;gap:12px;margin:24px 0 16px;}
+.cat-header-line{flex:1;height:2px;background:#e5e7eb;}
+.cat-header-label{background:var(--cat-color);color:white;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;white-space:nowrap;}
+.pron-guide{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:22px;font-size:14px;line-height:1.9;color:#92400e;}
+.pron-guide strong{color:#b45309;}
+.pron-guide.red{background:#fef2f2;border-color:#fca5a5;color:#7f1d1d;}
+.quiz-intro{background:linear-gradient(135deg,var(--navy) 0%,#1a3a8f 100%);color:white;padding:28px;border-radius:16px;margin-bottom:24px;text-align:center;}
+.quiz-intro h2{font-size:30px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:6px;}
+.quiz-intro p{font-size:15px;opacity:.9;}
+.quiz-q{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:24px;margin-bottom:16px;}
+.q-num{background:var(--navy);color:white;display:inline-block;padding:5px 14px;border-radius:14px;font-size:13px;font-weight:700;margin-bottom:12px;}
+.q-text{font-size:18px;color:#111827;font-weight:700;margin-bottom:16px;line-height:1.5;}
+.q-ko{color:var(--navy);font-family:'Noto Sans KR',sans-serif;font-size:22px;}
+.q-opts{display:grid;gap:9px;}
+.q-opt{background:#f9fafb;border:2px solid #e5e7eb;border-radius:10px;padding:12px 16px;font-size:16px;cursor:pointer;text-align:left;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.q-opt:hover{border-color:var(--navy);background:#eef2ff;transform:translateX(4px);}
+.q-opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;font-weight:700;}
+.q-opt.wrong{border-color:#dc2626;background:#fef2f2;color:#b91c1c;}
+.q-explain{margin-top:10px;padding:12px;border-radius:8px;font-size:14px;display:none;}
+.q-explain.show{display:block;}
+.q-explain.correct{background:#f0fdf4;border:2px solid #86efac;color:#166534;}
+.q-explain.incorrect{background:#fef2f2;border:2px solid #fca5a5;color:#991b1b;}
+.submit-btn{background:linear-gradient(135deg,var(--navy),var(--red));color:white;border:none;padding:16px 52px;font-size:18px;font-weight:700;border-radius:30px;cursor:pointer;display:block;margin:26px auto;box-shadow:0 6px 18px rgba(11,36,114,0.3);font-family:'DM Sans',sans-serif;}
+.submit-btn:hover{transform:translateY(-2px);}
+.quiz-results{display:none;background:linear-gradient(135deg,#16a34a,#15803d);color:white;padding:40px;border-radius:16px;text-align:center;margin-top:24px;}
+.quiz-results.show{display:block;}
+.quiz-results h2{font-size:36px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:10px;}
+.result-score{font-size:72px;font-weight:900;margin:14px 0;}
+.result-msg{font-size:20px;opacity:.95;margin-bottom:24px;}
+.reset-btn{background:white;color:#16a34a;border:none;padding:14px 40px;font-size:16px;font-weight:700;border-radius:24px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.reset-btn:hover{transform:scale(1.05);}
+@media(max-width:768px){.header h1{font-size:36px;}.content{padding:20px 16px;}.phrases-grid{grid-template-columns:1fr;}.nav-tab{padding:12px;font-size:13px;}.section-hero{padding:20px;}}
+
+</style>
+</head>
+<body style="--c1:#E8682A;--c2:#C2185B;">
+<div class="header">
+  <div class="flag-badge">🇰🇷 WEEK 20 · MARCH TRIP</div>
+  <h1>식당 · 카페 · 쇼핑</h1>
+  <div class="header-sub">Restaurant · Café · Shopping  |  초급 Beginner  |  🇰🇷 3월 March</div>
+  <div class="header-tags"><span class="tag">🍜 식당/카페</span><span class="tag">🛍️ 쇼핑</span><span class="tag">✍️ 퀴즈</span></div>
+</div>
+<div class="nav-wrapper">
+  <div class="nav-tabs">
+    <button class="nav-tab active" style="--active:#E8682A" onclick="show('food',this)">🍜 식당/카페</button>
+    <button class="nav-tab" style="--active:#C2185B" onclick="show('shop',this)">🛍️ 쇼핑</button>
+    <button class="nav-tab" style="--active:#1F2937" onclick="show('quiz',this)">✍️ 퀴즈</button>
+  </div>
+</div>
+<div class="content">
+
+<div id="food-section" class="section active" style="--cat-color:#E8682A">
+  <div class="section-hero" style="background:linear-gradient(135deg,#E8682A,#c0392b)" data-emoji="🍜">
+    <div class="hero-emoji">🍜</div>
+    <div><div class="hero-title">식당 · 카페 · 편의점</div><div class="hero-sub">Restaurant · Café · Convenience Store</div></div>
+  </div>
+  <div class="pron-guide">
+    💡 <strong>식당 꿀팁:</strong> Most Korean restaurants have picture menus — just point and say <strong>"이거 주세요"</strong>! Water (물) is usually free. <strong>No tipping needed</strong> in Korea 🙌
+  </div>
+  <div class="phrases-grid">
+    <div class="phrase-card"><div class="situation-label">Ordering — Most Used!</div><div class="phrase-ko">이거 주세요.</div><div class="phrase-ro">i-geo ju-se-yo</div><div class="phrase-en">I'll have this, please.</div><div class="phrase-tip">💡 The #1 most useful restaurant phrase! Point at the menu/picture + say this. Works 100% of the time.</div></div>
+    <div class="phrase-card"><div class="situation-label">How Many People</div><div class="phrase-ko">두 명이에요.</div><div class="phrase-ro">du myeong-i-e-yo</div><div class="phrase-en">There are two of us.</div><div class="phrase-tip">💡 Numbers: 한 명 (1) · 두 명 (2) · 세 명 (3) · 네 명 (4) · 다섯 명 (5).</div></div>
+    <div class="phrase-card"><div class="situation-label">Free Water</div><div class="phrase-ko">물 주세요.</div><div class="phrase-ro">mul ju-se-yo</div><div class="phrase-en">Water, please.</div><div class="phrase-tip">💡 Water is free in most Korean restaurants! Cold water = <strong>냉수</strong>, hot = <strong>온수</strong>.</div></div>
+    <div class="phrase-card"><div class="situation-label">What Is This?</div><div class="phrase-ko">이거 뭐예요?</div><div class="phrase-ro">i-geo mwo-e-yo?</div><div class="phrase-en">What is this?</div><div class="phrase-tip">💡 Point at something on the menu or plate. Staff will often show you a photo or explain with gestures.</div></div>
+    <div class="phrase-card"><div class="situation-label">Not Spicy</div><div class="phrase-ko">맵지 않게 해 주세요.</div><div class="phrase-ro">maep-ji an-ke hae ju-se-yo</div><div class="phrase-en">Please make it not spicy.</div><div class="phrase-tip">💡 Korean food can be very spicy! 🌶️ Also: <strong>"안 매운 거 있어요?"</strong> (Is there something not spicy?)</div></div>
+    <div class="phrase-card"><div class="situation-label">Bill Please</div><div class="phrase-ko">계산해 주세요.</div><div class="phrase-ro">gye-san-hae ju-se-yo</div><div class="phrase-en">Check, please.</div><div class="phrase-tip">💡 In many restaurants, you pay at the counter (계산대), not at the table. Look for the register near the exit!</div></div>
+    <div class="phrase-card"><div class="situation-label">Takeout / To-Go</div><div class="phrase-ko">포장해 주세요.</div><div class="phrase-ro">po-jang-hae ju-se-yo</div><div class="phrase-en">To go, please.</div><div class="phrase-tip">💡 Café staff may ask: <strong>"드시고 가세요, 포장이에요?"</strong> (For here or to go?) Answer: 포장이에요 or 여기서 마실게요.</div></div>
+    <div class="phrase-card"><div class="situation-label">Delicious!</div><div class="phrase-ko">맛있어요! 정말 맛있어요!</div><div class="phrase-ro">ma-sit-seo-yo! jeong-mal ma-sit-seo-yo!</div><div class="phrase-en">It's delicious! Really delicious!</div><div class="phrase-tip">💡 Koreans LOVE hearing this! Extra: <strong>"최고예요!"</strong> (It's the best!) 😍</div></div>
+    <div class="phrase-card"><div class="situation-label">Café Order</div><div class="phrase-ko">아이스 아메리카노 한 잔 주세요.</div><div class="phrase-ro">a-i-seu a-me-ri-ka-no han jan ju-se-yo</div><div class="phrase-en">One iced Americano, please.</div><div class="phrase-tip">💡 Korea = coffee nation! 한 잔 = one cup, 두 잔 = two cups.</div></div>
+    <div class="phrase-card"><div class="situation-label">Card Payment</div><div class="phrase-ko">카드 돼요?</div><div class="phrase-ro">ka-deu dwae-yo?</div><div class="phrase-en">Do you accept card?</div><div class="phrase-tip">💡 Most places accept cards. But small street food stalls (포장마차) and traditional markets are often cash only!</div></div>
+  </div>
+  <div class="dialog-box">
+    <div class="dialog-title">🎭 상황 연습 — Café Order</div>
+    <div class="dialog-row"><div class="d-avatar d-them">☕</div><div class="d-bubble"><div class="d-ko">어서 오세요! 주문하시겠어요?</div><div class="d-ro">eo-seo o-se-yo! ju-mun-ha-si-get-seo-yo?</div><div class="d-en">Welcome! Are you ready to order?</div></div></div>
+    <div class="dialog-row right"><div class="d-avatar d-you">👤</div><div class="d-bubble"><div class="d-ko">아이스 아메리카노 두 잔 주세요.</div><div class="d-ro">a-i-seu a-me-ri-ka-no du jan ju-se-yo.</div><div class="d-en">Two iced Americanos, please.</div></div></div>
+    <div class="dialog-row"><div class="d-avatar d-them">☕</div><div class="d-bubble"><div class="d-ko">드시고 가세요, 포장이에요?</div><div class="d-ro">deu-si-go ga-se-yo, po-jang-i-e-yo?</div><div class="d-en">For here, or to go?</div></div></div>
+    <div class="dialog-row right"><div class="d-avatar d-you">👤</div><div class="d-bubble"><div class="d-ko">여기서 마실게요. 카드 돼요?</div><div class="d-ro">yeo-gi-seo ma-sil-ge-yo. ka-deu dwae-yo?</div><div class="d-en">We'll drink here. Do you take card?</div></div></div>
+  </div>
+</div>
+
+<div id="shop-section" class="section" style="--cat-color:#C2185B">
+  <div class="section-hero" style="background:linear-gradient(135deg,#C2185B,#880E4F)" data-emoji="🛍️">
+    <div class="hero-emoji">🛍️</div>
+    <div><div class="hero-title">쇼핑 · 시장 · 면세점</div><div class="hero-sub">Shopping · Market · Duty Free</div></div>
+  </div>
+  <div class="pron-guide">
+    💡 <strong>쇼핑 꿀팁:</strong> Duty-free refund (환급) for purchases over 30,000원 — look for the <strong>TAX FREE</strong> sign! Namdaemun &amp; Dongdaemun markets are best for bargaining.
+  </div>
+  <div class="phrases-grid">
+    <div class="phrase-card"><div class="situation-label">How Much?</div><div class="phrase-ko">이거 얼마예요?</div><div class="phrase-ro">i-geo eol-ma-e-yo?</div><div class="phrase-en">How much is this?</div><div class="phrase-tip">💡 Point and ask! Korean won: 1,000원 ≈ $0.75.</div></div>
+    <div class="phrase-card"><div class="situation-label">Bargaining (Markets Only)</div><div class="phrase-ko">좀 깎아 주세요.</div><div class="phrase-ro">jom kka-kka ju-se-yo</div><div class="phrase-en">Please give me a discount.</div><div class="phrase-tip">💡 Only use at traditional markets (시장), not department stores. Smile! 🤝 좀 = "a little" — keeps it polite.</div></div>
+    <div class="phrase-card"><div class="situation-label">I'll Buy This</div><div class="phrase-ko">이거 살게요.</div><div class="phrase-ro">i-geo sal-ge-yo</div><div class="phrase-en">I'll buy this. / I'll take this one.</div><div class="phrase-tip">💡 More decisive than 주세요. You can also hold it up and say <strong>"이거요!"</strong></div></div>
+    <div class="phrase-card"><div class="situation-label">Other Colors</div><div class="phrase-ko">다른 색 있어요?</div><div class="phrase-ro">da-reun saek it-seo-yo?</div><div class="phrase-en">Do you have other colors?</div><div class="phrase-tip">💡 Replace 색 (color) with: <strong>사이즈</strong> (size), <strong>디자인</strong> (design), <strong>종류</strong> (type).</div></div>
+    <div class="phrase-card"><div class="situation-label">Try On Clothes</div><div class="phrase-ko">입어 봐도 돼요?</div><div class="phrase-ro">ib-eo bwa-do dwae-yo?</div><div class="phrase-en">Can I try it on?</div><div class="phrase-tip">💡 Ask where fitting rooms are: <strong>"탈의실이 어디에 있어요?"</strong></div></div>
+    <div class="phrase-card"><div class="situation-label">Too Expensive</div><div class="phrase-ko">너무 비싸요.</div><div class="phrase-ro">neo-mu bi-ssa-yo</div><div class="phrase-en">It's too expensive.</div><div class="phrase-tip">💡 Say with a smile. Follow up: <strong>"조금만 깎아 주세요"</strong> (just a little discount please).</div></div>
+    <div class="phrase-card"><div class="situation-label">Tax Refund</div><div class="phrase-ko">세금 환급 돼요?</div><div class="phrase-ro">se-geum hwan-geup dwae-yo?</div><div class="phrase-en">Can I get a tax refund?</div><div class="phrase-tip">💡 Spend 30,000원+ per store. Bring your passport. Claim refund at the airport!</div></div>
+    <div class="phrase-card"><div class="situation-label">Shopping Bag</div><div class="phrase-ko">봉투 주세요.</div><div class="phrase-ro">bong-tu ju-se-yo</div><div class="phrase-en">Please give me a bag.</div><div class="phrase-tip">💡 Plastic bags cost extra in Korea! Bring a reusable eco-bag (에코백) to save 100-300원.</div></div>
+  </div>
+</div>
+<!-- QUIZ -->
+<div id="quiz-section" class="section">
+
+<div class="quiz-intro">
+  <h2>✍️ 퀴즈 Quiz — 식당 · 쇼핑</h2>
+  <p>식당/카페와 쇼핑 표현을 얼마나 기억하나요? · 6 questions</p>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q1 · 식당</div>
+  <div class="q-text">메뉴를 가리키며 가장 간단하게 주문하는 표현은?<br><small style="font-weight:400;font-size:14px">(Simplest way to order while pointing at a menu)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q1')">① 이거 뭐예요?</button>
+    <button class="q-opt" onclick="pick(this,true,'q1')">② 이거 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">③ 얼마예요?</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">④ 맛있어요!</button>
+  </div>
+  <div id="q1-exp" class="q-explain">✅ <strong>이거 주세요</strong> = "This, please." 이거 = this thing, 주세요 = please give me. Point + say this = instant order! Works 100% of the time.</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q2 · 식당</div>
+  <div class="q-text">"Please make it not spicy" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q2')">① 매워요!</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">② 안 매워요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">③ 조금만 주세요.</button>
+    <button class="q-opt" onclick="pick(this,true,'q2')">④ 맵지 않게 해 주세요.</button>
+  </div>
+  <div id="q2-exp" class="q-explain">✅ <strong>맵지 않게 해 주세요</strong> = "Please make it not spicy." 맵다 = spicy. 않게 해 주세요 = please do it in a way that isn't ___. Essential for Korean food! 🌶️</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q3 · 식당/카페</div>
+  <div class="q-text">"To go please" (포장) 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,true,'q3')">① 포장해 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">② 여기서 마실게요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">③ 계산해 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">④ 물 주세요.</button>
+  </div>
+  <div id="q3-exp" class="q-explain">✅ <strong>포장해 주세요</strong> = "To go / takeout please." 포장 = packaging/wrapping. 여기서 마실게요 = "I'll drink here." These two are opposites!</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q4 · 쇼핑</div>
+  <div class="q-text">시장에서 가격을 낮춰달라고 할 때 쓰는 표현은?<br><small style="font-weight:400;font-size:14px">(Asking for a discount at a traditional market)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q4')">① 너무 비싸요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">② 다른 색 있어요?</button>
+    <button class="q-opt" onclick="pick(this,true,'q4')">③ 좀 깎아 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">④ 세금 환급 돼요?</button>
+  </div>
+  <div id="q4-exp" class="q-explain">✅ <strong>좀 깎아 주세요</strong> = "Please discount it a little." 깎다 = to cut/reduce price. 좀 = a little. Use ONLY at traditional markets, not at regular stores!</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q5 · 쇼핑</div>
+  <div class="q-text">"Can I try it on?" 을 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q5')">① 이거 살게요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">② 봉투 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">③ 다른 사이즈 있어요?</button>
+    <button class="q-opt" onclick="pick(this,true,'q5')">④ 입어 봐도 돼요?</button>
+  </div>
+  <div id="q5-exp" class="q-explain">✅ <strong>입어 봐도 돼요?</strong> = "Can I try it on?" 입다 = to wear, 봐도 돼요 = is it okay to try? Fitting room = <strong>탈의실</strong>.</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q6 · 쇼핑</div>
+  <div class="q-text">한국에서 세금 환급(Tax Refund)을 받으려면 한 매장에서 최소 얼마 이상 사야 하나요?<br><small style="font-weight:400;font-size:14px">(Minimum purchase for tax refund at one store)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q6')">① 10,000원</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">② 20,000원</button>
+    <button class="q-opt" onclick="pick(this,true,'q6')">③ 30,000원</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">④ 50,000원</button>
+  </div>
+  <div id="q6-exp" class="q-explain">✅ 30,000원 이상! Look for the <strong>TAX FREE</strong> sign in stores. Bring your passport, get a refund form, then claim your refund at the airport. Save your receipts!</div>
+</div>
+  <button class="submit-btn" onclick="submitQ(6)">🇰🇷 결과 보기 See My Score!</button>
+  <div id="quiz-results" class="quiz-results">
+    <h2>🇰🇷 결과 Results!</h2>
+    <div class="result-score" id="score-disp">0/6</div>
+    <div class="result-msg" id="result-msg"></div>
+    <button class="reset-btn" onclick="resetQ()">🔄 다시 하기 Try Again</button>
+  </div>
+</div>
+</div>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id+'-section').classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const ans={};
+function pick(btn,correct,id){
+  if(ans[id]!==undefined)return;
+  const parent=btn.closest('.quiz-q');
+  const opts=parent.querySelectorAll('.q-opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  btn.classList.add(correct?'correct':'wrong');
+  if(!correct)opts.forEach(o=>{if(o.onclick.toString().includes('true'))o.classList.add('correct');});
+  ans[id]=correct;
+  const exp=document.getElementById(id+'-exp');
+  if(exp){exp.classList.add('show',correct?'correct':'incorrect');}
+}
+function submitQ(total){
+  let c=0;
+  for(let i=1;i<=total;i++)if(ans['q'+i]===true)c++;
+  const r=document.getElementById('quiz-results');
+  r.classList.add('show');
+  document.getElementById('score-disp').textContent=c+'/'+total;
+  const msgs=[
+    [total,'🌟 완벽해요! Perfect score!'],
+    [Math.ceil(total*0.8),'🎉 아주 잘했어요! Almost perfect!'],
+    [Math.ceil(total*0.6),'🌸 잘했어요! Good job!'],
+    [0,'💪 화이팅! Keep studying!']
+  ];
+  const msg=msgs.find(([min])=>c>=min)||msgs[msgs.length-1];
+  document.getElementById('result-msg').textContent=msg[1];
+  r.scrollIntoView({behavior:'smooth'});
+}
+function resetQ(){
+  for(let k in ans)delete ans[k];
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.pointerEvents='';});
+  document.querySelectorAll('.q-explain').forEach(e=>e.classList.remove('show','correct','incorrect'));
+  document.getElementById('quiz-results').classList.remove('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

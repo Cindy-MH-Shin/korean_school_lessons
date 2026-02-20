@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇰🇷 관광지 · K-pop · 한류</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#0B2472;--red:#CD2E3A;--bg:#F7F8FC;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;}
+.header{background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 100%);color:white;padding:30px 40px 24px;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.03) 20px,rgba(255,255,255,0.03) 40px);}
+.flag-badge{display:inline-block;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);padding:6px 18px;border-radius:30px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;margin-bottom:10px;}
+.header h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;text-shadow:3px 3px 0 rgba(0,0,0,0.25);line-height:1;}
+.header-sub{font-size:16px;opacity:.9;margin-top:6px;}
+.header-tags{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.tag{background:rgba(255,255,255,0.18);padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600;}
+.nav-wrapper{background:white;border-bottom:3px solid #e5e7eb;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex-shrink:0;padding:14px 22px;font-size:15px;font-weight:700;cursor:pointer;border:none;background:transparent;color:#9ca3af;transition:all .25s;border-bottom:4px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.nav-tab:hover{background:#f9fafb;color:#374151;}
+.nav-tab.active{color:var(--active);border-bottom-color:var(--active);background:#fafafa;}
+.content{padding:32px 36px;max-width:1300px;margin:0 auto;}
+.section{display:none;}.section.active{display:block;}
+.section-hero{border-radius:16px;padding:28px 32px;margin-bottom:28px;color:white;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
+.section-hero::after{content:attr(data-emoji);position:absolute;right:20px;bottom:-10px;font-size:90px;opacity:0.15;}
+.hero-emoji{font-size:42px;}
+.hero-title{font-size:30px;font-weight:900;margin-bottom:4px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;}
+.hero-sub{font-size:16px;opacity:.9;}
+.phrases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:28px;}
+.phrase-card{background:white;border-radius:14px;padding:20px;border:2px solid #e5e7eb;transition:all .25s;position:relative;overflow:hidden;}
+.phrase-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--cat-color);border-radius:14px 0 0 14px;}
+.phrase-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,0.1);border-color:var(--cat-color);}
+.situation-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:8px;text-transform:uppercase;}
+.phrase-ko{font-family:'Noto Sans KR',sans-serif;font-size:26px;font-weight:900;color:#111827;line-height:1.3;margin-bottom:5px;}
+.phrase-ro{font-size:13px;color:#9ca3af;font-style:italic;margin-bottom:5px;}
+.phrase-en{font-size:15px;color:#374151;font-weight:600;margin-bottom:10px;}
+.phrase-tip{background:#f9fafb;border-radius:8px;padding:9px 12px;font-size:13px;color:#6b7280;line-height:1.6;border-left:3px solid var(--cat-color);}
+.phrase-tip strong{color:var(--cat-color);}
+.dialog-box{background:white;border-radius:14px;padding:24px 28px;border:2px solid #e5e7eb;margin-bottom:20px;}
+.dialog-title{font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--cat-color);margin-bottom:18px;text-transform:uppercase;}
+.dialog-row{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+.dialog-row.right{flex-direction:row-reverse;}
+.d-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.d-you{background:#EEF2FF;border:2px solid #c7d2fe;}
+.d-them{background:#F0FDF4;border:2px solid #bbf7d0;}
+.d-bubble{background:#f9fafb;border-radius:12px;padding:12px 16px;max-width:80%;}
+.dialog-row.right .d-bubble{background:#EEF2FF;}
+.d-ko{font-size:16px;font-weight:700;color:#111827;font-family:'Noto Sans KR',sans-serif;margin-bottom:3px;}
+.d-ro{font-size:11px;color:#9ca3af;margin-bottom:2px;}
+.d-en{font-size:13px;color:#6b7280;font-style:italic;}
+.emergency-card{background:linear-gradient(135deg,#fef2f2,#fff1f2);border:3px solid #fca5a5;border-radius:14px;padding:20px;position:relative;overflow:hidden;}
+.emergency-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:#CD2E3A;border-radius:14px 0 0 14px;}
+.emergency-card .phrase-ko{color:#CD2E3A;}
+.urgent-badge{display:inline-block;background:#CD2E3A;color:white;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:6px;margin-bottom:6px;text-transform:uppercase;}
+.kpop-card{background:linear-gradient(135deg,#fdf4ff,#fce7f3);border:2px solid #e9d5ff;border-radius:14px;padding:20px;}
+.numbers-box{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:20px 24px;margin-bottom:20px;}
+.numbers-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:14px;}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
+.num-item{background:#f9fafb;border-radius:10px;padding:10px;text-align:center;border:2px solid #e5e7eb;}
+.num-ko{font-size:22px;font-weight:900;font-family:'Noto Sans KR',sans-serif;color:#111827;}
+.num-ro{font-size:11px;color:#9ca3af;}
+.num-en{font-size:13px;font-weight:600;color:#374151;}
+.cat-header{display:flex;align-items:center;gap:12px;margin:24px 0 16px;}
+.cat-header-line{flex:1;height:2px;background:#e5e7eb;}
+.cat-header-label{background:var(--cat-color);color:white;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;white-space:nowrap;}
+.pron-guide{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:22px;font-size:14px;line-height:1.9;color:#92400e;}
+.pron-guide strong{color:#b45309;}
+.pron-guide.red{background:#fef2f2;border-color:#fca5a5;color:#7f1d1d;}
+.quiz-intro{background:linear-gradient(135deg,var(--navy) 0%,#1a3a8f 100%);color:white;padding:28px;border-radius:16px;margin-bottom:24px;text-align:center;}
+.quiz-intro h2{font-size:30px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:6px;}
+.quiz-intro p{font-size:15px;opacity:.9;}
+.quiz-q{background:white;border:2px solid #e5e7eb;border-radius:14px;padding:24px;margin-bottom:16px;}
+.q-num{background:var(--navy);color:white;display:inline-block;padding:5px 14px;border-radius:14px;font-size:13px;font-weight:700;margin-bottom:12px;}
+.q-text{font-size:18px;color:#111827;font-weight:700;margin-bottom:16px;line-height:1.5;}
+.q-ko{color:var(--navy);font-family:'Noto Sans KR',sans-serif;font-size:22px;}
+.q-opts{display:grid;gap:9px;}
+.q-opt{background:#f9fafb;border:2px solid #e5e7eb;border-radius:10px;padding:12px 16px;font-size:16px;cursor:pointer;text-align:left;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.q-opt:hover{border-color:var(--navy);background:#eef2ff;transform:translateX(4px);}
+.q-opt.correct{border-color:#16a34a;background:#f0fdf4;color:#15803d;font-weight:700;}
+.q-opt.wrong{border-color:#dc2626;background:#fef2f2;color:#b91c1c;}
+.q-explain{margin-top:10px;padding:12px;border-radius:8px;font-size:14px;display:none;}
+.q-explain.show{display:block;}
+.q-explain.correct{background:#f0fdf4;border:2px solid #86efac;color:#166534;}
+.q-explain.incorrect{background:#fef2f2;border:2px solid #fca5a5;color:#991b1b;}
+.submit-btn{background:linear-gradient(135deg,var(--navy),var(--red));color:white;border:none;padding:16px 52px;font-size:18px;font-weight:700;border-radius:30px;cursor:pointer;display:block;margin:26px auto;box-shadow:0 6px 18px rgba(11,36,114,0.3);font-family:'DM Sans',sans-serif;}
+.submit-btn:hover{transform:translateY(-2px);}
+.quiz-results{display:none;background:linear-gradient(135deg,#16a34a,#15803d);color:white;padding:40px;border-radius:16px;text-align:center;margin-top:24px;}
+.quiz-results.show{display:block;}
+.quiz-results h2{font-size:36px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;margin-bottom:10px;}
+.result-score{font-size:72px;font-weight:900;margin:14px 0;}
+.result-msg{font-size:20px;opacity:.95;margin-bottom:24px;}
+.reset-btn{background:white;color:#16a34a;border:none;padding:14px 40px;font-size:16px;font-weight:700;border-radius:24px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.reset-btn:hover{transform:scale(1.05);}
+@media(max-width:768px){.header h1{font-size:36px;}.content{padding:20px 16px;}.phrases-grid{grid-template-columns:1fr;}.nav-tab{padding:12px;font-size:13px;}.section-hero{padding:20px;}}
+
+</style>
+</head>
+<body style="--c1:#6A1B9A;--c2:#D97706;">
+<div class="header">
+  <div class="flag-badge">🇰🇷 WEEK 20 · MARCH TRIP</div>
+  <h1>관광지 · K-pop · 한류</h1>
+  <div class="header-sub">Sightseeing · K-pop · Hallyu  |  초급 Beginner  |  🇰🇷 3월 March</div>
+  <div class="header-tags"><span class="tag">📸 관광지</span><span class="tag">🎤 K-pop</span><span class="tag">✍️ 퀴즈</span></div>
+</div>
+<div class="nav-wrapper">
+  <div class="nav-tabs">
+    <button class="nav-tab active" style="--active:#6A1B9A" onclick="show('tourist',this)">📸 관광지</button>
+    <button class="nav-tab" style="--active:#D97706" onclick="show('kpop',this)">🎤 K-pop</button>
+    <button class="nav-tab" style="--active:#1F2937" onclick="show('quiz',this)">✍️ 퀴즈</button>
+  </div>
+</div>
+<div class="content">
+
+<div id="tourist-section" class="section active" style="--cat-color:#6A1B9A">
+  <div class="section-hero" style="background:linear-gradient(135deg,#6A1B9A,#4a148c)" data-emoji="📸">
+    <div class="hero-emoji">📸</div>
+    <div><div class="hero-title">관광지 · 사진 · 체험</div><div class="hero-sub">Sightseeing · Photos · Experiences</div></div>
+  </div>
+  <div class="pron-guide">
+    💡 <strong>3월 서울 추천:</strong> 경복궁 (Gyeongbokgung Palace) · 북촌 한옥마을 (Bukchon Hanok Village) · 인사동 · 남산 · 명동. Cherry blossoms start late March in 여의도 &amp; 창덕궁! 🌸
+  </div>
+  <div class="phrases-grid">
+    <div class="phrase-card"><div class="situation-label">Ask Someone to Take Your Photo</div><div class="phrase-ko">사진 찍어 주실 수 있어요?</div><div class="phrase-ro">sa-jin jji-geo ju-sil su it-seo-yo?</div><div class="phrase-en">Could you take a photo for us?</div><div class="phrase-tip">💡 Hold out your phone + say this. Koreans are very willing to help with photos!</div></div>
+    <div class="phrase-card"><div class="situation-label">Take a Photo Together</div><div class="phrase-ko">같이 사진 찍어도 돼요?</div><div class="phrase-ro">ga-chi sa-jin jji-geo-do dwae-yo?</div><div class="phrase-en">Can we take a photo together?</div><div class="phrase-tip">💡 Always ask first — don't just snap! Koreans appreciate the politeness.</div></div>
+    <div class="phrase-card"><div class="situation-label">Entrance Fee</div><div class="phrase-ko">입장료가 얼마예요?</div><div class="phrase-ro">ip-jang-nyo-ga eol-ma-e-yo?</div><div class="phrase-en">How much is the entrance fee?</div><div class="phrase-tip">💡 Gyeongbokgung: 3,000원. Changdeokgung: 3,000원. Namsan Tower admission: free (cable car costs extra).</div></div>
+    <div class="phrase-card"><div class="situation-label">Can I Take Photos Here?</div><div class="phrase-ko">여기서 사진 찍어도 돼요?</div><div class="phrase-ro">yeo-gi-seo sa-jin jji-geo-do dwae-yo?</div><div class="phrase-en">Can I take photos here?</div><div class="phrase-tip">💡 Always ask in museums and temples. Look for 촬영 금지 (no photography) signs.</div></div>
+    <div class="phrase-card"><div class="situation-label">Trying Hanbok</div><div class="phrase-ko">한복 입어 보고 싶어요.</div><div class="phrase-ro">han-bok ib-eo bo-go sip-eo-yo</div><div class="phrase-en">I want to try on hanbok.</div><div class="phrase-tip">💡 Rental shops near Gyeongbokgung! Wearing hanbok = FREE entry to most royal palaces. Rental: ~15,000원/2hrs. 🎎</div></div>
+    <div class="phrase-card"><div class="situation-label">Closing Time</div><div class="phrase-ko">몇 시에 닫아요?</div><div class="phrase-ro">myeot si-e da-da-yo?</div><div class="phrase-en">What time does it close?</div><div class="phrase-tip">💡 몇 시에 열어요? = What time does it open? Most palaces close on Tuesdays!</div></div>
+    <div class="phrase-card"><div class="situation-label">English Guide Available?</div><div class="phrase-ko">영어 안내 있어요?</div><div class="phrase-ro">yeong-eo an-nae it-seo-yo?</div><div class="phrase-en">Is there an English guide available?</div><div class="phrase-tip">💡 Royal palaces have free English guided tours at set times. Most major sites have English audio guides (오디오 가이드)!</div></div>
+    <div class="phrase-card"><div class="situation-label">One More Photo!</div><div class="phrase-ko">한 번 더 찍어 주세요.</div><div class="phrase-ro">han beon deo jji-geo ju-se-yo</div><div class="phrase-en">Please take one more.</div><div class="phrase-tip">💡 한 번 더 = one more time. Also: <strong>"좀 더 가까이요"</strong> (a bit closer) or <strong>"조금 왼쪽으로요"</strong> (a little to the left).</div></div>
+  </div>
+</div>
+
+<div id="kpop-section" class="section" style="--cat-color:#D97706">
+  <div class="section-hero" style="background:linear-gradient(135deg,#D97706,#92400e)" data-emoji="🎤">
+    <div class="hero-emoji">🎤</div>
+    <div><div class="hero-title">K-pop · 한류 · 팬 문화</div><div class="hero-sub">Kpop · K-drama · Fan Expressions</div></div>
+  </div>
+  <div class="pron-guide">
+    💡 <strong>K-pop 성지:</strong> HYBE → 한강진역 | SM Town Coex → 삼성역 | JYP → 청담역 | 홍대 (Hongdae) → indie music &amp; busking | 명동 → K-beauty &amp; merch!
+  </div>
+  <div class="phrases-grid">
+    <div class="kpop-card phrase-card"><div class="situation-label">Being a Fan</div><div class="phrase-ko">저 ___ 팬이에요!</div><div class="phrase-ro">jeo ___ paen-i-e-yo!</div><div class="phrase-en">I'm a ___ fan!</div><div class="phrase-tip">💡 Fill in: BTS, BLACKPINK, EXO, aespa, NewJeans, Stray Kids... Koreans will instantly light up! 🎉</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Autograph!</div><div class="phrase-ko">사인해 주세요!</div><div class="phrase-ro">sa-in-hae ju-se-yo!</div><div class="phrase-en">Please sign (autograph) for me!</div><div class="phrase-tip">💡 Bring an album or photo card. <strong>"여기 사인해 주세요"</strong> (Please sign here — pointing to the spot).</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Studying Korean</div><div class="phrase-ko">K-pop 때문에 한국어 공부해요!</div><div class="phrase-ro">K-pop ttae-mun-e han-guk-eo gong-bu-hae-yo!</div><div class="phrase-en">I study Korean because of K-pop!</div><div class="phrase-tip">💡 BEST icebreaker in Korea! Koreans will be incredibly touched. Very likely to make Korean friends this way 🤝</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Expressing Love</div><div class="phrase-ko">정말 좋아해요!</div><div class="phrase-ro">jeong-mal jo-a-hae-yo!</div><div class="phrase-en">I really love it!</div><div class="phrase-tip">💡 좋아해요 = like/love (general). 사랑해요 = romantic love. Use 좋아해요 for music, food, Korea in general!</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Finding Merchandise</div><div class="phrase-ko">공식 굿즈 어디서 살 수 있어요?</div><div class="phrase-ro">gong-sik gut-seu eo-di-seo sal su it-seo-yo?</div><div class="phrase-en">Where can I buy official merchandise?</div><div class="phrase-tip">💡 HYBE Insight, Coex SMtown store, 핫트랙스 (Hottracks), 교보문고 for all K-pop merch!</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Photo Cards</div><div class="phrase-ko">포토카드 있어요?</div><div class="phrase-ro">po-to-ka-deu it-seo-yo?</div><div class="phrase-en">Do you have photo cards?</div><div class="phrase-tip">💡 포토카드 = fan photo cards (poca). 홍대 (Hongdae) has rare/used photocard shops — many specializing in specific groups!</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Karaoke!</div><div class="phrase-ko">노래방 가요!</div><div class="phrase-ro">no-rae-bang ga-yo!</div><div class="phrase-en">Let's go to karaoke (norebang)!</div><div class="phrase-tip">💡 노래방 = private singing room — NOT public bar karaoke. Your own private room with a mic &amp; giant screen! ~15,000-25,000원/hr. 🎤</div></div>
+    <div class="kpop-card phrase-card"><div class="situation-label">Dream Come True</div><div class="phrase-ko">한국에 와서 꿈 같아요!</div><div class="phrase-ro">han-guk-e wa-seo kkum gat-a-yo!</div><div class="phrase-en">Being in Korea feels like a dream!</div><div class="phrase-tip">💡 꿈 같아요 = feels like a dream. One of the most heartfelt things a foreign fan can say. Koreans will absolutely melt! 🥹</div></div>
+  </div>
+  <div class="cat-header" style="--cat-color:#D97706">
+    <div class="cat-header-line"></div>
+    <div class="cat-header-label">🌟 팬 필수 단어 Essential Fan Words</div>
+    <div class="cat-header-line"></div>
+  </div>
+  <div class="numbers-box">
+    <div class="numbers-grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+      <div class="num-item"><div class="num-ko">최애</div><div class="num-ro">choe-ae</div><div class="num-en">Ultimate fave / bias</div></div>
+      <div class="num-item"><div class="num-ko">직캠</div><div class="num-ro">jik-kaem</div><div class="num-en">Fan cam video</div></div>
+      <div class="num-item"><div class="num-ko">성지</div><div class="num-ro">seong-ji</div><div class="num-en">Fan pilgrimage spot</div></div>
+      <div class="num-item"><div class="num-ko">오빠</div><div class="num-ro">op-pa</div><div class="num-en">Male idol / older bro</div></div>
+      <div class="num-item"><div class="num-ko">대박</div><div class="num-ro">dae-bak</div><div class="num-en">Amazing! / Wow!</div></div>
+      <div class="num-item"><div class="num-ko">헐</div><div class="num-ro">heol</div><div class="num-en">Oh my gosh!</div></div>
+      <div class="num-item"><div class="num-ko">귀엽다</div><div class="num-ro">gwi-yeop-da</div><div class="num-en">So cute!</div></div>
+      <div class="num-item"><div class="num-ko">부캐</div><div class="num-ro">bu-kae</div><div class="num-en">Alter ego / side char</div></div>
+    </div>
+  </div>
+</div>
+<!-- QUIZ -->
+<div id="quiz-section" class="section">
+
+<div class="quiz-intro">
+  <h2>✍️ 퀴즈 Quiz — 관광지 · K-pop</h2>
+  <p>관광지와 K-pop 표현을 얼마나 기억하나요? · 6 questions</p>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q1 · 관광지</div>
+  <div class="q-text">"Could you take a photo for us?" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q1')">① 여기서 사진 찍어도 돼요?</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">② 한 번 더 찍어 주세요.</button>
+    <button class="q-opt" onclick="pick(this,false,'q1')">③ 같이 사진 찍어도 돼요?</button>
+    <button class="q-opt" onclick="pick(this,true,'q1')">④ 사진 찍어 주실 수 있어요?</button>
+  </div>
+  <div id="q1-exp" class="q-explain">✅ <strong>사진 찍어 주실 수 있어요?</strong> = "Could you take a photo for us?" 사진 찍다 = to take a photo, 주실 수 있어요 = could you (polite). Hold out your phone and say this!</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q2 · 관광지</div>
+  <div class="q-text">한복을 입으면 대부분의 궁궐(palace)에 어떤 혜택이 있나요?<br><small style="font-weight:400;font-size:14px">(Benefit of wearing hanbok at royal palaces)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q2')">① 50% 할인 (50% discount)</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">② 오디오 가이드 무료 (Free audio guide)</button>
+    <button class="q-opt" onclick="pick(this,true,'q2')">③ 무료 입장 (Free entry)</button>
+    <button class="q-opt" onclick="pick(this,false,'q2')">④ 사진 서비스 무료 (Free photo service)</button>
+  </div>
+  <div id="q2-exp" class="q-explain">✅ <strong>무료 입장 (Free entry)!</strong> Wearing hanbok = FREE admission at Gyeongbokgung, Changdeokgung, Deoksugung &amp; more! Hanbok rental near palaces: ~15,000원/2hrs. Great photos too! 📸</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q3 · 관광지</div>
+  <div class="q-text">궁궐이 쉬는 날(휴관일)은 보통 언제인가요?<br><small style="font-weight:400;font-size:14px">(What day are royal palaces usually closed?)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q3')">① 월요일 Monday</button>
+    <button class="q-opt" onclick="pick(this,true,'q3')">② 화요일 Tuesday</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">③ 토요일 Saturday</button>
+    <button class="q-opt" onclick="pick(this,false,'q3')">④ 일요일 Sunday</button>
+  </div>
+  <div id="q3-exp" class="q-explain">✅ Most Korean royal palaces are closed on <strong>화요일 (Tuesday)</strong>. Plan your itinerary accordingly! Also: many Korean museums offer free entry on the last Wednesday of each month.</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q4 · K-pop</div>
+  <div class="q-text"><span class="q-ko">노래방</span>에 대한 설명으로 올바른 것은?<br><small style="font-weight:400;font-size:14px">(Correct description of norebang)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q4')">① A public bar karaoke where strangers sing on stage together</button>
+    <button class="q-opt" onclick="pick(this,true,'q4')">② A private singing room you book for your own group</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">③ A K-pop merchandise store</button>
+    <button class="q-opt" onclick="pick(this,false,'q4')">④ A recording studio open to fans</button>
+  </div>
+  <div id="q4-exp" class="q-explain">✅ 노래방 = 노래(song) + 방(room) = <strong>private singing room</strong>! You book a private room with your group, choose songs on a tablet, and sing with a real mic. ~15,000-25,000원/hr. Essential Korean experience! 🎤</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q5 · K-pop</div>
+  <div class="q-text">"I study Korean because of K-pop!" 를 한국어로 하면?</div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q5')">① K-pop 정말 좋아요!</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">② 사인해 주세요!</button>
+    <button class="q-opt" onclick="pick(this,true,'q5')">③ K-pop 때문에 한국어 공부해요!</button>
+    <button class="q-opt" onclick="pick(this,false,'q5')">④ 포토카드 있어요?</button>
+  </div>
+  <div id="q5-exp" class="q-explain">✅ <strong>K-pop 때문에 한국어 공부해요!</strong> 때문에 = because of. 공부해요 = I study. This is the BEST icebreaker in Korea — Koreans will be so touched and excited to talk to you! 🤝</div>
+</div>
+<div class="quiz-q">
+  <div class="q-num">Q6 · K-pop</div>
+  <div class="q-text">K-pop 팬 용어 중 <span class="q-ko">"최애"</span>의 뜻은?<br><small style="font-weight:400;font-size:14px">(What does the K-pop fan term "최애" mean?)</small></div>
+  <div class="q-opts">
+    <button class="q-opt" onclick="pick(this,false,'q6')">① Fan cam video</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">② Fan pilgrimage spot</button>
+    <button class="q-opt" onclick="pick(this,true,'q6')">③ Ultimate favorite / bias</button>
+    <button class="q-opt" onclick="pick(this,false,'q6')">④ Official merchandise</button>
+  </div>
+  <div id="q6-exp" class="q-explain">✅ <strong>최애 (choe-ae)</strong> = 최(most/best) + 애(love) = your ultimate favorite / bias! "BTS에서 누가 최애예요?" (Who is your bias in BTS?) 직캠 = fan cam, 성지 = fan pilgrimage spot.</div>
+</div>
+  <button class="submit-btn" onclick="submitQ(6)">🇰🇷 결과 보기 See My Score!</button>
+  <div id="quiz-results" class="quiz-results">
+    <h2>🇰🇷 결과 Results!</h2>
+    <div class="result-score" id="score-disp">0/6</div>
+    <div class="result-msg" id="result-msg"></div>
+    <button class="reset-btn" onclick="resetQ()">🔄 다시 하기 Try Again</button>
+  </div>
+</div>
+</div>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id+'-section').classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const ans={};
+function pick(btn,correct,id){
+  if(ans[id]!==undefined)return;
+  const parent=btn.closest('.quiz-q');
+  const opts=parent.querySelectorAll('.q-opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  btn.classList.add(correct?'correct':'wrong');
+  if(!correct)opts.forEach(o=>{if(o.onclick.toString().includes('true'))o.classList.add('correct');});
+  ans[id]=correct;
+  const exp=document.getElementById(id+'-exp');
+  if(exp){exp.classList.add('show',correct?'correct':'incorrect');}
+}
+function submitQ(total){
+  let c=0;
+  for(let i=1;i<=total;i++)if(ans['q'+i]===true)c++;
+  const r=document.getElementById('quiz-results');
+  r.classList.add('show');
+  document.getElementById('score-disp').textContent=c+'/'+total;
+  const msgs=[
+    [total,'🌟 완벽해요! Perfect score!'],
+    [Math.ceil(total*0.8),'🎉 아주 잘했어요! Almost perfect!'],
+    [Math.ceil(total*0.6),'🌸 잘했어요! Good job!'],
+    [0,'💪 화이팅! Keep studying!']
+  ];
+  const msg=msgs.find(([min])=>c>=min)||msgs[msgs.length-1];
+  document.getElementById('result-msg').textContent=msg[1];
+  r.scrollIntoView({behavior:'smooth'});
+}
+function resetQ(){
+  for(let k in ans)delete ans[k];
+  document.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','wrong');o.style.pointerEvents='';});
+  document.querySelectorAll('.q-explain').forEach(e=>e.classList.remove('show','correct','incorrect'));
+  document.getElementById('quiz-results').classList.remove('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
