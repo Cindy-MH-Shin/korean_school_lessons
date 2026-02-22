@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주일예배 영어 학습 Part 4 - 완성 마무리</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 36px; margin-bottom: 10px; }
+        .header .subtitle { font-size: 16px; opacity: 0.92; line-height: 1.8; }
+
+        .series-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.22);
+            border: 2px solid rgba(255,255,255,0.55);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #fafafa;
+            border-bottom: 3px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 140px;
+            padding: 18px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #718096;
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active { color: #7c2d12; background: white; border-bottom: 4px solid #ea580c; }
+        .nav-tab:hover { background: #fef3e8; }
+
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .category-header {
+            background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .category-desc {
+            color: #64748b;
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .sub-header {
+            background: #fff7ed;
+            border-left: 5px solid #ea580c;
+            padding: 12px 20px;
+            margin: 30px 0 18px 0;
+            font-size: 17px;
+            font-weight: bold;
+            color: #7c2d12;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .vocab-card {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .vocab-card:hover {
+            border-color: #ea580c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.15);
+        }
+
+        .vocab-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .vocab-number {
+            background: #7c2d12;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            margin-right: 13px;
+            flex-shrink: 0;
+        }
+
+        .vocab-word {
+            font-size: 25px;
+            font-weight: bold;
+            color: #2d3748;
+            line-height: 1.3;
+        }
+
+        .word-type-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-theology  { background: #fce7f3; color: #9d174d; border: 2px solid #db2777; }
+        .badge-expression{ background: #fff3e0; color: #c2410c; border: 2px solid #ea580c; }
+        .badge-verb      { background: #e0f2fe; color: #0369a1; border: 2px solid #0284c7; }
+        .badge-poetic    { background: #f5f0ff; color: #5b21b6; border: 2px solid #7c3aed; }
+        .badge-adj-noun  { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+        .badge-life      { background: #fef9c3; color: #713f12; border: 2px solid #ca8a04; }
+
+        .vocab-english {
+            font-size: 20px;
+            color: #7c2d12;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pronunciation {
+            font-size: 13px;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .example-box {
+            background: #fffbeb;
+            padding: 13px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            margin-top: 10px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #b45309;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .example-text {
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .korean-text { font-weight: 700; color: #1a1a1a; font-size: 15px; }
+        .english-text { color: #7c2d12; font-style: italic; }
+
+        .note-box {
+            background: #fff7ed;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border-left: 4px solid #ea580c;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #7c2d12;
+            line-height: 1.65;
+        }
+
+        .compare-box {
+            background: #f0f9ff;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border-left: 4px solid #0ea5e9;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #0c4a6e;
+            line-height: 1.65;
+        }
+
+        .related-words-box {
+            background: #fff7ed;
+            padding: 11px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 4px solid #fdba74;
+        }
+
+        .related-title {
+            font-weight: bold;
+            color: #7c2d12;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
+        .related-item {
+            display: inline-block;
+            background: white;
+            padding: 4px 9px;
+            border-radius: 12px;
+            margin: 2px;
+            font-size: 13px;
+            color: #2d3748;
+            border: 1px solid #fed7aa;
+        }
+
+        /* Vocab Table */
+        .term-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .term-table th {
+            background: #7c2d12;
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        .term-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.65;
+        }
+
+        .term-table tr:nth-child(even) td { background: #fff7ed; }
+        .term-table tr:hover td { background: #fed7aa; }
+        .term-korean { font-weight: 700; color: #1a1a1a; font-size: 17px; }
+        .term-english { color: #7c2d12; font-weight: 600; }
+        .term-note { color: #64748b; font-size: 13px; }
+
+        /* Quiz */
+        .quiz-container { max-width: 900px; margin: 0 auto; }
+
+        .quiz-question {
+            background: #f7fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+
+        .quiz-question:hover {
+            border-color: #ea580c;
+            box-shadow: 0 5px 15px rgba(234, 88, 12, 0.1);
+        }
+
+        .question-number {
+            background: #7c2d12;
+            color: white;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 13px;
+            font-size: 13px;
+        }
+
+        .question-text {
+            font-size: 17px;
+            color: #2d3748;
+            margin-bottom: 13px;
+            line-height: 1.6;
+        }
+
+        .quiz-options { display: flex; flex-direction: column; gap: 9px; }
+
+        .quiz-option {
+            padding: 13px 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .quiz-option:hover { border-color: #ea580c; background: #fff7ed; }
+        .quiz-option.selected { background: #fed7aa; border-color: #ea580c; font-weight: 600; }
+        .quiz-option.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+        .quiz-option.incorrect { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+
+        .submit-button {
+            background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 45, 18, 0.3);
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #7c2d12;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff7ed;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .series-nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px 40px;
+            background: #fff7ed;
+            border-top: 2px solid #fed7aa;
+            flex-wrap: wrap;
+        }
+
+        .series-link {
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 2px solid #ea580c;
+            color: #7c2d12;
+            text-decoration: none;
+            background: white;
+        }
+
+        .series-link.current { background: #7c2d12; color: white; }
+
+        @media (max-width: 768px) {
+            .vocab-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 22px; }
+            .vocab-word { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>⛪ 주일예배 영어 학습 Part 4 — 완성 마무리</h1>
+        <div class="subtitle">
+            중요 신학 어휘 · 남은 핵심 표현 · 시적·문학적 표현 완전 정복<br>
+            Theological Vocabulary · Remaining Expressions · Poetic &amp; Literary Language
+        </div>
+        <div class="series-badge">📚 전체 기도문 완전 커버 — Parts 1~4 Complete Series</div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('theology')">✝️ 신학 핵심 어휘</button>
+        <button class="nav-tab" onclick="showSection('expressions4')">🌟 남은 핵심 표현</button>
+        <button class="nav-tab" onclick="showSection('poetic')">🎨 시적·문학적 표현</button>
+        <button class="nav-tab" onclick="showSection('quiz4')">✏️ 퀴즈</button>
+    </div>
+
+    <div class="content">
+
+        <!-- ==================== TAB 1: 신학 핵심 어휘 ==================== -->
+        <div id="theology" class="section active">
+            <div class="category-header">✝️ 중요 신학 어휘 — Key Theological Vocabulary</div>
+            <p class="category-desc">
+                기도문 전체에서 사용된 핵심 신학 단어들 중 Part 1~3에서 다루지 않은 것들을 총정리합니다.<br>
+                각 단어의 한자 어원, 신학적 의미, 실제 기도문 용례를 함께 학습합니다.
+            </p>
+
+            <div class="sub-header">✝️ 구원론 · 속죄론 — Soteriology &amp; Atonement</div>
+            <div class="vocab-grid">
+
+                <!-- T1 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T1</div>
+                        <div class="vocab-word">대속 (代贖)</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">THEOLOGY NOUN</div>
+                    <div class="vocab-english">Atonement / Substitutionary redemption</div>
+                    <div class="pronunciation">대(代) = in place of, substituting | 속(贖) = to redeem, to buy back | 대속 = redeeming in one's place</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">십자가 대속없이 설수 없는 우리는 너무 약하고 악한 존재입니다.</span><br>
+                            <span class="english-text">We are beings too weak and sinful to stand without the atonement of the cross.</span>
+                        </div>
+                    </div>
+                    <div class="related-words-box">
+                        <div class="related-title">🔗 관련 신학 용어:</div>
+                        <span class="related-item">대속자 (the Redeemer)</span>
+                        <span class="related-item">속죄 (atonement, expiation)</span>
+                        <span class="related-item">보혈 (precious blood)</span>
+                        <span class="related-item">대속의 은혜 (grace of atonement)</span>
+                    </div>
+                </div>
+
+                <!-- T2 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T2</div>
+                        <div class="vocab-word">유월절 (逾越節)</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">THEOLOGY NOUN</div>
+                    <div class="vocab-english">Passover</div>
+                    <div class="pronunciation">유(逾) = to pass over | 월(越) = to leap, pass | 절(節) = festival | 설교 제목: "유월절의 밤과 십자가의 아침"</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현 (설교 제목):</div>
+                        <div class="example-text">
+                            <span class="korean-text">"유월절의 밤과 십자가의 아침"이라는 제목으로 말씀하실때에</span><br>
+                            <span class="english-text">When he preaches under the title "The Night of Passover and the Morning of the Cross"</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 유월절 = Passover (Exodus 12). The blood of the lamb on the doorposts protected Israel. Christians see it as a type/foreshadowing of Christ's atoning sacrifice — hence the sermon title linking 유월절의 밤 (Passover night) to 십자가의 아침 (the morning of the cross).</div>
+                </div>
+
+                <!-- T3 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T3</div>
+                        <div class="vocab-word">하나님의 어린양</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">BIBLICAL TITLE</div>
+                    <div class="vocab-english">The Lamb of God</div>
+                    <div class="pronunciation">어린양(羊) = lamb | 하나님의 어린양 = the Lamb of God (John 1:29)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">하나님의 어린양, 완전한 의로 덮으시는 예수 보혈만 의지합니다.</span><br>
+                            <span class="english-text">The Lamb of God — we rely only on the blood of Jesus that covers us with perfect righteousness.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 요한복음 1:29 / John 1:29: "Behold, the Lamb of God who takes away the sin of the world!" (세상 죄를 지고 가는 하나님의 어린양). Connected to 유월절 imagery and 대속 theology.</div>
+                </div>
+
+                <!-- T4 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T4</div>
+                        <div class="vocab-word">육신을 입으시다</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">INCARNATION EXPRESSION</div>
+                    <div class="vocab-english">To take on flesh / The Incarnation</div>
+                    <div class="pronunciation">육신(肉身) = flesh, physical body | 입으시다 = to put on, wear (honorific) | 성육신(成肉身) = the Incarnation</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">죄로 어두워진 이 땅을 회복시키기 위하여 육신을 입으시고 인간들 가운데로 임하신 예수님의 그 크신 은혜와 사랑을 찬양합니다.</span><br>
+                            <span class="english-text">We praise the great grace and love of Jesus, who took on flesh and came among humans in order to restore this land darkened by sin.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 신학 용어: <strong>성육신(成肉身)</strong> = Incarnation (literally: becoming flesh). 요한복음 1:14 / John 1:14 — "The Word became flesh and dwelt among us." (말씀이 육신이 되어 우리 가운데 거하시매)</div>
+                </div>
+
+                <!-- T5 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T5</div>
+                        <div class="vocab-word">죽은 자 가운데서 부활하다</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">RESURRECTION EXPRESSION</div>
+                    <div class="vocab-english">To be raised from among the dead / Resurrection</div>
+                    <div class="pronunciation">죽은 자(者) = the dead (literally: those who are dead) | 부활(復活) = resurrection | 가운데서 = from among</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">하나님의 많으신 긍휼대로 예수 그리스도를 죽은 자 가운데서 부활하게 하시며, 우리를 거듭나게 하시고, 산 소망이 있게 하시니 감사합니다.</span><br>
+                            <span class="english-text">According to God's great mercy, He raised Jesus Christ from among the dead, caused us to be born again, and gave us a living hope — for this we give thanks.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 베드로전서 1:3 / 1 Peter 1:3: "Praise be to the God…who has given us a living hope through the resurrection of Jesus Christ from the dead." (죽은 자 가운데서 부활하심으로 말미암아 산 소망이 있게 하시며)</div>
+                </div>
+
+                <!-- T6 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T6</div>
+                        <div class="vocab-word">공의 (公義)</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">THEOLOGY NOUN</div>
+                    <div class="vocab-english">Justice / Righteousness (God's)</div>
+                    <div class="pronunciation">공(公) = public, impartial | 의(義) = righteousness | 공의 = just/righteous governance — God's impartial righteousness in judgment</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">예수 그리스도를 통한 하나님의 사랑과 공의를 선포하게 하시옵고</span><br>
+                            <span class="english-text">Let him proclaim God's love and justice through Jesus Christ</span>
+                        </div>
+                    </div>
+                    <div class="compare-box">
+                        ⚖️ <strong>의(義) vs. 공의(公義):</strong><br>
+                        의(義) = righteousness (personal/moral quality) — 예: 완전한 의로 덮으시다<br>
+                        공의(公義) = justice (relational/judicial quality of God) — 예: 하나님의 사랑과 공의
+                    </div>
+                </div>
+
+                <!-- T7 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T7</div>
+                        <div class="vocab-word">인자 (仁慈)</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">THEOLOGY NOUN</div>
+                    <div class="vocab-english">Lovingkindness / Steadfast Love (hesed)</div>
+                    <div class="pronunciation">인(仁) = benevolence, love | 자(慈) = compassion, kindness | Hebrew equivalent: חֶסֶד (hesed)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">푸른 초장이나, 맹렬한 영적전쟁의 최전방에서나... 생명보다 귀하신 주님의 인자와 임재로 다시 일어나겠습니다.</span><br>
+                            <span class="english-text">Whether in green pastures or on the frontlines of fierce spiritual warfare… we will rise again through the Lord's lovingkindness and presence, more precious than life itself.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>인자(仁慈)</strong> is the Korean translation of the Hebrew <strong>חֶסֶד (hesed)</strong> — God's covenantal, steadfast, faithful love. The name of the 헤세드 찬양대 comes from this word. 시편 63:3 / Psalm 63:3: "Your lovingkindness is better than life." (주의 인자가 생명보다 나으므로)</div>
+                </div>
+
+                <!-- T8 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">T8</div>
+                        <div class="vocab-word">다시 오실 주님</div>
+                    </div>
+                    <div class="word-type-badge badge-theology">ESCHATOLOGY</div>
+                    <div class="vocab-english">The Lord who is coming again / The Second Coming</div>
+                    <div class="pronunciation">다시 오시다 = to come again | 재림(再臨) = Second Coming (formal theological term)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">다시 오실 우리의 주, 예수님의 이름으로 기도합니다. 아멘!</span><br>
+                            <span class="english-text">In the name of our Lord who is coming again, Jesus — we pray. Amen!</span>
+                        </div>
+                    </div>
+                    <div class="related-words-box">
+                        <div class="related-title">🔗 재림 관련 표현:</div>
+                        <span class="related-item">재림(再臨) = Second Coming</span>
+                        <span class="related-item">주님의 재림을 기다리다 (to await the Lord's return)</span>
+                        <span class="related-item">마라나타 (Maranatha — Come, Lord)</span>
+                    </div>
+                </div>
+
+            </div><!-- end theology grid 1 -->
+
+            <div class="sub-header">🙏 중요 신학 개념 어휘 — Key Conceptual Vocabulary</div>
+            <table class="term-table">
+                <tr>
+                    <th style="width:18%">한국어</th>
+                    <th style="width:28%">English</th>
+                    <th style="width:54%">설명 / Notes</th>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">분별하다</span></td>
+                    <td><span class="term-english">To discern / to distinguish</span></td>
+                    <td><span class="term-note">분별(分別) = discernment. 하나님의 선하시고 기뻐하시고 온전하신 뜻이 무엇인지 분별하도록 = "so that we may discern what God's good, pleasing, and perfect will is." (Romans 12:2 echo)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">주야로 묵상하다</span></td>
+                    <td><span class="term-english">To meditate day and night</span></td>
+                    <td><span class="term-note">주야(晝夜) = day and night | 묵상(黙想) = meditation, contemplation. 날마다 하나님의 말씀을 주야로 묵상하는 온 교회가 되게 하시고 = "Let the whole church be one that meditates on God's Word day and night." (Psalm 1:2 echo)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">구별된 삶</span></td>
+                    <td><span class="term-english">Set-apart / Sanctified life</span></td>
+                    <td><span class="term-note">구별되다(區別) = to be distinguished/set apart. 구별되지 못한 삶을 살았음을 고백 = "we confess that we have lived lives not set apart." Connects to 거룩하라 (be holy) — God calls His people to be set apart from the world.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">담대함</span></td>
+                    <td><span class="term-english">Boldness / Courage</span></td>
+                    <td><span class="term-note">담대하다(膽大) = to be bold, courageous | 담대함 = boldness (noun). 담대함과 신뢰함으로 예수 그리스도를 통한 하나님의 사랑과 공의를 선포하게 하시옵고 = "Let him boldly and faithfully proclaim God's love and justice through Jesus Christ."</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">허물</span></td>
+                    <td><span class="term-english">Fault / Transgression / Shortcoming</span></td>
+                    <td><span class="term-note">허물(虛物) = fault, transgression, shortcoming (slightly softer than 죄/sin). 주님의 뜻을 온전히 따르지 못했던 우리의 허물을 용서하여 주옵소서 = "Please forgive our faults/transgressions of not fully following Your will." Note: 허물 ≈ fault/failure, 죄 = sin (stronger), 죄악 = iniquity (strongest).</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">복음화</span></td>
+                    <td><span class="term-english">Evangelization</span></td>
+                    <td><span class="term-note">복음(福音) + 화(化, -ization suffix). 세계 열방의 복음화를 위해 = "For the evangelization of all the nations of the world." 복음화되다 = to become evangelized.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">값없이 받은 구원</span></td>
+                    <td><span class="term-english">Salvation freely received / Salvation received without cost</span></td>
+                    <td><span class="term-note">값없이(價없이) = without price, freely | 값없이 받은 구원의 은혜를 늘 기억하게 하시고 = "Let us always remember the grace of salvation freely received." Echoes 이사야 55:1 / Isaiah 55:1 — "come, buy wine and milk without money and without price."</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">구원받은 자</span></td>
+                    <td><span class="term-english">One who is saved / The saved</span></td>
+                    <td><span class="term-note">구원받다 (to be saved, passive) + 자(者) = person. 구원받은 자답게 = "in a manner befitting one who has been saved." The suffix -답게 = "in a way fitting/worthy of." A key discipleship concept.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">강하게 역사하시다</span></td>
+                    <td><span class="term-english">To work powerfully / To act mightily</span></td>
+                    <td><span class="term-note">역사하다(役事) = to work, to act (used only of God/the Holy Spirit). 성령 하나님의 능력으로, 강하게 역사하시어 = "Working powerfully through the power of the Holy Spirit." 강하게 = powerfully, mightily.</span></td>
+                </tr>
+                <tr>
+                    <td><span class="term-korean">갑절의 은혜</span></td>
+                    <td><span class="term-english">Double portion of grace</span></td>
+                    <td><span class="term-note">갑절 = double, twice as much. 아름다운 찬양으로 하나님께 영광 돌리는 목회자 위에 갑절의 은혜를 부어 주옵소서 = "Pour a double portion of grace upon the minister who brings glory to God through beautiful praise." Biblical echo: Elisha's request for a double portion of Elijah's spirit (2 Kings 2:9).</span></td>
+                </tr>
+            </table>
+        </div><!-- end theology section -->
+
+
+        <!-- ==================== TAB 2: 남은 핵심 표현 ==================== -->
+        <div id="expressions4" class="section">
+            <div class="category-header">🌟 남은 핵심 표현 — Remaining Key Expressions</div>
+            <p class="category-desc">
+                Parts 1~3에서 다루지 않은 동사 표현, 복합 표현, 삶과 신앙에 관한 구(句)를 총정리합니다.
+            </p>
+
+            <!-- Group 9: 하나님의 인도 -->
+            <div class="sub-header">🕊️ 9. 인도 · 인도하심 — God's Leading &amp; Guidance</div>
+            <div class="vocab-grid">
+
+                <!-- E39 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E39</div>
+                        <div class="vocab-word">저희들의 삶을 인도해 주심</div>
+                    </div>
+                    <div class="word-type-badge badge-verb">VERB PHRASE</div>
+                    <div class="vocab-english">Your leading/guiding of our lives</div>
+                    <div class="pronunciation">인도하다(引導) = to lead, guide | 인도하심 = the act of leading (honorific noun form)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">저희들의 삶을 인도해 주심을 감사합니다.</span><br>
+                            <span class="english-text">We give thanks for Your leading of our lives.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">광야에서 앞서 인도하시고 원수를 흩으신 주</span><br>
+                            <span class="english-text">Lord who led the way in the wilderness and scattered the enemies</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">그들의 발걸음을 인도하여 주시고</span><br>
+                            <span class="english-text">Guide their footsteps</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Three forms: <br>
+                    <strong>인도하다</strong> (verb) / <strong>인도하심</strong> (honorific gerund) / <strong>인도자</strong> (the one who leads = 인도자 하나님)</div>
+                </div>
+
+                <!-- E40 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E40</div>
+                        <div class="vocab-word">하나님의 계획 안에서 이루어지다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">FAITH EXPRESSION</div>
+                    <div class="vocab-english">To be accomplished within God's plan</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">삶 속의 크고 작은 일들이 비록 우리의 뜻대로 흘러가지 않았을지라도, 모든 것이 하나님의 계획 안에서 이루어졌음을 고백합니다.</span><br>
+                            <span class="english-text">Though the great and small things in life did not go according to our will, we confess that all things have been accomplished within God's plan.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Key grammar pattern: <strong>비록 ~지라도</strong> = "even though, although" (concession). <br>비록 우리의 뜻대로 흘러가지 않았을지라도 = "even though it did not flow according to our will."</div>
+                </div>
+
+                <!-- E41 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E41</div>
+                        <div class="vocab-word">한마음으로 세워나가다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">COMMUNITY EXPRESSION</div>
+                    <div class="vocab-english">To build up with one heart/mind</div>
+                    <div class="pronunciation">한마음 = one heart, united mind | 세워나가다 = to build up (progressively, ongoing action)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">임직자를 선출하는 과정과 공동의회를 통해 세우게 될 주님의 귀한 섬김의 리더들을 온 교회가 한마음으로 세워나갈 수 있도록 주님이 인도하실줄 믿습니다.</span><br>
+                            <span class="english-text">We believe the Lord will guide the whole church so that all can work with one heart to raise up the Lord's precious servant leaders through the process of selecting officers and the congregational meeting.</span>
+                        </div>
+                    </div>
+                    <div class="related-words-box">
+                        <div class="related-title">🔗 한마음 관련 표현:</div>
+                        <span class="related-item">한마음으로 기도하다 (pray with one mind)</span>
+                        <span class="related-item">한마음으로 감당하다 (carry out with one heart)</span>
+                        <span class="related-item">한몸 (one body)</span>
+                    </div>
+                </div>
+
+                <!-- E42 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E42</div>
+                        <div class="vocab-word">사람의 생각이 아닌 하나님의 뜻이 드러나다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">DISCERNMENT EXPRESSION</div>
+                    <div class="vocab-english">God's will, not human thinking, to be revealed</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">성령님 주관하여 주셔서 사람의 생각이 아닌 하나님의 뜻이 온전히 드러나게 하시고, 주님의 마음을 시원하게 해드릴 신실한 일꾼들이 세워지는 은혜를 허락하여 주옵소서.</span><br>
+                            <span class="english-text">May the Holy Spirit be in charge so that God's will — not human thinking — is fully revealed, and please grant the grace of raising up faithful workers who will refresh the Lord's heart.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>A가 아닌 B</strong> = "not A but B" — a contrastive structure used for emphasis. 사람의 생각이 아닌 하나님의 뜻 = "God's will, not human thinking." Common in prayer to contrast human vs. divine perspectives.</div>
+                </div>
+
+            </div><!-- end grid 9 -->
+
+            <!-- Group 10: 신앙 생활과 삶 -->
+            <div class="sub-header">🌿 10. 신앙 생활 · 훈련 — Faith Life &amp; Discipleship</div>
+            <div class="vocab-grid">
+
+                <!-- E43 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E43</div>
+                        <div class="vocab-word">말씀, 기도, 훈련 (세 가지 기둥)</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">DISCIPLESHIP TRIAD</div>
+                    <div class="vocab-english">Word, Prayer, Training — the three pillars of discipleship</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">말씀, 기도, 훈련을 통해 주님을 더 알게 하시고, 인격적으로 주님을 만나 주님과 동행하는 삶의 기쁨을 날마다 누리게 하옵소서.</span><br>
+                            <span class="english-text">Through the Word, prayer, and training, let us know the Lord more, personally encounter Him, and daily enjoy the joy of walking with the Lord.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">믿음과 말씀과 기도의 자리를 바로 세우게 하시고</span><br>
+                            <span class="english-text">Let us rightly establish the place of faith, Word, and prayer</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>훈련(訓鍊)</strong> = training, discipline (for growth). In discipleship language: 성도를 훈련시키다 = "to train the saints." 수련회(修鍊會) = retreat (training gathering).</div>
+                </div>
+
+                <!-- E44 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E44</div>
+                        <div class="vocab-word">세상 풍조에서 벗어나지 못하다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">CONFESSION EXPRESSION</div>
+                    <div class="vocab-english">Unable to break free from worldly trends/currents</div>
+                    <div class="pronunciation">풍조(風潮) = trend, current, prevailing tide | 세상 풍조 = worldly trends | 벗어나다 = to escape, break free</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">아직도 세상에 시선을 빼앗겨서 불평하며 세상 풍조에서 벗어나지 못한, 구별되지 못한 삶을 살았음을 고백할 수밖에 없습니다.</span><br>
+                            <span class="english-text">We have no choice but to confess that we have lived lives still with eyes captivated by the world, complaining, unable to break free from worldly trends, lives not set apart.</span>
+                        </div>
+                    </div>
+                    <div class="compare-box">
+                        🌊 <strong>풍조(風潮)</strong> = literally "wind and tide" → figuratively: prevailing trends/currents of the age. Compare: 시대의 풍조 = spirit of the age. Contrasted with 하나님의 말씀 / 진리 (God's Word / truth).</div>
+                </div>
+
+                <!-- E45 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E45</div>
+                        <div class="vocab-word">세상에 시선을 빼앗기다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">CONFESSION EXPRESSION</div>
+                    <div class="vocab-english">To have one's gaze stolen by the world / To be distracted by the world</div>
+                    <div class="pronunciation">시선(視線) = line of sight, gaze | 빼앗기다 = to be stolen/taken from (passive) | 세상에 시선을 빼앗기다 = to have one's eyes stolen by the world</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">세상에 시선을 빼앗겨서 불평하며</span><br>
+                            <span class="english-text">With our gaze stolen by the world, complaining</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Vivid metaphor: the world "steals" our eyes/gaze from God. Contrasted with <strong>주님만 바라보다</strong> (to look only to the Lord). Related: <strong>하늘을 바라보다</strong> (to look toward heaven).</div>
+                </div>
+
+                <!-- E46 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E46</div>
+                        <div class="vocab-word">천국 공동체를 미리 맛보다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">CHURCH VISION EXPRESSION</div>
+                    <div class="vocab-english">To get a foretaste of the heavenly community</div>
+                    <div class="pronunciation">미리 = in advance, beforehand | 맛보다 = to taste, to get a taste of | 미리 맛보다 = to foretaste, to experience a preview</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">순모임을 통해 이 땅에서 천국 공동체를 미리 맛보게 하시고, 타국에서의 외로움 가운데서도 그리스도 안에서 한 가족의 기쁨을 회복하는 사랑의 공동체가 되게 하여 주셔서 감사드립니다.</span><br>
+                            <span class="english-text">Thank You for letting us get a foretaste of the heavenly community on earth through small group meetings, and for making us a community of love that recovers the joy of being one family in Christ even in the loneliness of a foreign land.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E47 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E47</div>
+                        <div class="vocab-word">눈과 귀와 마음을 열어 주시다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">WORSHIP PETITION</div>
+                    <div class="vocab-english">To open our eyes, ears, and hearts</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">우리의 눈과 귀와 마음을 열어 주셔서 하나님의 뜻을 깨닫게 하옵소서.</span><br>
+                            <span class="english-text">Open our eyes, ears, and hearts so that we may understand God's will.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">잘 이해되고, 기억되게 하시고, 삶에 온전히 적용되게 하옵소서.</span><br>
+                            <span class="english-text">Let [the Word] be well understood, well remembered, and fully applied to life.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Triple structure: <strong>눈</strong> (eyes / perception) + <strong>귀</strong> (ears / hearing) + <strong>마음</strong> (heart / understanding). Together they represent total receptivity to God's Word. Compare: 영적인 눈 (spiritual eyes), 듣는 귀 (hearing ears).</div>
+                </div>
+
+                <!-- E48 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E48</div>
+                        <div class="vocab-word">긍휼을 베풀다 / 긍휼히 여기다</div>
+                    </div>
+                    <div class="word-type-badge badge-verb">VERB PHRASE</div>
+                    <div class="vocab-english">To show mercy / To have compassion on</div>
+                    <div class="pronunciation">긍휼(矜恤) = mercy, pity, compassion | 베풀다 = to extend, bestow | 긍휼히 여기다 = to regard with mercy/compassion</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">미쁘시고 의로우신 주님, 저희들을 불쌍히 여기시고, 저희들의 죄를 용서해 주시옵소서.</span><br>
+                            <span class="english-text">Faithful and righteous Lord, have mercy on us and forgive our sins.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">주님의 긍휼을 베풀어 주시기를 간구합니다. / 하나님의 많으신 긍휼대로</span><br>
+                            <span class="english-text">We beseech You to bestow Your mercy. / According to God's great mercy</span>
+                        </div>
+                    </div>
+                    <div class="compare-box">
+                        ⚖️ <strong>긍휼</strong> vs. <strong>자비</strong> vs. <strong>불쌍히 여기다</strong>:<br>
+                        긍휼(矜恤) = mercy toward suffering (responding to need/pain)<br>
+                        자비(慈悲) = compassion/mercy (gentle, loving quality)<br>
+                        불쌍히 여기다 = to feel pity for, to regard with sympathy
+                    </div>
+                </div>
+
+                <!-- E49 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E49</div>
+                        <div class="vocab-word">배려와 사랑의 본이 되다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">COMMUNITY EXPRESSION</div>
+                    <div class="vocab-english">To become a model of consideration and love</div>
+                    <div class="pronunciation">배려(配慮) = consideration, thoughtfulness for others | 본(本)이 되다 = to become a model/example</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">성도님들이 셔틀을 이용하는 서로의 배려와 사랑의 본이 되게 해주세요.</span><br>
+                            <span class="english-text">Let the saints become a model of mutual consideration and love by using the shuttle [service].</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>본(本)이 되다</strong> = "to become a model/example" — a common expression for Christian witness through practical behavior. Related: 본받다 (to follow as an example / to model after).</div>
+                </div>
+
+                <!-- E50 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E50</div>
+                        <div class="vocab-word">동역하다</div>
+                    </div>
+                    <div class="word-type-badge badge-verb">VERB</div>
+                    <div class="vocab-english">To co-labor / To work together in ministry</div>
+                    <div class="pronunciation">동역(同役) = working together (same yoke/service) | 역(役) = service, labor | 동역자 = co-laborer, ministry partner</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">함께 기도 하며 동역하는 성도들에게도 은혜를 베푸시며, 선교현장에서 함께 사역하는 모든 분들을 격려하며 위로하여 주시옵소서.</span><br>
+                            <span class="english-text">Bestow grace also upon the saints who pray together and co-labor in ministry, and encourage and comfort all who minister together in the mission field.</span>
+                        </div>
+                    </div>
+                    <div class="related-words-box">
+                        <div class="related-title">🔗 관련 표현:</div>
+                        <span class="related-item">동역자 (co-laborer, ministry partner)</span>
+                        <span class="related-item">팀 사역 (team ministry)</span>
+                        <span class="related-item">함께 사역하다 (to minister together)</span>
+                    </div>
+                </div>
+
+                <!-- E51 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E51</div>
+                        <div class="vocab-word">사모하다</div>
+                    </div>
+                    <div class="word-type-badge badge-verb">VERB</div>
+                    <div class="vocab-english">To long for / To yearn for / To earnestly desire</div>
+                    <div class="pronunciation">사모(思慕) = longing, yearning, deep desire | 사모하다 = to yearn/long for with deep affection</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">사모하며 기다리는 우리에게 성령님, 오셔서 말씀해 주십시오.</span><br>
+                            <span class="english-text">Holy Spirit, come and speak to us who yearn for and await You.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">날마다 하나님의 말씀을 주야로 묵상하는, 온 교회가 되게 하시고 — 생명의 말씀을 사모하여</span><br>
+                            <span class="english-text">Let the whole church yearn for the living Word and meditate on God's Word day and night</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 사모하다 is deeper than 원하다 (to want) or 바라다 (to hope/desire). It implies longing + affection, like a bride longing for her bridegroom. Used exclusively in devotional/worship language.</div>
+                </div>
+
+                <!-- E52 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E52</div>
+                        <div class="vocab-word">신앙의 절개를 끝까지 지켜내다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">PERSEVERANCE EXPRESSION</div>
+                    <div class="vocab-english">To maintain the integrity/fidelity of faith to the very end</div>
+                    <div class="pronunciation">절개(節槪) = moral integrity, fidelity (traditionally: loyalty unto death) | 지켜내다 = to keep/guard to the end (against opposition)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">성경의 진리를 타협하지 않는 하나님의 메가폰, 우리도 신앙의 절개를 끝까지 지켜내도록 삶으로 이끄는 목자가 되게 해 주세요.</span><br>
+                            <span class="english-text">Be God's megaphone that never compromises biblical truth — a shepherd who leads us through life to maintain the integrity of our faith to the very end.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>절개(節槪)</strong> originally meant unwavering loyalty in Confucian ethics (e.g., a widow's fidelity). In Christian context it means unwavering faith that does not bend to cultural pressure. <strong>타협하지 않다</strong> = "to not compromise."</div>
+                </div>
+
+                <!-- E53 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E53</div>
+                        <div class="vocab-word">차고 넘치도록 / 영혼구원의 열매가 차고 넘치다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">ABUNDANCE EXPRESSION</div>
+                    <div class="vocab-english">Overflowing / More than abundant / That the fruit may overflow</div>
+                    <div class="pronunciation">차다 = to be full | 넘치다 = to overflow | 차고 넘치다 = to be full and overflowing</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">세계 열방의 복음화를 위해 삶으로 전파하는 선교사님들에게 영혼구원의 열매가 차고 넘치도록 크신 은혜를 부어 주옵소서.</span><br>
+                            <span class="english-text">Pour out great grace upon the missionaries who spread the gospel through their lives for the evangelization of all nations, so that the fruit of soul-winning may overflow.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>차고 넘치다</strong> = "to be full and overflowing" — a vivid image of abundance beyond capacity. Echo of Psalm 23:5: "my cup overflows" (나의 잔이 넘치나이다).</div>
+                </div>
+
+            </div><!-- end grid 10 -->
+
+            <!-- Group 11: 위로 · 회복 -->
+            <div class="sub-header">💙 11. 위로 · 위탁 · 회복 — Comfort, Entrusting &amp; Restoration</div>
+            <div class="vocab-grid">
+
+                <!-- E54 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E54</div>
+                        <div class="vocab-word">주님께 온전히 의탁하다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">TRUST EXPRESSION</div>
+                    <div class="vocab-english">To wholly entrust/commit to the Lord</div>
+                    <div class="pronunciation">의탁(依託) = entrusting, relying on | 온전히 = wholly, completely | 의탁하다 = to entrust oneself/something to</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">오늘 말씀을 전하시는 담임목사님을 주님께 온전히 의탁합니다.</span><br>
+                            <span class="english-text">We wholly entrust our senior pastor who preaches today's Word to the Lord.</span>
+                        </div>
+                    </div>
+                    <div class="related-words-box">
+                        <div class="related-title">🔗 의탁 관련 표현:</div>
+                        <span class="related-item">주님께 맡기다 (to entrust to the Lord)</span>
+                        <span class="related-item">하나님의 손 안에 있다 (to be in God's hands)</span>
+                        <span class="related-item">주님을 의지하다 (to rely on the Lord)</span>
+                    </div>
+                </div>
+
+                <!-- E55 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E55</div>
+                        <div class="vocab-word">새로운 희망과 다짐으로 맞이하다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">RENEWAL EXPRESSION</div>
+                    <div class="vocab-english">To welcome [the new year] with new hope and resolve</div>
+                    <div class="pronunciation">다짐 = resolve, pledge, determination | 맞이하다 = to welcome, to receive (a new year, season)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">저희가 이 한해를 정리하며 새로운 희망과 다짐으로 2026년을 맞이하면서, 우리의 가정을 주님께 맡겨드리며</span><br>
+                            <span class="english-text">As we close out this year and welcome 2026 with new hope and resolve, we commit our families to the Lord</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E56 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E56</div>
+                        <div class="vocab-word">온맘을 드려 예배하다</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">WORSHIP EXPRESSION</div>
+                    <div class="vocab-english">To worship giving one's whole heart</div>
+                    <div class="pronunciation">온맘 = whole heart (온 = whole/all + 맘 = heart/mind, colloquial form of 마음)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">각자 있는 곳에서 온맘을 드려 예배 하는 자로 불러 주시니 감사합니다.</span><br>
+                            <span class="english-text">Thank You for calling us to be worshippers who offer our whole hearts from wherever we are.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 온맘 = 온 마음 = whole heart. In worship prayer, often paralleled with 온 몸 (whole body) and 온 영혼 (whole soul). Compare: "Love the Lord your God with all your heart (마음), soul (영혼), and strength (힘)." (신명기 6:5)</div>
+                </div>
+
+                <!-- E57 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">E57</div>
+                        <div class="vocab-word">정성껏 준비하다 / 섬기는 손길</div>
+                    </div>
+                    <div class="word-type-badge badge-expression">SERVICE EXPRESSION</div>
+                    <div class="vocab-english">To prepare with all sincerity / Serving hands</div>
+                    <div class="pronunciation">정성껏(精誠껏) = with all one's sincerity/devotion | 손길 = hands (in the sense of helping, touching hands)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">정성껏 준비한 헤세드 찬양대와 쉐키나 찬양팀, 예배를 위해 섬기는 손길들과 예배에 참예한 모든 성도님들과 함께 드리는 이 예배를 하나님, 기쁘게 받아 주시옵소서.</span><br>
+                            <span class="english-text">God, please receive with joy this worship offered together with the Hesed Choir and Shekhinah praise team who prepared with all sincerity, the serving hands who serve for worship, and all the saints who have joined in worship.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end grid 11 -->
+        </div><!-- end expressions4 section -->
+
+
+        <!-- ==================== TAB 3: 시적·문학적 표현 ==================== -->
+        <div id="poetic" class="section">
+            <div class="category-header">🎨 시적 · 문학적 표현 — Poetic &amp; Literary Language</div>
+            <p class="category-desc">
+                기도문 #7과 여러 기도문에서 나타나는 시적이고 문학적인 표현들을 학습합니다.<br>
+                이러한 표현들은 한국어의 아름다움과 신앙의 깊이를 동시에 보여줍니다.
+            </p>
+
+            <div class="sub-header">🌌 창조 · 자연 이미지 — Creation &amp; Nature Imagery</div>
+            <div class="vocab-grid">
+
+                <!-- P1 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P1</div>
+                        <div class="vocab-word">하늘 위에 하늘을 펼치시고, 창공의 바다에 별들을 심으신 하나님</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">CREATION POETRY</div>
+                    <div class="vocab-english">God who spread out the heavens above the heavens and planted stars in the sea of the sky</div>
+                    <div class="pronunciation">창공(蒼空) = the blue sky, firmament | 펼치다 = to spread out, unfurl | 심다 = to plant</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현 (기도문 7 서두):</div>
+                        <div class="example-text">
+                            <span class="korean-text">하늘 위에 하늘을 펼치시고, 창공의 바다에 별들을 심으신 하나님, 쌀쌀한 1월 아침, 우리는 우주의 먼지 같은 존재로 눈을 떴습니다.</span><br>
+                            <span class="english-text">God who spread out the heavens above the heavens and planted stars in the sea of the sky — on a cool January morning, we opened our eyes as beings like dust in the universe.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>우주의 먼지 같은 존재</strong> (beings like dust in the universe) is a deeply humble and poetic self-description, echoing Psalm 8 — the contrast of God's vast creation vs. human smallness. 별들을 심다 = "to plant stars" is a beautiful, unusual metaphor for God's creative act.</div>
+                </div>
+
+                <!-- P2 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P2</div>
+                        <div class="vocab-word">다시 오지 않는 선물</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">POETIC EXPRESSION</div>
+                    <div class="vocab-english">A gift that will not come again / The irreplaceable gift of each day</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">잠들고 다시 깨어 아침을 맞는 평범한 하루도 하나님이 허락하신 생명, 다시 오지 않는 선물임을 믿습니다.</span><br>
+                            <span class="english-text">We believe that even the ordinary day of sleeping and waking again to greet the morning is life granted by God — a gift that will not come again.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Carpe diem theme in a Christian frame: each day is <strong>다시 오지 않는 선물</strong> (a one-time gift). The ordinary (평범한 하루 = an ordinary day) is reframed as the extraordinary through this perspective.</div>
+                </div>
+
+                <!-- P3 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P3</div>
+                        <div class="vocab-word">말로 다 담을 수 없는 은혜</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">POETIC EXPRESSION</div>
+                    <div class="vocab-english">Grace that cannot be contained in words</div>
+                    <div class="pronunciation">말로 = in words | 다 = fully, completely | 담다 = to contain, to hold | 담을 수 없다 = cannot contain</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">말로 다 담을 수 없는 은혜, 고개 들지 못할 용서와 자비 앞에 감격으로 노래합니다.</span><br>
+                            <span class="english-text">We sing with overwhelming joy before grace that cannot be contained in words, and before forgiveness and mercy before which we cannot lift our heads.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Two vivid parallel images:<br>
+                    <strong>말로 다 담을 수 없는 은혜</strong> = grace too great for language (grace overflows the container of words)<br>
+                    <strong>고개 들지 못할 용서</strong> = forgiveness so great one cannot even lift one's head (from shame and awe)</div>
+                </div>
+
+                <!-- P4 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P4</div>
+                        <div class="vocab-word">고개 들지 못할 용서와 자비</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">POETIC EXPRESSION</div>
+                    <div class="vocab-english">Forgiveness and mercy before which one cannot lift one's head</div>
+                    <div class="pronunciation">고개 = head, neck | 들다 = to lift | 고개를 들지 못하다 = to be unable to lift one's head (from shame/reverence)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">고개 들지 못할 용서와 자비 앞에 감격으로 노래합니다.</span><br>
+                            <span class="english-text">We sing with overwhelming emotion before forgiveness and mercy before which we cannot lift our heads.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Korean idiom: <strong>고개를 들지 못하다</strong> = "cannot raise one's head" — used when overcome by shame, gratitude, or awe. In this context it expresses the overwhelmingness of God's forgiveness (not just shame but profound reverence and gratitude).</div>
+                </div>
+
+            </div><!-- end creation poetry grid -->
+
+            <div class="sub-header">⚔️ 삶의 여정 · 영적 전쟁 이미지 — Life Journey &amp; Spiritual Battle Imagery</div>
+            <div class="vocab-grid">
+
+                <!-- P5 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P5</div>
+                        <div class="vocab-word">푸른 초장 / 맹렬한 영적전쟁의 최전방</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">CONTRAST IMAGERY</div>
+                    <div class="vocab-english">Green pastures / The frontlines of fierce spiritual warfare</div>
+                    <div class="pronunciation">초장(草場) = pasture, meadow | 맹렬하다(猛烈) = to be fierce, intense | 최전방(最前方) = frontline, front line</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">푸른 초장이나, 맹렬한 영적전쟁의 최전방에서나, 웃음이 사라지고 슬픔을 애도하는 날에도, 생명보다 귀하신 주님의 인자와 임재로 다시 일어나겠습니다.</span><br>
+                            <span class="english-text">Whether in green pastures, on the frontlines of fierce spiritual warfare, or even on days when laughter disappears and grief is mourned — we will rise again through the Lord's lovingkindness and presence, more precious than life.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 Three-part contrast structure:<br>
+                    <strong>푸른 초장</strong> = green pastures (peace / Psalm 23) ←→ <strong>영적전쟁의 최전방</strong> (frontline of spiritual warfare) ←→ <strong>웃음이 사라지고 슬픔을 애도하는 날</strong> (days of grief). The point: in ALL circumstances, we rise through God's lovingkindness.</note>
+                </div>
+
+                <!-- P6 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P6</div>
+                        <div class="vocab-word">생명보다 귀하신 주님의 인자와 임재</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">PSALM-ECHO EXPRESSION</div>
+                    <div class="vocab-english">The Lord's lovingkindness and presence, more precious than life</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">생명보다 귀하신 주님의 인자와 임재로 다시 일어나겠습니다.</span><br>
+                            <span class="english-text">We will rise again through the Lord's lovingkindness and presence, more precious than life.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 시편 63:3 / Psalm 63:3: "Your lovingkindness is better than life" (주의 인자가 생명보다 나으므로). The prayer writer paraphrases this as <strong>생명보다 귀하신 주님의 인자</strong> — elevating it further with 귀하신 (precious/honorable). Note also <strong>임재(臨在)</strong> added alongside 인자, combining God's love with His presence.</note>
+                </div>
+
+                <!-- P7 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P7</div>
+                        <div class="vocab-word">하나님의 침묵이 너무 길게 느껴질 때</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">LAMENT EXPRESSION</div>
+                    <div class="vocab-english">When God's silence feels too long</div>
+                    <div class="pronunciation">침묵(沈默) = silence | 느껴지다 = to be felt (passive) | 길게 = long, prolonged</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">기도가 막히고 눈물이 앞을 가릴 때, 하나님의 침묵이 너무 길게 느껴질 때, 오늘을 견딜 힘과 내일을 기다릴 소망을 허락해주십시오.</span><br>
+                            <span class="english-text">When prayer is blocked and tears obscure our vision, when God's silence feels too long — please grant strength to endure today and hope to await tomorrow.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>하나님의 침묵</strong> = "God's silence" — a deeply honest lament expression. This belongs to the biblical lament tradition (see Psalms 13, 22, 88). The prayer does not deny the experience of divine silence but prays through it — a sign of mature faith.</note>
+                </div>
+
+                <!-- P8 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P8</div>
+                        <div class="vocab-word">매일 주님 앞에 엎드리고 사죄해도 다시 죄악으로 향하는 죄인</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">CONFESSION POETRY</div>
+                    <div class="vocab-english">A sinner who, though prostrating before the Lord and confessing sin daily, turns toward sin again</div>
+                    <div class="pronunciation">엎드리다 = to prostrate oneself, bow down | 사죄하다(謝罪) = to confess sin, to apologize for sin</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">매일 주님 앞에 엎드리고 사죄해도 다시 죄악으로 향하는 죄인입니다. 하나님의 어린양, 완전한 의로 덮으시는 예수 보혈만 의지합니다.</span><br>
+                            <span class="english-text">We are sinners who, though we prostrate ourselves and confess sin before the Lord daily, turn toward sin again. We rely only on the blood of Jesus, the Lamb of God, who covers us with perfect righteousness.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 A powerful honest confession that resonates with Romans 7:15 ("I do not do what I want, but I do the very thing I hate"). The resolution: not self-improvement but reliance on <strong>예수 보혈</strong> (the blood of Jesus). 엎드리다 = the physical act of prostration in prayer — deeper than kneeling.</note>
+                </div>
+
+                <!-- P9 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P9</div>
+                        <div class="vocab-word">거짓은 스스로 무너지게 해주세요</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">PROPHETIC EXPRESSION</div>
+                    <div class="vocab-english">Let falsehood collapse on its own / Let lies fall by themselves</div>
+                    <div class="pronunciation">거짓 = falsehood, lies | 스스로 = on its own, by itself | 무너지다 = to collapse, crumble</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">창조 질서에 대항하는 세력들 앞에 주님의 진리가 드러나게 하시고, 거짓은 스스로 무너지게 해주세요.</span><br>
+                            <span class="english-text">Before the forces that oppose the created order, let the Lord's truth be revealed, and let falsehood collapse on its own.</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>스스로 무너지다</strong> = "to collapse on its own" — the prayer does not ask God to actively destroy falsehood, but confidently declares that falsehood has no foundation and will collapse by the power of truth. Echo of Isaiah 8:9-10 and the biblical theme that evil is ultimately self-defeating.</note>
+                </div>
+
+                <!-- P10 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P10</div>
+                        <div class="vocab-word">웃음과 눈물의 날 / 웃음이 사라지고 슬픔을 애도하는 날</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">LIFE IMAGERY</div>
+                    <div class="vocab-english">Days of laughter and tears / Days when laughter disappears and grief is mourned</div>
+                    <div class="pronunciation">애도(哀悼) = mourning, lamenting | 애도하다 = to mourn</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">편안한 날이나, 웃음과 눈물의 날에도 우리는 주님 앞에 나와 예배합니다.</span><br>
+                            <span class="english-text">Whether on comfortable days or days of both laughter and tears, we come before the Lord and worship.</span>
+                        </div>
+                        <div class="example-text">
+                            <span class="korean-text">웃음이 사라지고 슬픔을 애도하는 날에도, 생명보다 귀하신 주님의 인자와 임재로 다시 일어나겠습니다.</span><br>
+                            <span class="english-text">Even on days when laughter disappears and grief is mourned, we will rise again through the Lord's lovingkindness and presence, more precious than life.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P11 -->
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">P11</div>
+                        <div class="vocab-word">영적전쟁의 최전방에서</div>
+                    </div>
+                    <div class="word-type-badge badge-poetic">SPIRITUAL WARFARE</div>
+                    <div class="vocab-english">On the frontlines of spiritual warfare</div>
+                    <div class="pronunciation">영적전쟁(靈的戰爭) = spiritual warfare | 최전방(最前方) = frontlines | 낯선 땅에서 위험을 마다하고 복음으로 살아내다 (to live the gospel in a foreign land, not avoiding danger)</div>
+                    <div class="example-box">
+                        <div class="example-title">📌 기도문 속 표현:</div>
+                        <div class="example-text">
+                            <span class="korean-text">낯선 땅에서 위험을 마다하고 복음으로 살아내시는 선교사님들</span><br>
+                            <span class="english-text">Missionaries who live out the gospel in a foreign land without avoiding danger</span>
+                        </div>
+                    </div>
+                    <div class="note-box">💡 <strong>복음으로 살아내다</strong> = "to live out the gospel" (살다 + 내다 = to see through to completion despite difficulty). Not just believing but actively living it through hardship. 위험을 마다하다 = "to not avoid danger / to accept danger."</note>
+                </div>
+
+            </div><!-- end poetic grid -->
+
+            <div class="sub-header">📊 Part 1~4 학습 총정리 — Complete Summary Table</div>
+            <table class="term-table">
+                <tr>
+                    <th>파트</th>
+                    <th>주제 Theme</th>
+                    <th>내용 Content</th>
+                    <th>학습 항목 수</th>
+                </tr>
+                <tr>
+                    <td><strong>Part 1</strong></td>
+                    <td>신앙 핵심 단어</td>
+                    <td>믿음, 구원, 은혜, 회개, 십자가, 순종, 감격, 심판, 영생, 원망</td>
+                    <td>10단어 + 퀴즈</td>
+                </tr>
+                <tr>
+                    <td><strong>Part 2</strong></td>
+                    <td>형용사+명사 / 핵심 표현 / 기도 패턴</td>
+                    <td>형용사+명사 20개, 핵심 표현 20개, 기도 문장 패턴 10개</td>
+                    <td>50개 항목 + 퀴즈</td>
+                </tr>
+                <tr>
+                    <td><strong>Part 3</strong></td>
+                    <td>형용사+명사(2) / 남은 표현 / 교회·선교 용어</td>
+                    <td>형용사+명사 14개, 핵심 표현 18개, 교회·선교 용어 25개 (표)</td>
+                    <td>57개 항목 + 퀴즈</td>
+                </tr>
+                <tr>
+                    <td><strong>Part 4</strong></td>
+                    <td>신학 어휘 / 남은 표현 / 시적 표현</td>
+                    <td>신학 어휘 8개+10개(표), 핵심 표현 19개, 시적 표현 11개</td>
+                    <td>48개 항목 + 퀴즈</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:right;font-weight:bold;color:#7c2d12;">총합 (Grand Total)</td>
+                    <td><strong>약 165개+ 항목</strong></td>
+                </tr>
+            </table>
+        </div><!-- end poetic section -->
+
+
+        <!-- ==================== TAB 4: 퀴즈 ==================== -->
+        <div id="quiz4" class="section">
+            <div class="category-header">✏️ Part 4 최종 퀴즈 — Final Quiz</div>
+            <p class="category-desc">신학 어휘, 남은 핵심 표현, 시적·문학적 표현 전체 복습. (12문제)</p>
+
+            <div class="quiz-container">
+
+                <!-- Q1 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 1</span>
+                    <div class="question-text">What does <strong>대속(代贖)</strong> mean?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(0,0)">A) Passover</div>
+                        <div class="quiz-option" onclick="selectAnswer(0,1)">B) Atonement / Substitutionary redemption</div>
+                        <div class="quiz-option" onclick="selectAnswer(0,2)">C) Resurrection</div>
+                        <div class="quiz-option" onclick="selectAnswer(0,3)">D) Incarnation</div>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 2</span>
+                    <div class="question-text">What does <strong>육신을 입으시다</strong> mean in theology?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(1,0)">A) To clothe the poor</div>
+                        <div class="quiz-option" onclick="selectAnswer(1,1)">B) To take on flesh / The Incarnation</div>
+                        <div class="quiz-option" onclick="selectAnswer(1,2)">C) To rise from the dead</div>
+                        <div class="quiz-option" onclick="selectAnswer(1,3)">D) To send the Holy Spirit</div>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 3</span>
+                    <div class="question-text">What does <strong>인자(仁慈)</strong> mean, and what Hebrew word is it equivalent to?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(2,0)">A) Righteousness — equivalent to shalom</div>
+                        <div class="quiz-option" onclick="selectAnswer(2,1)">B) Lovingkindness / Steadfast love — equivalent to hesed (חֶסֶד)</div>
+                        <div class="quiz-option" onclick="selectAnswer(2,2)">C) Justice — equivalent to mishpat</div>
+                        <div class="quiz-option" onclick="selectAnswer(2,3)">D) Mercy — equivalent to rahum</div>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 4</span>
+                    <div class="question-text">What does <strong>사모하다</strong> mean? How does it differ from 원하다 (to want)?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(3,0)">A) Same meaning as 원하다 — just a formal synonym</div>
+                        <div class="quiz-option" onclick="selectAnswer(3,1)">B) To long for / yearn with deep affection — deeper and more devotional than 원하다</div>
+                        <div class="quiz-option" onclick="selectAnswer(3,2)">C) To pray earnestly</div>
+                        <div class="quiz-option" onclick="selectAnswer(3,3)">D) To wait patiently</div>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 5</span>
+                    <div class="question-text">What does <strong>천국 공동체를 미리 맛보다</strong> mean?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(4,0)">A) To experience heaven after death</div>
+                        <div class="quiz-option" onclick="selectAnswer(4,1)">B) To prepare for the second coming</div>
+                        <div class="quiz-option" onclick="selectAnswer(4,2)">C) To get a foretaste of the heavenly community here on earth</div>
+                        <div class="quiz-option" onclick="selectAnswer(4,3)">D) To memorize scripture about heaven</div>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 6</span>
+                    <div class="question-text">What image is conveyed by <strong>하늘 위에 하늘을 펼치시고, 창공의 바다에 별들을 심으신 하나님</strong>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(5,0)">A) God's role as judge</div>
+                        <div class="quiz-option" onclick="selectAnswer(5,1)">B) God's creative majesty — using the poetic images of unfolding heavens and planting stars</div>
+                        <div class="quiz-option" onclick="selectAnswer(5,2)">C) God's presence in the church</div>
+                        <div class="quiz-option" onclick="selectAnswer(5,3)">D) God's promise to Abraham</div>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 7</span>
+                    <div class="question-text">What does <strong>분별하다</strong> mean?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(6,0)">A) To confess</div>
+                        <div class="quiz-option" onclick="selectAnswer(6,1)">B) To discern / distinguish</div>
+                        <div class="quiz-option" onclick="selectAnswer(6,2)">C) To proclaim</div>
+                        <div class="quiz-option" onclick="selectAnswer(6,3)">D) To intercede</div>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 8</span>
+                    <div class="question-text">What is the difference between <strong>의(義)</strong> and <strong>공의(公義)</strong>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(7,0)">A) 의 = love, 공의 = judgment</div>
+                        <div class="quiz-option" onclick="selectAnswer(7,1)">B) 의 = personal/moral righteousness, 공의 = God's impartial justice/righteousness in governance</div>
+                        <div class="quiz-option" onclick="selectAnswer(7,2)">C) 의 = for humans, 공의 = only for God</div>
+                        <div class="quiz-option" onclick="selectAnswer(7,3)">D) No real difference — they are synonyms</div>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 9</span>
+                    <div class="question-text">What does <strong>동역하다</strong> mean in a ministry context?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(8,0)">A) To lead worship</div>
+                        <div class="quiz-option" onclick="selectAnswer(8,1)">B) To co-labor / work together in ministry</div>
+                        <div class="quiz-option" onclick="selectAnswer(8,2)">C) To train the saints</div>
+                        <div class="quiz-option" onclick="selectAnswer(8,3)">D) To serve as a missionary</div>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 10</span>
+                    <div class="question-text">Which Psalm is echoed in <strong>생명보다 귀하신 주님의 인자</strong>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(9,0)">A) Psalm 23 — "The LORD is my shepherd"</div>
+                        <div class="quiz-option" onclick="selectAnswer(9,1)">B) Psalm 63:3 — "Your lovingkindness is better than life"</div>
+                        <div class="quiz-option" onclick="selectAnswer(9,2)">C) Psalm 100 — "Enter His gates with thanksgiving"</div>
+                        <div class="quiz-option" onclick="selectAnswer(9,3)">D) Psalm 22 — "My God, my God, why have you forsaken me?"</div>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 11</span>
+                    <div class="question-text">What does <strong>허물</strong> mean? How does it compare to <strong>죄</strong>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(10,0)">A) 허물 = deeper/stronger than 죄</div>
+                        <div class="quiz-option" onclick="selectAnswer(10,1)">B) 허물 = fault/transgression (slightly softer than 죄 = sin)</div>
+                        <div class="quiz-option" onclick="selectAnswer(10,2)">C) 허물 and 죄 are exact synonyms</div>
+                        <div class="quiz-option" onclick="selectAnswer(10,3)">D) 허물 = physical illness, 죄 = spiritual sin</div>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="quiz-question">
+                    <span class="question-number">Question 12</span>
+                    <div class="question-text">In the expression <strong>세상 풍조에서 벗어나지 못하다</strong>, what does 풍조(風潮) literally mean, and how is it used here?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectAnswer(11,0)">A) Literally "wind and tide" → figuratively: prevailing worldly trends/currents</div>
+                        <div class="quiz-option" onclick="selectAnswer(11,1)">B) Literally "storm cloud" → figuratively: spiritual attacks</div>
+                        <div class="quiz-option" onclick="selectAnswer(11,2)">C) Literally "flowing water" → figuratively: blessings</div>
+                        <div class="quiz-option" onclick="selectAnswer(11,3)">D) Literally "changing seasons" → figuratively: life stages</div>
+                    </div>
+                </div>
+
+                <button class="submit-button" onclick="checkAnswers()">제출하기 (Submit)</button>
+                <div class="score-display" id="score-display"></div>
+
+            </div><!-- end quiz-container -->
+        </div><!-- end quiz4 section -->
+
+    </div><!-- end content -->
+
+    <div class="series-nav">
+        <span style="color:#7c2d12;font-weight:bold;font-size:14px;align-self:center;">📚 시리즈:</span>
+        <a class="series-link" href="#">Part 1 — 신앙 핵심 단어</a>
+        <a class="series-link" href="#">Part 2 — 형용사+명사 / 표현 / 패턴</a>
+        <a class="series-link" href="#">Part 3 — 나머지 표현 완성</a>
+        <a class="series-link current" href="#">Part 4 — 완성 마무리 ✓</a>
+    </div>
+
+</div><!-- end container -->
+
+<script>
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    const answers = {};
+    const correctAnswers = [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0];
+
+    function selectAnswer(qIdx, optIdx) {
+        answers[qIdx] = optIdx;
+        const question = document.querySelectorAll('.quiz-question')[qIdx];
+        question.querySelectorAll('.quiz-option').forEach((opt, i) => {
+            opt.classList.remove('selected');
+            if (i === optIdx) opt.classList.add('selected');
+        });
+    }
+
+    function checkAnswers() {
+        let score = 0;
+        correctAnswers.forEach((correct, idx) => {
+            const question = document.querySelectorAll('.quiz-question')[idx];
+            const options = question.querySelectorAll('.quiz-option');
+            options.forEach((opt, i) => {
+                if (i === correct) opt.classList.add('correct');
+                if (answers[idx] !== undefined && i === answers[idx] && answers[idx] !== correct)
+                    opt.classList.add('incorrect');
+            });
+            if (answers[idx] === correct) score++;
+        });
+
+        const pct = Math.round((score / correctAnswers.length) * 100);
+        let msg = pct >= 90 ? '🎉 Excellent! 완벽합니다! 전체 시리즈 완주 축하드립니다! 🏆' :
+                  pct >= 70 ? '👏 Great job! 잘하셨어요! 거의 다 됐어요!' :
+                  pct >= 50 ? '👍 Good! Part 1-4를 다시 복습해 보세요!' :
+                              '📚 Keep studying! Part 1부터 다시 시작해 보세요!';
+
+        const sd = document.getElementById('score-display');
+        sd.innerHTML = `<div style="font-size:24px;margin-bottom:10px;">${msg}</div>
+                        <div>Score: ${score} / ${correctAnswers.length} (${pct}%)</div>
+                        <div style="font-size:16px;margin-top:12px;color:#92400e;">📖 Part 1~4 전체 완성 • 약 165개 표현 학습 완료</div>`;
+        sd.style.display = 'block';
+        sd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+
+</body>
+</html>
