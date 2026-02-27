@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국어 학습: 꽃 - 김춘수 (Korean Learning: Flower - Kim Chun-su)</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            line-height: 1.6;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        h1 {
+            color: #c0392b;
+            text-align: center;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .poem-info {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .poem-info-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* Poem display */
+        .poem-block {
+            background: #fffaf0;
+            border: 2px solid #f6ad55;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .poem-stanza {
+            margin-bottom: 25px;
+        }
+
+        .poem-line {
+            font-size: 20px;
+            color: #2d3748;
+            line-height: 2;
+            font-weight: 500;
+        }
+
+        .poem-line-en {
+            font-size: 14px;
+            color: #718096;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Line-by-line analysis */
+        .analysis-card {
+            background: #fff;
+            border: 2px solid #fed7d7;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .analysis-line-ko {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 8px;
+        }
+
+        .analysis-line-en {
+            font-size: 15px;
+            color: #4a5568;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .analysis-note {
+            background: #fff5f5;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+
+        /* Vocabulary */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .vocab-card {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+
+        .vocab-card:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .vocab-word {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 6px;
+        }
+
+        .vocab-pronunciation {
+            font-size: 15px;
+            color: #c0392b;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .vocab-pos {
+            display: inline-block;
+            background: #fed7d7;
+            color: #9b2335;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+        }
+
+        .vocab-meaning {
+            font-size: 15px;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .vocab-example {
+            background: #fff5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .example-ko { color: #2d3748; margin-bottom: 4px; }
+        .example-en { color: #718096; font-style: italic; }
+
+        /* Grammar */
+        .grammar-section {
+            background: #fffff0;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .grammar-title {
+            font-size: 19px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+
+        .grammar-pattern {
+            display: inline-block;
+            background: #fed7d7;
+            color: #9b2335;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .grammar-explanation {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .grammar-example {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            border: 1px solid #fed7d7;
+        }
+
+        .grammar-example p { margin: 4px 0; }
+        .grammar-ex-ko { color: #2d3748; font-weight: 600; }
+        .grammar-ex-en { color: #718096; font-style: italic; }
+
+        .highlight { background: #fffacd; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+        .highlight-red { background: #fed7d7; padding: 2px 5px; border-radius: 3px; font-weight: bold; color: #c0392b; }
+
+        /* Phrase */
+        .phrase-section {
+            background: #f0fff4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .phrase-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #276749;
+            margin-bottom: 15px;
+        }
+
+        .phrase-item {
+            background: white;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #48bb78;
+        }
+
+        .phrase-ko { font-size: 16px; font-weight: bold; color: #2d3748; margin-bottom: 5px; }
+        .phrase-en { font-size: 14px; color: #718096; }
+        .phrase-note { font-size: 13px; color: #4a5568; margin-top: 5px; font-style: italic; }
+
+        /* Literary Analysis */
+        .lit-section {
+            background: #f7f0ff;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #805ad5;
+        }
+
+        .lit-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #553c9a;
+            margin-bottom: 12px;
+        }
+
+        .lit-text {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .lit-text strong { color: #553c9a; }
+
+        /* Quiz */
+        .quiz-section {
+            background: #fff5f5;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .quiz-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .question-number {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 17px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+
+        .options { display: grid; gap: 10px; }
+
+        .option {
+            background: #f7fafc;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option:hover { background: #fff5f5; border-color: #e74c3c; }
+        .option.selected { background: #e74c3c; color: white; border-color: #e74c3c; }
+        .option.correct { background: #48bb78; color: white; border-color: #48bb78; }
+        .option.incorrect { background: #f56565; color: white; border-color: #f56565; }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus { outline: none; border-color: #e74c3c; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover { transform: scale(1.02); }
+        .submit-btn:active { transform: scale(0.98); }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #fed7d7;
+            padding-bottom: 10px;
+        }
+
+        .nav-tab {
+            padding: 8px 18px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a5568;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        @media (max-width: 600px) {
+            .vocab-grid { grid-template-columns: 1fr; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🌸 한국어 학습: 꽃<br><small style="font-size: 18px; color: #888;">Korean Learning: Flower — Kim Chun-su (김춘수)</small></h1>
+
+    <div class="poem-info">
+        <div class="poem-info-title">꽃 (Flower) — 김춘수 (Kim Chun-su, 1922–2004)</div>
+        <p><strong>시 소개 / About the Poem:</strong> 김춘수의 <em>꽃</em>은 1952년에 발표된 한국의 대표 현대시입니다. 이름을 불러주는 행위를 통해 존재의 의미와 인간 사이의 진정한 관계가 형성된다는 사상을 담고 있습니다.<br>
+        <em>Flower</em> by Kim Chun-su was published in 1952 and is one of Korea's most beloved modern poems. It explores how the act of naming someone gives meaning to their existence and forms genuine connection between people.</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <a class="nav-tab active" onclick="showTab('poem-tab', this)">🌸 시 전문 / Full Poem</a>
+        <a class="nav-tab" onclick="showTab('vocab-tab', this)">📚 단어 / Vocabulary</a>
+        <a class="nav-tab" onclick="showTab('grammar-tab', this)">✏️ 문법 / Grammar</a>
+        <a class="nav-tab" onclick="showTab('phrase-tab', this)">💬 구문 / Phrases</a>
+        <a class="nav-tab" onclick="showTab('meaning-tab', this)">🔍 의미 분석 / Analysis</a>
+        <a class="nav-tab" onclick="showTab('quiz-tab', this)">📝 퀴즈 / Quiz</a>
+    </div>
+
+    <!-- ==================== TAB 1: POEM ==================== -->
+    <div id="poem-tab" class="tab-content active">
+        <div class="section-title">🌸 시 전문 (Full Poem) — 행별 분석 (Line-by-Line)</div>
+
+        <div class="poem-block">
+            <div class="poem-stanza">
+                <div class="poem-line">내가 그의 이름을 불러 주기 전에는</div>
+                <div class="poem-line">그는 다만</div>
+                <div class="poem-line">하나의 몸짓에 지나지 않았다.</div>
+                <div style="height:8px"></div>
+                <div class="poem-line-en">Before I called his name,</div>
+                <div class="poem-line-en">he was nothing more</div>
+                <div class="poem-line-en">than a single gesture.</div>
+            </div>
+            <div class="poem-stanza">
+                <div class="poem-line">내가 그의 이름을 불러 주었을 때</div>
+                <div class="poem-line">그는 나에게로 와서</div>
+                <div class="poem-line">꽃이 되었다.</div>
+                <div style="height:8px"></div>
+                <div class="poem-line-en">When I called his name,</div>
+                <div class="poem-line-en">he came to me</div>
+                <div class="poem-line-en">and became a flower.</div>
+            </div>
+            <div class="poem-stanza">
+                <div class="poem-line">내가 그의 이름을 불러 준 것처럼</div>
+                <div class="poem-line">나의 이 빛깔과 향기에 알맞는</div>
+                <div class="poem-line">누가 나의 이름을 불러다오.</div>
+                <div class="poem-line">그에게로 가서 나도</div>
+                <div class="poem-line">그의 꽃이 되고 싶다.</div>
+                <div style="height:8px"></div>
+                <div class="poem-line-en">Just as I called his name,</div>
+                <div class="poem-line-en">I wish someone would call my name —</div>
+                <div class="poem-line-en">my name that fits my color and fragrance.</div>
+                <div class="poem-line-en">I wish to go to that person</div>
+                <div class="poem-line-en">and become his flower.</div>
+            </div>
+            <div class="poem-stanza">
+                <div class="poem-line">우리들은 모두</div>
+                <div class="poem-line">무엇이 되고 싶다.</div>
+                <div class="poem-line">너는 나에게 나는 너에게</div>
+                <div class="poem-line">잊혀지지 않는 하나의 눈짓이 되고 싶다.</div>
+                <div style="height:8px"></div>
+                <div class="poem-line-en">We all</div>
+                <div class="poem-line-en">want to become something.</div>
+                <div class="poem-line-en">You to me, and I to you —</div>
+                <div class="poem-line-en">I want to become one unforgettable glance (to you, and to me).</div>
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top:30px;">🔬 행별 상세 분석 / Detailed Line Analysis</div>
+
+        <div class="analysis-card">
+            <div class="analysis-line-ko">내가 그의 이름을 불러 주기 전에는</div>
+            <div class="analysis-line-en">Before I called his name</div>
+            <div class="analysis-note">
+                <strong>구조 / Structure:</strong> 내가 (I + subject marker) + 그의 (his) + 이름을 (name + object marker) + 불러 주기 전에는 (before calling for [him])<br>
+                <strong>핵심 문법 / Key Grammar:</strong> <span class="highlight-red">~기 전에</span> = "before doing ~" | <span class="highlight-red">~아/어 주다</span> = to do something for someone (here: 불러 주다 = to call for someone's sake)<br>
+                <strong>해석 팁 / Note:</strong> "주기"는 단순히 이름을 부르는 것이 아니라 <em>상대방을 위해</em> 이름을 불러주는 배려의 행위임을 나타냅니다. The "주" in 불러 주다 signals an act of giving — calling the name as a gift to another.
+            </div>
+        </div>
+
+        <div class="analysis-card">
+            <div class="analysis-line-ko">그는 다만 하나의 몸짓에 지나지 않았다.</div>
+            <div class="analysis-line-en">He was nothing more than a single gesture.</div>
+            <div class="analysis-note">
+                <strong>핵심 표현 / Key Expression:</strong> <span class="highlight-red">~에 지나지 않다</span> = "to be nothing more than ~", "to be merely ~"<br>
+                <strong>어휘 / Vocab:</strong> 다만 = merely, just / 몸짓 = gesture, bodily movement (몸 body + 짓 act)<br>
+                <strong>의미 / Meaning:</strong> 이름이 불리기 전의 존재는 '의미 없는 움직임'에 불과했다는 것. Before being named, existence is meaningless — just a formless gesture in space.
+            </div>
+        </div>
+
+        <div class="analysis-card">
+            <div class="analysis-line-ko">내가 그의 이름을 불러 주었을 때, 그는 나에게로 와서 꽃이 되었다.</div>
+            <div class="analysis-line-en">When I called his name, he came to me and became a flower.</div>
+            <div class="analysis-note">
+                <strong>핵심 문법 / Key Grammar:</strong> <span class="highlight-red">~었을 때</span> = "when (something happened)" (past tense) | <span class="highlight-red">~이/가 되다</span> = "to become ~"<br>
+                <strong>상징 / Symbolism:</strong> "꽃"은 아름다움, 의미, 완성된 존재를 상징합니다. The flower symbolizes a being that has achieved full meaning and beauty through being named.<br>
+                <strong>문장 구조 / Sentence Structure:</strong> "나에게로 와서" — 방향을 나타내는 ~에게로 (~toward) + 와서 (came and then...)
+            </div>
+        </div>
+
+        <div class="analysis-card">
+            <div class="analysis-line-ko">나의 이 빛깔과 향기에 알맞는 누가 나의 이름을 불러다오.</div>
+            <div class="analysis-line-en">I wish someone would call my name — my name that fits my color and fragrance.</div>
+            <div class="analysis-note">
+                <strong>핵심 문법 / Key Grammar:</strong> <span class="highlight-red">~아/어 다오</span> = informal request "please do ~ for me" (간청의 어미, a pleading ending)<br>
+                <strong>어휘 / Vocab:</strong> 빛깔 = color, hue / 향기 = fragrance, scent / 알맞다 = to be fitting, appropriate<br>
+                <strong>핵심 해석 / Key Reading:</strong> "나의 이 빛깔과 향기에 알맞는"은 누가(someone)를 수식하는 것이 아니라 <em>나의 이름</em>을 수식합니다. 즉, "나의 빛깔과 향기에 어울리는 이름을 누군가 불러달라"는 뜻입니다. "알맞는" modifies <em>이름</em> (name), not 누가 (someone). The meaning is: "Please, someone, call my name — the name that truly fits my color and fragrance."
+            </div>
+        </div>
+
+        <div class="analysis-card">
+            <div class="analysis-line-ko">잊혀지지 않는 하나의 눈짓이 되고 싶다.</div>
+            <div class="analysis-line-en">I want to become one unforgettable glance (to you, and to me).</div>
+            <div class="analysis-note">
+                <strong>핵심 문법 / Key Grammar:</strong> <span class="highlight-red">잊혀지지 않는</span> = (passive) 잊다 → 잊혀지다 (to be forgotten) + -지 않다 (negation) + -는 (present modifier) = "that is not forgotten"<br>
+                <span class="highlight-red">~고 싶다</span> = "want to do ~"<br>
+                <strong>어휘 / Vocab:</strong> 눈짓 = a glance, signal with the eyes (눈 eye + 짓 act)<br>
+                <strong>의미 / Meaning:</strong> 시의 결론 — 우리는 모두 서로에게 잊혀지지 않는 존재가 되길 원한다. The poem's conclusion: we all yearn to be unforgettable to one another.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 2: VOCABULARY ==================== -->
+    <div id="vocab-tab" class="tab-content">
+        <div class="section-title">📚 핵심 단어 / Key Vocabulary</div>
+
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <div class="vocab-word">꽃</div>
+                <div class="vocab-pronunciation">[kkot]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">flower / 상징적 의미: 의미 있는 존재 (a being with meaning)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">봄에 꽃이 피어요.</div>
+                    <div class="example-en">Flowers bloom in spring.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">이름</div>
+                <div class="vocab-pronunciation">[i-reum]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">name / 시에서: 존재를 규정하는 것 (that which defines existence)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">이름이 뭐예요?</div>
+                    <div class="example-en">What is your name?</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">부르다</div>
+                <div class="vocab-pronunciation">[bu-reu-da]</div>
+                <span class="vocab-pos">동사 Verb</span>
+                <div class="vocab-meaning">to call (a name); to sing / 불러 (stem form used in poem)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">제 이름을 불러 주세요.</div>
+                    <div class="example-en">Please call my name.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">몸짓</div>
+                <div class="vocab-pronunciation">[mom-jit]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">gesture; bodily movement / 몸(body) + 짓(act)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">그의 몸짓이 슬퍼 보였어요.</div>
+                    <div class="example-en">His gestures looked sad.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">눈짓</div>
+                <div class="vocab-pronunciation">[nun-jit]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">a glance; signal with one's eyes / 눈(eye) + 짓(act)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">그녀는 눈짓으로 조용히 하라고 했어요.</div>
+                    <div class="example-en">She signaled with her eyes to be quiet.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">빛깔</div>
+                <div class="vocab-pronunciation">[bit-kkal]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">color; hue / 시에서: 개인의 고유한 성품 (one's unique character)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">가을 단풍의 빛깔이 아름다워요.</div>
+                    <div class="example-en">The colors of autumn leaves are beautiful.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">향기</div>
+                <div class="vocab-pronunciation">[hyang-gi]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">fragrance; scent / 시에서: 내면의 매력 (inner charm)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">꽃향기가 퍼져 있어요.</div>
+                    <div class="example-en">The flower fragrance is spreading.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">알맞다</div>
+                <div class="vocab-pronunciation">[al-mat-da]</div>
+                <span class="vocab-pos">형용사 Adjective</span>
+                <div class="vocab-meaning">to be fitting; to be suitable; just right</div>
+                <div class="vocab-example">
+                    <div class="example-ko">이 옷이 저한테 알맞아요.</div>
+                    <div class="example-en">These clothes fit me just right.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">잊다</div>
+                <div class="vocab-pronunciation">[it-da]</div>
+                <span class="vocab-pos">동사 Verb</span>
+                <div class="vocab-meaning">to forget / 잊혀지다 = to be forgotten (passive)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">그 날을 절대 잊지 못해요.</div>
+                    <div class="example-en">I can never forget that day.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">되다</div>
+                <div class="vocab-pronunciation">[doe-da]</div>
+                <span class="vocab-pos">동사 Verb</span>
+                <div class="vocab-meaning">to become; to turn into / 시에서 핵심 동사 (key verb of the poem)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">나는 선생님이 되고 싶어요.</div>
+                    <div class="example-en">I want to become a teacher.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">다만</div>
+                <div class="vocab-pronunciation">[da-man]</div>
+                <span class="vocab-pos">부사 Adverb</span>
+                <div class="vocab-meaning">merely; only; just (used to minimize or limit)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">다만 부탁이 하나 있어요.</div>
+                    <div class="example-en">I only have one request.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">지나다</div>
+                <div class="vocab-pronunciation">[ji-na-da]</div>
+                <span class="vocab-pos">동사 Verb</span>
+                <div class="vocab-meaning">to pass by; to go beyond / ~에 지나지 않다 = to be nothing more than</div>
+                <div class="vocab-example">
+                    <div class="example-ko">시간이 지나면 나아질 거예요.</div>
+                    <div class="example-en">Things will get better as time passes.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">존재</div>
+                <div class="vocab-pronunciation">[jon-jae]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">existence; being / 이 시의 핵심 주제어</div>
+                <div class="vocab-example">
+                    <div class="example-ko">나의 존재를 알아줘요.</div>
+                    <div class="example-en">Please acknowledge my existence.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">의미</div>
+                <div class="vocab-pronunciation">[eui-mi]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">meaning; significance</div>
+                <div class="vocab-example">
+                    <div class="example-ko">이 단어의 의미가 뭐예요?</div>
+                    <div class="example-en">What is the meaning of this word?</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">관계</div>
+                <div class="vocab-pronunciation">[gwan-gye]</div>
+                <span class="vocab-pos">명사 Noun</span>
+                <div class="vocab-meaning">relationship; connection</div>
+                <div class="vocab-example">
+                    <div class="example-ko">우리는 특별한 관계예요.</div>
+                    <div class="example-en">We have a special relationship.</div>
+                </div>
+            </div>
+
+            <div class="vocab-card">
+                <div class="vocab-word">피다</div>
+                <div class="vocab-pronunciation">[pi-da]</div>
+                <span class="vocab-pos">동사 Verb</span>
+                <div class="vocab-meaning">to bloom; to blossom (for flowers)</div>
+                <div class="vocab-example">
+                    <div class="example-ko">봄이 되면 꽃이 피어요.</div>
+                    <div class="example-en">When spring comes, flowers bloom.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 3: GRAMMAR ==================== -->
+    <div id="grammar-tab" class="tab-content">
+        <div class="section-title">✏️ 핵심 문법 / Key Grammar Patterns</div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">① ~기 전에 (는)</div>
+            <div class="grammar-pattern">동사/형용사 stem + 기 전에</div>
+            <div class="grammar-explanation">
+                <strong>"~하기 전에" = "before doing ~"</strong><br>
+                어떤 행동이나 상태가 일어나기 이전의 시간을 나타냅니다. Used to express a time before an action or state occurs.<br>
+                시에서 / In the poem: <span class="highlight">이름을 불러 주기 전에는</span> — "before calling the name" (는 adds contrast/topic emphasis)
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 자기 전에 책을 읽어요.</p>
+                <p class="grammar-ex-en">I read a book before sleeping.</p>
+                <p class="grammar-ex-ko">🌸 밥을 먹기 전에 손을 씻어요.</p>
+                <p class="grammar-ex-en">I wash my hands before eating.</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">② ~아/어 주다 (giving favor)</div>
+            <div class="grammar-pattern">verb stem + 아/어 주다</div>
+            <div class="grammar-explanation">
+                <strong>"~해 주다" = to do ~ for someone (as a favor or gift)</strong><br>
+                단순한 행위가 아니라 상대방을 위해 행동한다는 의미를 더합니다. Adds the nuance that the action is done for another person's benefit.<br>
+                시에서 / In the poem: <span class="highlight">이름을 불러 주다</span> — to call the name (as a gift to them)
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 도와 주세요. (도와 주다)</p>
+                <p class="grammar-ex-en">Please help me.</p>
+                <p class="grammar-ex-ko">🌸 설명해 주셔서 감사해요.</p>
+                <p class="grammar-ex-en">Thank you for explaining (for me).</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">③ ~었/았을 때</div>
+            <div class="grammar-pattern">verb stem + 었/았 + 을 때</div>
+            <div class="grammar-explanation">
+                <strong>"~했을 때" = "when (something happened)"</strong> (past time clause)<br>
+                과거의 특정 시점에 일어난 상황을 나타냅니다. Used to refer to a specific moment in the past.<br>
+                시에서 / In the poem: <span class="highlight">이름을 불러 주었을 때</span> — "when I called his name"
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 처음 만났을 때 긴장했어요.</p>
+                <p class="grammar-ex-en">I was nervous when we first met.</p>
+                <p class="grammar-ex-ko">🌸 어렸을 때 꿈이 뭐였어요?</p>
+                <p class="grammar-ex-en">What was your dream when you were young?</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">④ ~이/가 되다</div>
+            <div class="grammar-pattern">noun + 이/가 되다</div>
+            <div class="grammar-explanation">
+                <strong>"~이/가 되다" = "to become ~"</strong><br>
+                어떤 상태나 신분으로 변화함을 나타냅니다. Expresses transformation into a new state or identity.<br>
+                시에서 / In the poem: <span class="highlight">꽃이 되었다</span> — "became a flower" / <span class="highlight">꽃이 되고 싶다</span> — "want to become a flower"
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 그는 의사가 되었어요.</p>
+                <p class="grammar-ex-en">He became a doctor.</p>
+                <p class="grammar-ex-ko">🌸 나는 너에게 특별한 사람이 되고 싶어요.</p>
+                <p class="grammar-ex-en">I want to become a special person to you.</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">⑤ ~고 싶다</div>
+            <div class="grammar-pattern">verb stem + 고 싶다</div>
+            <div class="grammar-explanation">
+                <strong>"~고 싶다" = "want to do ~"</strong><br>
+                화자의 바람이나 소망을 나타내는 가장 기본적인 표현. The most common way to express a speaker's desire or wish.<br>
+                시에서 / In the poem: <span class="highlight">그의 꽃이 되고 싶다</span> — "I want to become his flower"
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 한국어를 잘 하고 싶어요.</p>
+                <p class="grammar-ex-en">I want to speak Korean well.</p>
+                <p class="grammar-ex-ko">🌸 잊혀지지 않는 사람이 되고 싶어요.</p>
+                <p class="grammar-ex-en">I want to become a person who is not forgotten.</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">⑥ ~아/어 다오 (간청 Plea)</div>
+            <div class="grammar-pattern">verb stem + 아/어 다오</div>
+            <div class="grammar-explanation">
+                <strong>"~아/어 다오" = "please do ~ for me"</strong> (informal, emotionally charged request)<br>
+                부탁보다 강한 간청의 의미. Stronger than a regular request — carries emotional longing or pleading.<br>
+                시에서 / In the poem: <span class="highlight">나의 이름을 불러다오</span> — "Please (I beg you), call my name"<br>
+                <em>주다 vs 다오: "주세요" is polite; "다오" is informal and carries yearning</em>
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 나를 기억해 다오.</p>
+                <p class="grammar-ex-en">Please, remember me.</p>
+                <p class="grammar-ex-ko">🌸 이것 좀 가져다오.</p>
+                <p class="grammar-ex-en">Please bring this (to me).</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">⑦ 잊혀지다 — 피동 (Passive Voice)</div>
+            <div class="grammar-pattern">잊다 → 잊히다 / 잊혀지다</div>
+            <div class="grammar-explanation">
+                <strong>피동 (수동태) = Passive voice</strong><br>
+                능동: 잊다 (to forget) → 피동: 잊혀지다 (to be forgotten)<br>
+                시에서 / In the poem: <span class="highlight">잊혀지지 않는</span> = that is not forgotten<br>
+                분석: 잊혀지다 + -지 않다 (negation) + -는 (present attributive modifier)
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 그 노래는 잊혀지지 않아요.</p>
+                <p class="grammar-ex-en">That song is not forgotten.</p>
+                <p class="grammar-ex-ko">🌸 이 기억은 영원히 잊혀지지 않을 거예요.</p>
+                <p class="grammar-ex-en">This memory will never be forgotten.</p>
+            </div>
+        </div>
+
+        <div class="grammar-section">
+            <div class="grammar-title">⑧ ~에 지나지 않다</div>
+            <div class="grammar-pattern">noun + 에 지나지 않다</div>
+            <div class="grammar-explanation">
+                <strong>"~에 지나지 않다" = "to be nothing more than ~", "to be merely ~"</strong><br>
+                어떤 것이 그 이상의 의미나 가치가 없음을 강조합니다. Used to emphasize that something has no greater significance.<br>
+                시에서 / In the poem: <span class="highlight">하나의 몸짓에 지나지 않았다</span> — "was nothing more than a single gesture"
+            </div>
+            <div class="grammar-example">
+                <p class="grammar-ex-ko">🌸 그것은 단순한 오해에 지나지 않아요.</p>
+                <p class="grammar-ex-en">That is nothing more than a simple misunderstanding.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 4: PHRASES ==================== -->
+    <div id="phrase-tab" class="tab-content">
+        <div class="section-title">💬 핵심 구문 / Key Phrases & Expressions</div>
+
+        <div class="phrase-section">
+            <div class="phrase-title">📌 시의 핵심 구문 / Core Phrases from the Poem</div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">이름을 불러 주다</div>
+                <div class="phrase-en">to call (someone's) name for them / to give meaning by naming</div>
+                <div class="phrase-note">이 시의 핵심 행위. 이름을 불러주는 것은 상대의 존재를 인정하는 것. The central act of the poem — naming is an act of recognition.</div>
+            </div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">~에 지나지 않다</div>
+                <div class="phrase-en">to be nothing more than ~; to be merely ~</div>
+                <div class="phrase-note">격식체 표현. 어떤 것의 가치나 의미를 제한할 때 사용. Formal expression used to minimize something's significance.</div>
+            </div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">나에게로 오다</div>
+                <div class="phrase-en">to come toward me</div>
+                <div class="phrase-note">"~에게로" = directional marker towards a person. 일반적으로 "나에게 오다"를 쓰지만, "나에게로"는 더 시적이고 강한 방향성을 나타냄. More poetic and directional than 나에게.</div>
+            </div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">빛깔과 향기에 알맞다</div>
+                <div class="phrase-en">my name that fits my color and fragrance (called by someone)</div>
+                <div class="phrase-note">"알맞는"은 누가(someone)가 아니라 나의 이름(my name)을 수식합니다. "알맞는" modifies 이름 (name), not 누가 (someone). The poet asks for their name to be called — a name that perfectly matches who they truly are.</div>
+            </div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">잊혀지지 않는 존재</div>
+                <div class="phrase-en">an unforgettable existence / a being that is not forgotten</div>
+                <div class="phrase-note">시의 궁극적인 소망. 관계 속에서 의미 있는 존재로 기억되고 싶다는 욕망. The ultimate wish of the poem — to be remembered and meaningful in relationship.</div>
+            </div>
+
+            <div class="phrase-item">
+                <div class="phrase-ko">무엇이 되고 싶다</div>
+                <div class="phrase-en">want to become something</div>
+                <div class="phrase-note">보편적 인간의 열망을 표현. Expresses the universal human desire for meaning and identity.</div>
+            </div>
+        </div>
+
+        <div class="phrase-section" style="background: #fff9e6;">
+            <div class="phrase-title" style="color: #b7791f;">🌿 관련 표현 확장 / Extended Expressions</div>
+
+            <div class="phrase-item" style="border-left-color: #f6ad55;">
+                <div class="phrase-ko">이름을 붙이다</div>
+                <div class="phrase-en">to name something; to attach a name</div>
+                <div class="phrase-note">이름을 부르다 vs. 이름을 붙이다: 부르다 = to call; 붙이다 = to give/attach a name to something unnamed</div>
+            </div>
+
+            <div class="phrase-item" style="border-left-color: #f6ad55;">
+                <div class="phrase-ko">의미 있는 존재</div>
+                <div class="phrase-en">a meaningful existence / a being with significance</div>
+                <div class="phrase-note">반대: 의미 없는 존재 = a meaningless existence</div>
+            </div>
+
+            <div class="phrase-item" style="border-left-color: #f6ad55;">
+                <div class="phrase-ko">서로에게 특별하다</div>
+                <div class="phrase-en">to be special to each other</div>
+                <div class="phrase-note">서로 = each other, mutually. 시의 마지막 연 "너는 나에게 나는 너에게"의 상호성을 표현.</div>
+            </div>
+
+            <div class="phrase-item" style="border-left-color: #f6ad55;">
+                <div class="phrase-ko">기억 속에 남다</div>
+                <div class="phrase-en">to remain in one's memory / to linger in memory</div>
+                <div class="phrase-note">"잊혀지지 않다"의 동의어적 표현. A synonym-like expression for "not being forgotten."</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 5: LITERARY ANALYSIS ==================== -->
+    <div id="meaning-tab" class="tab-content">
+        <div class="section-title">🔍 의미 분석 / Literary & Thematic Analysis</div>
+
+        <div class="lit-section">
+            <div class="lit-title">🎭 시의 주제 / Central Themes</div>
+            <div class="lit-text">
+                <strong>1. 명명(命名)의 힘 — The Power of Naming</strong><br>
+                이 시의 핵심은 "이름을 부른다"는 행위입니다. 김춘수는 어떤 존재든 이름이 불리기 전에는 단순한 '몸짓'에 불과하지만, 이름이 불리는 순간 의미를 가진 '꽃'이 된다고 말합니다.<br>
+                The heart of this poem is the act of "calling a name." Kim Chun-su suggests that any being, before being named, is merely a gesture — but the moment it is named, it becomes a flower with meaning.<br><br>
+
+                <strong>2. 존재와 의미 — Existence and Meaning</strong><br>
+                철학적으로, 이 시는 실존주의적 사상을 담고 있습니다: 인간의 존재는 타자의 인식을 통해서 비로소 완성됩니다. 혼자서는 '몸짓'이지만, 누군가가 알아봐 줄 때 '꽃'이 됩니다.<br>
+                Philosophically, this poem carries existentialist ideas: human existence is completed only through the recognition of another. Alone we are a gesture; recognized by another, we become a flower.<br><br>
+
+                <strong>3. 상호성 — Mutual Recognition</strong><br>
+                시의 마지막 연 "너는 나에게 나는 너에게"는 관계의 상호성을 강조합니다. 우리는 서로에게 의미가 되어야 하고, 서로를 잊혀지지 않는 눈짓으로 기억해야 합니다.<br>
+                The final stanza, "You to me, and I to you," emphasizes the bidirectionality of recognition. "잊혀지지 않는 하나의 눈짓" (one unforgettable glance) applies in both directions — to you and to me — capturing the mutual wish to be unforgettable to each other.
+            </div>
+        </div>
+
+        <div class="lit-section" style="background: #f0fff4; border-left-color: #48bb78;">
+            <div class="lit-title" style="color: #276749;">🌿 상징 분석 / Symbolism</div>
+            <div class="lit-text">
+                <strong>꽃 (Flower)</strong> — 의미를 부여받은 완성된 존재 / A being that has received meaning and achieved wholeness<br><br>
+                <strong>몸짓 (Gesture)</strong> — 아직 인식되지 않은, 이름 없는 존재 / An unrecognized, nameless being<br><br>
+                <strong>눈짓 (Glance)</strong> — 언어를 초월한 감정적 연결 / Emotional connection beyond words<br><br>
+                <strong>빛깔과 향기 (Color and Fragrance)</strong> — 개인의 본질, 고유한 정체성 / One's inner essence and unique identity<br><br>
+                <strong>이름 (Name)</strong> — 존재를 인정하는 언어적 행위 / The linguistic act that affirms existence
+            </div>
+        </div>
+
+        <div class="lit-section" style="background: #f7f0ff; border-left-color: #805ad5;">
+            <div class="lit-title" style="color: #553c9a;">✍️ 시적 구조 / Poetic Structure</div>
+            <div class="lit-text">
+                이 시는 4연으로 구성되어 있습니다 (4 stanzas):<br><br>
+                <strong>1연</strong>: 이름을 부르기 전 — 무의미한 존재 (Before naming — meaningless existence)<br>
+                <strong>2연</strong>: 이름을 부른 후 — 꽃이 된 존재 (After naming — becomes a flower)<br>
+                <strong>3연</strong>: 시인의 소망 — 나도 이름이 불리고 싶다 (The poet's wish — to be named too)<br>
+                <strong>4연</strong>: 보편적 진리 — 우리 모두의 소망 (Universal truth — everyone's wish)<br><br>
+                이 구조는 개인의 경험에서 보편적 진리로 확장되는 운동을 보여줍니다. The structure moves from individual experience to universal truth.
+            </div>
+        </div>
+
+        <div class="lit-section" style="background: #fff5f5; border-left-color: #e74c3c;">
+            <div class="lit-title">📖 김춘수 소개 / About Kim Chun-su</div>
+            <div class="lit-text">
+                김춘수(1922–2004)는 한국의 대표적인 현대 시인으로, '언어'와 '존재'의 관계를 탐구하는 시 세계를 구축했습니다. 1952년 발표한 〈꽃〉은 그의 대표작이자 한국 현대시의 걸작으로 꼽히며, 교과서에 수록되어 모든 한국인이 암기하는 시입니다.<br><br>
+                Kim Chun-su (1922–2004) was one of Korea's foremost modern poets, known for exploring the relationship between language and existence. <em>Flower</em>, published in 1952, is his masterpiece and a classic of Korean modern poetry, included in school textbooks and memorized by nearly all Koreans.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 6: QUIZ ==================== -->
+    <div id="quiz-tab" class="tab-content">
+        <div class="quiz-section">
+            <div class="quiz-title">📝 퀴즈 / Quiz — 꽃 (Flower)</div>
+            <p style="text-align:center; color:#718096; margin-bottom:20px;">총 20문제 / 20 Questions Total</p>
+
+            <form id="quizForm">
+
+                <!-- Q1 -->
+                <div class="question" data-qid="q1">
+                    <div class="question-number">Question 1 / 1번</div>
+                    <div class="question-text">"꽃이 되었다"에서 ~이/가 되다의 의미는? <br><small style="color:#718096">What does ~이/가 되다 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q1" value="a"> to disappear</label>
+                        <label class="option"><input type="radio" name="q1" value="b"> to become</label>
+                        <label class="option"><input type="radio" name="q1" value="c"> to remain</label>
+                        <label class="option"><input type="radio" name="q1" value="d"> to break</label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question" data-qid="q2">
+                    <div class="question-number">Question 2 / 2번</div>
+                    <div class="question-text">"name" (이름)을 한국어로 써 보세요. <br><small style="color:#718096">Write "name" in Korean.</small></div>
+                    <input type="text" id="q2" placeholder="한국어로 쓰세요">
+                </div>
+
+                <!-- Q3 -->
+                <div class="question" data-qid="q3">
+                    <div class="question-number">Question 3 / 3번</div>
+                    <div class="question-text">"~기 전에"의 의미는? <br><small style="color:#718096">What does ~기 전에 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="a"> after doing</label>
+                        <label class="option"><input type="radio" name="q3" value="b"> before doing</label>
+                        <label class="option"><input type="radio" name="q3" value="c"> while doing</label>
+                        <label class="option"><input type="radio" name="q3" value="d"> instead of doing</label>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question" data-qid="q4">
+                    <div class="question-number">Question 4 / 4번</div>
+                    <div class="question-text">"몸짓"의 뜻은? <br><small style="color:#718096">What does 몸짓 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q4" value="a"> flower</label>
+                        <label class="option"><input type="radio" name="q4" value="b"> name</label>
+                        <label class="option"><input type="radio" name="q4" value="c"> gesture; bodily movement</label>
+                        <label class="option"><input type="radio" name="q4" value="d"> memory</label>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question" data-qid="q5">
+                    <div class="question-number">Question 5 / 5번</div>
+                    <div class="question-text">"flower" (꽃)을 한국어로 써 보세요. <br><small style="color:#718096">Write "flower" in Korean.</small></div>
+                    <input type="text" id="q5" placeholder="한국어로 쓰세요">
+                </div>
+
+                <!-- Q6 -->
+                <div class="question" data-qid="q6">
+                    <div class="question-number">Question 6 / 6번</div>
+                    <div class="question-text">"~아/어 주다"가 동사에 더해질 때 어떤 의미가 생기나요? <br><small style="color:#718096">What nuance does ~아/어 주다 add to a verb?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q6" value="a"> the action is done forcefully</label>
+                        <label class="option"><input type="radio" name="q6" value="b"> the action is done in the past</label>
+                        <label class="option"><input type="radio" name="q6" value="c"> the action is done for someone else's benefit</label>
+                        <label class="option"><input type="radio" name="q6" value="d"> the action is uncertain</label>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="question" data-qid="q7">
+                    <div class="question-number">Question 7 / 7번</div>
+                    <div class="question-text">"향기"의 뜻은? <br><small style="color:#718096">What does 향기 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q7" value="a"> color</label>
+                        <label class="option"><input type="radio" name="q7" value="b"> sound</label>
+                        <label class="option"><input type="radio" name="q7" value="c"> fragrance; scent</label>
+                        <label class="option"><input type="radio" name="q7" value="d"> taste</label>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="question" data-qid="q8">
+                    <div class="question-number">Question 8 / 8번</div>
+                    <div class="question-text">"fragrance" (향기)를 한국어로 써 보세요. <br><small style="color:#718096">Write "fragrance" in Korean.</small></div>
+                    <input type="text" id="q8" placeholder="한국어로 쓰세요">
+                </div>
+
+                <!-- Q9 -->
+                <div class="question" data-qid="q9">
+                    <div class="question-number">Question 9 / 9번</div>
+                    <div class="question-text">"잊혀지지 않는"을 영어로 올바르게 번역한 것은? <br><small style="color:#718096">Which is the correct English translation of 잊혀지지 않는?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q9" value="a"> that is being forgotten</label>
+                        <label class="option"><input type="radio" name="q9" value="b"> that is not forgotten; unforgettable</label>
+                        <label class="option"><input type="radio" name="q9" value="c"> that wants to forget</label>
+                        <label class="option"><input type="radio" name="q9" value="d"> that has already forgotten</label>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="question" data-qid="q10">
+                    <div class="question-number">Question 10 / 10번</div>
+                    <div class="question-text">시에서 "꽃"이 상징하는 것은? <br><small style="color:#718096">In the poem, what does "꽃" (flower) symbolize?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q10" value="a"> a real flower in a garden</label>
+                        <label class="option"><input type="radio" name="q10" value="b"> a being that has received meaning through being named</label>
+                        <label class="option"><input type="radio" name="q10" value="c"> sadness and loneliness</label>
+                        <label class="option"><input type="radio" name="q10" value="d"> the passage of time</label>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="question" data-qid="q11">
+                    <div class="question-number">Question 11 / 11번</div>
+                    <div class="question-text">"눈짓"의 뜻은? <br><small style="color:#718096">What does 눈짓 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q11" value="a"> a voice call</label>
+                        <label class="option"><input type="radio" name="q11" value="b"> a touch of the hand</label>
+                        <label class="option"><input type="radio" name="q11" value="c"> a glance; signal with one's eyes</label>
+                        <label class="option"><input type="radio" name="q11" value="d"> a written message</label>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="question" data-qid="q12">
+                    <div class="question-number">Question 12 / 12번</div>
+                    <div class="question-text">"existence" (존재)를 한국어로 써 보세요. <br><small style="color:#718096">Write "existence" in Korean.</small></div>
+                    <input type="text" id="q12" placeholder="한국어로 쓰세요">
+                </div>
+
+                <!-- Q13 -->
+                <div class="question" data-qid="q13">
+                    <div class="question-number">Question 13 / 13번</div>
+                    <div class="question-text">"~에 지나지 않다"의 의미는? <br><small style="color:#718096">What does ~에 지나지 않다 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q13" value="a"> to be nothing more than; merely</label>
+                        <label class="option"><input type="radio" name="q13" value="b"> to be greater than</label>
+                        <label class="option"><input type="radio" name="q13" value="c"> to go beyond</label>
+                        <label class="option"><input type="radio" name="q13" value="d"> to be exactly equal to</label>
+                    </div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="question" data-qid="q14">
+                    <div class="question-number">Question 14 / 14번</div>
+                    <div class="question-text">"~고 싶다"의 의미는? <br><small style="color:#718096">What does ~고 싶다 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q14" value="a"> must do</label>
+                        <label class="option"><input type="radio" name="q14" value="b"> to want to do</label>
+                        <label class="option"><input type="radio" name="q14" value="c"> to have done</label>
+                        <label class="option"><input type="radio" name="q14" value="d"> to be able to do</label>
+                    </div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="question" data-qid="q15">
+                    <div class="question-number">Question 15 / 15번</div>
+                    <div class="question-text">"빛깔"의 뜻은? <br><small style="color:#718096">What does 빛깔 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q15" value="a"> light (intensity)</label>
+                        <label class="option"><input type="radio" name="q15" value="b"> color; hue</label>
+                        <label class="option"><input type="radio" name="q15" value="c"> shadow</label>
+                        <label class="option"><input type="radio" name="q15" value="d"> shape</label>
+                    </div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="question" data-qid="q16">
+                    <div class="question-number">Question 16 / 16번</div>
+                    <div class="question-text">"meaning" (의미)를 한국어로 써 보세요. <br><small style="color:#718096">Write "meaning" in Korean.</small></div>
+                    <input type="text" id="q16" placeholder="한국어로 쓰세요">
+                </div>
+
+                <!-- Q17 -->
+                <div class="question" data-qid="q17">
+                    <div class="question-number">Question 17 / 17번</div>
+                    <div class="question-text">"~아/어 다오"는 어떤 뉘앙스의 표현인가요? <br><small style="color:#718096">What nuance does ~아/어 다오 carry?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q17" value="a"> a polite formal request</label>
+                        <label class="option"><input type="radio" name="q17" value="b"> a command to a subordinate</label>
+                        <label class="option"><input type="radio" name="q17" value="c"> an emotional plea or heartfelt request</label>
+                        <label class="option"><input type="radio" name="q17" value="d"> a question</label>
+                    </div>
+                </div>
+
+                <!-- Q18 -->
+                <div class="question" data-qid="q18">
+                    <div class="question-number">Question 18 / 18번</div>
+                    <div class="question-text">이 시에서 4연(마지막 연)의 핵심 메시지는? <br><small style="color:#718096">What is the main message of the 4th (final) stanza?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q18" value="a"> Flowers are the most beautiful things in nature</label>
+                        <label class="option"><input type="radio" name="q18" value="b"> We all want to become unforgettable to one another</label>
+                        <label class="option"><input type="radio" name="q18" value="c"> Names are unimportant</label>
+                        <label class="option"><input type="radio" name="q18" value="d"> The poet is sad and alone</label>
+                    </div>
+                </div>
+
+                <!-- Q19 -->
+                <div class="question" data-qid="q19">
+                    <div class="question-number">Question 19 / 19번</div>
+                    <div class="question-text">"알맞다"의 뜻은? <br><small style="color:#718096">What does 알맞다 mean?</small></div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q19" value="a"> to be too big</label>
+                        <label class="option"><input type="radio" name="q19" value="b"> to be fitting; suitable; just right</label>
+                        <label class="option"><input type="radio" name="q19" value="c"> to be unknown</label>
+                        <label class="option"><input type="radio" name="q19" value="d"> to be surprising</label>
+                    </div>
+                </div>
+
+                <!-- Q20 -->
+                <div class="question" data-qid="q20">
+                    <div class="question-number">Question 20 / 20번</div>
+                    <div class="question-text">"to forget" (잊다)의 피동형(수동태)은? <br><small style="color:#718096">What is the passive form of 잊다 (to forget)?</small></div>
+                    <input type="text" id="q20" placeholder="한국어로 쓰세요">
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">채점하기 / Check Answers ✓</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+<script>
+    function showTab(tabId, el) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        el.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function checkAnswers() {
+        let correct = 0;
+        const total = 20;
+
+        // Per-question explanations
+        const explanations = {
+            q1: { correct: 'b', ko: '~이/가 되다 = "~이 되다" = to become', en: '~이/가 되다 means "to become". 꽃이 되었다 = became a flower.' },
+            q2: { correct: '이름', ko: 'name = 이름', en: '"name" in Korean is 이름.' },
+            q3: { correct: 'b', ko: '~기 전에 = "~하기 전에" = before doing', en: '~기 전에 means "before doing ~".' },
+            q4: { correct: 'c', ko: '몸짓 = 몸(body) + 짓(act) = gesture; bodily movement', en: '몸짓 means gesture or bodily movement.' },
+            q5: { correct: '꽃', ko: 'flower = 꽃', en: '"flower" in Korean is 꽃.' },
+            q6: { correct: 'c', ko: '~아/어 주다 = 상대방을 위해 행동함 = done for someone else\'s benefit', en: '~아/어 주다 adds the nuance of doing an action for another person\'s benefit.' },
+            q7: { correct: 'c', ko: '향기 = fragrance; scent', en: '향기 means fragrance or scent.' },
+            q8: { correct: '향기', ko: 'fragrance = 향기', en: '"fragrance" in Korean is 향기.' },
+            q9: { correct: 'b', ko: '잊혀지다(be forgotten) + -지 않다(negation) + -는(modifier) = that is not forgotten', en: '잊혀지지 않는 = that is not forgotten / unforgettable.' },
+            q10: { correct: 'b', ko: '꽃은 이름 불림으로써 의미를 얻은 존재를 상징합니다', en: 'The flower symbolizes a being that has received meaning through being named.' },
+            q11: { correct: 'c', ko: '눈짓 = 눈(eye) + 짓(act) = a glance; signal with one\'s eyes', en: '눈짓 means a glance or eye signal.' },
+            q12: { correct: '존재', ko: 'existence = 존재', en: '"existence" in Korean is 존재.' },
+            q13: { correct: 'a', ko: '~에 지나지 않다 = ~에 불과하다 = to be nothing more than; merely', en: '~에 지나지 않다 means "to be nothing more than" or "merely ~".' },
+            q14: { correct: 'b', ko: '~고 싶다 = 바람/소망을 나타냄 = want to do', en: '~고 싶다 means "want to do ~".' },
+            q15: { correct: 'b', ko: '빛깔 = color; hue (시에서: 개인의 고유한 정체성)', en: '빛깔 means color or hue.' },
+            q16: { correct: '의미', ko: 'meaning = 의미', en: '"meaning" in Korean is 의미.' },
+            q17: { correct: 'c', ko: '~아/어 다오 = 간청의 표현, 감정적 부탁 = emotional plea / heartfelt request', en: '~아/어 다오 carries an emotional, pleading nuance — stronger than a regular request.' },
+            q18: { correct: 'b', ko: '마지막 연: 우리 모두 서로에게 잊혀지지 않는 존재가 되고 싶다', en: 'The final stanza: we all want to become unforgettable to one another.' },
+            q19: { correct: 'b', ko: '알맞다 = to be fitting; suitable; just right', en: '알맞다 means to be fitting, suitable, or just right.' },
+            q20: { correct: '잊혀지다', ko: '잊다(능동) → 잊혀지다(피동) = 잊다의 수동형', en: 'The passive form of 잊다 (to forget) is 잊혀지다 (to be forgotten).' }
+        };
+
+        const textQuestions = ['q2', 'q5', 'q8', 'q12', 'q16', 'q20'];
+        const mcQuestions = ['q1','q3','q4','q6','q7','q9','q10','q11','q13','q14','q15','q17','q18','q19'];
+
+        // Grade text inputs
+        textQuestions.forEach(id => {
+            const input = document.getElementById(id);
+            if (!input) return;
+            const userAnswer = input.value.trim().normalize('NFC').replace(/\s/g, '');
+            const correctAnswer = explanations[id].correct.normalize('NFC').replace(/\s/g, '');
+            const isCorrect = userAnswer === correctAnswer;
+            if (isCorrect) correct++;
+
+            input.style.borderColor = isCorrect ? '#48bb78' : '#f56565';
+            input.style.background = isCorrect ? '#f0fff4' : '#fff5f5';
+
+            // Show explanation below input
+            showExplanation(id, isCorrect, explanations[id], correctAnswer);
+        });
+
+        // Grade multiple choice
+        mcQuestions.forEach(id => {
+            const selected = document.querySelector(`input[name="${id}"]:checked`);
+            const userValue = selected ? selected.value : null;
+            const isCorrect = userValue === explanations[id].correct;
+            if (isCorrect) correct++;
+
+            // Highlight correct/incorrect options
+            document.querySelectorAll(`input[name="${id}"]`).forEach(radio => {
+                const label = radio.parentElement;
+                label.classList.remove('selected', 'correct', 'incorrect');
+                if (radio.value === explanations[id].correct) {
+                    label.classList.add('correct');
+                } else if (radio.value === userValue && !isCorrect) {
+                    label.classList.add('incorrect');
+                }
+            });
+
+            // Show explanation
+            showExplanation(id, isCorrect, explanations[id], null);
+        });
+
+        const percentage = Math.round((correct / total) * 100);
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+
+        let message = '';
+        if (percentage >= 90) message = '🌸 완벽해요! Excellent! 김춘수 시인도 감동받을 거예요!\n';
+        else if (percentage >= 70) message = '🌼 잘했어요! Good job! 계속 공부해요!\n';
+        else message = '💪 더 연습해봐요! Keep practicing! 꽃이 피어날 거예요!\n';
+
+        resultDiv.textContent = `${message}${correct}문제 맞았어요 / ${correct} out of ${total} correct!\n${percentage}%`;
+        resultDiv.style.background = percentage >= 70 ? '#e6fffa' : '#fff5f5';
+        resultDiv.style.color = percentage >= 70 ? '#1a4731' : '#742a2a';
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showExplanation(id, isCorrect, exp, correctText) {
+        // Remove old explanation if any
+        const old = document.getElementById('exp-' + id);
+        if (old) old.remove();
+
+        const qDiv = document.querySelector(`[data-qid="${id}"]`);
+        if (!qDiv) return;
+
+        const expDiv = document.createElement('div');
+        expDiv.id = 'exp-' + id;
+        expDiv.style.cssText = `
+            margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+            font-size: 14px; line-height: 1.6;
+            background: ${isCorrect ? '#f0fff4' : '#fff5f5'};
+            border-left: 3px solid ${isCorrect ? '#48bb78' : '#f56565'};
+        `;
+
+        let html = isCorrect
+            ? `<span style="color:#276749; font-weight:bold;">✅ 정답!</span> `
+            : `<span style="color:#c53030; font-weight:bold;">❌ 오답.</span> `;
+
+        if (!isCorrect && correctText) {
+            html += `<strong>정답 / Correct answer: ${correctText}</strong><br>`;
+        } else if (!isCorrect) {
+            html += `<strong>정답 / Correct: (${exp.correct})</strong><br>`;
+        }
+
+        html += `<span style="color:#2d3748;">🇰🇷 ${exp.ko}</span><br>`;
+        html += `<span style="color:#718096; font-style:italic;">🇺🇸 ${exp.en}</span>`;
+
+        expDiv.innerHTML = html;
+        qDiv.appendChild(expDiv);
+    }
+    // Option click handler — use pointer-events on label naturally, just track visual selection
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            const radio = this.querySelector('input[type="radio"]');
+            if (!radio) return;
+            const name = radio.name;
+            document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                r.parentElement.classList.remove('selected');
+            });
+            this.classList.add('selected');
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>한국 돈 — Korean Won (₩)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e8449;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Bills display */
+        .bills-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .bill-card {
+            text-align: center;
+            background: #f0faf4;
+            border: 2px solid #27ae60;
+            border-radius: 12px;
+            padding: 12px 18px;
+            min-width: 110px;
+        }
+
+        .bill-amount {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1e8449;
+        }
+
+        .bill-label {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 3px;
+        }
+
+        .bill-icon {
+            font-size: 1.6em;
+            margin-bottom: 4px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #e9f7ef;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.05em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: #27ae60;
+            color: white;
+        }
+
+        .tab-button:active { transform: scale(0.98); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Conversation */
+        .conversation-section {
+            background: #e9f7ef;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .conversation-title {
+            color: #1e8449;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        .dialogue { margin-bottom: 18px; }
+
+        .speaker {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .speaker.minjun { color: #2471a3; }
+        .speaker.soyeon { color: #8e44ad; }
+        .speaker.clerk  { color: #1e8449; }
+
+        .message {
+            background: white;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            line-height: 1.8;
+            font-size: 1.05em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .message.minjun { border-left: 4px solid #2471a3; }
+        .message.soyeon { border-left: 4px solid #8e44ad; }
+        .message.clerk  { border-left: 4px solid #27ae60; }
+
+        .highlight {
+            background: linear-gradient(transparent 60%, #fff59d 60%);
+            font-weight: bold;
+            padding: 0 2px;
+        }
+
+        .money-highlight {
+            background: linear-gradient(transparent 60%, #a9dfbf 60%);
+            font-weight: bold;
+            padding: 0 3px;
+            color: #1e8449;
+        }
+
+        .translation {
+            color: #666;
+            font-size: 0.88em;
+            margin-top: 6px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .note-tag {
+            display: inline-block;
+            background: #fef9e7;
+            color: #b7770d;
+            border: 1px solid #f9e79f;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.82em;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        /* Vocabulary */
+        .vocabulary-section {
+            background: #e9f7ef;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .vocab-grid::-webkit-scrollbar { width: 7px; }
+        .vocab-grid::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .vocab-grid::-webkit-scrollbar-thumb { background: #27ae60; border-radius: 10px; }
+
+        .vocab-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.7;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 3px solid #27ae60;
+        }
+
+        .vocab-word {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #1e8449;
+        }
+
+        .vocab-sub {
+            font-size: 0.88em;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Money counting table */
+        .money-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .money-table th {
+            background: #27ae60;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .money-table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .money-table tr:nth-child(even) td { background: #f0faf4; }
+        .money-table tr:hover td { background: #d5f5e3; }
+
+        /* Quiz */
+        .quiz-section {
+            background: #e9f7ef;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .question {
+            background: white;
+            padding: 18px 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .question-number {
+            color: #1e8449;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .question-text {
+            font-size: 1.05em;
+            margin-bottom: 13px;
+            line-height: 1.6;
+        }
+
+        .options { display: grid; gap: 9px; }
+
+        .option {
+            padding: 11px 14px;
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .option:hover { background: #e9f7ef; border-color: #27ae60; }
+        .option.selected { background: #27ae60; color: white; border-color: #27ae60; }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 11px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus { outline: none; border-color: #27ae60; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover { transform: scale(1.02); }
+        .submit-btn:active { transform: scale(0.98); }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 18px; }
+            h1 { font-size: 1.4em; }
+            .tab-button { padding: 11px; font-size: 0.95em; }
+            .bills-row { gap: 8px; }
+            .bill-card { min-width: 90px; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>💵 한국 돈 (Korean Won ₩)</h1>
+    <div class="subtitle">
+        한국 돈으로 쇼핑하는 대화 연습<br>
+        Practice conversations using Korean Won
+    </div>
+
+    <!-- Bills Overview -->
+    <div class="bills-row">
+        <div class="bill-card">
+            <div class="bill-icon">💴</div>
+            <div class="bill-amount">천 원</div>
+            <div class="bill-label">1,000 ₩</div>
+        </div>
+        <div class="bill-card">
+            <div class="bill-icon">💵</div>
+            <div class="bill-amount">오천 원</div>
+            <div class="bill-label">5,000 ₩</div>
+        </div>
+        <div class="bill-card">
+            <div class="bill-icon">💶</div>
+            <div class="bill-amount">만 원</div>
+            <div class="bill-label">10,000 ₩</div>
+        </div>
+        <div class="bill-card">
+            <div class="bill-icon">💷</div>
+            <div class="bill-amount">오만 원</div>
+            <div class="bill-label">50,000 ₩</div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab('conversation-tab', event)">Conversation</button>
+        <button class="tab-button" onclick="openTab('vocabulary-tab', event)">Vocabulary</button>
+        <button class="tab-button" onclick="openTab('quiz-tab', event)">Quiz</button>
+    </div>
+
+    <!-- ===== CONVERSATION TAB ===== -->
+    <div id="conversation-tab" class="tab-content active">
+
+        <!-- Scene 1: Convenience Store -->
+        <div class="conversation-section">
+            <div class="conversation-title">🏪 편의점에서 (At the Convenience Store)</div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    이 <span class="highlight">라면</span> 얼마예요?
+                    <div class="translation">How much is this ramen?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 직원 (Staff)
+                </div>
+                <div class="message clerk">
+                    <span class="money-highlight">천이백 원</span>이에요.
+                    <div class="translation">It's 1,200 won.</div>
+                    <span class="note-tag">💡 천(1,000) + 이백(200) = 1,200</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    그럼 이 <span class="highlight">음료수</span>도요. 다 얼마예요?
+                    <div class="translation">Then this drink too. How much is it all together?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 직원
+                </div>
+                <div class="message clerk">
+                    합계 <span class="money-highlight">삼천 원</span>입니다.
+                    <div class="translation">The total is 3,000 won.</div>
+                    <span class="note-tag">💡 삼(3) + 천(1,000) = 3,000</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    여기 <span class="money-highlight">오천 원</span> 드릴게요.
+                    <div class="translation">Here, I'll give you 5,000 won.</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 직원
+                </div>
+                <div class="message clerk">
+                    감사합니다. <span class="money-highlight">이천 원</span> 거슬러 드릴게요.
+                    <div class="translation">Thank you. I'll give you 2,000 won in change.</div>
+                    <span class="note-tag">💡 거슬러 드리다 = to give change</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Market -->
+        <div class="conversation-section">
+            <div class="conversation-title">🛒 시장에서 (At the Market)</div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    저기요, 이 <span class="highlight">사과</span> 한 개에 얼마예요?
+                    <div class="translation">Excuse me, how much is one of these apples?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 상인 (Vendor)
+                </div>
+                <div class="message clerk">
+                    한 개에 <span class="money-highlight">이천오백 원</span>이에요. 세 개 사시면 <span class="money-highlight">육천 원</span>이에요.
+                    <div class="translation">It's 2,500 won each. If you buy three, it's 6,000 won.</div>
+                    <span class="note-tag">💡 이천(2,000) + 오백(500) = 2,500</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    그럼 세 개 주세요. 좀 <span class="highlight">깎아 주세요</span>!
+                    <div class="translation">Then please give me three. Please give me a discount!</div>
+                    <span class="note-tag">💡 깎아 주세요 = Please reduce the price</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 상인
+                </div>
+                <div class="message clerk">
+                    하하, 그럼 <span class="money-highlight">오천오백 원</span>에 드릴게요!
+                    <div class="translation">Haha, then I'll give them to you for 5,500 won!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    감사해요! 여기 <span class="money-highlight">만 원</span>이요.
+                    <div class="translation">Thank you! Here's 10,000 won.</div>
+                    <span class="note-tag">💡 만 = 10,000</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 상인
+                </div>
+                <div class="message clerk">
+                    <span class="money-highlight">사천오백 원</span> 거스름돈이에요. 또 오세요~
+                    <div class="translation">Here's 4,500 won in change. Come again~</div>
+                    <span class="note-tag">💡 거스름돈 = change (money returned)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Cafe -->
+        <div class="conversation-section">
+            <div class="conversation-title">☕ 카페에서 (At the Café)</div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    아메리카노 두 잔이랑 케이크 하나 주세요. 다 얼마예요?
+                    <div class="translation">Two Americanos and one cake please. How much is it all?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 직원
+                </div>
+                <div class="message clerk">
+                    아메리카노가 각각 <span class="money-highlight">사천오백 원</span>이고, 케이크가 <span class="money-highlight">육천 원</span>이에요. 합계 <span class="money-highlight">만오천 원</span>입니다.
+                    <div class="translation">Each Americano is 4,500 won, and the cake is 6,000 won. The total is 15,000 won.</div>
+                    <span class="note-tag">💡 만(10,000) + 오천(5,000) = 15,000</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    내가 낼게! 여기 <span class="money-highlight">이만 원</span>이요.
+                    <div class="translation">I'll treat you! Here's 20,000 won.</div>
+                    <span class="note-tag">💡 이만 = 2 × 만(10,000) = 20,000</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    고마워! 다음에는 내가 <span class="highlight">낼게</span>.
+                    <div class="translation">Thanks! Next time I'll treat you.</div>
+                    <span class="note-tag">💡 내다 = to pay</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 직원
+                </div>
+                <div class="message clerk">
+                    <span class="money-highlight">오천 원</span> 거슬러 드릴게요. 맛있게 드세요!
+                    <div class="translation">Here's 5,000 won in change. Enjoy!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 4: Clothing store with won -->
+        <div class="conversation-section">
+            <div class="conversation-title">👕 옷 가게에서 — 얼마예요? (Clothing Store — How much?)</div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    이 티셔츠 얼마예요?
+                    <div class="translation">How much is this T-shirt?</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 점원
+                </div>
+                <div class="message clerk">
+                    <span class="money-highlight">삼만오천 원</span>인데요, 지금 세일해서 <span class="money-highlight">이만오천 원</span>이에요.
+                    <div class="translation">It's 35,000 won, but with the current sale it's 25,000 won.</div>
+                    <span class="note-tag">💡 삼만(30,000) + 오천(5,000) = 35,000</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker soyeon">
+                    <span>👩</span> 소연
+                </div>
+                <div class="message soyeon">
+                    오, 싸다! 이거 살게요. 현금으로 낼게요. 여기 <span class="money-highlight">오만 원</span>이요.
+                    <div class="translation">Oh, it's cheap! I'll buy this. I'll pay in cash. Here's 50,000 won.</div>
+                    <span class="note-tag">💡 오만 원 = 50,000 won — 가장 큰 지폐 (largest bill)</span>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker clerk">
+                    <span>🧑‍💼</span> 점원
+                </div>
+                <div class="message clerk">
+                    네, <span class="money-highlight">이만오천 원</span> 거슬러 드릴게요. 감사합니다!
+                    <div class="translation">Here's 25,000 won in change. Thank you!</div>
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="speaker minjun">
+                    <span>👦</span> 민준
+                </div>
+                <div class="message minjun">
+                    소연아, 나는 카드로 낼게. 요즘 현금이 없어.
+                    <div class="translation">Soyeon, I'll pay by card. I don't have cash these days.</div>
+                    <span class="note-tag">💡 카드로 내다 = to pay by card | 현금으로 내다 = to pay in cash</span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /conversation-tab -->
+
+    <!-- ===== VOCABULARY TAB ===== -->
+    <div id="vocabulary-tab" class="tab-content">
+        <div class="vocabulary-section">
+            <div class="conversation-title">📚 핵심 단어 / Key Vocabulary</div>
+
+            <!-- Money counting table -->
+            <table class="money-table">
+                <tr>
+                    <th>한국어</th>
+                    <th>숫자</th>
+                    <th>English</th>
+                </tr>
+                <tr><td><strong>백 원</strong></td><td>100 ₩</td><td>100 won</td></tr>
+                <tr><td><strong>오백 원</strong></td><td>500 ₩</td><td>500 won</td></tr>
+                <tr><td><strong>천 원</strong></td><td>1,000 ₩</td><td>1,000 won</td></tr>
+                <tr><td><strong>이천 원</strong></td><td>2,000 ₩</td><td>2,000 won</td></tr>
+                <tr><td><strong>오천 원</strong></td><td>5,000 ₩</td><td>5,000 won</td></tr>
+                <tr><td><strong>만 원</strong></td><td>10,000 ₩</td><td>10,000 won</td></tr>
+                <tr><td><strong>이만 원</strong></td><td>20,000 ₩</td><td>20,000 won</td></tr>
+                <tr><td><strong>오만 원</strong></td><td>50,000 ₩</td><td>50,000 won</td></tr>
+            </table>
+
+            <div class="vocab-grid">
+
+                <div class="vocab-item">
+                    <div class="vocab-word">얼마예요? / 얼마입니까?</div>
+                    <div class="vocab-sub">[eol-ma-ye-yo]</div>
+                    How much is it? <br>
+                    <em>💡 가장 기본적인 가격 질문 / Most basic price question</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">원 (₩)</div>
+                    <div class="vocab-sub">[won]</div>
+                    Korean Won — Korean currency unit<br>
+                    <em>💡 숫자 읽기: 천 원(1,000) / 만 원(10,000) / 오만 원(50,000)</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">천 원</div>
+                    <div class="vocab-sub">[cheon won]</div>
+                    1,000 won &nbsp;|&nbsp; <strong>천(千) = 1,000</strong><br>
+                    <em>이천 원 = 2,000 / 삼천 원 = 3,000 / 오천 원 = 5,000</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">만 원</div>
+                    <div class="vocab-sub">[man won]</div>
+                    10,000 won &nbsp;|&nbsp; <strong>만(萬) = 10,000</strong><br>
+                    <em>이만 원 = 20,000 / 삼만 원 = 30,000 / 오만 원 = 50,000</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">오만 원</div>
+                    <div class="vocab-sub">[o-man won]</div>
+                    50,000 won &nbsp;|&nbsp; Korea's largest bill 💷<br>
+                    <em>💡 오(五) × 만(10,000) = 50,000</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">합계 / 총</div>
+                    <div class="vocab-sub">[hap-gye] / [chong]</div>
+                    Total amount<br>
+                    <em>합계 얼마예요? = What's the total?</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">거슬러 주다 / 거스름돈</div>
+                    <div class="vocab-sub">[geo-seum-don]</div>
+                    To give change / Change (money returned)<br>
+                    <em>천 원 거슬러 주세요 = Please give me 1,000 won in change</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">깎아 주세요</div>
+                    <div class="vocab-sub">[kka-kka ju-se-yo]</div>
+                    Please give me a discount / Please lower the price<br>
+                    <em>💡 시장에서 자주 쓰는 표현 / Common at markets</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">현금 / 카드</div>
+                    <div class="vocab-sub">[hyeon-geum] / [ka-deu]</div>
+                    Cash / Card<br>
+                    <em>현금으로 낼게요 = I'll pay in cash<br>카드로 낼게요 = I'll pay by card</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">내다 / 계산하다</div>
+                    <div class="vocab-sub">[nae-da] / [gye-san-ha-da]</div>
+                    To pay / To pay (more formal)<br>
+                    <em>내가 낼게 = I'll treat you (casual)<br>제가 계산할게요 = I'll pay / I'll treat (polite)</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">세일 / 할인</div>
+                    <div class="vocab-sub">[se-il] / [ha-rin]</div>
+                    Sale / Discount<br>
+                    <em>지금 세일 중이에요 = It's on sale now<br>10% 할인해요 = 10% discount</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">비싸다 / 싸다</div>
+                    <div class="vocab-sub">[bi-ssa-da] / [ssa-da]</div>
+                    Expensive / Cheap (inexpensive)<br>
+                    <em>너무 비싸요 = It's too expensive<br>정말 싸다! = It's really cheap!</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">영수증</div>
+                    <div class="vocab-sub">[yeong-su-jeung]</div>
+                    Receipt<br>
+                    <em>영수증 주세요 = Please give me a receipt</em>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-word">드릴게요</div>
+                    <div class="vocab-sub">[deu-ril-ge-yo]</div>
+                    I will give you (polite form of 주다)<br>
+                    <em>거슬러 드릴게요 = I will give you change<br>
+                    💡 드리다 = to give (to someone of higher status)</em>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /vocabulary-tab -->
+
+    <!-- ===== QUIZ TAB ===== -->
+    <div id="quiz-tab" class="tab-content">
+        <div class="quiz-section">
+            <div class="conversation-title">📝 퀴즈 — 한국 돈 / Quiz — Korean Won</div>
+            <p style="text-align:center; color:#555; margin-bottom:20px; font-size:0.95em;">15 questions 총 15문제</p>
+
+            <!-- Q1 -->
+            <div class="question" data-qid="q1">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">How do you say 1,000 won in Korean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 1, 'wrong1')">만 원</button>
+                    <button class="option" onclick="selectAnswer(this, 1, 'correct')">천 원</button>
+                    <button class="option" onclick="selectAnswer(this, 1, 'wrong2')">백 원</button>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question" data-qid="q2">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">How do you write "10,000 won" in Korean?</div>
+                <input type="text" id="q2" placeholder="한국어로 쓰세요">
+            </div>
+
+            <!-- Q3 -->
+            <div class="question" data-qid="q3">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">What does "얼마예요?" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 3, 'wrong1')">Here you go.</button>
+                    <button class="option" onclick="selectAnswer(this, 3, 'wrong2')">Do you have this?</button>
+                    <button class="option" onclick="selectAnswer(this, 3, 'correct')">How much is it?</button>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question" data-qid="q4">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">How do you write "50,000 won" in Korean?</div>
+                <input type="text" id="q4" placeholder="한국어로 쓰세요">
+            </div>
+
+            <!-- Q5 -->
+            <div class="question" data-qid="q5">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">What does "거스름돈" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 5, 'correct')">change (money returned)</button>
+                    <button class="option" onclick="selectAnswer(this, 5, 'wrong1')">total price</button>
+                    <button class="option" onclick="selectAnswer(this, 5, 'wrong2')">discount</button>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question" data-qid="q6">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">How much is "삼천오백 원" in numbers?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 6, 'wrong1')">3,000 won</button>
+                    <button class="option" onclick="selectAnswer(this, 6, 'correct')">3,500 won</button>
+                    <button class="option" onclick="selectAnswer(this, 6, 'wrong2')">35,000 won</button>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question" data-qid="q7">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">What does "깎아 주세요" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong1')">Please wrap it up.</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'wrong2')">Please give me a receipt.</button>
+                    <button class="option" onclick="selectAnswer(this, 7, 'correct')">Please give me a discount.</button>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question" data-qid="q8">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">How do you write "cash" in Korean?</div>
+                <input type="text" id="q8" placeholder="한국어로 쓰세요">
+            </div>
+
+            <!-- Q9 -->
+            <div class="question" data-qid="q9">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">How much is "이만오천 원" in numbers?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 9, 'wrong1')">20,000 won</button>
+                    <button class="option" onclick="selectAnswer(this, 9, 'correct')">25,000 won</button>
+                    <button class="option" onclick="selectAnswer(this, 9, 'wrong2')">15,000 won</button>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question" data-qid="q10">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">What does "내가 낼게" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong1')">You pay for yourself.</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'correct')">I'll treat you.</button>
+                    <button class="option" onclick="selectAnswer(this, 10, 'wrong2')">Let's split the bill.</button>
+                </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question" data-qid="q11">
+                <div class="question-number">Question 11</div>
+                <div class="question-text">How do you write "receipt" in Korean?</div>
+                <input type="text" id="q11" placeholder="한국어로 쓰세요">
+            </div>
+
+            <!-- Q12 -->
+            <div class="question" data-qid="q12">
+                <div class="question-number">Question 12</div>
+                <div class="question-text">How do you say 15,000 won in Korean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 12, 'wrong1')">오만 원</button>
+                    <button class="option" onclick="selectAnswer(this, 12, 'wrong2')">일만오천 원</button>
+                    <button class="option" onclick="selectAnswer(this, 12, 'correct')">만오천 원</button>
+                </div>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question" data-qid="q13">
+                <div class="question-number">Question 13</div>
+                <div class="question-text">What does "비싸다" mean?</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 13, 'wrong1')">cheap</button>
+                    <button class="option" onclick="selectAnswer(this, 13, 'correct')">expensive</button>
+                    <button class="option" onclick="selectAnswer(this, 13, 'wrong2')">free</button>
+                </div>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question" data-qid="q14">
+                <div class="question-number">Question 14</div>
+                <div class="question-text">How do you write "discount" in Korean?</div>
+                <input type="text" id="q14" placeholder="한국어로 쓰세요">
+            </div>
+
+            <!-- Q15 -->
+            <div class="question" data-qid="q15">
+                <div class="question-number">Question 15</div>
+                <div class="question-text">"카드로 계산할게요" means:</div>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this, 15, 'wrong1')">I'll pay in cash.</button>
+                    <button class="option" onclick="selectAnswer(this, 15, 'correct')">I'll pay by card.</button>
+                    <button class="option" onclick="selectAnswer(this, 15, 'wrong2')">Do you accept cards?</button>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="checkAnswers()">Check Answers ✓</button>
+            <div class="result" id="result"></div>
+        </div>
+    </div><!-- /quiz-tab -->
+
+</div><!-- /container -->
+
+<script>
+    function openTab(tabName, event) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // ── Explanations for all 15 questions ──────────────────────────────
+    const explanations = {
+        q1:  { correct: 'correct',  answer: '천 원',
+               ko: '천(千) = 1,000. 천 원은 한국 지폐 중 가장 작은 단위예요.',
+               en: '천(千) = 1,000. 천 원 is the smallest bill denomination in Korea.' },
+
+        q2:  { correct: '만원',     answer: '만 원',
+               ko: '만(萬) = 10,000. 숫자 앞에 붙어요: 이만(20,000), 삼만(30,000).',
+               en: '만(萬) = 10,000. It attaches before a number: 이만(20,000), 삼만(30,000).' },
+
+        q3:  { correct: 'correct',  answer: '얼마예요?',
+               ko: '"얼마예요?" = "How much is it?" — 가격을 물어볼 때 가장 많이 쓰는 표현이에요.',
+               en: '"얼마예요?" = "How much is it?" — The most common phrase for asking a price.' },
+
+        q4:  { correct: '오만원',   answer: '오만 원',
+               ko: '오(五) × 만(10,000) = 50,000. 오만 원은 한국에서 가장 큰 지폐예요.',
+               en: '오(5) × 만(10,000) = 50,000. 오만 원 is Korea\'s largest banknote.' },
+
+        q5:  { correct: 'correct',  answer: '거스름돈',
+               ko: '"거스름돈" = 잔돈, 즉 돌려받는 돈이에요. 예: 만 원 내고 삼천 원 거스름돈 받아요.',
+               en: '"거스름돈" = the money you get back as change. E.g. pay 10,000 won, receive 3,000 won change.' },
+
+        q6:  { correct: 'correct',  answer: '3,500 won',
+               ko: '삼천(3,000) + 오백(500) = 3,500원. 숫자를 조합해서 읽어요.',
+               en: '삼천(3,000) + 오백(500) = 3,500 won. Korean numbers are combined like building blocks.' },
+
+        q7:  { correct: 'correct',  answer: '깎아 주세요',
+               ko: '"깎아 주세요" = 가격을 낮춰달라는 표현. 시장이나 재래시장에서 자주 써요.',
+               en: '"깎아 주세요" = Please lower the price / give me a discount. Common at traditional markets.' },
+
+        q8:  { correct: '현금',     answer: '현금',
+               ko: '현금(現金) = cash. 반대말은 카드(card). "현금으로 내다" = to pay in cash.',
+               en: '현금(現金) = cash. The opposite is 카드(card). "현금으로 내다" = to pay in cash.' },
+
+        q9:  { correct: 'correct',  answer: '25,000 won',
+               ko: '이만(20,000) + 오천(5,000) = 25,000원. 만 단위와 천 단위를 더해요.',
+               en: '이만(20,000) + 오천(5,000) = 25,000 won. Add the 만(10,000s) and 천(1,000s) together.' },
+
+        q10: { correct: 'correct',  answer: '내가 낼게',
+               ko: '"내가 낼게" = 내가 돈을 낸다는 뜻인데, 상대방에게 대접할 때 써요 → "I\'ll treat you."',
+               en: '"내가 낼게" literally means "I\'ll pay," but in context it means "I\'ll treat you" — you\'re covering for the other person.' },
+
+        q11: { correct: '영수증',   answer: '영수증',
+               ko: '영수증(領收證) = receipt. "영수증 주세요" = "Please give me a receipt."',
+               en: '영수증(領收證) = receipt. "영수증 주세요" = "Please give me a receipt."' },
+
+        q12: { correct: 'correct',  answer: '만오천 원',
+               ko: '만(10,000) + 오천(5,000) = 15,000원. 일만오천 원이라고도 하지만 보통 만오천 원이라고 해요.',
+               en: '만(10,000) + 오천(5,000) = 15,000 won. 일만오천 원 is also correct but 만오천 원 is more natural.' },
+
+        q13: { correct: 'correct',  answer: '비싸다 = expensive',
+               ko: '"비싸다" = expensive. 반대말은 "싸다" = cheap / inexpensive.',
+               en: '"비싸다" = expensive. The opposite is "싸다" = cheap / inexpensive.' },
+
+        q14: { correct: '할인',     answer: '할인',
+               ko: '할인(割引) = discount. "세일(sale)"과 같은 뜻으로 써요. "10% 할인" = 10% discount.',
+               en: '할인(割引) = discount. Used interchangeably with "세일(sale)". "10% 할인" = 10% discount.' },
+
+        q15: { correct: 'correct',  answer: '카드로 계산할게요',
+               ko: '"카드로 계산하다" = to pay by card. "현금으로 계산하다" = to pay in cash.',
+               en: '"카드로 계산하다" = to pay by card. "현금으로 계산하다" = to pay in cash.' },
+    };
+
+    let userAnswers = {};
+
+    function selectAnswer(button, questionNum, answer) {
+        const options = button.parentElement.querySelectorAll('.option');
+        options.forEach(opt => opt.classList.remove('selected'));
+        button.classList.add('selected');
+        userAnswers[questionNum] = answer;
+    }
+
+    function checkAnswers() {
+        let correct = 0;
+        const total = 15;
+
+        const textQs = ['q2', 'q4', 'q8', 'q11', 'q14'];
+        const mcQs   = [1, 3, 5, 6, 7, 9, 10, 12, 13, 15];
+
+        // ── Grade text inputs ───────────────────────────────────────────
+        textQs.forEach(id => {
+            const input = document.getElementById(id);
+            const user  = input.value.trim().normalize('NFC').replace(/\s/g, '');
+            const ans   = explanations[id].correct.normalize('NFC').replace(/\s/g, '');
+            const ok    = (user === ans);
+            if (ok) correct++;
+            input.style.borderColor = ok ? '#27ae60' : '#e74c3c';
+            input.style.background  = ok ? '#f0faf4' : '#fff5f5';
+            showExplanation(id, ok, explanations[id]);
+        });
+
+        // ── Grade multiple choice ───────────────────────────────────────
+        mcQs.forEach(num => {
+            const qid  = 'q' + num;
+            const ok   = (userAnswers[num] === 'correct');
+            if (ok) correct++;
+
+            // Colour the option buttons
+            const qDiv = document.querySelector(`[data-qid="${qid}"]`);
+            if (qDiv) {
+                qDiv.querySelectorAll('.option').forEach(btn => {
+                    const val = btn.getAttribute('onclick').match(/'(correct|wrong\d)'/)[1];
+                    btn.classList.remove('selected');
+                    if (val === 'correct') {
+                        btn.style.background   = '#e9f7ef';
+                        btn.style.borderColor  = '#27ae60';
+                        btn.style.color        = '#1a5c36';
+                        btn.style.fontWeight   = 'bold';
+                    } else if (val === userAnswers[num] && !ok) {
+                        btn.style.background   = '#fdecea';
+                        btn.style.borderColor  = '#e74c3c';
+                        btn.style.color        = '#b71c1c';
+                    }
+                });
+            }
+            showExplanation(qid, ok, explanations[qid]);
+        });
+
+        // ── Summary result ──────────────────────────────────────────────
+        const pct = Math.round((correct / total) * 100);
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+
+        let msg = '';
+        if (pct >= 90)      msg = '🎉 완벽해요! Excellent!\n';
+        else if (pct >= 70) msg = '👍 잘했어요! Good job!\n';
+        else                msg = '💪 더 연습해봐요! Keep practicing!\n';
+
+        resultDiv.textContent = `${msg}${correct} / ${total} 문제 정답!\n${pct}%`;
+        resultDiv.style.background = pct >= 70 ? '#e9f7ef' : '#fef9e7';
+        resultDiv.style.color      = pct >= 70 ? '#1a5c36' : '#935116';
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showExplanation(qid, isCorrect, exp) {
+        // Remove old explanation if already shown (re-grade case)
+        const old = document.getElementById('exp-' + qid);
+        if (old) old.remove();
+
+        const qDiv = document.querySelector(`[data-qid="${qid}"]`);
+        if (!qDiv) return;
+
+        const box = document.createElement('div');
+        box.id = 'exp-' + qid;
+        box.style.cssText = [
+            'margin-top:12px',
+            'padding:11px 14px',
+            'border-radius:8px',
+            'font-size:0.9em',
+            'line-height:1.75',
+            `background:${isCorrect ? '#e9f7ef' : '#fff5f5'}`,
+            `border-left:3px solid ${isCorrect ? '#27ae60' : '#e74c3c'}`,
+        ].join(';');
+
+        const icon   = isCorrect ? '✅' : '❌';
+        const status = isCorrect
+            ? `<strong style="color:#1a5c36">${icon} 정답! Correct!</strong>`
+            : `<strong style="color:#b71c1c">${icon} 오답. Incorrect.</strong>
+               <span style="color:#333"> &nbsp;정답 / Correct answer: <strong>${exp.answer}</strong></span>`;
+
+        box.innerHTML = `
+            ${status}
+            <div style="margin-top:7px; color:#2d5a3d;">
+                🇰🇷 <strong>한국어 설명:</strong> ${exp.ko}
+            </div>
+            <div style="margin-top:5px; color:#555; font-style:italic;">
+                🇺🇸 <strong>English:</strong> ${exp.en}
+            </div>`;
+
+        qDiv.appendChild(box);
+    }
+</script>
+</body>
+</html>
