@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W20 봄 Spring - 대화 Conversation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6e0 0%, #ffb3c6 50%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #7c83fd 0%, #a18cd1 50%, #fbc2eb 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '💬💬💬💬💬💬💬💬💬💬';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 22px;
+            letter-spacing: 8px;
+            opacity: 0.3;
+        }
+        .header h1 { font-size: 46px; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 20px; opacity: 0.95; }
+        .header .week-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .nav-tabs {
+            display: flex;
+            background: #f5f0ff;
+            border-bottom: 3px solid #d8b4fe;
+        }
+        .nav-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+        .nav-tab.active { color: #7c83fd; background: white; border-bottom: 4px solid #7c83fd; }
+        .nav-tab:hover { background: #f0ecff; color: #7c83fd; }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* CATEGORY HEADERS */
+        .category-header {
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin: 30px 0 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .cat-purple { background: linear-gradient(135deg, #a18cd1 0%, #7c83fd 100%); }
+        .cat-pink { background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%); }
+        .cat-green { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+        .cat-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+        /* VOCAB CARDS */
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 28px;
+            font-size: 16px;
+        }
+        .vocab-table thead tr {
+            background: linear-gradient(135deg, #a18cd1 0%, #7c83fd 100%);
+            color: white;
+        }
+        .vocab-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 15px;
+        }
+        .vocab-table tbody tr:nth-child(even) { background: #f9f5ff; }
+        .vocab-table tbody tr:hover { background: #f0eaff; }
+        .vocab-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8e0ff;
+            vertical-align: middle;
+        }
+        .word-ko { font-size: 22px; font-weight: bold; color: #3f3a8a; }
+        .word-ro { font-size: 13px; color: #a18cd1; font-style: italic; }
+        .word-type {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .type-noun { background: #e3f2fd; color: #1565c0; }
+        .type-verb { background: #e8f5e9; color: #2e7d32; }
+        .type-adj { background: #fff3e0; color: #e65100; }
+        .type-expr { background: #f3e5f5; color: #6a1b9a; }
+        .type-adv { background: #fce4ec; color: #c62828; }
+        .word-meaning { font-weight: 600; color: #4a5568; margin-bottom: 4px; }
+        .word-example { font-size: 14px; color: #718096; font-style: italic; }
+        .word-example-ko { font-size: 15px; color: #2d3748; font-weight: 600; }
+
+        /* EXPRESSIONS BOX */
+        .expr-card {
+            background: linear-gradient(135deg, #f9f5ff 0%, #fff5fb 100%);
+            border: 2px solid #d8b4fe;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .expr-korean { font-size: 26px; font-weight: bold; color: #5b21b6; margin-bottom: 6px; }
+        .expr-meaning { font-size: 16px; color: #4a5568; font-weight: 600; margin-bottom: 10px; }
+        .expr-example { background: white; border-radius: 8px; padding: 12px; border-left: 4px solid #a18cd1; }
+        .expr-example .ko { font-size: 16px; color: #2d3748; font-weight: 600; margin-bottom: 4px; }
+        .expr-example .en { font-size: 14px; color: #718096; font-style: italic; }
+
+        /* CONVERSATION */
+        .conversation-container {
+            background: #f8f5ff;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 28px;
+            border: 2px solid #d8b4fe;
+        }
+        .conv-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #5b21b6;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed #d8b4fe;
+        }
+        .dialog-line {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .dialog-line.right { flex-direction: row-reverse; }
+        .speaker-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 4px;
+        }
+        .speaker-avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            border: 3px solid #d8b4fe;
+        }
+        .speaker-name { font-size: 12px; font-weight: bold; color: #7c83fd; }
+        .speaker-a-bg { background: #ede9fe; }
+        .speaker-b-bg { background: #c8e6c9; border-color: #a5d6a7; }
+        .speaker-b-name { color: #2e7d32; }
+        .dialog-bubble {
+            background: white;
+            border: 2px solid #d8b4fe;
+            border-radius: 14px;
+            padding: 16px 20px;
+            max-width: 78%;
+            box-shadow: 0 2px 10px rgba(124,131,253,0.1);
+        }
+        .dialog-line.right .dialog-bubble { border-color: #a5d6a7; }
+        .bubble-ko { font-size: 18px; color: #2d3748; font-weight: 600; margin-bottom: 6px; line-height: 1.6; }
+        .bubble-ro { font-size: 12px; color: #aaa; margin-bottom: 5px; line-height: 1.5; }
+        .bubble-en { font-size: 14px; color: #718096; font-style: italic; line-height: 1.5; }
+        .highlight-word {
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* QUIZ */
+        .quiz-intro {
+            background: linear-gradient(135deg, #7c83fd 0%, #a18cd1 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .quiz-intro h2 { font-size: 30px; margin-bottom: 10px; }
+        .quiz-intro p { font-size: 17px; opacity: 0.95; }
+        .quiz-question {
+            background: #fafafa;
+            border: 2px solid #d8b4fe;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            background: #7c83fd;
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 18px;
+            font-weight: bold;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .question-text { font-size: 19px; color: #2d3748; margin-bottom: 18px; font-weight: 600; line-height: 1.6; }
+        .korean-word-large { color: #7c83fd; font-size: 24px; font-weight: bold; }
+        .quiz-options { display: grid; gap: 10px; }
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .quiz-option:hover { border-color: #7c83fd; background: #f5f0ff; transform: translateX(4px); }
+        .quiz-option.correct { border-color: #52c41a; background: #f6ffed; color: #2e7d32; }
+        .quiz-option.wrong { border-color: #ff4d4f; background: #fff1f0; color: #cf1322; }
+        .question-explanation { margin-top: 12px; padding: 13px; border-radius: 8px; font-size: 15px; display: none; }
+        .question-explanation.show { display: block; }
+        .question-explanation.correct { background: #f6ffed; border: 2px solid #52c41a; color: #237804; }
+        .question-explanation.incorrect { background: #fff1f0; border: 2px solid #ff4d4f; color: #cf1322; }
+        .submit-btn {
+            background: linear-gradient(135deg, #7c83fd 0%, #a18cd1 100%);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            font-size: 19px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            margin: 28px auto;
+            box-shadow: 0 5px 15px rgba(124,131,253,0.35);
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .quiz-results {
+            display: none;
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 28px;
+        }
+        .quiz-results.show { display: block; }
+        .quiz-results h2 { font-size: 34px; margin-bottom: 16px; }
+        .quiz-results .score { font-size: 64px; font-weight: bold; margin: 18px 0; }
+        .quiz-results p { font-size: 20px; margin-bottom: 26px; }
+        .reset-btn {
+            background: white;
+            color: #56ab2f;
+            border: none;
+            padding: 14px 40px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .spring-divider { text-align: center; font-size: 24px; letter-spacing: 8px; margin: 20px 0; opacity: 0.6; }
+        .tip-box {
+            background: #f9f5ff;
+            border: 2px solid #c4b5fd;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #5b21b6;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .nav-tab { font-size: 13px; padding: 12px 6px; }
+            .vocab-table { font-size: 14px; }
+            .dialog-bubble { max-width: 85%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="week-badge">WEEK 20</div>
+        <h1>봄 🌸 Spring</h1>
+        <div class="subtitle">대화 Conversation + 퀴즈 Quiz</div>
+    </div>
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('vocab', event)">📋 대화 단어 Key Words</button>
+        <button class="nav-tab" onclick="showSection('conversation', event)">💬 대화 Dialogue</button>
+        <button class="nav-tab" onclick="showSection('quiz', event)">✍️ 퀴즈 Quiz</button>
+    </div>
+    <div class="content">
+
+        <!-- ═══════════════════ TAB 1: KEY VOCAB FROM DIALOGUE ═══════════════════ -->
+        <div id="vocab-section" class="section active">
+
+            <div class="category-header cat-purple">📋 대화에 나오는 단어 — Words from the Dialogue</div>
+
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>단어 Word</th>
+                        <th>유형 Type</th>
+                        <th>뜻 Meaning</th>
+                        <th>예문 Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="word-ko">벌써</div>
+                            <div class="word-ro">[beol-sseo]</div>
+                        </td>
+                        <td><span class="word-type type-adv">부사 Adv</span></td>
+                        <td><div class="word-meaning">Already</div></td>
+                        <td>
+                            <div class="word-example-ko">벌써 봄이 왔나 봐요.</div>
+                            <div class="word-example">It seems spring has already come.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">개나리</div>
+                            <div class="word-ro">[gae-na-ri]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Forsythia (yellow spring flower)</div></td>
+                        <td>
+                            <div class="word-example-ko">출근길에 개나리가 피고 있더라고요.</div>
+                            <div class="word-example">On my commute, I saw forsythia blooming.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">따뜻해지다</div>
+                            <div class="word-ro">[tta-tteu-tae ji-da]</div>
+                        </td>
+                        <td><span class="word-type type-verb">동사 V</span></td>
+                        <td><div class="word-meaning">To become warm (change of state)</div></td>
+                        <td>
+                            <div class="word-example-ko">날씨도 많이 따뜻해졌어요.</div>
+                            <div class="word-example">The weather has gotten much warmer.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">봄소풍</div>
+                            <div class="word-ro">[bom-so-pung]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Spring picnic / field trip</div></td>
+                        <td>
+                            <div class="word-example-ko">봄소풍 가고 싶네요!</div>
+                            <div class="word-example">I want to go on a spring picnic!</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">봄나물</div>
+                            <div class="word-ro">[bom-na-mul]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Spring vegetables / wild greens</div></td>
+                        <td>
+                            <div class="word-example-ko">오늘 점심은 봄나물 어떠세요?</div>
+                            <div class="word-example">How about spring greens for lunch today?</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">맛집</div>
+                            <div class="word-ro">[mat-jip]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Famous / great restaurant</div></td>
+                        <td>
+                            <div class="word-example-ko">회사 앞에 비빔밥 맛집이 있어요.</div>
+                            <div class="word-example">There's a great bibimbap restaurant in front of the office.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">구내 식당</div>
+                            <div class="word-ro">[gu-nae sik-dang]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Cafeteria / in-house canteen</div></td>
+                        <td>
+                            <div class="word-example-ko">그냥 구내 식당에 가요.</div>
+                            <div class="word-example">Let's just go to the cafeteria.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">꽃샘 추위</div>
+                            <div class="word-ro">[kkot-saem chu-wi]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Late spring cold snap ("cold jealous of flowers")</div></td>
+                        <td>
+                            <div class="word-example-ko">꽃샘 추위 때문인지 좀 춥네요.</div>
+                            <div class="word-example">Maybe because of the cold snap, it's a bit chilly.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">환절기</div>
+                            <div class="word-ro">[hwan-jeol-gi]</div>
+                        </td>
+                        <td><span class="word-type type-noun">명사 N</span></td>
+                        <td><div class="word-meaning">Change of seasons / transitional period</div></td>
+                        <td>
+                            <div class="word-example-ko">환절기라 감기도 유행이네요.</div>
+                            <div class="word-example">Because it's the change of seasons, colds are going around.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">유행이다</div>
+                            <div class="word-ro">[yu-haeng-i-da]</div>
+                        </td>
+                        <td><span class="word-type type-expr">표현 Expr</span></td>
+                        <td><div class="word-meaning">To be going around / trending / epidemic</div></td>
+                        <td>
+                            <div class="word-example-ko">요즘 독감이 유행이에요.</div>
+                            <div class="word-example">The flu is going around these days.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="word-ko">아쉽다</div>
+                            <div class="word-ro">[a-swin-da]</div>
+                        </td>
+                        <td><span class="word-type type-adj">형용사 Adj</span></td>
+                        <td><div class="word-meaning">To feel a pity / to be disappointed</div></td>
+                        <td>
+                            <div class="word-example-ko">아쉽네요. 다음에 같이 가요!</div>
+                            <div class="word-example">What a shame. Let's go together next time!</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="spring-divider">💬 ✨ 💬 ✨ 💬</div>
+
+            <div class="category-header cat-purple">💡 핵심 표현 Key Expressions</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px;">
+
+                <div class="expr-card">
+                    <div class="expr-korean">그러니까요</div>
+                    <div class="expr-meaning">Exactly! / I know, right! / That's what I'm saying</div>
+                    <div class="expr-example">
+                        <div class="ko">A: 봄이 온 것 같아요. &nbsp; B: 그러니까요!</div>
+                        <div class="en">A: It seems spring has come. B: I know, right!</div>
+                    </div>
+                </div>
+
+                <div class="expr-card">
+                    <div class="expr-korean">하긴</div>
+                    <div class="expr-meaning">Well / Come to think of it / You're right, though</div>
+                    <div class="expr-example">
+                        <div class="ko">하긴, 꽃샘 추위 때문인지 좀 춥긴 해요.</div>
+                        <div class="en">Well, it is a bit cold, maybe because of the cold snap.</div>
+                    </div>
+                </div>
+
+                <div class="expr-card">
+                    <div class="expr-korean">아쉽네요</div>
+                    <div class="expr-meaning">That's a shame / How disappointing / I'm a little sad about it</div>
+                    <div class="expr-example">
+                        <div class="ko">아쉽네요. 다음에 같이 가요!</div>
+                        <div class="en">What a shame. Let's go together next time!</div>
+                    </div>
+                </div>
+
+                <div class="expr-card">
+                    <div class="expr-korean">~라 그런지</div>
+                    <div class="expr-meaning">Maybe because it's ~ / Perhaps since it is ~</div>
+                    <div class="expr-example">
+                        <div class="ko">환절기<strong>라 그런지</strong> 감기도 유행이네요.</div>
+                        <div class="en">Maybe because it's the change of seasons, colds are going around.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>대화 배경:</strong> This is a workplace conversation (직장 대화) between colleagues on a spring morning. They discuss the changing season, plan lunch, and talk about the weather — very natural, everyday Korean! All dialogues end in polite <strong>~요</strong> form (존댓말).
+            </div>
+
+        </div><!-- end vocab tab -->
+
+
+        <!-- ═══════════════════ TAB 2: DIALOGUE ═══════════════════ -->
+        <div id="conversation-section" class="section">
+
+            <div class="category-header cat-purple">💬 봄 대화 — Spring at the Office</div>
+
+            <div class="conversation-container">
+                <div class="conv-title">📍 상황 (Situation): 봄날 아침, 직장 동료들의 대화 / Spring morning, colleagues at work</div>
+
+                <!-- Line 1: A -->
+                <div class="dialog-line">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-a-bg">👨</div>
+                        <div class="speaker-name">민준</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko"><span class="highlight-word">벌써</span> 봄이 왔나 봐요. 출근길에 보니 <span class="highlight-word">개나리</span>가 피고 있<span class="highlight-word">더라고요</span>.</div>
+                        <div class="bubble-ro">Beol-sseo bom-i wan-na bwa-yo. Chul-geun-gi-re bo-ni gae-na-ri-ga pi-go it-deo-ra-go-yo.</div>
+                        <div class="bubble-en">It seems spring has already come. On my way to work, I noticed forsythia was blooming.</div>
+                    </div>
+                </div>
+
+                <!-- Line 2: B -->
+                <div class="dialog-line right">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-b-bg">🧑</div>
+                        <div class="speaker-name" style="color:#2e7d32;">지수</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko"><span class="highlight-word">그러니까요</span>. 날씨도 많이 <span class="highlight-word">따뜻해졌어요</span>.</div>
+                        <div class="bubble-ro">Geu-reo-ni-kka-yo. Nal-ssi-do ma-ni tta-tteu-tae-jyeo-sseo-yo.</div>
+                        <div class="bubble-en">Exactly. The weather has gotten much warmer too.</div>
+                    </div>
+                </div>
+
+                <!-- Line 3: A -->
+                <div class="dialog-line">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-a-bg">👩</div>
+                        <div class="speaker-name">수진</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko">봄이 오니 <span class="highlight-word">봄소풍</span> 가고 싶네요. 오늘 점심은 <span class="highlight-word">봄나물</span> 어떠세요? 회사 앞에 비빔밥 <span class="highlight-word">맛집</span>이 있어요.</div>
+                        <div class="bubble-ro">Bo-mi o-ni bom-so-pung ga-go sim-ne-yo. O-neul jeom-si-meun bom-na-mul eo-tteo-se-yo? Hoe-sa ap-e bi-bim-bap mat-ji-bi it-seo-yo.</div>
+                        <div class="bubble-en">Now that spring is here, I want to go on a picnic. How about spring greens for lunch today? There's a great bibimbap restaurant in front of the office.</div>
+                    </div>
+                </div>
+
+                <!-- Line 4: B -->
+                <div class="dialog-line right">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-b-bg">👱</div>
+                        <div class="speaker-name" style="color:#2e7d32;">현우</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko">봄<span class="highlight-word">이라고 하지만</span>, 아직 좀 추워요. 그냥 <span class="highlight-word">구내 식당</span>에 가요. 거기도 비빔밥이 있어요.</div>
+                        <div class="bubble-ro">Bom-i-ra-go ha-ji-man, a-jik jom chu-wo-yo. Geu-nyang gu-nae sik-dang-e ga-yo. Geo-gi-do bi-bim-bap-i it-seo-yo.</div>
+                        <div class="bubble-en">Even though they call it spring, it's still a bit cold. Let's just go to the cafeteria. They have bibimbap there too.</div>
+                    </div>
+                </div>
+
+                <!-- Line 5: A -->
+                <div class="dialog-line">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-a-bg">👨</div>
+                        <div class="speaker-name">민준</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko"><span class="highlight-word">하긴</span>, <span class="highlight-word">꽃샘 추위</span> <span class="highlight-word">때문인지</span> 좀 춥긴 해요.</div>
+                        <div class="bubble-ro">Ha-gin, kkot-saem chu-wi ttae-mun-in-ji jom chup-gin hae-yo.</div>
+                        <div class="bubble-en">Well, it is a bit cold, maybe because of the late cold snap.</div>
+                    </div>
+                </div>
+
+                <!-- Line 6: B -->
+                <div class="dialog-line right">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-b-bg">🧑</div>
+                        <div class="speaker-name" style="color:#2e7d32;">지수</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko">네. <span class="highlight-word">환절기</span><span class="highlight-word">라 그런지</span> 감기도 <span class="highlight-word">유행</span>이네요.</div>
+                        <div class="bubble-ro">Ne. Hwan-jeol-gi-ra geu-reon-ji gam-gi-do yu-haeng-i-ne-yo.</div>
+                        <div class="bubble-en">Right. Maybe because it's the change of seasons, colds are going around.</div>
+                    </div>
+                </div>
+
+                <!-- Line 7: A -->
+                <div class="dialog-line">
+                    <div class="speaker-info">
+                        <div class="speaker-avatar speaker-a-bg">👩</div>
+                        <div class="speaker-name">수진</div>
+                    </div>
+                    <div class="dialog-bubble">
+                        <div class="bubble-ko"><span class="highlight-word">아쉽네요</span>. 그럼 날이 좀 더 따뜻해지면 꼭 나가요!</div>
+                        <div class="bubble-ro">A-swim-ne-yo. Geu-reom na-ri jom deo tta-tteu-tae-ji-myeon kkok na-ga-yo!</div>
+                        <div class="bubble-en">That's a shame. Well, when it gets warmer, let's definitely go out!</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tip-box">
+                📌 <strong>~요 형식 안내:</strong> 이 대화의 모든 문장은 존댓말 <strong>~요</strong> 형식으로 끝납니다.
+                원본 문장의 <em>~습니다 / ~갑시다 / ~합니다</em> 형식을 모두 자연스러운 ~요 형식으로 바꿨어요.
+                하이라이트된 단어(보라색 배경)는 중요 단어와 문법 표현이에요!
+            </div>
+
+        </div><!-- end conversation tab -->
+
+
+        <!-- ═══════════════════ TAB 3: QUIZ ═══════════════════ -->
+        <div id="quiz-section" class="section">
+
+            <div class="quiz-intro">
+                <h2>💬 대화 퀴즈 Conversation Quiz</h2>
+                <p>대화 내용을 얼마나 이해했나요? 8문제에 도전해 보세요!</p>
+            </div>
+
+            <!-- Q1 -->
+            <div class="quiz-question">
+                <div class="question-number">Q1</div>
+                <div class="question-text">민준이 출근길에 무엇을 봤나요? What did 민준 see on the way to work?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">벚꽃 (cherry blossoms)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q1')">개나리 (forsythia)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">진달래 (azalea)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">새싹 (new sprouts)</button>
+                </div>
+                <div id="q1-explanation" class="question-explanation">
+                    <span>✅</span> "출근길에 보니 <strong>개나리</strong>가 피고 있더라고요." — He saw <strong>forsythia</strong> blooming on his commute.
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+                <div class="question-number">Q2</div>
+                <div class="question-text"><span class="korean-word-large">그러니까요</span> 는 어떤 의미인가요?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">I disagree / 아니에요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">I'm not sure / 잘 모르겠어요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q2')">Exactly! / I know, right! / 맞아요!</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">That's strange / 이상해요</button>
+                </div>
+                <div id="q2-explanation" class="question-explanation">
+                    <span>✅</span> <strong>그러니까요</strong> = strongly agreeing with the other person — like "Exactly!" or "I know, right!" It's the same as saying "That's what I was going to say!"
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+                <div class="question-number">Q3</div>
+                <div class="question-text">수진이 점심으로 제안한 것은? What did 수진 suggest for lunch?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">삼겹살 (Korean BBQ pork)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">순두부찌개 (soft tofu stew)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q3')">봄나물 비빔밥 (spring greens bibimbap)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">냉면 (cold noodles)</button>
+                </div>
+                <div id="q3-explanation" class="question-explanation">
+                    <span>✅</span> "오늘 점심은 <strong>봄나물</strong> 어떠세요? 회사 앞에 비빔밥 맛집이 있어요." — She suggested spring greens / bibimbap at a nearby restaurant.
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+                <div class="question-number">Q4</div>
+                <div class="question-text">현우가 구내 식당을 제안한 이유는? Why did 현우 suggest the cafeteria instead?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">The outside restaurant was too expensive</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q4')">Even though it's spring, it's still a bit cold</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">The outside restaurant doesn't have bibimbap</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">He doesn't like spring greens</button>
+                </div>
+                <div id="q4-explanation" class="question-explanation">
+                    <span>✅</span> "봄이라고 하지만, 아직 좀 <strong>추워요</strong>." — Even though it's spring, it's still cold. The grammar 봄이라고 하지만 = "even though they call it spring."
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="quiz-question">
+                <div class="question-number">Q5</div>
+                <div class="question-text">Fill in the blank: 하긴, 꽃샘 추위 _____ 좀 춥긴 해요. (Maybe because of the cold snap, it is a bit cold)</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">라서</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q5')">때문인지</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">덕분에</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">이어서</button>
+                </div>
+                <div id="q5-explanation" class="question-explanation">
+                    <span>✅</span> <strong>때문인지</strong> = "maybe because of / perhaps due to." It expresses uncertain cause — "I don't know for sure, but maybe because of the cold snap..."
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="quiz-question">
+                <div class="question-number">Q6</div>
+                <div class="question-text"><span class="korean-word-large">환절기라 그런지</span> 의 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">Because it's definitely the change of seasons</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q6')">Maybe because it's the change of seasons</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">Although it's the change of seasons</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">Since it is not the change of seasons</button>
+                </div>
+                <div id="q6-explanation" class="question-explanation">
+                    <span>✅</span> <strong>~라 그런지</strong> expresses an uncertain/soft reason — "maybe because it is ~." It's a natural way to suggest a possible cause without being definitive. Similar to ~때문인지.
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="quiz-question">
+                <div class="question-number">Q7</div>
+                <div class="question-text">마지막에 수진이 한 말의 의미는? What did 수진 say at the end?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">She gave up on the picnic idea</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">She said she wouldn't go with them</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q7')">She said let's definitely go out when it gets warmer</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">She suggested eating at a different restaurant</button>
+                </div>
+                <div id="q7-explanation" class="question-explanation">
+                    <span>✅</span> "아쉽네요. 그럼 날이 좀 더 <strong>따뜻해지면</strong> 꼭 나가요!" — What a shame, but let's definitely go out once it gets warmer. She's optimistic and looking forward to spring!
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="quiz-question">
+                <div class="question-number">Q8</div>
+                <div class="question-text"><span class="korean-word-large">아쉽다</span> 와 가장 비슷한 표현은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">기뻐요 (I'm happy)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">화가 나요 (I'm angry)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q8')">그게 아쉬운데요 / What a pity / That's a shame</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">괜찮아요 (It's okay)</button>
+                </div>
+                <div id="q8-explanation" class="question-explanation">
+                    <span>✅</span> <strong>아쉽다</strong> = feeling disappointed or regretful about something that didn't go as hoped. "아쉽네요" is like saying "What a shame!" or "That's too bad!" — a very common Korean expression.
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">💬 결과 보기 See Results</button>
+
+            <div id="quiz-results" class="quiz-results">
+                <h2>💬 결과 Results</h2>
+                <div class="score" id="score-display">0/8</div>
+                <p id="result-message"></p>
+                <button class="reset-btn" onclick="resetQuiz()">🔄 다시 하기 Try Again</button>
+            </div>
+
+        </div><!-- end quiz -->
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, event) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        event.target.classList.add('active');
+    }
+    const answers = {};
+    function selectOption(btn, isCorrect, questionId) {
+        const parent = btn.closest('.quiz-question');
+        const options = parent.querySelectorAll('.quiz-option');
+        const explanation = document.getElementById(questionId + '-explanation');
+        if (answers[questionId] !== undefined) return;
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+        if (!isCorrect) {
+            options.forEach(opt => {
+                if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+        }
+        answers[questionId] = isCorrect;
+        if (explanation) {
+            explanation.classList.add('show');
+            explanation.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+    }
+    function submitQuiz() {
+        const total = 8;
+        let correct = 0;
+        for (let i = 1; i <= total; i++) { if (answers['q' + i] === true) correct++; }
+        const results = document.getElementById('quiz-results');
+        results.classList.add('show');
+        document.getElementById('score-display').textContent = correct + '/' + total;
+        let msg = '';
+        if (correct === total) msg = '🌸 완벽해요! Perfect! You understood the whole conversation!';
+        else if (correct >= 6) msg = '🌼 아주 잘했어요! Great job! Almost there!';
+        else if (correct >= 4) msg = '🌱 좋아요! Keep reviewing the dialogue!';
+        else msg = '💪 괜찮아요! Re-read the conversation and try again!';
+        document.getElementById('result-message').textContent = msg;
+        results.scrollIntoView({ behavior: 'smooth' });
+    }
+    function resetQuiz() {
+        for (let key in answers) delete answers[key];
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            opt.style.pointerEvents = '';
+        });
+        document.querySelectorAll('.question-explanation').forEach(exp => {
+            exp.classList.remove('show', 'correct', 'incorrect');
+        });
+        document.getElementById('quiz-results').classList.remove('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>

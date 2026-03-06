@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W20 봄 Spring - 문법 Grammar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #ddd6fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #3f4ea0 0%, #7c83fd 50%, #4facfe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '📝📝📝📝📝📝📝📝📝📝';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 22px;
+            letter-spacing: 8px;
+            opacity: 0.25;
+        }
+        .header h1 { font-size: 46px; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 20px; opacity: 0.95; }
+        .header .week-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .nav-tabs {
+            display: flex;
+            background: #f0f4ff;
+            border-bottom: 3px solid #c5cae9;
+        }
+        .nav-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+        .nav-tab.active { color: #3f4ea0; background: white; border-bottom: 4px solid #3f4ea0; }
+        .nav-tab:hover { background: #e8eaf6; color: #3f4ea0; }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .category-header {
+            background: linear-gradient(135deg, #3f4ea0 0%, #7c83fd 100%);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin: 30px 0 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* GRAMMAR CARDS */
+        .grammar-card {
+            background: #f8f9ff;
+            border: 2px solid #c5cae9;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+        .grammar-card:hover { border-color: #7c83fd; box-shadow: 0 8px 20px rgba(124,131,253,0.15); }
+        .grammar-number {
+            display: inline-block;
+            background: #3f4ea0;
+            color: white;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 14px;
+        }
+        .grammar-title { font-size: 28px; font-weight: bold; color: #3f4ea0; display: inline; }
+        .grammar-english { font-size: 16px; color: #7c83fd; margin: 10px 0; font-weight: 600; }
+        .grammar-rule {
+            background: #e8eaf6;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 14px 0;
+            font-size: 15px;
+            color: #3f4ea0;
+            line-height: 1.9;
+        }
+        .rule-highlight { color: #7c83fd; font-weight: bold; font-size: 17px; }
+
+        .grammar-examples { display: grid; gap: 12px; margin-top: 14px; }
+        .grammar-example {
+            background: white;
+            border: 1px solid #e8eaf6;
+            border-radius: 10px;
+            padding: 14px 18px;
+            border-left: 5px solid #7c83fd;
+        }
+        .grammar-example .ko { font-size: 18px; color: #2d3748; font-weight: 600; margin-bottom: 6px; }
+        .grammar-example .en { font-size: 14px; color: #718096; font-style: italic; }
+        .grammar-example .highlight { color: #FF6B9D; font-weight: bold; font-size: 20px; }
+        .pattern-badge {
+            display: inline-block;
+            background: #3f4ea0;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .structure-box {
+            background: white;
+            border: 2px dashed #7c83fd;
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 10px 0;
+            font-size: 16px;
+            color: #3f4ea0;
+        }
+        .structure-box strong { color: #7c83fd; }
+
+        .spring-divider { text-align: center; font-size: 24px; letter-spacing: 8px; margin: 20px 0; opacity: 0.5; }
+
+        /* SUMMARY TABLE */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .summary-table th {
+            background: linear-gradient(135deg, #3f4ea0 0%, #7c83fd 100%);
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 15px;
+        }
+        .summary-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8eaf6;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+        .summary-table tr:nth-child(even) { background: #f0f4ff; }
+        .summary-table tr:hover { background: #e8eaf6; }
+        .summary-table .ko { font-size: 20px; font-weight: bold; color: #3f4ea0; }
+
+        /* QUIZ */
+        .quiz-intro {
+            background: linear-gradient(135deg, #3f4ea0 0%, #7c83fd 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .quiz-intro h2 { font-size: 30px; margin-bottom: 10px; }
+        .quiz-intro p { font-size: 17px; opacity: 0.95; }
+        .quiz-question {
+            background: #fafafa;
+            border: 2px solid #c5cae9;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            background: #3f4ea0;
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 18px;
+            font-weight: bold;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .question-text { font-size: 19px; color: #2d3748; margin-bottom: 18px; font-weight: 600; line-height: 1.6; }
+        .korean-word-large { color: #3f4ea0; font-size: 24px; font-weight: bold; }
+        .quiz-options { display: grid; gap: 10px; }
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .quiz-option:hover { border-color: #7c83fd; background: #f0f4ff; transform: translateX(4px); }
+        .quiz-option.correct { border-color: #52c41a; background: #f6ffed; color: #2e7d32; }
+        .quiz-option.wrong { border-color: #ff4d4f; background: #fff1f0; color: #cf1322; }
+        .question-explanation { margin-top: 12px; padding: 13px; border-radius: 8px; font-size: 15px; display: none; }
+        .question-explanation.show { display: block; }
+        .question-explanation.correct { background: #f6ffed; border: 2px solid #52c41a; color: #237804; }
+        .question-explanation.incorrect { background: #fff1f0; border: 2px solid #ff4d4f; color: #cf1322; }
+        .submit-btn {
+            background: linear-gradient(135deg, #3f4ea0 0%, #7c83fd 100%);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            font-size: 19px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            margin: 28px auto;
+            box-shadow: 0 5px 15px rgba(63,78,160,0.3);
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .quiz-results {
+            display: none;
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 28px;
+        }
+        .quiz-results.show { display: block; }
+        .quiz-results h2 { font-size: 34px; margin-bottom: 16px; }
+        .quiz-results .score { font-size: 64px; font-weight: bold; margin: 18px 0; }
+        .quiz-results p { font-size: 20px; margin-bottom: 26px; }
+        .reset-btn {
+            background: white;
+            color: #56ab2f;
+            border: none;
+            padding: 14px 40px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .reset-btn:hover { transform: scale(1.05); }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .nav-tab { font-size: 13px; padding: 12px 6px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="week-badge">WEEK 20</div>
+        <h1>봄 📝 Spring</h1>
+        <div class="subtitle">문법 Grammar + 퀴즈 Quiz</div>
+    </div>
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('grammar', event)">📐 문법 Grammar</button>
+        <button class="nav-tab" onclick="showSection('quiz', event)">✍️ 퀴즈 Quiz</button>
+    </div>
+    <div class="content">
+
+        <!-- ═══════════════════ GRAMMAR ═══════════════════ -->
+        <div id="grammar-section" class="section active">
+
+            <div class="category-header">📐 핵심 문법 표현 (Key Grammar Patterns)</div>
+
+            <!-- Grammar 1 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">1</span><span class="grammar-title">~아/어지다</span></div>
+                <div class="grammar-english">→ To become / To get (gradual change of state)</div>
+                <div class="pattern-badge">형용사/동사 + 아/어지다</div>
+                <div class="grammar-rule">
+                    형용사나 동사 어간 + <span class="rule-highlight">아/어지다</span><br>
+                    A gradual change or transformation in state. The weather "becomes" warmer, it doesn't just "become warm."<br>
+                    ▸ 따뜻하다 → <strong>따뜻해지다</strong> (to become warm)<br>
+                    ▸ 춥다 → <strong>추워지다</strong> (to get cold)<br>
+                    ▸ 예쁘다 → <strong>예뻐지다</strong> (to become pretty)
+                </div>
+                <div class="structure-box">
+                    <strong>Pattern:</strong> [Adj/Verb stem] + 아/어 + 지다<br>
+                    • Vowel ㅏ/ㅗ → 아지다 &nbsp;|&nbsp; Other vowels → 어지다 &nbsp;|&nbsp; 하다 → 해지다
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko">날씨도 많이 <span class="highlight">따뜻해졌어요</span>.</div>
+                        <div class="en">The weather has gotten much warmer.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">그럼 날이 좀 더 <span class="highlight">따뜻해지면</span> 꼭 나가요!</div>
+                        <div class="en">Then when it gets a bit warmer, let's definitely go out!</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">봄이 되면 날씨가 <span class="highlight">따뜻해져요</span>.</div>
+                        <div class="en">When spring comes, the weather becomes warm.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grammar 2 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">2</span><span class="grammar-title">~고 싶다</span></div>
+                <div class="grammar-english">→ Want to do (expressing desire)</div>
+                <div class="pattern-badge">동사 어간 + 고 싶다</div>
+                <div class="grammar-rule">
+                    동사 어간 + <span class="rule-highlight">고 싶다</span><br>
+                    Expresses the speaker's own wish or desire. In polite form: <strong>고 싶어요</strong>.<br>
+                    ▸ 가다 → <strong>가고 싶다</strong> (want to go)<br>
+                    ▸ 먹다 → <strong>먹고 싶다</strong> (want to eat)<br>
+                    ▸ 되다 → <strong>되고 싶다</strong> (want to become)
+                </div>
+                <div class="structure-box">
+                    <strong>Note:</strong> ~고 싶다 is for <em>your own</em> desire. For others' desire, use ~고 싶어하다.
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko">봄이 오니 봄소풍 <span class="highlight">가고 싶네요</span>.</div>
+                        <div class="en">Now that spring is here, I want to go on a picnic.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">봄에는 들로 산으로 놀러 <span class="highlight">가고 싶어요</span>.</div>
+                        <div class="en">In spring, I want to go out to the fields and mountains.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">그에게로 가서 나도 그의 꽃이 <span class="highlight">되고 싶어요</span>.</div>
+                        <div class="en">I want to go to him and become his flower too.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grammar 3 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">3</span><span class="grammar-title">~(이)라고 하지만</span></div>
+                <div class="grammar-english">→ Although it's called / Even though it is said to be</div>
+                <div class="pattern-badge">명사 + (이)라고 하지만</div>
+                <div class="grammar-rule">
+                    명사 + <span class="rule-highlight">(이)라고 하지만</span><br>
+                    Acknowledges a label or claim, then introduces a contrasting reality.<br>
+                    ▸ After vowel: <strong>라고 하지만</strong> &nbsp;|&nbsp; After consonant: <strong>이라고 하지만</strong><br>
+                    ▸ 봄이라고 하지만 아직 춥다 = "It's called spring but it's still cold"
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko"><span class="highlight">봄이라고 하지만</span>, 아직 좀 추워요.</div>
+                        <div class="en">Even though they call it spring, it's still a bit cold.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko"><span class="highlight">여름이라고 하지만</span>, 오늘은 좀 시원해요.</div>
+                        <div class="en">Even though they call it summer, it's a bit cool today.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grammar 4 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">4</span><span class="grammar-title">~아/어 보다</span></div>
+                <div class="grammar-english">→ Try to do / to look / to see (by doing)</div>
+                <div class="pattern-badge">동사 어간 + 아/어 보다</div>
+                <div class="grammar-rule">
+                    동사 어간 + <span class="rule-highlight">아/어 보다</span><br>
+                    Two uses: (1) Try doing something, (2) Noticing/seeing by means of an action.<br>
+                    ▸ 먹다 → <strong>먹어 보다</strong> (try eating)<br>
+                    ▸ 보다 → <strong>봐요</strong> → 출근길에 보니... (when I looked on the commute...)
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko">출근길에 <span class="highlight">보니</span> 개나리가 피고 있더라고요.</div>
+                        <div class="en">Looking on my commute, I could see forsythia was blooming.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">한번 <span class="highlight">먹어 봐요</span>!</div>
+                        <div class="en">Give it a try and eat it!</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">이 봄나물 비빔밥을 한번 <span class="highlight">먹어 보세요</span>.</div>
+                        <div class="en">Please try eating this spring greens bibimbap.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grammar 5 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">5</span><span class="grammar-title">~더라고요</span></div>
+                <div class="grammar-english">→ I noticed that / I found that (past personal observation)</div>
+                <div class="pattern-badge">동사/형용사 어간 + 더라고요</div>
+                <div class="grammar-rule">
+                    동사/형용사 어간 + <span class="rule-highlight">더라고요</span><br>
+                    Used when <strong>sharing something you personally observed</strong> in the past — often with a nuance of surprise or newly discovered information. This is a first-person observational report.
+                </div>
+                <div class="structure-box">
+                    <strong>Tip:</strong> ~더라고요 can only be used with YOUR OWN direct observation, not hearsay. It carries a soft "I noticed/I saw that..."
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko">출근길에 보니 개나리가 피고 있<span class="highlight">더라고요</span>.</div>
+                        <div class="en">On my way to work, I noticed forsythia was blooming.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">구내 식당에도 비빔밥이 있<span class="highlight">더라고요</span>.</div>
+                        <div class="en">I found out they also have bibimbap at the cafeteria.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">벚꽃이 정말 아름답<span class="highlight">더라고요</span>.</div>
+                        <div class="en">The cherry blossoms were really beautiful (I noticed).</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grammar 6 -->
+            <div class="grammar-card">
+                <div style="margin-bottom:12px;"><span class="grammar-number">6</span><span class="grammar-title">~때문인지 / ~(라) 그런지</span></div>
+                <div class="grammar-english">→ Maybe because of / Perhaps since it's (uncertain cause)</div>
+                <div class="pattern-badge">명사 + 때문인지 &nbsp;|&nbsp; 명사 + (이)라 그런지</div>
+                <div class="grammar-rule">
+                    Expresses an <strong>uncertain or suggested cause</strong> — "I'm not 100% sure, but maybe because of..."<br>
+                    ▸ Noun + <strong>때문인지</strong>: maybe because of [noun]<br>
+                    ▸ Noun + <strong>라 그런지</strong>: maybe since it is [noun]<br>
+                    Both are softer / more humble than saying a definite reason.
+                </div>
+                <div class="grammar-examples">
+                    <div class="grammar-example">
+                        <div class="ko">꽃샘 추위 <span class="highlight">때문인지</span> 좀 춥긴 해요.</div>
+                        <div class="en">Maybe because of the late cold snap, it does feel a bit cold.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">환절기<span class="highlight">라 그런지</span> 감기도 유행이네요.</div>
+                        <div class="en">Maybe because it's the change of seasons, colds are going around.</div>
+                    </div>
+                    <div class="grammar-example">
+                        <div class="ko">봄<span class="highlight">이라 그런지</span> 기분이 설레네요.</div>
+                        <div class="en">Maybe because it's spring, I feel excited.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spring-divider">📐 ✨ 📐 ✨ 📐</div>
+
+            <!-- Summary Table -->
+            <div class="category-header" style="margin-top:30px;">📋 문법 요약 Grammar Summary</div>
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>패턴 Pattern</th>
+                        <th>뜻 Meaning</th>
+                        <th>예시 Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td><span class="ko">~아/어지다</span></td>
+                        <td>To become / To get</td>
+                        <td>따뜻해졌어요 (became warm)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td><span class="ko">~고 싶다</span></td>
+                        <td>Want to do</td>
+                        <td>가고 싶네요 (I want to go)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td><span class="ko">~(이)라고 하지만</span></td>
+                        <td>Even though it's called ~</td>
+                        <td>봄이라고 하지만 (even though it's spring)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td><span class="ko">~아/어 보다</span></td>
+                        <td>Try doing / Notice by looking</td>
+                        <td>출근길에 보니 (I noticed on my commute)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td><span class="ko">~더라고요</span></td>
+                        <td>I noticed / I found that</td>
+                        <td>피고 있더라고요 (I noticed it was blooming)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td><span class="ko">~때문인지 / ~라 그런지</span></td>
+                        <td>Maybe because of ~</td>
+                        <td>환절기라 그런지 (maybe because it's the change of seasons)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div><!-- end grammar -->
+
+
+        <!-- ═══════════════════ QUIZ ═══════════════════ -->
+        <div id="quiz-section" class="section">
+
+            <div class="quiz-intro">
+                <h2>📐 문법 퀴즈 Grammar Quiz</h2>
+                <p>6가지 문법 패턴을 얼마나 이해했나요? 10문제에 도전해 보세요!</p>
+            </div>
+
+            <!-- Q1 -->
+            <div class="quiz-question">
+                <div class="question-number">Q1</div>
+                <div class="question-text"><span class="korean-word-large">~아/어지다</span> 의 의미는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">To try doing something</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q1')">To become / to get (gradual change of state)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Want to do</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">To notice something</button>
+                </div>
+                <div id="q1-explanation" class="question-explanation">
+                    <span>✅</span> <strong>~아/어지다</strong> = gradual change of state. 따뜻하다 → <strong>따뜻해지다</strong> (to become warm). 날씨가 따뜻해졌어요 = The weather has gotten warmer.
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+                <div class="question-number">Q2</div>
+                <div class="question-text">Complete the sentence: 봄이 오니 봄소풍 ____ 싶네요. (I want to go on a spring picnic)</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">가서</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q2')">가고</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">가면</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">가니</button>
+                </div>
+                <div id="q2-explanation" class="question-explanation">
+                    <span>✅</span> <strong>~고 싶다</strong> = want to do. Verb stem + 고 싶다: 가다 → 가<strong>고</strong> 싶다 (want to go). 봄소풍 <strong>가고</strong> 싶네요!
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+                <div class="question-number">Q3</div>
+                <div class="question-text">What grammar pattern is used in: "봄이라고 하지만, 아직 좀 추워요"?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">~더라고요 (past observation)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">~때문인지 (uncertain cause)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q3')">~(이)라고 하지만 (acknowledging a label then contrasting)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">~고 싶다 (expressing desire)</button>
+                </div>
+                <div id="q3-explanation" class="question-explanation">
+                    <span>✅</span> <strong>봄이라고 하지만</strong> = "Even though they call it spring." This pattern acknowledges a label/claim, then introduces a contrasting reality (it's still cold!).
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+                <div class="question-number">Q4</div>
+                <div class="question-text"><span class="korean-word-large">~더라고요</span> 를 올바르게 사용한 문장은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">내일 비가 오더라고요. (I noticed it will rain tomorrow — future hearsay)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q4')">출근길에 개나리가 피고 있더라고요. (On my commute I noticed forsythia was blooming)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">친구가 밥을 먹더라고요. (My friend said they want to eat)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">봄이 오고 싶더라고요. (I noticed spring wants to come)</button>
+                </div>
+                <div id="q4-explanation" class="question-explanation">
+                    <span>✅</span> <strong>~더라고요</strong> is for sharing your own direct past observation. "피고 있<strong>더라고요</strong>" = I (personally) noticed it was blooming. It's a first-person discovery report.
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="quiz-question">
+                <div class="question-number">Q5</div>
+                <div class="question-text">Fill in the blank: 환절기____ 감기도 유행이네요. (Maybe because it's the change of seasons, colds are going around)</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">이어서</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">이고 싶어서</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q5')">라 그런지</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">이라고 하지만</button>
+                </div>
+                <div id="q5-explanation" class="question-explanation">
+                    <span>✅</span> <strong>환절기라 그런지</strong> = "Maybe because it's the change of seasons." ~라 그런지 expresses uncertain cause, suggesting a possible reason without being definitive.
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="quiz-question">
+                <div class="question-number">Q6</div>
+                <div class="question-text"><span class="korean-word-large">따뜻하다</span> → 변화 표현 (change expression): "It became warm" 은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">따뜻하고 싶어요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">따뜻해 봐요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q6')">따뜻해졌어요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">따뜻해 보더라고요</button>
+                </div>
+                <div id="q6-explanation" class="question-explanation">
+                    <span>✅</span> 따뜻하다 + ~아/어지다 → <strong>따뜻해지다</strong> → past polite: <strong>따뜻해졌어요</strong>. (하다 → 해지다 pattern)
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="quiz-question">
+                <div class="question-number">Q7</div>
+                <div class="question-text">Choose the correct use of <span class="korean-word-large">~아/어 보다</span> (try to do):</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">봄이 오고 봐요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q7')">봄나물 비빔밥을 먹어 봐요!</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">봄소풍이 가더라고요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">날씨가 따뜻해 봤어요</button>
+                </div>
+                <div id="q7-explanation" class="question-explanation">
+                    <span>✅</span> <strong>먹어 봐요!</strong> = Try eating it! Verb stem 먹 + 어 봐요. This is the natural "give it a try" usage of ~아/어 보다.
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="quiz-question">
+                <div class="question-number">Q8</div>
+                <div class="question-text">~더라고요 vs. ~았어요/었어요: 차이점은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">They are exactly the same</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q8')">~더라고요 shares a personal past observation; ~았/었어요 is just simple past tense</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">~더라고요 is for future; ~았/었어요 is for past</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">~더라고요 is more formal; ~았/었어요 is casual</button>
+                </div>
+                <div id="q8-explanation" class="question-explanation">
+                    <span>✅</span> <strong>~더라고요</strong> carries the nuance "I (personally) noticed/discovered that..." It's used to share a newly observed fact. Compare: 비가 왔어요 (It rained) vs. 비가 오더라고요 (I noticed/saw that it was raining).
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="quiz-question">
+                <div class="question-number">Q9</div>
+                <div class="question-text">Translate: "I want to become like a flower" 꽃처럼 ____.</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">되더라고요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">되어지고 싶어요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q9')">되고 싶어요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">됩이라고 해요</button>
+                </div>
+                <div id="q9-explanation" class="question-explanation">
+                    <span>✅</span> 되다 + ~고 싶다 → <strong>되고 싶어요</strong> = want to become. From the poem: "그에게로 가서 나도 그의 꽃이 <strong>되고 싶어요</strong>." 🌸
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="quiz-question">
+                <div class="question-number">Q10</div>
+                <div class="question-text">Which sentence uses <span class="korean-word-large">~때문인지</span> correctly?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">봄이 오고 싶기 때문인지 날씨가 추워요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q10')">꽃샘 추위 때문인지 요즘 감기가 많이 걸려요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">따뜻해졌기 때문이지 않아요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">봄이라고 때문인지 좋아요</button>
+                </div>
+                <div id="q10-explanation" class="question-explanation">
+                    <span>✅</span> <strong>꽃샘 추위 때문인지</strong> 요즘 감기가 많이 걸려요 = "Maybe because of the cold snap, a lot of people are getting colds lately." ~때문인지 follows a noun directly.
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">📐 결과 보기 See Results</button>
+
+            <div id="quiz-results" class="quiz-results">
+                <h2>📐 결과 Results</h2>
+                <div class="score" id="score-display">0/10</div>
+                <p id="result-message"></p>
+                <button class="reset-btn" onclick="resetQuiz()">🔄 다시 하기 Try Again</button>
+            </div>
+
+        </div><!-- end quiz -->
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, event) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        event.target.classList.add('active');
+    }
+    const answers = {};
+    function selectOption(btn, isCorrect, questionId) {
+        const parent = btn.closest('.quiz-question');
+        const options = parent.querySelectorAll('.quiz-option');
+        const explanation = document.getElementById(questionId + '-explanation');
+        if (answers[questionId] !== undefined) return;
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+        if (!isCorrect) {
+            options.forEach(opt => {
+                if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+        }
+        answers[questionId] = isCorrect;
+        if (explanation) {
+            explanation.classList.add('show');
+            explanation.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+    }
+    function submitQuiz() {
+        const total = 10;
+        let correct = 0;
+        for (let i = 1; i <= total; i++) { if (answers['q' + i] === true) correct++; }
+        const results = document.getElementById('quiz-results');
+        results.classList.add('show');
+        document.getElementById('score-display').textContent = correct + '/' + total;
+        let msg = '';
+        if (correct === total) msg = '🌸 완벽해요! Grammar master! 문법 완전 정복!';
+        else if (correct >= 8) msg = '🌼 아주 잘했어요! Great job on grammar!';
+        else if (correct >= 6) msg = '🌱 잘했어요! Keep reviewing the patterns!';
+        else msg = '💪 괜찮아요! Review each grammar card and try again!';
+        document.getElementById('result-message').textContent = msg;
+        results.scrollIntoView({ behavior: 'smooth' });
+    }
+    function resetQuiz() {
+        for (let key in answers) delete answers[key];
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            opt.style.pointerEvents = '';
+        });
+        document.querySelectorAll('.question-explanation').forEach(exp => {
+            exp.classList.remove('show', 'correct', 'incorrect');
+        });
+        document.getElementById('quiz-results').classList.remove('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>

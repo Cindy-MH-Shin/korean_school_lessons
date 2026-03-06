@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W20 봄 Spring - 단어 Vocabulary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6e0 0%, #ffb3c6 50%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 50%, #FF6B9D 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 22px;
+            letter-spacing: 8px;
+            opacity: 0.4;
+        }
+        .header h1 { font-size: 46px; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 20px; opacity: 0.95; }
+        .header .week-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .nav-tabs {
+            display: flex;
+            background: #fff5f7;
+            border-bottom: 3px solid #ffe0eb;
+        }
+        .nav-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+        .nav-tab.active { color: #FF6B9D; background: white; border-bottom: 4px solid #FF6B9D; }
+        .nav-tab:hover { background: #fff0f5; color: #FF6B9D; }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .category-header {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin: 30px 0 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .category-header.green { background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%); }
+        .category-header.blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+        .vocab-card {
+            background: #fafafa;
+            border: 2px solid #ffe0eb;
+            border-radius: 14px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .vocab-card:hover { border-color: #FF6B9D; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,107,157,0.15); }
+        .vocab-card.green-card { border-color: #c8e6c9; }
+        .vocab-card.green-card:hover { border-color: #56ab2f; box-shadow: 0 10px 25px rgba(86,171,47,0.15); }
+        .vocab-card.blue-card { border-color: #b3e5fc; }
+        .vocab-card.blue-card:hover { border-color: #4facfe; box-shadow: 0 10px 25px rgba(79,172,254,0.15); }
+
+        .vocab-header { display: flex; align-items: center; margin-bottom: 12px; }
+        .vocab-number {
+            background: #FF6B9D;
+            color: white;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 15px;
+            margin-right: 14px; flex-shrink: 0;
+        }
+        .vocab-number.green { background: #56ab2f; }
+        .vocab-number.blue { background: #4facfe; }
+        .vocab-word { font-size: 30px; font-weight: bold; color: #2d3748; }
+        .vocab-pronunciation { font-size: 16px; color: #FF6B9D; font-style: italic; margin-bottom: 8px; }
+        .vocab-pronunciation.green { color: #56ab2f; }
+        .vocab-pronunciation.blue { color: #4facfe; }
+        .vocab-meaning { font-size: 15px; color: #4a5568; margin-bottom: 12px; font-weight: 600; }
+        .vocab-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .vocab-type.noun { background: #e3f2fd; color: #1565c0; }
+        .vocab-type.verb { background: #e8f5e9; color: #2e7d32; }
+        .vocab-type.adj { background: #fff3e0; color: #e65100; }
+
+        .form-labels { display: flex; gap: 8px; margin-bottom: 6px; }
+        .form-label { flex: 1; font-size: 12px; color: #999; font-weight: 600; text-align: center; }
+        .level-progression { display: flex; gap: 8px; margin-bottom: 12px; }
+        .level-box {
+            flex: 1; padding: 9px 6px; border-radius: 6px;
+            text-align: center; font-size: 14px; font-weight: 600;
+        }
+        .level-basic { background: #e6f7ff; border: 2px solid #1890ff; color: #1565c0; }
+        .level-polite { background: #fff7e6; border: 2px solid #fa8c16; color: #e65100; }
+        .level-past { background: #f6ffed; border: 2px solid #52c41a; color: #2e7d32; }
+
+        .example-box {
+            background: #fff9e6;
+            padding: 13px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .example-korean { font-size: 17px; color: #2d3748; margin-bottom: 6px; font-weight: 600; }
+        .example-english { font-size: 14px; color: #718096; font-style: italic; }
+        .example-romanization { font-size: 13px; color: #aaa; margin-bottom: 4px; }
+
+        .spring-divider { text-align: center; font-size: 24px; letter-spacing: 8px; margin: 20px 0; opacity: 0.6; }
+
+        /* QUIZ */
+        .quiz-intro {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .quiz-intro h2 { font-size: 30px; margin-bottom: 10px; }
+        .quiz-intro p { font-size: 17px; opacity: 0.95; }
+        .quiz-question {
+            background: #fafafa;
+            border: 2px solid #ffe0eb;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            background: #FF6B9D;
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 18px;
+            font-weight: bold;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .question-text { font-size: 19px; color: #2d3748; margin-bottom: 18px; font-weight: 600; line-height: 1.6; }
+        .korean-word-large { color: #FF6B9D; font-size: 24px; font-weight: bold; }
+        .quiz-options { display: grid; gap: 10px; }
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .quiz-option:hover { border-color: #FF6B9D; background: #fff5f7; transform: translateX(4px); }
+        .quiz-option.correct { border-color: #52c41a; background: #f6ffed; color: #2e7d32; }
+        .quiz-option.wrong { border-color: #ff4d4f; background: #fff1f0; color: #cf1322; }
+        .question-explanation { margin-top: 12px; padding: 13px; border-radius: 8px; font-size: 15px; display: none; }
+        .question-explanation.show { display: block; }
+        .question-explanation.correct { background: #f6ffed; border: 2px solid #52c41a; color: #237804; }
+        .question-explanation.incorrect { background: #fff1f0; border: 2px solid #ff4d4f; color: #cf1322; }
+        .submit-btn {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            font-size: 19px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            margin: 28px auto;
+            box-shadow: 0 5px 15px rgba(255,107,157,0.35);
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .quiz-results {
+            display: none;
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 28px;
+        }
+        .quiz-results.show { display: block; }
+        .quiz-results h2 { font-size: 34px; margin-bottom: 16px; }
+        .quiz-results .score { font-size: 64px; font-weight: bold; margin: 18px 0; }
+        .quiz-results p { font-size: 20px; margin-bottom: 26px; }
+        .reset-btn {
+            background: white;
+            color: #56ab2f;
+            border: none;
+            padding: 14px 40px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .reset-btn:hover { transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .vocab-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 32px; }
+            .nav-tab { font-size: 13px; padding: 12px 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="week-badge">WEEK 20</div>
+        <h1>봄 🌸 Spring</h1>
+        <div class="subtitle">단어 Vocabulary + 퀴즈 Quiz</div>
+    </div>
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('vocabulary', event)">🌼 단어 Vocabulary</button>
+        <button class="nav-tab" onclick="showSection('quiz', event)">✍️ 퀴즈 Quiz</button>
+    </div>
+    <div class="content">
+
+        <!-- ═══════════════════ VOCABULARY ═══════════════════ -->
+        <div id="vocabulary-section" class="section active">
+
+            <div class="category-header">🌱 봄 자연 (Spring Nature)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">1</div><div class="vocab-word">봄</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[bom]</div>
+                    <div class="vocab-meaning">Spring</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄이 오면 새싹이 돋아나요.</div>
+                        <div class="example-romanization">Bomi omyeon saessagi dotanayo.</div>
+                        <div class="example-english">When spring comes, new sprouts grow.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">2</div><div class="vocab-word">새싹</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[sae-ssak]</div>
+                    <div class="vocab-meaning">New sprout / Seedling</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄에는 새싹이 돋아나요.</div>
+                        <div class="example-romanization">Bome-neun saessagi dotanayo.</div>
+                        <div class="example-english">In spring, new sprouts come up.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">3</div><div class="vocab-word">봄꽃</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[bom-kkot]</div>
+                    <div class="vocab-meaning">Spring flowers</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄꽃은 짧지만 정말 아름다워요.</div>
+                        <div class="example-romanization">Bomkkocheun jjalbji-man jeongmal areumdawoyo.</div>
+                        <div class="example-english">Spring flowers are short-lived but truly beautiful.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">4</div><div class="vocab-word">봄바람</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[bom-ba-ram]</div>
+                    <div class="vocab-meaning">Spring breeze</div>
+                    <div class="example-box">
+                        <div class="example-korean">창문을 여니 봄바람이 불어왔어요.</div>
+                        <div class="example-romanization">Changmuneul yeoni bombarami bureowasseoyo.</div>
+                        <div class="example-english">When I opened the window, the spring breeze blew in.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">5</div><div class="vocab-word">개나리</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[gae-na-ri]</div>
+                    <div class="vocab-meaning">Forsythia (yellow spring flower)</div>
+                    <div class="example-box">
+                        <div class="example-korean">출근길에 보니 개나리가 피고 있더라고요.</div>
+                        <div class="example-romanization">Chulgeun-gireseo boni gaenarida pigo itdeoragoyoo.</div>
+                        <div class="example-english">On my way to work, I noticed forsythia was blooming.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">6</div><div class="vocab-word">진달래</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[jin-dal-lae]</div>
+                    <div class="vocab-meaning">Azalea (Korean spring flower)</div>
+                    <div class="example-box">
+                        <div class="example-korean">대표적인 봄꽃은 진달래와 개나리예요.</div>
+                        <div class="example-romanization">Daepyojeok-in bomkkocheun jindallaewa gaenariyeyo.</div>
+                        <div class="example-english">The representative spring flowers are azaleas and forsythia.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">7</div><div class="vocab-word">벚꽃</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[beot-kkot]</div>
+                    <div class="vocab-meaning">Cherry blossom</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄바람 휘날리며 흩날리는 벚꽃 잎이 아름다워요.</div>
+                        <div class="example-romanization">Bombaram hwinalrimyeo heutnallineun beotkkot ibi areumdawoyo.</div>
+                        <div class="example-english">Cherry blossom petals scattering in the spring breeze are beautiful.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header"><div class="vocab-number">8</div><div class="vocab-word">봄나물</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[bom-na-mul]</div>
+                    <div class="vocab-meaning">Spring vegetables / wild greens</div>
+                    <div class="example-box">
+                        <div class="example-korean">오늘 점심은 봄나물 어떠세요?</div>
+                        <div class="example-romanization">Oneul jeomsimeun bomnamul eotteoseyo?</div>
+                        <div class="example-english">How about spring vegetables for lunch today?</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="spring-divider">🌸 🌼 🌸 🌼 🌸</div>
+
+            <div class="category-header green">🌤️ 봄 날씨 (Spring Weather)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card green-card">
+                    <div class="vocab-header"><div class="vocab-number green">9</div><div class="vocab-word">따뜻하다</div></div>
+                    <span class="vocab-type adj">형용사 Adj</span>
+                    <div class="vocab-pronunciation green">[tta-tteu-ta-da]</div>
+                    <div class="vocab-meaning">Warm</div>
+                    <div class="form-labels">
+                        <div class="form-label">기본형</div>
+                        <div class="form-label">존댓말</div>
+                        <div class="form-label">과거형</div>
+                    </div>
+                    <div class="level-progression">
+                        <div class="level-box level-basic">따뜻하다</div>
+                        <div class="level-box level-polite">따뜻해요</div>
+                        <div class="level-box level-past">따뜻했어요</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-korean">날씨도 많이 따뜻해졌어요.</div>
+                        <div class="example-english">The weather has gotten much warmer.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card green-card">
+                    <div class="vocab-header"><div class="vocab-number green">10</div><div class="vocab-word">꽃샘 추위</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation green">[kkot-saem chu-wi]</div>
+                    <div class="vocab-meaning">Late spring cold snap (literally "cold that is jealous of flowers")</div>
+                    <div class="example-box">
+                        <div class="example-korean">꽃샘 추위가 오면 감기 환자가 늘어나요.</div>
+                        <div class="example-romanization">Kkotsaem chuwiga omyeon gamgi hwanjaga neureonayo.</div>
+                        <div class="example-english">When the late cold snap comes, the number of cold patients increases.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card green-card">
+                    <div class="vocab-header"><div class="vocab-number green">11</div><div class="vocab-word">환절기</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation green">[hwan-jeol-gi]</div>
+                    <div class="vocab-meaning">Change of season / transitional period</div>
+                    <div class="example-box">
+                        <div class="example-korean">환절기라 그런지 감기도 유행이네요.</div>
+                        <div class="example-romanization">Hwanjeolgi-ra geureonji gamgi-do yuhaeng-i-neyo.</div>
+                        <div class="example-english">Maybe because it's the change of seasons, colds are going around.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card green-card">
+                    <div class="vocab-header"><div class="vocab-number green">12</div><div class="vocab-word">봄소풍</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation green">[bom-so-pung]</div>
+                    <div class="vocab-meaning">Spring picnic / field trip</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄이 오니 봄소풍 가고 싶네요.</div>
+                        <div class="example-romanization">Bomi oni bomsopung gago simneyo.</div>
+                        <div class="example-english">Now that spring is here, I want to go on a spring picnic.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="spring-divider">🌸 🌼 🌸 🌼 🌸</div>
+
+            <div class="category-header blue">💕 감정·낭만 (Feelings &amp; Romance)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">13</div><div class="vocab-word">떨림</div></div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation blue">[tteol-lim]</div>
+                    <div class="vocab-meaning">Trembling / fluttering (of heart)</div>
+                    <div class="example-box">
+                        <div class="example-korean">알 수 없는 이 떨림과 둘이 걸어요.</div>
+                        <div class="example-english">We walk together with this inexplicable trembling feeling.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">14</div><div class="vocab-word">울렁이다</div></div>
+                    <span class="vocab-type verb">동사 Verb</span>
+                    <div class="vocab-pronunciation blue">[ul-leong-i-da]</div>
+                    <div class="vocab-meaning">Heart to pound / to flutter / to surge</div>
+                    <div class="form-labels">
+                        <div class="form-label">기본형</div>
+                        <div class="form-label">존댓말</div>
+                        <div class="form-label">과거형</div>
+                    </div>
+                    <div class="level-progression">
+                        <div class="level-box level-basic">울렁이다</div>
+                        <div class="level-box level-polite">울렁여요</div>
+                        <div class="level-box level-past">울렁였어요</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-korean">바람 불면 울렁이는 기분 탓에 나도 몰라요.</div>
+                        <div class="example-english">When the wind blows, my heart pounds without me even knowing.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">15</div><div class="vocab-word">겹치다</div></div>
+                    <span class="vocab-type verb">동사 Verb</span>
+                    <div class="vocab-pronunciation blue">[gyeop-chi-da]</div>
+                    <div class="vocab-meaning">To overlap / to superimpose</div>
+                    <div class="example-box">
+                        <div class="example-korean">바람 불면 저편에서 그대 모습이 자꾸 겹쳐요.</div>
+                        <div class="example-english">When the wind blows, your image keeps overlapping from over there.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">16</div><div class="vocab-word">휘날리다</div></div>
+                    <span class="vocab-type verb">동사 Verb</span>
+                    <div class="vocab-pronunciation blue">[hwi-nal-li-da]</div>
+                    <div class="vocab-meaning">To flutter / to wave (in the wind)</div>
+                    <div class="example-box">
+                        <div class="example-korean">봄바람 휘날리며 벚꽃이 떨어져요.</div>
+                        <div class="example-english">Cherry blossoms fall as the spring breeze flutters.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">17</div><div class="vocab-word">흩날리다</div></div>
+                    <span class="vocab-type verb">동사 Verb</span>
+                    <div class="vocab-pronunciation blue">[heut-nal-li-da]</div>
+                    <div class="vocab-meaning">To scatter / to drift (petals, snow)</div>
+                    <div class="example-box">
+                        <div class="example-korean">흩날리는 벚꽃 잎이 정말 아름다워요!</div>
+                        <div class="example-english">The scattering cherry blossom petals are so beautiful!</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header"><div class="vocab-number blue">18</div><div class="vocab-word">울려 퍼지다</div></div>
+                    <span class="vocab-type verb">동사 Verb</span>
+                    <div class="vocab-pronunciation blue">[ul-lyeo peo-ji-da]</div>
+                    <div class="vocab-meaning">To resound / to echo / to ring out</div>
+                    <div class="example-box">
+                        <div class="example-korean">벚꽃 잎이 울려 퍼질 이 거리를 같이 걸어요.</div>
+                        <div class="example-english">Let's walk together on this street where cherry blossom petals echo.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- end vocabulary -->
+
+
+        <!-- ═══════════════════ QUIZ ═══════════════════ -->
+        <div id="quiz-section" class="section">
+
+            <div class="quiz-intro">
+                <h2>🌸 단어 퀴즈 Vocabulary Quiz</h2>
+                <p>봄 단어 10문제 — 각 단어의 뜻을 골라 보세요!</p>
+            </div>
+
+            <!-- Q1 -->
+            <div class="quiz-question">
+                <div class="question-number">Q1</div>
+                <div class="question-text"><span class="korean-word-large">봄바람</span> 은 영어로 무엇인가요?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Spring rain</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q1')">Spring breeze</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Spring flowers</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Spring morning</button>
+                </div>
+                <div id="q1-explanation" class="question-explanation">
+                    <span>✅</span> <strong>봄바람</strong> = 봄 (spring) + 바람 (wind/breeze) → Spring breeze. 봄바람 휘날리며 흩날리는 벚꽃! 🌸
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+                <div class="question-number">Q2</div>
+                <div class="question-text"><span class="korean-word-large">꽃샘 추위</span> 의 올바른 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">The smell of spring flowers</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">Spring rain shower</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q2')">A late cold snap in spring ("cold jealous of flowers")</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">A cold medicine from spring herbs</button>
+                </div>
+                <div id="q2-explanation" class="question-explanation">
+                    <span>✅</span> <strong>꽃샘 추위</strong>: 꽃 (flower) + 샘 (jealousy) + 추위 (cold) — 꽃이 피려 하면 시샘하듯 갑자기 오는 추위! The cold that's jealous of blooming flowers.
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+                <div class="question-number">Q3</div>
+                <div class="question-text">한국의 대표적인 봄꽃 두 가지는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">장미 (rose) 와 국화 (chrysanthemum)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q3')">개나리 (forsythia) 와 진달래 (azalea)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">봄꽃 (spring flower) 와 새싹 (sprout)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">벚꽃 (cherry blossom) 와 해바라기 (sunflower)</button>
+                </div>
+                <div id="q3-explanation" class="question-explanation">
+                    <span>✅</span> 대표적인 봄꽃은 <strong>진달래</strong>와 <strong>개나리</strong>예요. 개나리는 노란색, 진달래는 분홍/보라색이에요!
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+                <div class="question-number">Q4</div>
+                <div class="question-text"><span class="korean-word-large">환절기</span> 는 무엇인가요?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">A spring festival</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q4')">The transitional period between seasons</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">A type of spring vegetable</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">The first day of spring</button>
+                </div>
+                <div id="q4-explanation" class="question-explanation">
+                    <span>✅</span> <strong>환절기</strong> (換節期) = 환 (change) + 절 (season) + 기 (period). 계절이 바뀌는 시기예요. 환절기에는 감기가 많이 걸려요!
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="quiz-question">
+                <div class="question-number">Q5</div>
+                <div class="question-text"><span class="korean-word-large">떨림</span> 의 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">Scattering petals</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">Spring wind</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q5')">Trembling / heart-fluttering feeling</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">Overlapping images</button>
+                </div>
+                <div id="q5-explanation" class="question-explanation">
+                    <span>✅</span> <strong>떨림</strong> = the trembling, fluttering feeling — especially used for the heart-pounding sensation of romance! 알 수 없는 이 떨림과 둘이 걸어요 🌸
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="quiz-question">
+                <div class="question-number">Q6</div>
+                <div class="question-text"><span class="korean-word-large">휘날리다</span> 와 <span class="korean-word-large">흩날리다</span> 의 차이는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">They have exactly the same meaning</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q6')">휘날리다 = to flutter/wave; 흩날리다 = to scatter/drift randomly</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">휘날리다 = to fall; 흩날리다 = to rise</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">휘날리다 = rain; 흩날리다 = snow</button>
+                </div>
+                <div id="q6-explanation" class="question-explanation">
+                    <span>✅</span> <strong>휘날리다</strong> = to flutter, wave (in the wind), <strong>흩날리다</strong> = to scatter and drift (in all directions). In 벚꽃 엔딩: "봄바람 <strong>휘날리며</strong> <strong>흩날리는</strong> 벚꽃 잎이" — the breeze flutters AND petals scatter!
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="quiz-question">
+                <div class="question-number">Q7</div>
+                <div class="question-text"><span class="korean-word-large">봄나물</span> 은 영어로 무엇인가요?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">Spring rain</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">Spring picnic</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">Spring festival</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q7')">Spring vegetables / wild greens</button>
+                </div>
+                <div id="q7-explanation" class="question-explanation">
+                    <span>✅</span> <strong>봄나물</strong> = 봄 (spring) + 나물 (greens/vegetables). 비빔밥에 봄나물이 들어가요! Spring greens like spinach, bracken fern, and shepherd's purse.
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="quiz-question">
+                <div class="question-number">Q8</div>
+                <div class="question-text"><span class="korean-word-large">따뜻하다</span> 의 존댓말(polite form)은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">따뜻했다</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">따뜻하요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q8')">따뜻해요</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">따뜻합이다</button>
+                </div>
+                <div id="q8-explanation" class="question-explanation">
+                    <span>✅</span> <strong>따뜻하다 → 따뜻해요</strong> (polite present), <strong>따뜻했어요</strong> (polite past). 형용사 ~하다 → ~해요 pattern!
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="quiz-question">
+                <div class="question-number">Q9</div>
+                <div class="question-text"><span class="korean-word-large">울렁이다</span> 의 뜻에 가장 가까운 것은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">To scatter in the wind</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">To overlap / to superimpose</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">To resound / to echo</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q9')">Heart to pound / to flutter (romantically)</button>
+                </div>
+                <div id="q9-explanation" class="question-explanation">
+                    <span>✅</span> <strong>울렁이다</strong> = the heart pounds/flutters with excitement or romance. 벚꽃 엔딩: "바람 불면 <strong>울렁이는</strong> 기분 탓에 나도 모르게" 💕
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="quiz-question">
+                <div class="question-number">Q10</div>
+                <div class="question-text">다음 중 <span class="korean-word-large">봄소풍</span> 의 올바른 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">Spring cleaning</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q10')">Spring picnic / field trip</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">Spring rain walk</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">Spring vacation</button>
+                </div>
+                <div id="q10-explanation" class="question-explanation">
+                    <span>✅</span> <strong>봄소풍</strong> = 봄 (spring) + 소풍 (picnic / outdoor trip). 봄이 오니 봄소풍 가고 싶네요! 🧺
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">🌸 결과 보기 See Results</button>
+
+            <div id="quiz-results" class="quiz-results">
+                <h2>🌸 결과 Results</h2>
+                <div class="score" id="score-display">0/10</div>
+                <p id="result-message"></p>
+                <button class="reset-btn" onclick="resetQuiz()">🔄 다시 하기 Try Again</button>
+            </div>
+
+        </div><!-- end quiz -->
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, event) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        event.target.classList.add('active');
+    }
+    const answers = {};
+    function selectOption(btn, isCorrect, questionId) {
+        const parent = btn.closest('.quiz-question');
+        const options = parent.querySelectorAll('.quiz-option');
+        const explanation = document.getElementById(questionId + '-explanation');
+        if (answers[questionId] !== undefined) return;
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+        if (!isCorrect) {
+            options.forEach(opt => {
+                if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+        }
+        answers[questionId] = isCorrect;
+        if (explanation) {
+            explanation.classList.add('show');
+            explanation.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+    }
+    function submitQuiz() {
+        const total = 10;
+        let correct = 0;
+        for (let i = 1; i <= total; i++) { if (answers['q' + i] === true) correct++; }
+        const results = document.getElementById('quiz-results');
+        results.classList.add('show');
+        document.getElementById('score-display').textContent = correct + '/' + total;
+        let msg = '';
+        if (correct === total) msg = '🌸 완벽해요! Perfect score! Spring vocabulary master!';
+        else if (correct >= 8) msg = '🌼 아주 잘했어요! Great job! Almost a spring expert!';
+        else if (correct >= 6) msg = '🌱 잘했어요! Good work! Keep practicing!';
+        else msg = '💪 괜찮아요! Keep studying — you\'ll bloom like spring flowers!';
+        document.getElementById('result-message').textContent = msg;
+        results.scrollIntoView({ behavior: 'smooth' });
+    }
+    function resetQuiz() {
+        for (let key in answers) delete answers[key];
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            opt.style.pointerEvents = '';
+        });
+        document.querySelectorAll('.question-explanation').forEach(exp => {
+            exp.classList.remove('show', 'correct', 'incorrect');
+        });
+        document.getElementById('quiz-results').classList.remove('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>

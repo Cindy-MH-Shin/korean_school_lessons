@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>봄 Spring — English–Korean Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sakura: #f7b8c4;
+  --sakura-deep: #e8839a;
+  --moss: #4a7c59;
+  --moss-light: #7fb08c;
+  --sky: #a8d4e8;
+  --sky-deep: #5b9dc0;
+  --cream: #fdf8f0;
+  --warm: #f5ead8;
+  --gold: #d4a843;
+  --text: #2a2015;
+  --text-soft: #6b5c4a;
+  --text-muted: #a09080;
+  --white: #ffffff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND DECORATION ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(247,184,196,0.35) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -60px; left: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(74,124,89,0.2) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── HEADER ── */
+.header {
+  position: relative;
+  text-align: center;
+  padding: 56px 24px 40px;
+  overflow: hidden;
+}
+.header-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #fdf0f5 0%, #f5f9f0 50%, #f0f5fd 100%);
+  z-index: 0;
+}
+.petal {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.5;
+  animation: drift 8s ease-in-out infinite;
+}
+.petal:nth-child(1) { top:12%; left:5%; animation-delay:0s; font-size:22px; }
+.petal:nth-child(2) { top:20%; left:15%; animation-delay:1.5s; font-size:18px; }
+.petal:nth-child(3) { top:8%; right:12%; animation-delay:0.8s; }
+.petal:nth-child(4) { top:30%; right:6%; animation-delay:2.2s; font-size:20px; }
+.petal:nth-child(5) { bottom:15%; left:10%; animation-delay:1s; font-size:24px; }
+.petal:nth-child(6) { bottom:10%; right:18%; animation-delay:3s; font-size:16px; }
+@keyframes drift {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(8deg); }
+}
+.header-content { position: relative; z-index: 1; }
+.header-label {
+  display: inline-block;
+  background: var(--sakura);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 62px);
+  color: var(--moss);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.header h1 span {
+  font-style: italic;
+  color: var(--sakura-deep);
+}
+.header-sub {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+.header-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  max-width: 520px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+/* ── NAV ── */
+.nav-wrap {
+  position: relative; z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px 32px;
+  flex-wrap: wrap;
+}
+.nav-btn {
+  background: white;
+  border: 2px solid #e8e0d4;
+  color: var(--text-soft);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.nav-btn:hover { border-color: var(--moss-light); color: var(--moss); }
+.nav-btn.active { background: var(--moss); border-color: var(--moss); color: white; }
+.nav-btn.quiz-btn.active { background: var(--sakura-deep); border-color: var(--sakura-deep); }
+
+/* ── MAIN CONTENT ── */
+.main { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; position: relative; z-index: 1; }
+.section { display: none; }
+.section.active { display: block; animation: fadeUp 0.4s ease; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ── SECTION TITLE ── */
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--moss);
+  margin-bottom: 6px;
+}
+.sec-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+/* ── WORD FAMILY TABLE ── */
+.wf-table-wrap {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #ede8e0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.wf-table-head {
+  display: grid;
+  grid-template-columns: 140px 140px 140px 1fr;
+  background: var(--moss);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  gap: 8px;
+}
+.wf-row {
+  display: grid;
+  grid-template-columns: 140px 140px 140px 1fr;
+  padding: 16px 20px;
+  gap: 8px;
+  border-bottom: 1px solid #f0ece6;
+  align-items: start;
+  transition: background 0.2s;
+}
+.wf-row:hover { background: #fdf8f2; }
+.wf-row:last-child { border-bottom: none; }
+.wf-cell { font-size: 15px; }
+.wf-en { font-weight: 600; color: var(--moss); }
+.wf-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13px;
+  color: var(--sakura-deep);
+  margin-top: 2px;
+}
+.wf-empty { color: #ccc; font-size: 13px; }
+.wf-note { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+
+/* ── VOCAB GRID ── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.vocab-card {
+  background: white;
+  border: 1.5px solid #ede8e0;
+  border-radius: 14px;
+  padding: 18px 16px;
+  transition: all 0.25s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.vocab-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.vocab-card.noun::before { background: var(--moss-light); }
+.vocab-card.verb::before { background: var(--sky-deep); }
+.vocab-card.adj::before { background: var(--sakura-deep); }
+.vocab-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.vocab-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.tag-noun { color: var(--moss); }
+.tag-verb { color: var(--sky-deep); }
+.tag-adj { color: var(--sakura-deep); }
+.vocab-en { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.vocab-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  color: var(--text-soft);
+}
+
+/* ── COLLOCATION CARDS ── */
+.coll-group { margin-bottom: 32px; }
+.coll-group-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--gold);
+}
+.coll-list { display: flex; flex-direction: column; gap: 10px; }
+.coll-item {
+  background: white;
+  border: 1.5px solid #ede8e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.coll-item:hover { border-color: var(--gold); transform: translateX(4px); }
+.coll-en { font-size: 18px; font-weight: 600; color: var(--text); }
+.coll-arrow { color: var(--text-muted); font-size: 18px; flex-shrink: 0; }
+.coll-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  color: var(--sakura-deep);
+  text-align: right;
+}
+
+/* ── QUIZ ── */
+.quiz-header {
+  background: linear-gradient(135deg, var(--sakura-deep), #c45b7a);
+  color: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.quiz-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+.quiz-header p { font-size: 14px; opacity: 0.85; }
+.quiz-score-display {
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 12px 24px;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.quiz-score-display.visible { opacity: 1; }
+.quiz-score-num { font-size: 32px; font-weight: 700; }
+
+.q-card {
+  background: white;
+  border: 1.5px solid #ede8e0;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: border-color 0.3s;
+}
+.q-card.answered-correct { border-color: #7fb08c; }
+.q-card.answered-wrong { border-color: var(--sakura-deep); }
+
+.q-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.q-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.q-text .highlight { color: var(--moss); font-style: italic; }
+
+.q-options { display: grid; gap: 10px; }
+.q-opt {
+  background: #fdf8f2;
+  border: 2px solid #ede8e0;
+  border-radius: 10px;
+  padding: 13px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.q-opt:hover:not(:disabled) { border-color: var(--moss-light); background: #f0faf5; transform: translateX(3px); }
+.q-opt:disabled { cursor: default; }
+.q-opt.correct { border-color: var(--moss); background: #f0fdf4; color: var(--moss); font-weight: 600; }
+.q-opt.wrong { border-color: var(--sakura-deep); background: #fff5f7; color: var(--sakura-deep); }
+.q-opt .opt-icon { font-size: 18px; width: 24px; flex-shrink: 0; }
+.q-opt .opt-ko { font-family: 'Noto Serif KR', serif; }
+
+.q-explanation {
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.7;
+  display: none;
+}
+.q-explanation.show { display: block; }
+.q-explanation.correct-exp { background: #f0fdf4; border: 1.5px solid var(--moss-light); color: #2d6a3f; }
+.q-explanation.wrong-exp { background: #fff5f7; border: 1.5px solid var(--sakura); color: #8a3a4a; }
+
+.quiz-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.btn-submit, .btn-retry, .btn-review {
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: inherit;
+}
+.btn-submit { background: var(--sakura-deep); color: white; }
+.btn-submit:hover { background: #c45b7a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,131,154,0.4); }
+.btn-retry { background: var(--moss); color: white; }
+.btn-retry:hover { background: #3d6b4a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74,124,89,0.4); }
+.btn-review { background: white; color: var(--text); border: 2px solid #ede8e0; }
+.btn-review:hover { border-color: var(--text-soft); transform: translateY(-2px); }
+
+.quiz-result-banner {
+  display: none;
+  background: linear-gradient(135deg, var(--moss), var(--moss-light));
+  color: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 28px;
+}
+.quiz-result-banner.show { display: block; animation: fadeUp 0.5s ease; }
+.result-score { font-size: 56px; font-weight: 700; margin: 12px 0; }
+.result-msg { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+.result-sub { font-size: 14px; opacity: 0.85; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .wf-table-head, .wf-row { grid-template-columns: 1fr 1fr; }
+  .wf-table-head .head-note, .wf-row .wf-note { display: none; }
+  .coll-item { flex-direction: column; align-items: flex-start; }
+  .coll-ko { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- PETALS -->
+<div class="header-bg"></div>
+
+<div class="header">
+  <div class="header-bg"></div>
+  <span class="petal">🌸</span>
+  <span class="petal">🌿</span>
+  <span class="petal">🌸</span>
+  <span class="petal">🌱</span>
+  <span class="petal">🌼</span>
+  <span class="petal">🌸</span>
+  <div class="header-content">
+    <div class="header-label">English → Korean</div>
+    <h1>봄 <span>Spring</span></h1>
+    <div class="header-sub">봄 어휘 학습 Vocabulary</div>
+    <p class="header-desc">영어를 기준으로 한국어를 매칭하는 학습법 — Word Families, Independent Vocabulary & Collocations</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <button class="nav-btn active" onclick="showSection('families', this)">🌿 Word Families</button>
+  <button class="nav-btn" onclick="showSection('vocab', this)">🌸 독립 어휘</button>
+  <button class="nav-btn" onclick="showSection('coll', this)">🌼 Collocations</button>
+  <button class="nav-btn quiz-btn" onclick="showSection('quiz', this)">✏️ 퀴즈 Quiz</button>
+</div>
+
+<div class="main">
+
+  <!-- ═══ SECTION 1: WORD FAMILIES ═══ -->
+  <div id="families" class="section active">
+    <h2 class="sec-title">🌿 Word Families & Related Pairs</h2>
+    <p class="sec-desc">서로 문법적 형태만 다르거나 의미상 짝을 이루는 단어들 — Words that share roots or are closely related in meaning</p>
+
+    <div class="wf-table-wrap">
+      <div class="wf-table-head">
+        <div>명사 Noun</div>
+        <div>동사 Verb</div>
+        <div>형용사 Adj</div>
+        <div>관계 설명 Relationship</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Blossom</div><div class="wf-ko">꽃 (나무꽃)</div></div>
+        <div class="wf-cell"><div class="wf-en">Bloom</div><div class="wf-ko">꽃이 피다</div></div>
+        <div class="wf-cell"><div class="wf-en">Blooming</div><div class="wf-ko">꽃이 피는</div></div>
+        <div class="wf-cell wf-note">모두 '꽃'과 관련된 단어. <em>Blossom</em> focuses on tree flowers (sakura, apple blossom); <em>Bloom</em> is broader; <em>Blooming</em> describes the active state.</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Sprout</div><div class="wf-ko">싹, 새싹</div></div>
+        <div class="wf-cell"><div class="wf-en">Sprout</div><div class="wf-ko">싹트다</div></div>
+        <div class="wf-cell"><div class="wf-empty">—</div></div>
+        <div class="wf-cell wf-note">명사(싹)와 동사(싹트다) 형태가 같음. "Seeds <em>sprout</em>" = "씨앗이 싹튼다"</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Sunshine</div><div class="wf-ko">햇살, 햇빛</div></div>
+        <div class="wf-cell"><div class="wf-empty">—</div></div>
+        <div class="wf-cell"><div class="wf-en">Sunny</div><div class="wf-ko">화창한, 맑은</div></div>
+        <div class="wf-cell wf-note">햇살(명사)과 햇살이 내리쬐는 날씨 상태(형용사)로 연결됨</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Breeze</div><div class="wf-ko">산들바람</div></div>
+        <div class="wf-cell"><div class="wf-empty">—</div></div>
+        <div class="wf-cell"><div class="wf-en">Breezy</div><div class="wf-ko">산들바람 부는</div></div>
+        <div class="wf-cell wf-note">산들바람(명사)과 그런 바람이 부는 날씨(형용사)로 연결됨. "A <em>breezy</em> spring day"</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Seedling</div><div class="wf-ko">묘목, 모종</div></div>
+        <div class="wf-cell"><div class="wf-en">Plant</div><div class="wf-ko">심다</div></div>
+        <div class="wf-cell"><div class="wf-empty">—</div></div>
+        <div class="wf-cell wf-note">묘목(seedling)을 심는(plant) 행위로 연결됨. "We <em>plant</em> the <em>seedlings</em> in spring."</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Rebirth</div><div class="wf-ko">재탄생, 부활</div></div>
+        <div class="wf-cell"><div class="wf-en">Renew</div><div class="wf-ko">새로워지다</div></div>
+        <div class="wf-cell"><div class="wf-en">Fresh / Vibrant</div><div class="wf-ko">신선한 / 생기있는</div></div>
+        <div class="wf-cell wf-note">다시 태어나고(rebirth) 새로워지는(renew) 봄의 속성. <em>Vibrant</em> captures the energy.</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-cell"><div class="wf-en">Shower</div><div class="wf-ko">소나기, 봄비</div></div>
+        <div class="wf-cell"><div class="wf-en">Refresh</div><div class="wf-ko">상쾌하게 하다</div></div>
+        <div class="wf-cell"><div class="wf-en">Fresh</div><div class="wf-ko">신선한, 상쾌한</div></div>
+        <div class="wf-cell wf-note">봄비(shower)가 내린 뒤 시원하고(refresh) 신선해지는(fresh) 관계. "April showers bring May flowers."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: INDEPENDENT VOCAB ═══ -->
+  <div id="vocab" class="section">
+    <h2 class="sec-title">🌸 독립 어휘 Independent Vocabulary</h2>
+    <p class="sec-desc">특정 짝이 없더라도 봄의 분위기를 묘사하는 핵심 어휘들 — Core words that paint the picture of spring</p>
+
+    <div style="margin-bottom:20px;">
+      <div class="coll-group-title">명사 Nouns</div>
+      <div class="vocab-grid">
+        <div class="vocab-card noun">
+          <div class="vocab-tag tag-noun">NOUN · 명사</div>
+          <div class="vocab-en">Butterfly</div>
+          <div class="vocab-ko">나비</div>
+        </div>
+        <div class="vocab-card noun">
+          <div class="vocab-tag tag-noun">NOUN · 명사</div>
+          <div class="vocab-en">Equinox</div>
+          <div class="vocab-ko">춘분</div>
+        </div>
+        <div class="vocab-card noun">
+          <div class="vocab-tag tag-noun">NOUN · 명사</div>
+          <div class="vocab-en">Daffodil</div>
+          <div class="vocab-ko">수선화</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div class="coll-group-title">동사 Verbs</div>
+      <div class="vocab-grid">
+        <div class="vocab-card verb">
+          <div class="vocab-tag tag-verb">VERB · 동사</div>
+          <div class="vocab-en">Awaken</div>
+          <div class="vocab-ko">깨어나다</div>
+        </div>
+        <div class="vocab-card verb">
+          <div class="vocab-tag tag-verb">VERB · 동사</div>
+          <div class="vocab-en">Chirp</div>
+          <div class="vocab-ko">지저귀다</div>
+        </div>
+        <div class="vocab-card verb">
+          <div class="vocab-tag tag-verb">VERB · 동사</div>
+          <div class="vocab-en">Thaw</div>
+          <div class="vocab-ko">녹다</div>
+        </div>
+        <div class="vocab-card verb">
+          <div class="vocab-tag tag-verb">VERB · 동사</div>
+          <div class="vocab-en">Buzz</div>
+          <div class="vocab-ko">윙윙거리다</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="coll-group-title">형용사 Adjectives</div>
+      <div class="vocab-grid">
+        <div class="vocab-card adj">
+          <div class="vocab-tag tag-adj">ADJ · 형용사</div>
+          <div class="vocab-en">Mild</div>
+          <div class="vocab-ko">포근한</div>
+        </div>
+        <div class="vocab-card adj">
+          <div class="vocab-tag tag-adj">ADJ · 형용사</div>
+          <div class="vocab-en">Fragrant</div>
+          <div class="vocab-ko">향기로운</div>
+        </div>
+        <div class="vocab-card adj">
+          <div class="vocab-tag tag-adj">ADJ · 형용사</div>
+          <div class="vocab-en">Lush</div>
+          <div class="vocab-ko">신록이 우거진</div>
+        </div>
+        <div class="vocab-card adj">
+          <div class="vocab-tag tag-adj">ADJ · 형용사</div>
+          <div class="vocab-en">Cheerful</div>
+          <div class="vocab-ko">밝은</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: COLLOCATIONS ═══ -->
+  <div id="coll" class="section">
+    <h2 class="sec-title">🌼 봄 Collocations</h2>
+    <p class="sec-desc">단어를 따로 외우는 것보다 뭉치로 외우면 훨씬 자연스러운 영어가 됩니다 — Learn words as natural pairs</p>
+
+    <div class="coll-group">
+      <div class="coll-group-title">형용사 + 명사 (Adjective + Noun)</div>
+      <div class="coll-list">
+        <div class="coll-item">
+          <div class="coll-en">Gentle breeze</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">기분 좋은 산들바람</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Vibrant colors</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">생기 넘치는 색깔들</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Mild weather</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">포근한 날씨</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Fragrant blossoms</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">향기로운 꽃들</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coll-group">
+      <div class="coll-group-title">명사 + 동사 (Noun + Verb)</div>
+      <div class="coll-list">
+        <div class="coll-item">
+          <div class="coll-en">Flowers bloom</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">꽃이 피다</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Birds chirp</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">새가 지저귀다</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">The ice thaws</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">얼음이 녹다</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Seeds sprout</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">씨앗이 싹트다</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coll-group">
+      <div class="coll-group-title">동사 + 명사 (Verb + Noun)</div>
+      <div class="coll-list">
+        <div class="coll-item">
+          <div class="coll-en">Plant a garden</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">정원을 가꾸다 / 심다</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Enjoy the sunshine</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">햇살을 즐기다</div>
+        </div>
+        <div class="coll-item">
+          <div class="coll-en">Welcome the spring</div>
+          <div class="coll-arrow">→</div>
+          <div class="coll-ko">봄을 맞이하다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 4: QUIZ ═══ -->
+  <div id="quiz" class="section">
+    <div class="quiz-header">
+      <div>
+        <h2>✏️ 퀴즈 Quiz</h2>
+        <p>영어 단어/표현에 맞는 한국어 의미를 고르세요 — Choose the correct Korean meaning</p>
+      </div>
+      <div class="quiz-score-display" id="scoreDisplay">
+        <div class="quiz-score-num" id="scoreNum">0/12</div>
+        <div>점수 Score</div>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="qc1">
+      <div class="q-num">Q1 · Word Family</div>
+      <div class="q-text">"<span class="highlight">Blossom</span>" 의 한국어 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(1, this, false)"><span class="opt-icon">🌿</span><span class="opt-ko">씨앗이 싹트다</span></button>
+        <button class="q-opt" onclick="answer(1, this, true)"><span class="opt-icon">🌸</span><span class="opt-ko">꽃 (특히 나무에 피는 꽃)</span></button>
+        <button class="q-opt" onclick="answer(1, this, false)"><span class="opt-icon">💨</span><span class="opt-ko">산들바람</span></button>
+        <button class="q-opt" onclick="answer(1, this, false)"><span class="opt-icon">☀️</span><span class="opt-ko">햇살</span></button>
+      </div>
+      <div class="q-explanation" id="exp1">✅ <strong>Blossom = 꽃 (나무꽃 위주)</strong>. Cherry blossoms = 벚꽃. <em>Bloom</em>은 더 넓은 의미의 '꽃이 피다'이고, <em>Blossom</em>은 특히 나무에 피는 꽃을 가리킵니다.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="qc2">
+      <div class="q-num">Q2 · Word Family</div>
+      <div class="q-text">"<span class="highlight">Sprout</span>" 이 동사로 쓰일 때의 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(2, this, false)"><span class="opt-icon">🌸</span><span class="opt-ko">꽃이 피다</span></button>
+        <button class="q-opt" onclick="answer(2, this, false)"><span class="opt-icon">☔</span><span class="opt-ko">비가 내리다</span></button>
+        <button class="q-opt" onclick="answer(2, this, true)"><span class="opt-icon">🌱</span><span class="opt-ko">싹트다</span></button>
+        <button class="q-opt" onclick="answer(2, this, false)"><span class="opt-icon">🦋</span><span class="opt-ko">날아다니다</span></button>
+      </div>
+      <div class="q-explanation" id="exp2">✅ <strong>Sprout = 싹트다 (동사) / 싹 (명사)</strong>. "Seeds <em>sprout</em> in spring." = "씨앗이 봄에 싹튼다." 명사와 동사 형태가 같은 단어입니다.</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="qc3">
+      <div class="q-num">Q3 · Word Family</div>
+      <div class="q-text">"<span class="highlight">Sunny</span>" 와 "<span class="highlight">Sunshine</span>" 의 관계로 올바른 것은?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(3, this, false)"><span class="opt-icon">❌</span>두 단어는 전혀 다른 의미이다</button>
+        <button class="q-opt" onclick="answer(3, this, true)"><span class="opt-icon">✅</span>햇살(명사)과 화창한 날씨 상태(형용사)로 연결된다</button>
+        <button class="q-opt" onclick="answer(3, this, false)"><span class="opt-icon">❌</span>Sunny는 동사이고 Sunshine은 형용사이다</button>
+        <button class="q-opt" onclick="answer(3, this, false)"><span class="opt-icon">❌</span>둘 다 동사로만 쓰인다</button>
+      </div>
+      <div class="q-explanation" id="exp3">✅ <strong>Sunshine(명사: 햇살) → Sunny(형용사: 화창한)</strong>. "A <em>sunny</em> day with bright <em>sunshine</em>." = "밝은 햇살이 있는 화창한 날."</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="qc4">
+      <div class="q-num">Q4 · Word Family</div>
+      <div class="q-text">"<span class="highlight">Rebirth</span>", "<span class="highlight">Renew</span>", "<span class="highlight">Vibrant</span>" 의 공통 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(4, this, false)"><span class="opt-icon">💧</span>봄비가 내리는 것과 관련됨</button>
+        <button class="q-opt" onclick="answer(4, this, false)"><span class="opt-icon">🌸</span>꽃이 피는 것과 관련됨</button>
+        <button class="q-opt" onclick="answer(4, this, true)"><span class="opt-icon">✨</span>다시 태어나고 새로워지는 봄의 속성</button>
+        <button class="q-opt" onclick="answer(4, this, false)"><span class="opt-icon">🌧️</span>날씨 변화와 관련됨</button>
+      </div>
+      <div class="q-explanation" id="exp4">✅ <strong>Rebirth(재탄생) + Renew(새로워지다) + Vibrant(생기있는)</strong> — 모두 봄의 새 생명, 에너지, 활력과 연결됩니다. "Spring brings <em>rebirth</em> and <em>vibrant</em> energy."</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="qc5">
+      <div class="q-num">Q5 · 독립 어휘</div>
+      <div class="q-text">"<span class="highlight">Equinox</span>" 의 한국어는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(5, this, false)"><span class="opt-icon">🌧️</span><span class="opt-ko">봄비</span></button>
+        <button class="q-opt" onclick="answer(5, this, false)"><span class="opt-icon">🌸</span><span class="opt-ko">수선화</span></button>
+        <button class="q-opt" onclick="answer(5, this, false)"><span class="opt-icon">🦋</span><span class="opt-ko">나비</span></button>
+        <button class="q-opt" onclick="answer(5, this, true)"><span class="opt-icon">☀️</span><span class="opt-ko">춘분 (낮과 밤의 길이가 같은 날)</span></button>
+      </div>
+      <div class="q-explanation" id="exp5">✅ <strong>Equinox = 춘분(春分)</strong>. Spring equinox = 봄의 시작을 알리는 날로, 낮과 밤의 길이가 같아지는 시점입니다. 보통 3월 20–21일경.</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="qc6">
+      <div class="q-num">Q6 · 독립 어휘</div>
+      <div class="q-text">"<span class="highlight">Thaw</span>" 의 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(6, this, true)"><span class="opt-icon">🧊</span><span class="opt-ko">녹다 (얼음/눈이 녹는 것)</span></button>
+        <button class="q-opt" onclick="answer(6, this, false)"><span class="opt-icon">🌿</span><span class="opt-ko">싹트다</span></button>
+        <button class="q-opt" onclick="answer(6, this, false)"><span class="opt-icon">🎵</span><span class="opt-ko">지저귀다</span></button>
+        <button class="q-opt" onclick="answer(6, this, false)"><span class="opt-icon">🌞</span><span class="opt-ko">깨어나다</span></button>
+      </div>
+      <div class="q-explanation" id="exp6">✅ <strong>Thaw = 녹다</strong>. "The ice <em>thaws</em> in spring." = "봄에 얼음이 녹는다." 겨울이 끝나고 봄이 오는 것을 상징하는 핵심 동사.</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="qc7">
+      <div class="q-num">Q7 · 독립 어휘</div>
+      <div class="q-text">"<span class="highlight">Lush</span>" 의 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(7, this, false)"><span class="opt-icon">🌸</span><span class="opt-ko">향기로운</span></button>
+        <button class="q-opt" onclick="answer(7, this, false)"><span class="opt-icon">😊</span><span class="opt-ko">밝은, 명랑한</span></button>
+        <button class="q-opt" onclick="answer(7, this, true)"><span class="opt-icon">🌿</span><span class="opt-ko">신록이 우거진</span></button>
+        <button class="q-opt" onclick="answer(7, this, false)"><span class="opt-icon">🌤️</span><span class="opt-ko">포근한</span></button>
+      </div>
+      <div class="q-explanation" id="exp7">✅ <strong>Lush = 신록이 우거진</strong>. "The <em>lush</em> green hills of spring." = "봄의 신록이 우거진 초록 언덕들." Lush는 풍성하게 자란 식물의 생동감을 표현합니다.</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="qc8">
+      <div class="q-num">Q8 · 독립 어휘</div>
+      <div class="q-text">"<span class="highlight">Chirp</span>" 의 의미는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(8, this, false)"><span class="opt-icon">🦋</span><span class="opt-ko">날아다니다</span></button>
+        <button class="q-opt" onclick="answer(8, this, true)"><span class="opt-icon">🐦</span><span class="opt-ko">지저귀다</span></button>
+        <button class="q-opt" onclick="answer(8, this, false)"><span class="opt-icon">🌱</span><span class="opt-ko">깨어나다</span></button>
+        <button class="q-opt" onclick="answer(8, this, false)"><span class="opt-icon">🐝</span><span class="opt-ko">윙윙거리다</span></button>
+      </div>
+      <div class="q-explanation" id="exp8">✅ <strong>Chirp = 지저귀다</strong>. "Birds <em>chirp</em> in the morning." = "아침에 새들이 지저귀다." 참고: Buzz(윙윙거리다)는 벌이나 곤충 소리.</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="qc9">
+      <div class="q-num">Q9 · Collocation</div>
+      <div class="q-text">"<span class="highlight">Gentle breeze</span>" 의 한국어는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(9, this, false)"><span class="opt-icon">🌧️</span><span class="opt-ko">세찬 봄비</span></button>
+        <button class="q-opt" onclick="answer(9, this, true)"><span class="opt-icon">🌬️</span><span class="opt-ko">기분 좋은 산들바람</span></button>
+        <button class="q-opt" onclick="answer(9, this, false)"><span class="opt-icon">🌪️</span><span class="opt-ko">강한 돌풍</span></button>
+        <button class="q-opt" onclick="answer(9, this, false)"><span class="opt-icon">🌸</span><span class="opt-ko">향기로운 꽃향기</span></button>
+      </div>
+      <div class="q-explanation" id="exp9">✅ <strong>Gentle breeze = 기분 좋은 산들바람</strong>. <em>Gentle</em>(부드러운, 온화한) + <em>breeze</em>(산들바람). "A <em>gentle breeze</em> blows through the cherry blossoms." = "벚꽃 사이로 산들바람이 불어온다."</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="qc10">
+      <div class="q-num">Q10 · Collocation</div>
+      <div class="q-text">"씨앗이 싹트다" 를 영어로 표현하면?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(10, this, false)"><span class="opt-icon">🌸</span>Flowers bloom</button>
+        <button class="q-opt" onclick="answer(10, this, false)"><span class="opt-icon">🌧️</span>Showers refresh</button>
+        <button class="q-opt" onclick="answer(10, this, true)"><span class="opt-icon">🌱</span>Seeds sprout</button>
+        <button class="q-opt" onclick="answer(10, this, false)"><span class="opt-icon">🐦</span>Birds chirp</button>
+      </div>
+      <div class="q-explanation" id="exp10">✅ <strong>Seeds sprout = 씨앗이 싹트다</strong>. "In spring, <em>seeds sprout</em> and flowers begin to bloom." = "봄에 씨앗이 싹트고 꽃이 피기 시작한다."</div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="q-card" id="qc11">
+      <div class="q-num">Q11 · Collocation</div>
+      <div class="q-text">"<span class="highlight">Welcome the spring</span>" 의 한국어는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(11, this, false)"><span class="opt-icon">🌻</span><span class="opt-ko">정원을 가꾸다</span></button>
+        <button class="q-opt" onclick="answer(11, this, false)"><span class="opt-icon">☀️</span><span class="opt-ko">햇살을 즐기다</span></button>
+        <button class="q-opt" onclick="answer(11, this, true)"><span class="opt-icon">🌸</span><span class="opt-ko">봄을 맞이하다</span></button>
+        <button class="q-opt" onclick="answer(11, this, false)"><span class="opt-icon">🌿</span><span class="opt-ko">새싹을 심다</span></button>
+      </div>
+      <div class="q-explanation" id="exp11">✅ <strong>Welcome the spring = 봄을 맞이하다</strong>. <em>Welcome</em>은 '환영하다' 뿐 아니라 '맞이하다'의 의미로도 쓰입니다. "We <em>welcome the spring</em> with open arms." = "온 마음으로 봄을 맞이한다."</div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card" id="qc12">
+      <div class="q-num">Q12 · Collocation</div>
+      <div class="q-text">"<span class="highlight">Vibrant colors</span>" 의 한국어는?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="answer(12, this, false)"><span class="opt-icon">🎨</span><span class="opt-ko">포근한 날씨</span></button>
+        <button class="q-opt" onclick="answer(12, this, true)"><span class="opt-icon">🌈</span><span class="opt-ko">생기 넘치는 색깔들</span></button>
+        <button class="q-opt" onclick="answer(12, this, false)"><span class="opt-icon">🌸</span><span class="opt-ko">향기로운 꽃들</span></button>
+        <button class="q-opt" onclick="answer(12, this, false)"><span class="opt-icon">💨</span><span class="opt-ko">기분 좋은 산들바람</span></button>
+      </div>
+      <div class="q-explanation" id="exp12">✅ <strong>Vibrant colors = 생기 넘치는 색깔들</strong>. <em>Vibrant</em> = 활기차고 생기가 넘치는. "Spring fills the world with <em>vibrant colors</em>." = "봄은 세상을 생기 넘치는 색깔들로 채운다."</div>
+    </div>
+
+    <div class="quiz-controls">
+      <button class="btn-submit" onclick="submitQuiz()">🌸 결과 보기 See Results</button>
+      <button class="btn-retry" onclick="retryQuiz()" style="display:none" id="retryBtn">🔄 다시 하기 Retry</button>
+    </div>
+
+    <div class="quiz-result-banner" id="resultBanner">
+      <div class="result-score" id="resultScore">0/12</div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-sub" id="resultSub"></div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  btn.classList.add('active');
+}
+
+const answers = {};
+const TOTAL = 12;
+
+function answer(qNum, btn, isCorrect) {
+  if (answers[qNum] !== undefined) return;
+  answers[qNum] = isCorrect;
+
+  const card = document.getElementById('qc' + qNum);
+  const exp = document.getElementById('exp' + qNum);
+  const allOpts = card.querySelectorAll('.q-opt');
+
+  allOpts.forEach(o => {
+    o.disabled = true;
+    o.style.pointerEvents = 'none';
+  });
+
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+
+  if (!isCorrect) {
+    allOpts.forEach(o => {
+      if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+        o.classList.add('correct');
+      }
+    });
+    card.classList.add('answered-wrong');
+  } else {
+    card.classList.add('answered-correct');
+  }
+
+  exp.classList.add('show');
+  exp.classList.add(isCorrect ? 'correct-exp' : 'wrong-exp');
+
+  // Update live score
+  const correct = Object.values(answers).filter(v => v === true).length;
+  const answered = Object.keys(answers).length;
+  document.getElementById('scoreNum').textContent = correct + '/' + answered;
+  document.getElementById('scoreDisplay').classList.add('visible');
+}
+
+function submitQuiz() {
+  const correct = Object.values(answers).filter(v => v === true).length;
+  const answered = Object.keys(answers).length;
+
+  const banner = document.getElementById('resultBanner');
+  document.getElementById('resultScore').textContent = correct + '/' + TOTAL;
+
+  let msg = '', sub = '';
+  if (correct === TOTAL) {
+    msg = '🌸 완벽해요! Perfect Score!';
+    sub = '봄 어휘를 완벽하게 마스터했어요! You have mastered all spring vocabulary!';
+  } else if (correct >= 10) {
+    msg = '🌿 아주 잘했어요! Excellent!';
+    sub = '조금만 더 복습하면 완벽해요. Just a bit more review and you\'ll be perfect!';
+  } else if (correct >= 7) {
+    msg = '🌱 잘했어요! Good job!';
+    sub = '단어군과 연어를 다시 한번 복습해 보세요. Review the word families and collocations again!';
+  } else {
+    msg = '💪 계속 도전하세요! Keep going!';
+    sub = '학습 자료를 다시 보고 퀴즈에 도전해 보세요! Review the study materials and try again!';
+  }
+
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultSub').textContent = sub;
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('retryBtn').style.display = 'inline-block';
+}
+
+function retryQuiz() {
+  // Reset answers
+  for (let k in answers) delete answers[k];
+
+  // Reset cards
+  for (let i = 1; i <= TOTAL; i++) {
+    const card = document.getElementById('qc' + i);
+    card.classList.remove('answered-correct', 'answered-wrong');
+    const opts = card.querySelectorAll('.q-opt');
+    opts.forEach(o => {
+      o.classList.remove('correct', 'wrong');
+      o.disabled = false;
+      o.style.pointerEvents = '';
+    });
+    const exp = document.getElementById('exp' + i);
+    exp.classList.remove('show', 'correct-exp', 'wrong-exp');
+  }
+
+  document.getElementById('resultBanner').classList.remove('show');
+  document.getElementById('retryBtn').style.display = 'none';
+  document.getElementById('scoreDisplay').classList.remove('visible');
+  document.getElementById('scoreNum').textContent = '0/12';
+  window.scrollTo({ top: document.getElementById('quiz').offsetTop - 80, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

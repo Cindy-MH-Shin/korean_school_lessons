@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>새로운 길 — 윤동주 A New Road — Yun Dong-ju</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #e8f4fb;
+  --sky2: #cce8f7;
+  --green: #3a8c5c;
+  --green-light: #6ab88a;
+  --green-pale: #eaf6ee;
+  --gold: #d4900a;
+  --gold-pale: #fef6e4;
+  --peach: #f97c5a;
+  --peach-pale: #fff0ec;
+  --blue: #3a7abd;
+  --blue-pale: #eaf3fb;
+  --text: #2a2a2a;
+  --text-soft: #5a5a5a;
+  --text-muted: #9a9a9a;
+  --white: #ffffff;
+  --cream: #fdfaf5;
+  --border: #e8e0d0;
+  --border2: #d0c8b8;
+  --card: #ffffff;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(200,235,210,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, rgba(200,225,250,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(255,235,200,0.35) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+/* floating elements */
+.floaters {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.floater {
+  position: absolute;
+  font-size: var(--fs, 20px);
+  opacity: 0.12;
+  animation: float var(--dur, 10s) ease-in-out infinite;
+  animation-delay: var(--del, 0s);
+}
+@keyframes float {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  33% { transform: translate(6px,-10px) rotate(5deg); }
+  66% { transform: translate(-4px,6px) rotate(-3deg); }
+}
+
+/* ── HEADER ── */
+.header {
+  position: relative; z-index: 2;
+  background: linear-gradient(160deg, #e8f8ee 0%, #dff0fb 40%, #fff8ee 100%);
+  border-bottom: 2px solid var(--border);
+  text-align: center;
+  padding: 52px 24px 44px;
+  overflow: hidden;
+}
+.header::after {
+  content: '🌸 🌿 🌸 🌿 🌸';
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  font-size: 16px;
+  letter-spacing: 16px;
+  opacity: 0.3;
+  text-align: center;
+}
+.author-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.header h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 300;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.header h1 strong {
+  font-weight: 600;
+  color: var(--peach);
+}
+.header-en {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+.header-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.header-meta em { color: var(--green); font-style: normal; }
+.yt-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: white;
+  border: 2px solid var(--border2);
+  color: var(--text);
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.yt-btn:hover { border-color: var(--peach); color: var(--peach); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(249,124,90,0.2); }
+.yt-icon { width: 28px; height: 28px; background: #ff0000; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white; flex-shrink: 0; }
+
+/* ── NAV ── */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(253,250,245,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid var(--border);
+  display: flex; justify-content: center; gap: 4px; padding: 10px 16px; flex-wrap: wrap;
+}
+.nav-btn {
+  background: transparent;
+  border: 1.5px solid transparent;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: inherit;
+}
+.nav-btn:hover { color: var(--green); border-color: var(--green-light); }
+.nav-btn.active { background: var(--green); border-color: var(--green); color: white; }
+
+/* ── MAIN ── */
+.main { max-width: 880px; margin: 0 auto; padding: 44px 20px 80px; position: relative; z-index: 1; }
+.section { display: none; animation: fadeUp 0.4s ease; }
+.section.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── SEC HEADER ── */
+.sec-head { margin-bottom: 32px; }
+.sec-label {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--green); margin-bottom: 6px;
+}
+.sec-title { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+.sec-sub { font-size: 14px; color: var(--text-soft); line-height: 1.8; }
+
+/* ── POEM BILINGUAL ── */
+.poem-outer {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.poem-tabs {
+  display: flex;
+  border-bottom: 1.5px solid var(--border);
+  background: var(--green-pale);
+}
+.poem-tab {
+  flex: 1; padding: 14px; text-align: center;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--text-muted); transition: all 0.25s;
+}
+.poem-tab.active { background: white; color: var(--green); border-bottom: 3px solid var(--green); font-weight: 600; }
+.poem-tab:hover:not(.active) { color: var(--green); background: rgba(255,255,255,0.6); }
+.poem-view { display: none; padding: 44px 48px; }
+.poem-view.active { display: block; }
+
+.stanza { margin-bottom: 28px; }
+.stanza:last-of-type { margin-bottom: 0; }
+.poem-line-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px; font-weight: 300;
+  color: var(--text); line-height: 2.2; letter-spacing: 0.05em;
+}
+.poem-line-en {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 18px; color: var(--blue);
+  line-height: 2.2;
+}
+.pl-green { color: var(--green); font-weight: 600; }
+.pl-gold { color: var(--gold); font-weight: 600; }
+.pl-blue { color: var(--blue); }
+.pl-peach { color: var(--peach); font-weight: 500; }
+.poem-dots { text-align: center; font-size: 20px; letter-spacing: 8px; color: var(--text-muted); margin: 20px 0; opacity: 0.4; }
+.poem-date { margin-top: 28px; font-size: 13px; color: var(--text-muted); text-align: right; border-top: 1px solid var(--border); padding-top: 18px; letter-spacing: 0.5px; }
+.poem-date em { color: var(--green); font-style: normal; font-weight: 600; }
+
+/* bilingual side by side */
+.bi-stanza { margin-bottom: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.bi-ko { font-family: 'Noto Serif KR', serif; font-size: 19px; font-weight: 300; line-height: 2.2; color: var(--text); }
+.bi-en { font-family: 'Lora', serif; font-style: italic; font-size: 16px; line-height: 2.2; color: var(--blue); padding-left: 16px; border-left: 2px solid var(--border); }
+
+/* ── VOCAB ── */
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.v-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.v-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background: var(--accent, var(--green)); }
+.v-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: var(--border2); }
+.v-pos {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 8px;
+}
+.v-ko { font-family: 'Noto Serif KR', serif; font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 2px; }
+.v-rom { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 6px; }
+.v-en { font-size: 15px; color: var(--green); font-weight: 500; margin-bottom: 10px; }
+.v-note-ko { font-size: 13px; color: var(--text-soft); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 2px; }
+.v-note-en { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-top: 4px; font-style: italic; }
+
+/* ── ANALYSIS ── */
+.an-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.an-card:hover { border-color: var(--green-light); }
+.an-top { padding: 20px 26px 16px; background: var(--green-pale); border-bottom: 1px solid var(--border); }
+.an-ko { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 300; color: var(--text); margin-bottom: 4px; }
+.an-en { font-family: 'Lora', serif; font-style: italic; font-size: 16px; color: var(--blue); }
+.an-bottom { padding: 16px 26px; }
+.an-ko-note { font-size: 14px; color: var(--text-soft); line-height: 1.8; margin-bottom: 8px; }
+.an-en-note { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-style: italic; border-left: 3px solid var(--border2); padding-left: 12px; }
+.an-en-note strong { font-style: normal; color: var(--blue); }
+.stanza-divider {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-muted); text-align: center;
+  margin: 28px 0 14px;
+  display: flex; align-items: center; gap: 16px;
+}
+.stanza-divider::before,.stanza-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ── GRAMMAR ── */
+.gr-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.gr-card:hover { border-color: var(--gold); }
+.gr-num {
+  display: inline-block;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; padding: 3px 14px; border-radius: 12px; margin-bottom: 12px;
+}
+.gr-title { font-family: 'Noto Serif KR', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+.gr-sub { font-size: 14px; color: var(--blue); margin-bottom: 14px; font-style: italic; }
+.gr-ko { font-size: 14px; color: var(--text-soft); line-height: 1.9; margin-bottom: 8px; }
+.gr-en { font-size: 13px; color: var(--text-muted); line-height: 1.8; font-style: italic; border-left: 3px solid var(--border2); padding-left: 12px; }
+.gr-examples {
+  margin-top: 14px; background: var(--green-pale);
+  border-radius: 10px; padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.gr-ex { display: flex; gap: 12px; align-items: baseline; font-size: 14px; flex-wrap: wrap; }
+.gr-ex .ko { font-family: 'Noto Serif KR', serif; font-size: 16px; color: var(--green); white-space: nowrap; min-width: 180px; }
+.gr-ex .en { color: var(--text-muted); font-style: italic; }
+
+/* ── QUIZ ── */
+.quiz-banner {
+  background: linear-gradient(135deg, var(--green), #2a7a50);
+  color: white;
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.quiz-banner h3 { font-family: 'Noto Serif KR', serif; font-size: 22px; margin-bottom: 4px; }
+.quiz-banner p { font-size: 13px; opacity: 0.85; }
+.q-live {
+  background: rgba(255,255,255,0.2); border-radius: 12px;
+  padding: 12px 22px; text-align: center; min-width: 80px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.q-live.show { opacity: 1; }
+.q-live .big { font-size: 28px; font-weight: 700; display: block; }
+.q-live .sm { font-size: 11px; opacity: 0.8; }
+
+.q-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 24px 26px; margin-bottom: 14px;
+  transition: border-color 0.3s;
+}
+.q-card.ok { border-color: var(--green); }
+.q-card.ng { border-color: var(--peach); }
+.q-badge {
+  font-size: 11px; letter-spacing: 2px;
+  background: var(--green-pale); color: var(--green);
+  padding: 3px 12px; border-radius: 10px;
+  display: inline-block; margin-bottom: 12px;
+}
+.q-ko { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 300; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+.q-en { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: var(--blue); margin-bottom: 16px; line-height: 1.5; }
+.hl { color: var(--green); font-weight: 600; }
+.q-opts { display: flex; flex-direction: column; gap: 9px; }
+.q-opt {
+  background: var(--cream); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 13px 18px;
+  font-size: 14px; font-family: inherit; color: var(--text);
+  cursor: pointer; text-align: left;
+  transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px;
+}
+.q-opt:hover:not(:disabled) { border-color: var(--green); background: var(--green-pale); transform: translateX(3px); }
+.q-opt:disabled { cursor: default; }
+.q-opt.correct { border-color: var(--green); background: #e8f8ee; color: var(--green); font-weight: 500; }
+.q-opt.wrong { border-color: var(--peach); background: var(--peach-pale); color: var(--peach); }
+.opt-marker { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); flex-shrink: 0; margin-top: 5px; }
+.q-opt.correct .opt-marker { background: var(--green); }
+.q-opt.wrong .opt-marker { background: var(--peach); }
+
+.q-exp {
+  margin-top: 12px; padding: 14px 16px;
+  border-radius: 10px; font-size: 13px; line-height: 1.8; display: none;
+}
+.q-exp.show { display: block; }
+.q-exp.ok { background: #e8f8ee; border: 1.5px solid var(--green-light); color: #2a6a40; }
+.q-exp.ng { background: var(--peach-pale); border: 1.5px solid #f0a898; color: #8a3a28; }
+
+.quiz-controls { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+.btn {
+  padding: 14px 36px; border-radius: 30px;
+  font-size: 15px; font-weight: 600; border: none;
+  cursor: pointer; font-family: inherit; transition: all 0.25s;
+}
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: #2a7a50; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58,140,92,0.35); }
+.btn-outline { background: white; border: 1.5px solid var(--border2); color: var(--text); display: none; }
+.btn-outline:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+.result-card {
+  display: none; background: linear-gradient(135deg, var(--green-pale), var(--blue-pale));
+  border: 1.5px solid var(--green-light);
+  border-radius: 20px; padding: 40px; text-align: center; margin-top: 28px;
+}
+.result-card.show { display: block; animation: fadeUp 0.5s ease; }
+.result-num { font-size: 60px; font-weight: 700; color: var(--green); margin: 10px 0; }
+.result-msg { font-family: 'Noto Serif KR', serif; font-size: 22px; color: var(--text); margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text-soft); }
+
+@media (max-width: 640px) {
+  .poem-view { padding: 28px 22px; }
+  .bi-stanza { grid-template-columns: 1fr; }
+  .bi-en { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 8px; }
+  .poem-line-ko { font-size: 19px; }
+  .an-top, .an-bottom { padding: 16px 18px; }
+  .gr-card { padding: 20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="floaters">
+  <div class="floater" style="--fs:28px;--dur:12s;--del:0s;top:8%;left:5%">🌸</div>
+  <div class="floater" style="--fs:22px;--dur:10s;--del:2s;top:15%;right:8%">🌿</div>
+  <div class="floater" style="--fs:20px;--dur:14s;--del:1s;top:40%;left:3%">🌼</div>
+  <div class="floater" style="--fs:26px;--dur:11s;--del:3s;top:60%;right:5%">🌱</div>
+  <div class="floater" style="--fs:18px;--dur:9s;--del:0.5s;bottom:20%;left:8%">🦋</div>
+  <div class="floater" style="--fs:24px;--dur:13s;--del:4s;bottom:15%;right:10%">🌸</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="author-chip">✦ 윤동주 Yun Dong-ju · 1917–1945 ✦</div>
+  <h1>새로운 <strong>길</strong></h1>
+  <div class="header-en">A New Road</div>
+  <div class="header-meta">
+    <em>하늘과 바람과 별과 시</em> · 1948 · 作 1938. 5. 10.
+  </div>
+  <a href="https://youtu.be/Ub-49kM6694?si=pzRXu9NSRQEClwcM" target="_blank" class="yt-btn">
+    <span class="yt-icon">▶</span>
+    시 낭송 듣기 · Listen to the Poem
+  </a>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <button class="nav-btn active" onclick="show('poem',this)">📜 원문 Poem</button>
+  <button class="nav-btn" onclick="show('vocab',this)">📖 단어 Vocab</button>
+  <button class="nav-btn" onclick="show('analysis',this)">🔍 해석 Analysis</button>
+  <button class="nav-btn" onclick="show('grammar',this)">✏️ 문법 Grammar</button>
+  <button class="nav-btn" onclick="show('quiz',this)">⭐ 퀴즈 Quiz</button>
+</div>
+
+<div class="main">
+
+  <!-- ══ 1. POEM ══ -->
+  <div id="poem" class="section active">
+    <div class="sec-head">
+      <div class="sec-label">Original Poem · 원문 & 영어 번역</div>
+      <div class="sec-title">새로운 길 — A New Road</div>
+      <div class="sec-sub">세 가지 보기 방식 — Korean only · English only · Side by side<br>
+      <em style="font-size:12px;color:var(--text-muted)">Three viewing modes to help you learn at your own pace.</em></div>
+    </div>
+
+    <div class="poem-outer">
+      <div class="poem-tabs">
+        <button class="poem-tab active" onclick="poemTab('ko',this)">한국어 Korean</button>
+        <button class="poem-tab" onclick="poemTab('en',this)">English</button>
+        <button class="poem-tab" onclick="poemTab('bi',this)">나란히 Side by Side</button>
+      </div>
+
+      <!-- Korean -->
+      <div id="pko" class="poem-view active">
+        <div class="stanza">
+          <div class="poem-line-ko"><span class="pl-blue">내</span>를 건너서 <span class="pl-green">숲</span>으로</div>
+          <div class="poem-line-ko"><span class="pl-blue">고개</span>를 넘어서 <span class="pl-green">마을</span>로</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-ko">어제도 가고 오늘도 갈</div>
+          <div class="poem-line-ko">나의 길 <span class="pl-gold">새로운 길</span></div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-ko"><span class="pl-peach">민들레</span>가 피고 <span class="pl-peach">까치</span>가 날고</div>
+          <div class="poem-line-ko"><span class="pl-peach">아가씨</span>가 지나고 <span class="pl-peach">바람</span>이 일고</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-ko">나의 길은 언제나 <span class="pl-gold">새로운 길</span></div>
+          <div class="poem-line-ko">오늘도…… 내일도……</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-ko"><span class="pl-blue">내</span>를 건너서 <span class="pl-green">숲</span>으로</div>
+          <div class="poem-line-ko"><span class="pl-blue">고개</span>를 넘어서 <span class="pl-green">마을</span>로</div>
+        </div>
+        <div class="poem-date">1938년 5월 10일 · <em>윤동주</em></div>
+      </div>
+
+      <!-- English -->
+      <div id="pen" class="poem-view">
+        <div class="stanza">
+          <div class="poem-line-en">Crossing the stream, into the woods</div>
+          <div class="poem-line-en">Over the hill, into the village.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-en">The path I walked yesterday, and will walk again today</div>
+          <div class="poem-line-en">My path, a new path.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-en">Dandelions bloom, magpies fly</div>
+          <div class="poem-line-en">A young lady passes by, the wind rises.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-en">My path is always a new path</div>
+          <div class="poem-line-en">Today… and tomorrow…</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="stanza">
+          <div class="poem-line-en">Crossing the stream, into the woods</div>
+          <div class="poem-line-en">Over the hill, into the village.</div>
+        </div>
+        <div class="poem-date">May 10, 1938 · <em>Yun Dong-ju</em></div>
+      </div>
+
+      <!-- Bilingual -->
+      <div id="pbi" class="poem-view">
+        <div class="bi-stanza">
+          <div class="bi-ko">내를 건너서 숲으로<br>고개를 넘어서 마을로</div>
+          <div class="bi-en">Crossing the stream, into the woods<br>Over the hill, into the village.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="bi-stanza">
+          <div class="bi-ko">어제도 가고 오늘도 갈<br>나의 길 새로운 길</div>
+          <div class="bi-en">The path I walked yesterday, and will walk again today<br>My path, a new path.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="bi-stanza">
+          <div class="bi-ko">민들레가 피고 까치가 날고<br>아가씨가 지나고 바람이 일고</div>
+          <div class="bi-en">Dandelions bloom, magpies fly<br>A young lady passes by, the wind rises.</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="bi-stanza">
+          <div class="bi-ko">나의 길은 언제나 새로운 길<br>오늘도…… 내일도……</div>
+          <div class="bi-en">My path is always a new path<br>Today… and tomorrow…</div>
+        </div>
+        <div class="poem-dots">· · ·</div>
+        <div class="bi-stanza">
+          <div class="bi-ko">내를 건너서 숲으로<br>고개를 넘어서 마을로</div>
+          <div class="bi-en">Crossing the stream, into the woods<br>Over the hill, into the village.</div>
+        </div>
+        <div class="poem-date">1938년 5월 10일 · <em>윤동주 Yun Dong-ju</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 2. VOCAB ══ -->
+  <div id="vocab" class="section">
+    <div class="sec-head">
+      <div class="sec-label">Vocabulary · 단어</div>
+      <div class="sec-title">핵심 단어 Key Words</div>
+      <div class="sec-sub">시에 등장하는 주요 단어들을 한국어와 영어로 함께 정리했습니다.<br>
+      <em style="font-size:12px;color:var(--text-muted)">Key words from the poem with explanations in both Korean and English.</em></div>
+    </div>
+    <div class="vocab-grid">
+
+      <div class="v-card" style="--accent: var(--blue)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">내 (川)</div>
+        <div class="v-rom">[nae]</div>
+        <div class="v-en">Stream / Brook</div>
+        <div class="v-note-ko">작은 냇물을 뜻하는 순우리말. '내를 건너서' = 냇물을 건너.</div>
+        <div class="v-note-en">Pure Korean word for a small stream or brook. 川 is the Chinese character equivalent.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--green)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">숲</div>
+        <div class="v-rom">[sup]</div>
+        <div class="v-en">Forest / Woods</div>
+        <div class="v-note-ko">나무가 우거진 곳. 미지의 공간, 새로운 가능성을 상징합니다.</div>
+        <div class="v-note-en">Dense trees. In this poem, it symbolizes the unknown and new possibilities ahead.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--gold)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">고개</div>
+        <div class="v-rom">[go-gae]</div>
+        <div class="v-en">Hill pass / Ridge</div>
+        <div class="v-note-ko">산의 낮은 부분 고갯길. '삶의 고비를 넘다'는 비유적 의미도 있습니다.</div>
+        <div class="v-note-en">A low pass over a mountain. Also used figuratively: "overcome a turning point in life."</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--peach)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">마을</div>
+        <div class="v-rom">[ma-eul]</div>
+        <div class="v-en">Village / Town</div>
+        <div class="v-note-ko">사람들이 모여 사는 곳. 공동체와 따뜻한 일상을 나타냅니다.</div>
+        <div class="v-note-en">A place where people live together. Represents warmth, community, and everyday life.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--green)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">민들레</div>
+        <div class="v-rom">[min-deul-le]</div>
+        <div class="v-en">Dandelion</div>
+        <div class="v-note-ko">봄 들판에 피는 꽃. 강인한 생명력과 소박한 아름다움의 상징.</div>
+        <div class="v-note-en">A spring wildflower. Symbolizes resilience and the humble beauty of everyday nature.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--blue)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">까치</div>
+        <div class="v-rom">[kka-chi]</div>
+        <div class="v-en">Magpie</div>
+        <div class="v-note-ko">한국의 국조(國鳥). 길조(吉鳥)로 좋은 소식을 전한다고 여겨집니다.</div>
+        <div class="v-note-en">Korea's national bird. Considered a lucky bird that brings good news — a positive omen.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--peach)">
+        <div class="v-pos">명사 Noun</div>
+        <div class="v-ko">아가씨</div>
+        <div class="v-rom">[a-ga-ssi]</div>
+        <div class="v-en">Young woman / Miss</div>
+        <div class="v-note-ko">젊은 여성을 뜻하는 존칭. 길 위를 지나가며 일상의 생동감을 더합니다.</div>
+        <div class="v-note-en">A respectful term for a young woman. Her passing adds a lively human presence to the road.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--gold)">
+        <div class="v-pos">동사 Verb</div>
+        <div class="v-ko">건너다</div>
+        <div class="v-rom">[geon-neo-da]</div>
+        <div class="v-en">To cross over</div>
+        <div class="v-note-ko">'내를 건너서' — 물 등을 가로질러 지나가는 동작.</div>
+        <div class="v-note-en">"Crossing the stream" — to move across water or a gap to the other side.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--gold)">
+        <div class="v-pos">동사 Verb</div>
+        <div class="v-ko">넘다</div>
+        <div class="v-rom">[neom-da]</div>
+        <div class="v-en">To go over / Surmount</div>
+        <div class="v-note-ko">'고개를 넘어서' — 언덕이나 장애를 타고 넘어가는 동작. 극복의 의미 포함.</div>
+        <div class="v-note-en">"Going over the hill" — also means to overcome a challenge or obstacle in life.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--blue)">
+        <div class="v-pos">동사 Verb</div>
+        <div class="v-ko">일다</div>
+        <div class="v-rom">[il-da]</div>
+        <div class="v-en">To rise / Stir up</div>
+        <div class="v-note-ko">'바람이 일고' — 바람이 생겨나기 시작하는 순간. '불다'보다 더 역동적입니다.</div>
+        <div class="v-note-en">"The wind rises" — captures the exact moment when wind begins to stir. More dynamic than 불다 (to blow).</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--green)">
+        <div class="v-pos">부사 Adverb</div>
+        <div class="v-ko">언제나</div>
+        <div class="v-rom">[eon-je-na]</div>
+        <div class="v-en">Always / Ever</div>
+        <div class="v-note-ko">'나의 길은 언제나 새로운 길' — 시의 핵심 부사. 언제(when) + 나 → 언제나.</div>
+        <div class="v-note-en">The poem's key adverb. From 언제 (when) + 나 → meaning "at any time = always." Creates the central paradox.</div>
+      </div>
+
+      <div class="v-card" style="--accent: var(--peach)">
+        <div class="v-pos">형용사 Adjective</div>
+        <div class="v-ko">새로운</div>
+        <div class="v-rom">[sae-ro-un]</div>
+        <div class="v-en">New / Fresh</div>
+        <div class="v-note-ko">새롭다 → 새로운 (ㅂ불규칙). 시의 제목이자 핵심 주제어입니다.</div>
+        <div class="v-note-en">From 새롭다 (ㅂ-irregular adjective). The title word and central theme of the poem.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ 3. ANALYSIS ══ -->
+  <div id="analysis" class="section">
+    <div class="sec-head">
+      <div class="sec-label">Line by Line · 문장 해석</div>
+      <div class="sec-title">문장 해석 & 영어 설명</div>
+      <div class="sec-sub">각 행의 직역과 내포된 의미를 한국어와 영어로 함께 설명합니다.<br>
+      <em style="font-size:12px;color:var(--text-muted)">Each line is explained in both Korean and English, with literal translation and deeper meaning.</em></div>
+    </div>
+
+    <div class="stanza-divider">1연 Stanza 1</div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">내를 건너서 숲으로</div>
+        <div class="an-en">Crossing the stream, into the woods</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">냇물을 건너 숲을 향해 걷는 출발의 이미지. <strong>~서</strong>는 순차 연결 ("건넌 후에"). 숲은 미지의 공간·새 가능성을 암시합니다.</div>
+        <div class="an-en-note">A simple image of walking — crossing the stream, heading toward the woods. <strong>~서</strong> means "after doing ~" (sequential action). The forest hints at the unknown, new possibilities ahead.</div>
+      </div>
+    </div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">고개를 넘어서 마을로</div>
+        <div class="an-en">Over the hill, into the village</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">고갯길을 넘어 마을로 향하는 여정. <strong>고개를 넘다</strong>는 '삶의 고비를 넘다'는 비유로도 읽힙니다. 마을은 따뜻한 목적지·공동체의 상징입니다.</div>
+        <div class="an-en-note"><strong>"Going over a hill"</strong> in Korean also means "overcoming a turning point in life." The village represents warmth, human community, and the destination of one's journey.</div>
+      </div>
+    </div>
+
+    <div class="stanza-divider">2연 Stanza 2</div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">어제도 가고 오늘도 갈</div>
+        <div class="an-en">The path I walked yesterday, and will walk again today</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note"><strong>어제도 / 오늘도</strong> — 조사 '도'가 반복되며 과거·현재·미래가 이어짐을 나타냅니다. '갈'은 미래를 나타내는 관형형.</div>
+        <div class="an-en-note">The particle <strong>도</strong> ("also/too") repeats with each time word. <strong>갈</strong> is the future-tense modifier form — "the road I will walk." Past, present, and future are woven into one single path.</div>
+      </div>
+    </div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">나의 길 새로운 길</div>
+        <div class="an-en">My path, a new path</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">시의 핵심 선언. '나의 길'과 '새로운 길'이 동격(appositive)으로 제시됩니다. 같은 길이 항상 새롭다는 <strong>역설(paradox)</strong>이 처음 등장합니다.</div>
+        <div class="an-en-note">The central declaration of the poem. "My path" and "a new path" are placed side by side as appositives — the same road is always new. This is the poem's core <strong>paradox</strong>.</div>
+      </div>
+    </div>
+
+    <div class="stanza-divider">3연 Stanza 3</div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">민들레가 피고 까치가 날고</div>
+        <div class="an-en">Dandelions bloom, magpies fly</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note"><strong>~고</strong> 연결어미가 반복되며 봄 풍경을 나열합니다. 식물(민들레)과 동물(까치)이 나란히 등장하며 자연의 활기를 표현합니다.</div>
+        <div class="an-en-note">The connector <strong>~고</strong> ("and ~") repeats four times, listing spring scenes one after another — creating rhythm and energy. Plant → animal → human → nature. The road is alive.</div>
+      </div>
+    </div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">아가씨가 지나고 바람이 일고</div>
+        <div class="an-en">A young lady passes by, the wind rises</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">인간(아가씨)과 자연현상(바람)이 같은 문법 리듬으로 등장합니다. '바람이 <strong>일고</strong>'는 바람이 갑자기 불기 시작하는 역동적 순간을 포착합니다.</div>
+        <div class="an-en-note">Human (a young woman) and nature (the wind) share the same grammatical rhythm. <strong>일다</strong> captures the precise moment wind begins to stir — more vivid than simply saying "the wind blows."</div>
+      </div>
+    </div>
+
+    <div class="stanza-divider">4연 Stanza 4</div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">나의 길은 언제나 새로운 길</div>
+        <div class="an-en">My path is always a new path</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">2연의 선언이 <strong>언제나</strong>로 강화됩니다. 은/는 주격조사가 더해져 완성된 문장으로 확신이 깊어졌습니다.</div>
+        <div class="an-en-note">The declaration from Stanza 2 is now reinforced with <strong>언제나</strong> (always). The topic marker 은 is added, making it a complete, definitive statement full of conviction.</div>
+      </div>
+    </div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">오늘도…… 내일도……</div>
+        <div class="an-en">Today… and tomorrow…</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">줄임표(……)가 두 번 사용되어 여운을 남깁니다. 말을 끊음으로써 미래가 무한히 이어짐을 암시하는 시적 장치입니다.</div>
+        <div class="an-en-note">The ellipsis (……) appears twice — a poetic device that leaves space for the reader to fill in. By leaving the sentence unfinished, the poet suggests that tomorrow, and the day after, extends infinitely.</div>
+      </div>
+    </div>
+
+    <div class="stanza-divider">5연 Stanza 5 — 수미상관 Circular Refrain</div>
+    <div class="an-card">
+      <div class="an-top">
+        <div class="an-ko">내를 건너서 숲으로 / 고개를 넘어서 마을로</div>
+        <div class="an-en">Crossing the stream, into the woods / Over the hill, into the village</div>
+      </div>
+      <div class="an-bottom">
+        <div class="an-ko-note">1연의 반복(수미상관). 같은 문장이지만 시 전체를 읽은 후에는 의미가 달라집니다. 삶의 순환 속에서도 매 순간이 새롭다는 메시지를 구조 자체로 완성합니다.</div>
+        <div class="an-en-note">The poem returns to its opening lines — a <strong>circular structure</strong> (수미상관). The same words carry deeper meaning after all that came before. The structure itself says: life repeats, yet every moment is new.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 4. GRAMMAR ══ -->
+  <div id="grammar" class="section">
+    <div class="sec-head">
+      <div class="sec-label">Grammar · 주요 문법</div>
+      <div class="sec-title">문법 포인트 Grammar Points</div>
+      <div class="sec-sub">이 시에 등장하는 핵심 문법을 한국어 설명과 영어 설명으로 정리했습니다.<br>
+      <em style="font-size:12px;color:var(--text-muted)">Each grammar point is explained in both Korean and English with examples from the poem.</em></div>
+    </div>
+
+    <div class="gr-card">
+      <div class="gr-num">문법 01 · GRAMMAR POINT 1</div>
+      <div class="gr-title">~아서/어서 — 순차적 행동 연결</div>
+      <div class="gr-sub">Sequential Connector — "after doing ~, then ~"</div>
+      <div class="gr-ko">동사 어간에 붙어 <strong>앞의 행동이 끝난 후 다음 행동으로 이어짐</strong>을 나타냅니다. ~고와 달리 순서와 인과 관계를 강조합니다.</div>
+      <div class="gr-en">Attaches to a verb stem to show that one action is completed <strong>before the next begins</strong>. More sequential than ~고, which simply lists actions.</div>
+      <div class="gr-examples">
+        <div class="gr-ex"><span class="ko">내를 건너서 숲으로</span><span class="en">After crossing the stream → into the woods</span></div>
+        <div class="gr-ex"><span class="ko">고개를 넘어서 마을로</span><span class="en">After going over the hill → into the village</span></div>
+        <div class="gr-ex"><span class="ko">밥을 먹어서 학교에 갔다</span><span class="en">After eating, I went to school</span></div>
+      </div>
+    </div>
+
+    <div class="gr-card">
+      <div class="gr-num">문법 02 · GRAMMAR POINT 2</div>
+      <div class="gr-title">~고 — 나열/동시 연결어미</div>
+      <div class="gr-sub">Listing Connector — "~, and ~, and ~"</div>
+      <div class="gr-ko">동사 어간에 붙어 여러 동작이나 사건을 나란히 나열합니다. 3연에서 4번 반복되며 봄 풍경의 생동감을 쌓아 올립니다.</div>
+      <div class="gr-en">Attaches to a verb stem to list multiple actions or events in sequence. In Stanza 3, it repeats 4 times — stacking up vivid spring images with a strong rhythmic beat.</div>
+      <div class="gr-examples">
+        <div class="gr-ex"><span class="ko">민들레가 피<strong>고</strong></span><span class="en">dandelions bloom, and</span></div>
+        <div class="gr-ex"><span class="ko">까치가 날<strong>고</strong></span><span class="en">magpies fly, and</span></div>
+        <div class="gr-ex"><span class="ko">아가씨가 지나<strong>고</strong></span><span class="en">a young woman passes, and</span></div>
+        <div class="gr-ex"><span class="ko">바람이 일<strong>고</strong></span><span class="en">the wind rises</span></div>
+      </div>
+    </div>
+
+    <div class="gr-card">
+      <div class="gr-num">문법 03 · GRAMMAR POINT 3</div>
+      <div class="gr-title">~도 조사 — "~도, ~도" 반복 강조</div>
+      <div class="gr-sub">Particle 도 — "also, too, even" (emphasis through repetition)</div>
+      <div class="gr-ko">보조사 <strong>도</strong>는 '역시, 마찬가지로'의 의미입니다. 시간 명사와 결합해 어느 때나 예외 없이 그러함을 강조합니다.</div>
+      <div class="gr-en">The particle <strong>도</strong> means "also, too." When repeated with time words, it emphasizes that something is true at all times — no exceptions.</div>
+      <div class="gr-examples">
+        <div class="gr-ex"><span class="ko">어제<strong>도</strong> 가고 오늘<strong>도</strong> 갈</span><span class="en">walked it yesterday too, will walk it today too</span></div>
+        <div class="gr-ex"><span class="ko">오늘<strong>도</strong>…… 내일<strong>도</strong>……</span><span class="en">today too…… tomorrow too……</span></div>
+        <div class="gr-ex"><span class="ko">나<strong>도</strong> 할 수 있어요</span><span class="en">I can do it too (everyday usage)</span></div>
+      </div>
+    </div>
+
+    <div class="gr-card">
+      <div class="gr-num">문법 04 · GRAMMAR POINT 4</div>
+      <div class="gr-title">새롭다 → 새로운 — ㅂ 불규칙 형용사</div>
+      <div class="gr-sub">ㅂ-Irregular Adjective — modifying a noun</div>
+      <div class="gr-ko">형용사가 명사를 꾸밀 때는 관형형 어미 <strong>~ㄴ/은</strong>을 붙입니다. ㅂ 불규칙: ㅂ 받침이 모음 어미 앞에서 <strong>우</strong>로 변합니다.</div>
+      <div class="gr-en">When an adjective modifies a noun, it takes the modifier ending <strong>~ㄴ/은</strong>. For ㅂ-irregular adjectives, the ㅂ changes to <strong>우</strong> before a vowel ending.</div>
+      <div class="gr-examples">
+        <div class="gr-ex"><span class="ko">새롭 + 은 → 새로<strong>운</strong> 길</span><span class="en">a new road</span></div>
+        <div class="gr-ex"><span class="ko">아름답 + 은 → 아름다<strong>운</strong> 꽃</span><span class="en">a beautiful flower (same ㅂ pattern)</span></div>
+        <div class="gr-ex"><span class="ko">가깝 + 은 → 가까<strong>운</strong> 마을</span><span class="en">a nearby village</span></div>
+      </div>
+    </div>
+
+    <div class="gr-card">
+      <div class="gr-num">문법 05 · GRAMMAR POINT 5</div>
+      <div class="gr-title">줄임표(……) — 여운과 열린 결말</div>
+      <div class="gr-sub">Ellipsis as Poetic Device — suggesting the infinite</div>
+      <div class="gr-ko">'오늘도…… 내일도……'에서 줄임표는 단순 구두점이 아니라 <strong>시적 장치</strong>입니다. 말을 끊어 독자가 스스로 의미를 채우게 합니다.</div>
+      <div class="gr-en">In "Today…… Tomorrow……", the ellipsis is not just punctuation — it is a <strong>poetic device</strong>. By leaving the sentence unfinished, the poet invites the reader to complete the meaning themselves, suggesting the journey continues forever.</div>
+    </div>
+  </div>
+
+  <!-- ══ 5. QUIZ ══ -->
+  <div id="quiz" class="section">
+    <div class="quiz-banner">
+      <div>
+        <h3>⭐ 퀴즈 Quiz</h3>
+        <p>시의 단어, 해석, 문법을 확인해 보세요 · Test your understanding of the poem</p>
+      </div>
+      <div class="q-live" id="liveScore">
+        <span class="big" id="liveNum">0</span>
+        <span class="sm">점수 Score</span>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="qc1">
+      <div class="q-badge">Q1 · 단어 Vocabulary</div>
+      <div class="q-ko">"<span class="hl">내</span>를 건너서 숲으로"</div>
+      <div class="q-en">In this line, what does <span class="hl">내 (川)</span> mean?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(1,this,false)"><span class="opt-marker"></span>산 / Mountain</button>
+        <button class="q-opt" onclick="a(1,this,true)"><span class="opt-marker"></span>냇물, 개울 / Stream, brook</button>
+        <button class="q-opt" onclick="a(1,this,false)"><span class="opt-marker"></span>바다 / Sea</button>
+        <button class="q-opt" onclick="a(1,this,false)"><span class="opt-marker"></span>들판 / Field</button>
+      </div>
+      <div class="q-exp" id="e1">✅ <strong>내 = 냇물, 개울 / stream, brook.</strong> It is a pure Korean word (순우리말) for a small stream. The Chinese character is 川(천). "내를 건너서" = "after crossing the stream." A very common word in Korean poetry and folk songs.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="qc2">
+      <div class="q-badge">Q2 · 단어 Vocabulary</div>
+      <div class="q-ko">"바람이 <span class="hl">일고</span>"</div>
+      <div class="q-en">What does the verb <span class="hl">일다</span> mean in this context?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(2,this,false)"><span class="opt-marker"></span>멈추다 / To stop</button>
+        <button class="q-opt" onclick="a(2,this,false)"><span class="opt-marker"></span>세게 불다 / To blow strongly</button>
+        <button class="q-opt" onclick="a(2,this,true)"><span class="opt-marker"></span>일어나다, 생겨나다 / To rise, to stir up</button>
+        <button class="q-opt" onclick="a(2,this,false)"><span class="opt-marker"></span>사라지다 / To disappear</button>
+      </div>
+      <div class="q-exp" id="e2">✅ <strong>일다 = to rise, stir up.</strong> "바람이 일다" captures the exact moment the wind begins to stir — more dynamic than 불다 (to blow). It's like catching nature in the act of waking up.</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="qc3">
+      <div class="q-badge">Q3 · 단어 Vocabulary</div>
+      <div class="q-ko">이 시에 등장하는 새(bird)는?</div>
+      <div class="q-en">Which bird appears in this poem, and what is it known as in Korean culture?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(3,this,false)"><span class="opt-marker"></span>두루미 / Crane</button>
+        <button class="q-opt" onclick="a(3,this,true)"><span class="opt-marker"></span>까치 / Magpie — 한국의 국조 Korea's national bird</button>
+        <button class="q-opt" onclick="a(3,this,false)"><span class="opt-marker"></span>제비 / Swallow</button>
+        <button class="q-opt" onclick="a(3,this,false)"><span class="opt-marker"></span>참새 / Sparrow</button>
+      </div>
+      <div class="q-exp" id="e3">✅ <strong>까치 = Magpie.</strong> Korea's national bird (국조). It is considered a lucky bird (길조) that brings good news. Korean proverb: "까치가 울면 반가운 손님이 온다" (When a magpie calls, a welcome guest is coming). In the poem, it adds lively spring energy.</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="qc4">
+      <div class="q-badge">Q4 · 문장 해석 Line Analysis</div>
+      <div class="q-ko">"나의 길 <span class="hl">새로운 길</span>"</div>
+      <div class="q-en">What is the deeper meaning of this line?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(4,this,false)"><span class="opt-marker"></span>길을 새로 만들겠다는 의지 / A resolve to build a new road</button>
+        <button class="q-opt" onclick="a(4,this,false)"><span class="opt-marker"></span>아직 가보지 못한 길에 대한 두려움 / Fear of an unknown path</button>
+        <button class="q-opt" onclick="a(4,this,true)"><span class="opt-marker"></span>매일 걷는 같은 길이 항상 새롭다는 역설 / The paradox that the same road walked every day is always new</button>
+        <button class="q-opt" onclick="a(4,this,false)"><span class="opt-marker"></span>과거의 길을 버리고 새 출발을 하겠다는 선언 / A declaration to leave the past behind</button>
+      </div>
+      <div class="q-exp" id="e4">✅ This is the poem's central <strong>paradox (역설)</strong>: the same road, walked yesterday and today, is always a new road. The poet finds freshness in the familiar — every moment of the journey is experienced as new.</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="qc5">
+      <div class="q-badge">Q5 · 문장 해석 Line Analysis</div>
+      <div class="q-ko">"오늘도…… <span class="hl">내일도</span>……"</div>
+      <div class="q-en">What is the effect of the ellipsis (……) used twice in this line?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(5,this,false)"><span class="opt-marker"></span>슬픔과 절망을 표현 / Expresses sadness and despair</button>
+        <button class="q-opt" onclick="a(5,this,false)"><span class="opt-marker"></span>다음 연의 내용을 예고 / Previews the next stanza</button>
+        <button class="q-opt" onclick="a(5,this,true)"><span class="opt-marker"></span>미래가 무한히 이어짐을 암시하며 독자에게 여운을 남김 / Suggests the journey continues infinitely and leaves the reader space to reflect</button>
+        <button class="q-opt" onclick="a(5,this,false)"><span class="opt-marker"></span>단순히 문장이 길어서 줄인 것 / Simply shortened because the sentence was too long</button>
+      </div>
+      <div class="q-exp" id="e5">✅ The ellipsis is a <strong>poetic device (시적 장치)</strong>. By leaving the sentence unfinished, Yun Dong-ju invites the reader to imagine what comes next. It suggests that tomorrow, and every tomorrow after that, extends infinitely — an open ending full of hope.</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="qc6">
+      <div class="q-badge">Q6 · 문법 Grammar</div>
+      <div class="q-ko">"내를 건너<span class="hl">서</span> 숲으로, 고개를 넘어<span class="hl">서</span> 마을로"</div>
+      <div class="q-en">What does the grammar ending <span class="hl">~서</span> express here?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(6,this,false)"><span class="opt-marker"></span>이유/원인 ("~기 때문에") / Reason or cause</button>
+        <button class="q-opt" onclick="a(6,this,true)"><span class="opt-marker"></span>앞 행동 후 다음 행동이 이어짐 / One action completed, then the next begins</button>
+        <button class="q-opt" onclick="a(6,this,false)"><span class="opt-marker"></span>두 행동이 동시에 일어남 / Two actions happening at the same time</button>
+        <button class="q-opt" onclick="a(6,this,false)"><span class="opt-marker"></span>미래 계획을 나타냄 / Expresses a future plan</button>
+      </div>
+      <div class="q-exp" id="e6">✅ <strong>~아서/어서</strong> is a sequential connector. "건너서 숲으로" = "after crossing the stream, (heading) into the woods." It shows that the first action is completed before the next begins — more ordered than ~고 which simply lists actions side by side.</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="qc7">
+      <div class="q-badge">Q7 · 문법 Grammar</div>
+      <div class="q-ko">"민들레가 피<span class="hl">고</span> 까치가 날<span class="hl">고</span> 아가씨가 지나<span class="hl">고</span> 바람이 일<span class="hl">고</span>"</div>
+      <div class="q-en">The ending ~고 repeats 4 times. What effect does this create?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(7,this,false)"><span class="opt-marker"></span>사건의 원인과 결과를 연결 / Connects cause and effect</button>
+        <button class="q-opt" onclick="a(7,this,false)"><span class="opt-marker"></span>시간 순서를 나타냄 / Shows strict time order</button>
+        <button class="q-opt" onclick="a(7,this,true)"><span class="opt-marker"></span>봄 풍경의 여러 요소를 나열하여 리듬감과 생동감을 만듦 / Lists spring elements to create rhythm and vivid energy</button>
+        <button class="q-opt" onclick="a(7,this,false)"><span class="opt-marker"></span>슬픔이 반복되는 느낌을 강조 / Emphasizes repeating sadness</button>
+      </div>
+      <div class="q-exp" id="e7">✅ The repeated <strong>~고</strong> stacks spring images like a drumbeat — plants, animals, people, weather — all alive at once. Notice the beautiful progression: plant (민들레) → animal (까치) → human (아가씨) → nature (바람). The world is bursting with life.</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="qc8">
+      <div class="q-badge">Q8 · 문법 Grammar</div>
+      <div class="q-ko">"<span class="hl">새로운</span> 길"에서 '새로운'의 기본형과 활용은?</div>
+      <div class="q-en">What is the dictionary form of <span class="hl">새로운</span>, and what grammar rule does it follow?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(8,this,false)"><span class="opt-marker"></span>새로다 → 새로 + 운 (규칙 활용 / regular conjugation)</button>
+        <button class="q-opt" onclick="a(8,this,true)"><span class="opt-marker"></span>새롭다 → ㅂ→우 변환 → 새로 + 운 (ㅂ 불규칙 / ㅂ-irregular)</button>
+        <button class="q-opt" onclick="a(8,this,false)"><span class="opt-marker"></span>새롭다 → 새롭 + 는 → 새롭는 (현재형 / present tense)</button>
+        <button class="q-opt" onclick="a(8,this,false)"><span class="opt-marker"></span>새것 → 새 + 로운 (compound word / 합성어)</button>
+      </div>
+      <div class="q-exp" id="e8">✅ <strong>ㅂ-irregular (ㅂ불규칙):</strong> 새롭다 → when followed by a vowel ending, ㅂ changes to 우. So: 새롭 + 은 → 새로<strong>운</strong>. Same pattern: 아름답다→아름다운 (beautiful), 가깝다→가까운 (nearby), 맵다→매운 (spicy).</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="qc9">
+      <div class="q-badge">Q9 · 시 구조 Structure</div>
+      <div class="q-ko">이 시의 1연과 5연이 동일한 내용으로 시작하고 끝나는 구조를 무엇이라 하나요?</div>
+      <div class="q-en">What do we call the structure where a poem begins and ends with the same lines?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(9,this,false)"><span class="opt-marker"></span>대조 구조 / Contrast structure</button>
+        <button class="q-opt" onclick="a(9,this,false)"><span class="opt-marker"></span>점층 구조 / Climactic / escalating structure</button>
+        <button class="q-opt" onclick="a(9,this,true)"><span class="opt-marker"></span>수미상관 / Circular structure (beginning echoes the ending)</button>
+        <button class="q-opt" onclick="a(9,this,false)"><span class="opt-marker"></span>병렬 구조 / Parallel structure</button>
+      </div>
+      <div class="q-exp" id="e9">✅ <strong>수미상관 (首尾相關) = Circular / Refrain structure.</strong> The poem begins and ends with the same two lines. In English, this is sometimes called a "frame" or "circular poem." The structure itself embodies the poem's message: life repeats, yet every cycle is new.</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="qc10">
+      <div class="q-badge">Q10 · 주제 Theme</div>
+      <div class="q-ko">이 시의 핵심 주제로 가장 적절한 것은?</div>
+      <div class="q-en">Which best captures the central theme of this poem?</div>
+      <div class="q-opts">
+        <button class="q-opt" onclick="a(10,this,false)"><span class="opt-marker"></span>일제 강점기의 저항과 고통 / Resistance and suffering under Japanese occupation</button>
+        <button class="q-opt" onclick="a(10,this,false)"><span class="opt-marker"></span>고향에 대한 그리움 / Longing and nostalgia for one's hometown</button>
+        <button class="q-opt" onclick="a(10,this,true)"><span class="opt-marker"></span>반복되는 일상 속에서도 매 순간을 새롭게 바라보는 태도 / Finding freshness and meaning in everyday repetition</button>
+        <button class="q-opt" onclick="a(10,this,false)"><span class="opt-marker"></span>봄 자연의 아름다움을 묘사한 서경시 / A descriptive nature poem celebrating spring scenery</button>
+      </div>
+      <div class="q-exp" id="e10">✅ The core theme is <strong>"the newness of the everyday."</strong> The same road, walked over and over, is always a new road. This reflects the poet's attitude: life repeats, but each moment can be experienced freshly. Written at age 21, this poem shows Yun Dong-ju's open, curious, and hopeful spirit.</div>
+    </div>
+
+    <div class="quiz-controls">
+      <button class="btn btn-green" onclick="submitQ()">🌸 결과 보기 See Results</button>
+      <button class="btn btn-outline" id="retryBtn" onclick="retryQ()">🔄 다시 하기 Retry</button>
+    </div>
+
+    <div class="result-card" id="resultCard">
+      <div style="font-size:11px;letter-spacing:3px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase">Result · 결과</div>
+      <div class="result-num" id="rNum">0/10</div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-sub" id="rSub"></div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// NAV
+function show(id, btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// POEM TABS
+function poemTab(id, btn){
+  document.querySelectorAll('.poem-view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.poem-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// QUIZ
+const answers={};
+const TOTAL=10;
+
+function a(n, btn, correct){
+  if(answers[n]!==undefined) return;
+  answers[n]=correct;
+  const card=document.getElementById('qc'+n);
+  const exp=document.getElementById('e'+n);
+  card.querySelectorAll('.q-opt').forEach(o=>{ o.disabled=true; o.style.pointerEvents='none'; });
+  btn.classList.add(correct?'correct':'wrong');
+  if(!correct){
+    card.querySelectorAll('.q-opt').forEach(o=>{
+      if(o.getAttribute('onclick').includes('true')) o.classList.add('correct');
+    });
+    card.classList.add('ng');
+  } else {
+    card.classList.add('ok');
+  }
+  exp.classList.add('show', correct?'ok':'ng');
+  const c=Object.values(answers).filter(v=>v).length;
+  document.getElementById('liveNum').textContent=c+'/'+Object.keys(answers).length;
+  document.getElementById('liveScore').classList.add('show');
+}
+
+function submitQ(){
+  const c=Object.values(answers).filter(v=>v).length;
+  document.getElementById('rNum').textContent=c+'/'+TOTAL;
+  let msg='',sub='';
+  if(c===TOTAL){ msg='🌸 완벽해요! Perfect Score!'; sub='새로운 길을 완벽하게 이해했습니다! You have fully mastered this poem!'; }
+  else if(c>=8){ msg='🌿 아주 잘했어요! Excellent!'; sub='조금만 더 복습하면 완벽해요. Just a little more review and you\'ll be perfect!'; }
+  else if(c>=6){ msg='🌱 잘했어요! Good work!'; sub='단어와 문법을 다시 복습해 보세요. Review the vocab and grammar sections again!'; }
+  else { msg='💪 다시 도전하세요! Keep going!'; sub='원문과 해석을 읽고 다시 도전해 보세요! Read through the poem and analysis, then try again!'; }
+  document.getElementById('rMsg').textContent=msg;
+  document.getElementById('rSub').textContent=sub;
+  document.getElementById('resultCard').classList.add('show');
+  document.getElementById('retryBtn').style.display='inline-block';
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+}
+
+function retryQ(){
+  for(let k in answers) delete answers[k];
+  for(let i=1;i<=TOTAL;i++){
+    const c=document.getElementById('qc'+i);
+    c.classList.remove('ok','ng');
+    c.querySelectorAll('.q-opt').forEach(o=>{ o.classList.remove('correct','wrong'); o.disabled=false; o.style.pointerEvents=''; });
+    const e=document.getElementById('e'+i);
+    e.classList.remove('show','ok','ng');
+  }
+  document.getElementById('resultCard').classList.remove('show');
+  document.getElementById('retryBtn').style.display='none';
+  document.getElementById('liveScore').classList.remove('show');
+  document.getElementById('liveNum').textContent='0';
+  window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
