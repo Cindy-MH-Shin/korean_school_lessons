@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식당 Restaurant - 한국어 학습서</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe8cc 0%, #ffd4a3 50%, #ffecd2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #e85d04 0%, #f48c06 50%, #e85d04 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '🍽️🥢🍜🥘🍲🥗🍛🥢🍽️🥢';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 22px;
+            letter-spacing: 8px;
+            opacity: 0.35;
+        }
+        .header h1 { font-size: 46px; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 20px; opacity: 0.95; }
+        .header .week-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #fff8f0;
+            border-bottom: 3px solid #ffd4a3;
+        }
+        .nav-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+        .nav-tab.active { color: #e85d04; background: white; border-bottom: 4px solid #e85d04; }
+        .nav-tab:hover { background: #fff3e0; color: #e85d04; }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* ── CATEGORY HEADERS ── */
+        .category-header {
+            background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin: 30px 0 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .category-header.teal { background: linear-gradient(135deg, #0e9f6e 0%, #31c48d 100%); }
+        .category-header.blue { background: linear-gradient(135deg, #3f83f8 0%, #76a9fa 100%); }
+
+        /* ── VOCAB GRID ── */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+        .vocab-card {
+            background: #fafafa;
+            border: 2px solid #ffd4a3;
+            border-radius: 14px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .vocab-card:hover { border-color: #e85d04; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(232,93,4,0.15); }
+        .vocab-card.teal-card { border-color: #bcf0da; }
+        .vocab-card.teal-card:hover { border-color: #0e9f6e; box-shadow: 0 10px 25px rgba(14,159,110,0.15); }
+        .vocab-card.blue-card { border-color: #c3ddfd; }
+        .vocab-card.blue-card:hover { border-color: #3f83f8; box-shadow: 0 10px 25px rgba(63,131,248,0.15); }
+
+        .vocab-header { display: flex; align-items: center; margin-bottom: 12px; }
+        .vocab-number {
+            background: #e85d04;
+            color: white;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 15px;
+            margin-right: 14px; flex-shrink: 0;
+        }
+        .vocab-number.teal { background: #0e9f6e; }
+        .vocab-number.blue { background: #3f83f8; }
+        .vocab-word { font-size: 30px; font-weight: bold; color: #2d3748; }
+        .vocab-hanja { font-size: 16px; color: #a0aec0; font-weight: 600; margin-left: 10px; }
+        .vocab-pronunciation { font-size: 16px; color: #e85d04; font-style: italic; margin-bottom: 8px; }
+        .vocab-pronunciation.teal { color: #0e9f6e; }
+        .vocab-pronunciation.blue { color: #3f83f8; }
+        .vocab-meaning { font-size: 15px; color: #4a5568; margin-bottom: 12px; font-weight: 600; }
+        .vocab-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .vocab-type.noun { background: #e3f2fd; color: #1565c0; }
+        .vocab-type.verb { background: #e8f5e9; color: #2e7d32; }
+        .vocab-type.adj { background: #fff3e0; color: #e65100; }
+        .vocab-type.phrase { background: #fce4ec; color: #880e4f; }
+
+        .portion-row {
+            display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;
+        }
+        .portion-badge {
+            background: #fff3e0;
+            border: 2px solid #e85d04;
+            color: #e85d04;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .portion-badge small { display: block; font-size: 11px; color: #718096; font-weight: normal; }
+
+        .example-box {
+            background: #fff8f0;
+            padding: 13px;
+            border-radius: 8px;
+            border-left: 4px solid #f48c06;
+        }
+        .example-korean { font-size: 17px; color: #2d3748; margin-bottom: 6px; font-weight: 600; }
+        .example-english { font-size: 14px; color: #718096; font-style: italic; }
+        .example-romanization { font-size: 13px; color: #aaa; margin-bottom: 4px; }
+
+        .tip-box {
+            background: #f0fff4;
+            border: 2px solid #68d391;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #276749;
+        }
+        .tip-box strong { color: #22543d; }
+
+        .divider { text-align: center; font-size: 24px; letter-spacing: 8px; margin: 20px 0; opacity: 0.6; }
+
+        /* ── HANJA TAB ── */
+        .hanja-section-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e85d04;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #ffd4a3;
+        }
+        .hanja-card {
+            background: #fffbf5;
+            border: 2px solid #ffd4a3;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .hanja-word-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .hanja-korean-big { font-size: 38px; font-weight: bold; color: #2d3748; }
+        .hanja-char-big { font-size: 38px; color: #e85d04; }
+        .hanja-rom { font-size: 18px; color: #718096; font-style: italic; }
+        .hanja-english { font-size: 18px; color: #4a5568; font-weight: 600; }
+
+        .hanja-breakdown {
+            display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
+        }
+        .hanja-char-block {
+            background: white;
+            border: 2px solid #fbd38d;
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 90px;
+        }
+        .hanja-char-block .char { font-size: 32px; color: #c05621; font-weight: bold; }
+        .hanja-char-block .reading { font-size: 14px; color: #e85d04; font-weight: 600; margin-top: 4px; }
+        .hanja-char-block .meaning { font-size: 12px; color: #718096; margin-top: 2px; }
+        .hanja-char-block .visual { font-size: 22px; margin-top: 4px; }
+
+        .hanja-story {
+            background: linear-gradient(135deg, #fff9ed 0%, #fff3de 100%);
+            border-left: 4px solid #f48c06;
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        .hanja-story .label { font-size: 12px; color: #e85d04; font-weight: bold; letter-spacing: 1px; margin-bottom: 6px; }
+        .stage-badge {
+            display: inline-block;
+            background: #e85d04;
+            color: white;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        /* ── QUIZ ── */
+        .quiz-intro {
+            background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .quiz-intro h2 { font-size: 30px; margin-bottom: 10px; }
+        .quiz-intro p { font-size: 17px; opacity: 0.95; }
+        .quiz-question {
+            background: #fafafa;
+            border: 2px solid #ffd4a3;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            background: #e85d04;
+            color: white;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 18px;
+            font-weight: bold;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .question-text { font-size: 19px; color: #2d3748; margin-bottom: 18px; font-weight: 600; line-height: 1.6; }
+        .korean-word-large { color: #e85d04; font-size: 24px; font-weight: bold; }
+        .quiz-options { display: grid; gap: 10px; }
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .quiz-option:hover { border-color: #e85d04; background: #fff8f0; transform: translateX(4px); }
+        .quiz-option.correct { border-color: #52c41a; background: #f6ffed; color: #2e7d32; }
+        .quiz-option.wrong { border-color: #ff4d4f; background: #fff1f0; color: #cf1322; }
+        .question-explanation { margin-top: 12px; padding: 13px; border-radius: 8px; font-size: 15px; display: none; line-height: 1.6; }
+        .question-explanation.show { display: block; }
+        .question-explanation.correct { background: #f6ffed; border: 2px solid #52c41a; color: #237804; }
+        .question-explanation.incorrect { background: #fff1f0; border: 2px solid #ff4d4f; color: #cf1322; }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            font-size: 19px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            display: block;
+            margin: 28px auto;
+            box-shadow: 0 5px 15px rgba(232,93,4,0.35);
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .quiz-results {
+            display: none;
+            background: linear-gradient(135deg, #0e9f6e 0%, #31c48d 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 28px;
+        }
+        .quiz-results.show { display: block; }
+        .quiz-results h2 { font-size: 34px; margin-bottom: 16px; }
+        .quiz-results .score { font-size: 64px; font-weight: bold; margin: 18px 0; }
+        .quiz-results p { font-size: 20px; margin-bottom: 26px; }
+        .reset-btn {
+            background: white;
+            color: #0e9f6e;
+            border: none;
+            padding: 14px 40px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .reset-btn:hover { transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .vocab-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 32px; }
+            .nav-tab { font-size: 13px; padding: 12px 8px; }
+            .hanja-breakdown { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <div class="week-badge">식당 편 RESTAURANT</div>
+        <h1>식당 🍽️ Restaurant</h1>
+        <div class="subtitle">단어 Vocabulary · 한자 Hanja · 퀴즈 Quiz</div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('vocabulary', event)">🥢 단어 Vocabulary</button>
+        <button class="nav-tab" onclick="showSection('hanja', event)">🈳 한자 Hanja</button>
+        <button class="nav-tab" onclick="showSection('quiz', event)">✍️ 퀴즈 Quiz</button>
+    </div>
+
+    <div class="content">
+
+        <!-- ═══════════════════ VOCABULARY ═══════════════════ -->
+        <div id="vocabulary-section" class="section active">
+
+            <div class="category-header">🏮 식당 가기 전 (Before You Go)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">1</div>
+                        <div class="vocab-word">예약<span class="vocab-hanja">豫約</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[ye-yak]</div>
+                    <div class="vocab-meaning">Reservation / Booking</div>
+                    <div class="example-box">
+                        <div class="example-korean">오늘 저녁 예약하고 싶어요.</div>
+                        <div class="example-romanization">Oneul jeonyeok yeyak-hago sipeoyo.</div>
+                        <div class="example-english">I'd like to make a reservation for this evening.</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>豫(미리 예)</strong> + <strong>約(맺을 약)</strong> = to tie up a promise in advance!</div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">2</div>
+                        <div class="vocab-word">입구<span class="vocab-hanja">入口</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[ip-gu]</div>
+                    <div class="vocab-meaning">Entrance / Entry</div>
+                    <div class="example-box">
+                        <div class="example-korean">식당 입구에서 만나요.</div>
+                        <div class="example-romanization">Sikdang ipgueseo mannayo.</div>
+                        <div class="example-english">Let's meet at the restaurant entrance.</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>入(들 입)</strong> = a person walking in 🚶 · <strong>口(입 구)</strong> = mouth / opening 🚪</div>
+                </div>
+
+            </div>
+
+            <div class="divider">🍜 🥢 🍜 🥢 🍜</div>
+
+            <div class="category-header teal">🍽️ 식사 시간 (Mealtime Essentials)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">3</div>
+                        <div class="vocab-word">식사<span class="vocab-hanja">食事</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation teal">[sik-sa]</div>
+                    <div class="vocab-meaning">A Meal / Dining</div>
+                    <div class="example-box">
+                        <div class="example-korean">식사 맛있게 하세요!</div>
+                        <div class="example-romanization">Siksa masitge haseyo!</div>
+                        <div class="example-english">Enjoy your meal! (polite)</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>食(먹을 식)</strong> + <strong>事(일 사)</strong> = "eating" is an important occasion — a family event!</div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">4</div>
+                        <div class="vocab-word">음식<span class="vocab-hanja">飮食</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation teal">[eum-sik]</div>
+                    <div class="vocab-meaning">Food / Everything we eat and drink</div>
+                    <div class="example-box">
+                        <div class="example-korean">한국 음식 좋아하세요?</div>
+                        <div class="example-romanization">Hanguk eumsik johahaseyo?</div>
+                        <div class="example-english">Do you like Korean food?</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>飮(마실 음)</strong> to drink + <strong>食(먹을 식)</strong> to eat = everything you consume!</div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">5</div>
+                        <div class="vocab-word">메뉴</div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation teal">[me-nyu]</div>
+                    <div class="vocab-meaning">Menu</div>
+                    <div class="example-box">
+                        <div class="example-korean">메뉴 주세요.</div>
+                        <div class="example-romanization">Menyu juseyo.</div>
+                        <div class="example-english">Please give me the menu.</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">6</div>
+                        <div class="vocab-word">추천<span class="vocab-hanja">推薦</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation teal">[chu-cheon]</div>
+                    <div class="vocab-meaning">Recommendation</div>
+                    <div class="example-box">
+                        <div class="example-korean">메뉴 추천해 주세요.</div>
+                        <div class="example-romanization">Menyu chucheonhae juseyo.</div>
+                        <div class="example-english">Please recommend a menu item.</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>推(밀 추)</strong> to push forward + <strong>薦(천거할 천)</strong> to recommend = pushing a good thing toward someone!</div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">7</div>
+                        <div class="vocab-word">주문<span class="vocab-hanja">注文</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation teal">[ju-mun]</div>
+                    <div class="vocab-meaning">Order (at a restaurant)</div>
+                    <div class="example-box">
+                        <div class="example-korean">주문 받아도 될까요?</div>
+                        <div class="example-romanization">Jumun badado doelkkayo?</div>
+                        <div class="example-english">May I take your order?</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number teal">8</div>
+                        <div class="vocab-word">맛있다</div>
+                    </div>
+                    <span class="vocab-type adj">형용사 Adj</span>
+                    <div class="vocab-pronunciation teal">[ma-sit-da]</div>
+                    <div class="vocab-meaning">Delicious / Tasty</div>
+                    <div class="example-box">
+                        <div class="example-korean">이 음식 정말 맛있어요!</div>
+                        <div class="example-romanization">I eumsik jeongmal masisseoyo!</div>
+                        <div class="example-english">This food is really delicious!</div>
+                    </div>
+                    <div class="tip-box">💡 맛있다 → 맛있어요 (polite) · 맛없다 = bland/not tasty (opposite!)</div>
+                </div>
+
+            </div>
+
+            <div class="divider">🥘 🍲 🥘 🍲 🥘</div>
+
+            <div class="category-header blue">👥 몇 인분이에요? (How Many Servings?)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number blue">9</div>
+                        <div class="vocab-word">인분<span class="vocab-hanja">人份</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun (counter)</span>
+                    <div class="vocab-pronunciation blue">[in-bun]</div>
+                    <div class="vocab-meaning">Serving / Portion (per person)</div>
+                    <div class="portion-row">
+                        <div class="portion-badge">1인분<small>il-in-bun<br>for 1 person</small></div>
+                        <div class="portion-badge">2인분<small>i-in-bun<br>for 2 people</small></div>
+                        <div class="portion-badge">3인분<small>sam-in-bun<br>for 3 people</small></div>
+                        <div class="portion-badge">4인분<small>sa-in-bun<br>for 4 people</small></div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-korean">삼겹살 4인분 주세요.</div>
+                        <div class="example-romanization">Samgyeopsal 4-in-bun juseyo.</div>
+                        <div class="example-english">4 servings of pork belly, please.</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>人(사람 인)</strong> person + <strong>份(몫 분)</strong> share/portion = each person's fair share! 份 = 刀(knife) + 分(divide) + 亻(person)</div>
+                </div>
+
+                <div class="vocab-card blue-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number blue">10</div>
+                        <div class="vocab-word">자리</div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation blue">[ja-ri]</div>
+                    <div class="vocab-meaning">Seat / Table / Spot</div>
+                    <div class="example-box">
+                        <div class="example-korean">4인 자리 있어요?</div>
+                        <div class="example-romanization">Sa-in jari isseoyo?</div>
+                        <div class="example-english">Do you have a table for 4?</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="divider">🧾 💳 🧾 💳 🧾</div>
+
+            <div class="category-header">💳 계산 & 출구 (Paying & Leaving)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">11</div>
+                        <div class="vocab-word">계산<span class="vocab-hanja">計算</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[gye-san]</div>
+                    <div class="vocab-meaning">Bill / Check / Calculation</div>
+                    <div class="example-box">
+                        <div class="example-korean">계산서 주세요. / 여기 계산해 주세요!</div>
+                        <div class="example-romanization">Gyesanseo juseyo. / Yeogi gyesan-hae juseyo!</div>
+                        <div class="example-english">The check, please. / Bill here, please!</div>
+                    </div>
+                    <div class="tip-box">💡 계산서 (計算書) = bill/receipt · 더치페이 = going Dutch / splitting the bill</div>
+                </div>
+
+                <div class="vocab-card">
+                    <div class="vocab-header">
+                        <div class="vocab-number">12</div>
+                        <div class="vocab-word">출구<span class="vocab-hanja">出口</span></div>
+                    </div>
+                    <span class="vocab-type noun">명사 Noun</span>
+                    <div class="vocab-pronunciation">[chul-gu]</div>
+                    <div class="vocab-meaning">Exit</div>
+                    <div class="example-box">
+                        <div class="example-korean">출구가 어디예요?</div>
+                        <div class="example-romanization">Chulguga eodiyeyo?</div>
+                        <div class="example-english">Where is the exit?</div>
+                    </div>
+                    <div class="tip-box">💡 <strong>出(날 출)</strong> = sprouts growing upward, going OUT 🌱 · <strong>口(입 구)</strong> = opening 🚪</div>
+                </div>
+
+            </div>
+
+            <div class="divider">🍽️ 잘 먹었습니다! 🙏</div>
+
+            <!-- USEFUL PHRASES -->
+            <div class="category-header teal">💬 식당 필수 표현 (Essential Phrases)</div>
+            <div class="vocab-grid">
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header"><div class="vocab-number teal">①</div><div class="vocab-word" style="font-size:20px;">어서 오세요</div></div>
+                    <span class="vocab-type phrase">인사 Greeting</span>
+                    <div class="vocab-pronunciation teal">[eo-seo o-se-yo]</div>
+                    <div class="vocab-meaning">Welcome! (said by staff)</div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header"><div class="vocab-number teal">②</div><div class="vocab-word" style="font-size:20px;">잠깐만요</div></div>
+                    <span class="vocab-type phrase">표현 Expression</span>
+                    <div class="vocab-pronunciation teal">[jam-kkan-man-yo]</div>
+                    <div class="vocab-meaning">Just a moment, please!</div>
+                    <div class="example-box">
+                        <div class="example-korean">저기요! 잠깐만요!</div>
+                        <div class="example-english">Excuse me! One moment, please!</div>
+                    </div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header"><div class="vocab-number teal">③</div><div class="vocab-word" style="font-size:20px;">잘 먹겠습니다</div></div>
+                    <span class="vocab-type phrase">표현 Expression</span>
+                    <div class="vocab-pronunciation teal">[jal meok-get-seum-ni-da]</div>
+                    <div class="vocab-meaning">I will eat well (before eating)</div>
+                </div>
+
+                <div class="vocab-card teal-card">
+                    <div class="vocab-header"><div class="vocab-number teal">④</div><div class="vocab-word" style="font-size:20px;">잘 먹었습니다</div></div>
+                    <span class="vocab-type phrase">표현 Expression</span>
+                    <div class="vocab-pronunciation teal">[jal meo-geot-seum-ni-da]</div>
+                    <div class="vocab-meaning">That was a great meal! (after eating)</div>
+                </div>
+
+            </div>
+
+        </div><!-- end vocabulary-section -->
+
+
+        <!-- ═══════════════════ HANJA ═══════════════════ -->
+        <div id="hanja-section" class="section">
+
+            <p style="color:#718096; margin-bottom:10px; font-size:16px;">🈳 각 단어 속 한자의 뜻과 이야기 · The story inside every character</p>
+
+            <div class="hanja-section-title">🏮 1단계 · 식당 가기 전 — Preparation</div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 1-A</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">예약</div>
+                    <div class="hanja-char-big">豫約</div>
+                    <div>
+                        <div class="hanja-rom">Ye-yak</div>
+                        <div class="hanja-english">Reservation</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">豫</div>
+                        <div class="reading">예 (ye)</div>
+                        <div class="meaning">미리 / in advance</div>
+                        <div class="visual">🐘</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">約</div>
+                        <div class="reading">약 (yak)</div>
+                        <div class="meaning">맺다 / to bind</div>
+                        <div class="visual">🪢</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY</div>
+                    豫 pictures a wise <strong>elephant (象)</strong> — known for its extraordinary memory and foresight. 約 shows silk thread being bound into a knot 🪢. Together: <em>"The wise elephant ties a knot ahead of time."</em> → You look ahead and secure your seat before going!
+                </div>
+            </div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 1-B</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">입구</div>
+                    <div class="hanja-char-big">入口</div>
+                    <div>
+                        <div class="hanja-rom">Ip-gu</div>
+                        <div class="hanja-english">Entrance</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">入</div>
+                        <div class="reading">입 (ip)</div>
+                        <div class="meaning">들다 / to enter</div>
+                        <div class="visual">🚶</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">口</div>
+                        <div class="reading">구 (gu)</div>
+                        <div class="meaning">입·구멍 / mouth, opening</div>
+                        <div class="visual">🚪</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY</div>
+                    入 looks like a person tilting forward to duck inside 🚶 — head first, stepping in. 口 is a square mouth / opening. Together: <em>"the opening you walk into."</em> Compare with 출구 出口 — same 口, but 出 (going OUT like a sprout growing upward 🌱).
+                </div>
+            </div>
+
+            <div class="hanja-section-title">🍽️ 2단계 · 즐거운 식사 시간 — The Meal</div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 2-A</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">식사</div>
+                    <div class="hanja-char-big">食事</div>
+                    <div>
+                        <div class="hanja-rom">Sik-sa</div>
+                        <div class="hanja-english">A Meal</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">食</div>
+                        <div class="reading">식 (sik)</div>
+                        <div class="meaning">먹다 / to eat</div>
+                        <div class="visual">🍚</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">事</div>
+                        <div class="reading">사 (sa)</div>
+                        <div class="meaning">일·사건 / affair, event</div>
+                        <div class="visual">👨‍👩‍👧‍👦</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY</div>
+                    食 depicts a covered pot of rice 🍚 being eaten. 事 means a significant happening or affair. Together: <em>eating is not just a biological act — it is a meaningful family event</em>, a gathering, a ritual worth honoring. That's why Koreans say "식사 맛있게 하세요!" with such warmth.
+                </div>
+            </div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 2-B</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">음식</div>
+                    <div class="hanja-char-big">飮食</div>
+                    <div>
+                        <div class="hanja-rom">Eum-sik</div>
+                        <div class="hanja-english">Food (everything)</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">飮</div>
+                        <div class="reading">음 (eum)</div>
+                        <div class="meaning">마시다 / to drink</div>
+                        <div class="visual">🥤</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">食</div>
+                        <div class="reading">식 (sik)</div>
+                        <div class="meaning">먹다 / to eat</div>
+                        <div class="visual">🍚</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY</div>
+                    飮食 = everything you drink 🥤 AND eat 🍚. A beautifully comprehensive word. Notice that 식사 (食事) focuses on the <em>act of eating as an occasion</em>, while 음식 (飮食) refers to <em>the food itself</em>. Both share 食 — the root of nourishment!
+                </div>
+            </div>
+
+            <div class="hanja-section-title">👥 3단계 · 몇 인분? — Counting Portions</div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 3</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">인분</div>
+                    <div class="hanja-char-big">人份</div>
+                    <div>
+                        <div class="hanja-rom">In-bun</div>
+                        <div class="hanja-english">Serving / Portion</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">人</div>
+                        <div class="reading">인 (in)</div>
+                        <div class="meaning">사람 / person</div>
+                        <div class="visual">🧑</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">份</div>
+                        <div class="reading">분 (bun)</div>
+                        <div class="meaning">몫 / one's share</div>
+                        <div class="visual">⚖️</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY — 份의 비밀 The secret inside 份</div>
+                    份 = 亻(person 사람) + 分 · And 分 = 刀(knife 칼) + 八(divide 나누다). So 份 means: <em>a knife cuts food into fair shares for each person</em> ⚖️🔪. 
+                    <br><br>
+                    Then 1인분, 2인분, 3인분, 4인분 use <strong>Sino-Korean numbers</strong> (일·이·삼·사) + 人份. A uniquely Korean way of blending Chinese characters with numbers to count portions!
+                </div>
+            </div>
+
+            <div class="hanja-section-title">🚪 4단계 · 나가는 길 — The Exit</div>
+
+            <div class="hanja-card">
+                <span class="stage-badge">Step 4</span>
+                <div class="hanja-word-row">
+                    <div class="hanja-korean-big">출구</div>
+                    <div class="hanja-char-big">出口</div>
+                    <div>
+                        <div class="hanja-rom">Chul-gu</div>
+                        <div class="hanja-english">Exit</div>
+                    </div>
+                </div>
+                <div class="hanja-breakdown">
+                    <div class="hanja-char-block">
+                        <div class="char">出</div>
+                        <div class="reading">출 (chul)</div>
+                        <div class="meaning">나가다 / to go out</div>
+                        <div class="visual">🌱</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:28px;color:#e85d04;">+</div>
+                    <div class="hanja-char-block">
+                        <div class="char">口</div>
+                        <div class="reading">구 (gu)</div>
+                        <div class="meaning">구멍 / opening</div>
+                        <div class="visual">🚪</div>
+                    </div>
+                </div>
+                <div class="hanja-story">
+                    <div class="label">📖 STORY</div>
+                    出 shows a sprout 🌱 pushing UP and OUT from the ground — a new beginning, emergence, departure. 口 is the same "opening/mouth" as in 입구. <br><br>
+                    <strong>입구 vs 출구:</strong><br>
+                    入口 (ip-gu) = the opening you walk <em>into</em> 🚶→🏠<br>
+                    出口 (chul-gu) = the opening you walk <em>out of</em> 🏠→🚶<br>
+                    Same 口, opposite direction! Easy to remember together.
+                </div>
+            </div>
+
+            <div style="background:#fff8f0;border:2px solid #fbd38d;border-radius:14px;padding:24px;margin-top:30px;">
+                <div style="font-size:20px;font-weight:bold;color:#e85d04;margin-bottom:16px;">🔑 공통 한자 Summary — Shared Characters</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;">
+                    <div class="hanja-char-block">
+                        <div class="char">食</div>
+                        <div class="reading">식 (sik)</div>
+                        <div class="meaning">식사, 음식</div>
+                        <div style="font-size:12px;color:#718096;margin-top:4px;">appears in BOTH words</div>
+                    </div>
+                    <div class="hanja-char-block">
+                        <div class="char">口</div>
+                        <div class="reading">구 (gu)</div>
+                        <div class="meaning">입구, 출구</div>
+                        <div style="font-size:12px;color:#718096;margin-top:4px;">same 口, opposite direction</div>
+                    </div>
+                    <div class="hanja-char-block">
+                        <div class="char">人</div>
+                        <div class="reading">인 (in)</div>
+                        <div class="meaning">인분</div>
+                        <div style="font-size:12px;color:#718096;margin-top:4px;">1인분, 2인분…</div>
+                    </div>
+                    <div class="hanja-char-block">
+                        <div class="char">豫</div>
+                        <div class="reading">예 (ye)</div>
+                        <div class="meaning">예약, 예습, 예상</div>
+                        <div style="font-size:12px;color:#718096;margin-top:4px;">always means "in advance"</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end hanja-section -->
+
+
+        <!-- ═══════════════════ QUIZ ═══════════════════ -->
+        <div id="quiz-section" class="section">
+
+            <div class="quiz-intro">
+                <h2>🍽️ 식당 단어 퀴즈</h2>
+                <p>Restaurant Vocabulary Quiz · 10 questions · 정답을 골라보세요!</p>
+            </div>
+
+            <!-- Q1 -->
+            <div class="quiz-question">
+                <div class="question-number">Q1</div>
+                <div class="question-text"><span class="korean-word-large">예약</span> 의 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Exit</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q1')">Reservation / Booking</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Order</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q1')">Entrance</button>
+                </div>
+                <div id="q1-explanation" class="question-explanation">
+                    ✅ <strong>예약 (豫約)</strong> = Reservation. 豫 (in advance) + 約 (to bind/promise). You tie up a promise ahead of time — just like a wise elephant planning ahead! 🐘
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+                <div class="question-number">Q2</div>
+                <div class="question-text">"4 servings of pork belly, please." 를 한국어로 하면?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">삼겹살 4개 주세요.</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">삼겹살 4명 주세요.</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q2')">삼겹살 4인분 주세요.</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q2')">삼겹살 4번 주세요.</button>
+                </div>
+                <div id="q2-explanation" class="question-explanation">
+                    ✅ <strong>4인분 (사인분)</strong> = 4 servings. 人份 = person's fair share. 개 = general counter for things · 명 = counter for people · 인분 = specifically for food portions!
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+                <div class="question-number">Q3</div>
+                <div class="question-text"><span class="korean-word-large">음식</span> 과 <span class="korean-word-large">식사</span> 의 차이는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">They mean exactly the same thing</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q3')">음식 = food itself; 식사 = the act/occasion of eating a meal</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">음식 = Korean food; 식사 = foreign food</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q3')">음식 = cooked food; 식사 = raw food</button>
+                </div>
+                <div id="q3-explanation" class="question-explanation">
+                    ✅ 음식 (飮食) = the food & drink themselves. 식사 (食事) = the meal as a meaningful occasion / event. Both share 食, but 事 (affair/event) makes 식사 more formal and ceremonial!
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+                <div class="question-number">Q4</div>
+                <div class="question-text">"May I take your order?" 를 한국어로 하면?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">메뉴 주세요.</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">계산해 주세요.</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q4')">주문 받아도 될까요?</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q4')">예약하고 싶어요.</button>
+                </div>
+                <div id="q4-explanation" class="question-explanation">
+                    ✅ <strong>주문 받아도 될까요?</strong> = May I take your order? 주문 (注文) = order · 받다 = to receive · ~아도 될까요? = May I...?
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="quiz-question">
+                <div class="question-number">Q5</div>
+                <div class="question-text"><span class="korean-word-large">입구</span> 와 <span class="korean-word-large">출구</span> 의 공통 한자는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">人 (사람 인)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">食 (먹을 식)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q5')">口 (입 구 / opening)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q5')">約 (맺을 약)</button>
+                </div>
+                <div id="q5-explanation" class="question-explanation">
+                    ✅ Both 입구(入口) and 출구(出口) share <strong>口</strong> = an opening/mouth. 入 = enter, 出 = exit. Same door 🚪, opposite direction!
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="quiz-question">
+                <div class="question-number">Q6</div>
+                <div class="question-text">식당에서 음식을 먹기 <em>전에</em> 하는 인사는?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">잘 먹었습니다</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">어서 오세요</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q6')">잘 먹겠습니다</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q6')">맛있어요</button>
+                </div>
+                <div id="q6-explanation" class="question-explanation">
+                    ✅ <strong>잘 먹겠습니다</strong> = "I will eat well" (BEFORE eating — future tense 겠). <strong>잘 먹었습니다</strong> = "I ate well" (AFTER eating — past tense 었). The tense tells the whole story!
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="quiz-question">
+                <div class="question-number">Q7</div>
+                <div class="question-text"><span class="korean-word-large">추천</span> (推薦) 에서 推의 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">To pull / 당기다</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q7')">To push forward / 밀다</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">To receive / 받다</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q7')">To choose / 고르다</button>
+                </div>
+                <div id="q7-explanation" class="question-explanation">
+                    ✅ 推 = to push 밀다. 薦 = to recommend. 추천 (推薦) = to push something good toward someone — you're literally advocating for it! "Let me push this dish toward you — it's amazing!" 🍛
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="quiz-question">
+                <div class="question-number">Q8</div>
+                <div class="question-text">"The check, please!" 를 한국어로 하면?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">주문해 주세요!</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">예약해 주세요!</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q8')">여기 계산해 주세요!</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q8')">추천해 주세요!</button>
+                </div>
+                <div id="q8-explanation" class="question-explanation">
+                    ✅ <strong>계산해 주세요</strong> = Please calculate (the bill). 계산서 (計算書) = the written bill/receipt. 저기요! = "Excuse me!" to get the server's attention first!
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="quiz-question">
+                <div class="question-number">Q9</div>
+                <div class="question-text">份 (분) 의 뜻을 가장 잘 설명한 것은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">A person who cooks (亻+ 食)</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q9')">A fair share cut for each person (亻+ 刀 + 分)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">A plate of food (皿 + 食)</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q9')">An empty bowl (口 + 空)</button>
+                </div>
+                <div id="q9-explanation" class="question-explanation">
+                    ✅ 份 = 亻(person) + 分 · and 分 = 刀(knife) + 八(divide). A knife fairly divides food for each person ⚖️🔪. So 3인분 = three people's fair shares. Beautiful!
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="quiz-question">
+                <div class="question-number">Q10</div>
+                <div class="question-text">다음 중 <span class="korean-word-large">4인 자리</span> 의 올바른 뜻은?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">4 servings of food</button>
+                    <button class="quiz-option" onclick="selectOption(this, true, 'q10')">A table / seat for 4 people</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">4th floor</button>
+                    <button class="quiz-option" onclick="selectOption(this, false, 'q10')">4 o'clock reservation</button>
+                </div>
+                <div id="q10-explanation" class="question-explanation">
+                    ✅ <strong>4인 자리</strong> = 4人 자리 = a seat/spot for 4 people. 자리 = place, spot, seat. "4인 자리 있어요?" is the perfect phrase when you arrive at a restaurant with your family!
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">🍽️ 결과 보기 See Results</button>
+
+            <div id="quiz-results" class="quiz-results">
+                <h2>🍽️ 결과 Results</h2>
+                <div class="score" id="score-display">0/10</div>
+                <p id="result-message"></p>
+                <button class="reset-btn" onclick="resetQuiz()">🔄 다시 하기 Try Again</button>
+            </div>
+
+        </div><!-- end quiz-section -->
+
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, event) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    const answers = {};
+
+    function selectOption(btn, isCorrect, questionId) {
+        const parent = btn.closest('.quiz-question');
+        const options = parent.querySelectorAll('.quiz-option');
+        const explanation = document.getElementById(questionId + '-explanation');
+        if (answers[questionId] !== undefined) return;
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+        if (!isCorrect) {
+            options.forEach(opt => {
+                if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+        }
+        answers[questionId] = isCorrect;
+        if (explanation) {
+            explanation.classList.add('show');
+            explanation.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+    }
+
+    function submitQuiz() {
+        const total = 10;
+        let correct = 0;
+        for (let i = 1; i <= total; i++) { if (answers['q' + i] === true) correct++; }
+        const results = document.getElementById('quiz-results');
+        results.classList.add('show');
+        document.getElementById('score-display').textContent = correct + '/' + total;
+        let msg = '';
+        if (correct === total) msg = '🍽️ 완벽해요! Perfect score! You are a restaurant vocabulary master!';
+        else if (correct >= 8) msg = '🥘 아주 잘했어요! Great job! Almost a Korean food expert!';
+        else if (correct >= 6) msg = '🍜 잘했어요! Good work! Keep practicing — 화이팅!';
+        else msg = '💪 괜찮아요! Keep studying — 다음엔 더 잘 할 수 있어요!';
+        document.getElementById('result-message').textContent = msg;
+        results.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+        for (let key in answers) delete answers[key];
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+            opt.style.pointerEvents = '';
+        });
+        document.querySelectorAll('.question-explanation').forEach(exp => {
+            exp.classList.remove('show', 'correct', 'incorrect');
+        });
+        document.getElementById('quiz-results').classList.remove('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
