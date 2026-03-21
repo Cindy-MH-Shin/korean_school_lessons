@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 카드: ~는 게 어때요? 동사 | Vocabulary: "How about...?" Verbs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 36px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 18px; opacity: 0.9; margin-bottom: 6px; }
+        .header .subtitle-en { font-size: 15px; opacity: 0.8; font-style: italic; }
+        .content { padding: 40px; }
+
+        /* Quick Reference Table */
+        .quick-ref {
+            background: #fff8e1;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 35px;
+            border-left: 5px solid #f39c12;
+        }
+        .quick-ref h2 { font-size: 22px; color: #e67e22; margin-bottom: 5px; }
+        .quick-ref-en { font-size: 13px; color: #999; font-style: italic; margin-bottom: 15px; }
+        .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .ref-table th {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 11px 14px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .ref-table td {
+            padding: 10px 14px;
+            text-align: center;
+            border-bottom: 1px solid #ffe0b2;
+            font-size: 14px;
+        }
+        .ref-table tbody tr:hover { background: #fff3e0; }
+        .ref-table .irregular-row { background: #fdecea; }
+        .ref-table .irregular-row:hover { background: #fad7d4; }
+        .badge-irregular {
+            background: #e74c3c; color: white;
+            font-size: 11px; padding: 2px 7px;
+            border-radius: 10px; margin-left: 4px; font-weight: bold;
+        }
+        .badge-sample {
+            background: #27ae60; color: white;
+            font-size: 11px; padding: 2px 7px;
+            border-radius: 10px; margin-left: 4px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 26px; color: #e67e22; font-weight: bold;
+            margin: 35px 0 8px 0;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+        }
+        .section-title-en { font-size: 13px; color: #aaa; font-style: italic; margin-bottom: 20px; }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        .verb-card {
+            border: 3px solid #ffe0b2;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .verb-card:hover {
+            border-color: #f39c12;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(243,156,18,0.2);
+        }
+        .verb-card.irregular { border-color: #fadbd8; }
+        .verb-card.irregular:hover { border-color: #e74c3c; box-shadow: 0 12px 30px rgba(231,76,60,0.2); }
+        .verb-card.sample-card { border-color: #a9dfbf; }
+        .verb-card.sample-card:hover { border-color: #27ae60; box-shadow: 0 12px 30px rgba(39,174,96,0.2); }
+
+        .card-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white; padding: 18px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .verb-card.irregular .card-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        .verb-card.sample-card .card-header {
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+        }
+        .card-num { font-size: 13px; opacity: 0.8; margin-bottom: 3px; }
+        .card-verb-ko { font-size: 28px; font-weight: bold; }
+        .card-verb-en { font-size: 14px; opacity: 0.9; margin-top: 3px; }
+        .card-badge {
+            background: rgba(255,255,255,0.25);
+            padding: 5px 12px; border-radius: 12px;
+            font-size: 12px; font-weight: bold;
+            white-space: nowrap; align-self: flex-start; margin-top: 4px;
+        }
+
+        .card-body { padding: 18px 20px; }
+
+        .conj-row {
+            display: flex; align-items: center;
+            margin-bottom: 10px; background: #fafafa;
+            border-radius: 8px; padding: 9px 13px;
+        }
+        .conj-row.highlight-row { background: #fdecea; }
+        .conj-label { font-size: 11px; color: #888; min-width: 88px; font-weight: bold; }
+        .conj-arrow { color: #f39c12; font-size: 18px; margin: 0 10px; }
+        .conj-value { font-size: 16px; font-weight: bold; color: #2c3e50; }
+        .conj-note { font-size: 11px; color: #e74c3c; margin-left: 8px; font-style: italic; }
+        .conj-final { color: #e67e22; }
+
+        .example-box {
+            background: #fff8e1; border-radius: 10px;
+            padding: 14px; margin-top: 8px;
+        }
+        .example-ko {
+            font-size: 15px; color: #2c3e50;
+            line-height: 1.7; margin-bottom: 6px;
+        }
+        .example-ko .hl { color: #e67e22; font-weight: bold; text-decoration: underline dotted; }
+        .example-en { font-size: 13px; color: #888; font-style: italic; line-height: 1.5; }
+
+        /* Remember Box */
+        .remember-box {
+            margin-top: 40px; background: #fff8e1;
+            border-radius: 14px; padding: 25px;
+            border: 2px solid #f39c12;
+        }
+        .remember-box h3 { color: #e67e22; margin-bottom: 14px; font-size: 20px; }
+        .remember-box p { color: #555; font-size: 15px; line-height: 2; }
+        .remember-box .en-note { font-size: 13px; color: #888; font-style: italic; margin-top: 10px; line-height: 1.8; }
+        .r-red { color: #e74c3c; font-weight: bold; }
+        .r-green { color: #27ae60; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📚 단어 카드: ~는 게 어때요?</h1>
+        <div class="subtitle">동사 활용 학습 카드 (Verb Conjugation Study Cards)</div>
+        <div class="subtitle-en">"How about doing...?" / "Why don't you...?" — Key Verbs</div>
+    </div>
+
+    <div class="content">
+
+        <!-- Quick Reference Table -->
+        <div class="quick-ref">
+            <h2>📋 동사 활용 한눈에 보기</h2>
+            <div class="quick-ref-en">Quick Conjugation Reference — all verbs used in this unit</div>
+            <table class="ref-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>기본형<br>Dictionary Form</th>
+                        <th>영어<br>English</th>
+                        <th>어간<br>Verb Stem</th>
+                        <th>~는 게 어때요?<br>Conjugated Form</th>
+                        <th>비고<br>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>예</td>
+                        <td><strong>사다</strong> <span class="badge-sample">예시</span></td>
+                        <td>to buy</td>
+                        <td>사-</td>
+                        <td><strong>사는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>고르다</strong></td>
+                        <td>to choose / pick</td>
+                        <td>고르-</td>
+                        <td><strong>고르는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>운동하다</strong></td>
+                        <td>to exercise</td>
+                        <td>운동하-</td>
+                        <td><strong>운동하는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>가다</strong></td>
+                        <td>to go</td>
+                        <td>가-</td>
+                        <td><strong>가는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr class="irregular-row">
+                        <td>4</td>
+                        <td><strong>열다</strong> <span class="badge-irregular">ㄹ탈락</span></td>
+                        <td>to open</td>
+                        <td>열→ <strong>여-</strong></td>
+                        <td><strong>여는 게 어때요?</strong></td>
+                        <td>⚠️ ㄹ 탈락</td>
+                    </tr>
+                    <tr class="irregular-row">
+                        <td>5</td>
+                        <td><strong>들다</strong> <span class="badge-irregular">ㄹ탈락</span></td>
+                        <td>to lift / carry</td>
+                        <td>들→ <strong>드-</strong></td>
+                        <td><strong>드는 게 어때요?</strong></td>
+                        <td>⚠️ ㄹ 탈락</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>먹다</strong></td>
+                        <td>to eat</td>
+                        <td>먹-</td>
+                        <td><strong>먹는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><strong>자다</strong></td>
+                        <td>to sleep</td>
+                        <td>자-</td>
+                        <td><strong>자는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>청소하다</strong></td>
+                        <td>to clean</td>
+                        <td>청소하-</td>
+                        <td><strong>청소하는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>보다</strong></td>
+                        <td>to watch / see</td>
+                        <td>보-</td>
+                        <td><strong>보는 게 어때요?</strong></td>
+                        <td>규칙 Regular</td>
+                    </tr>
+                    <tr class="irregular-row">
+                        <td>10</td>
+                        <td><strong>만들다</strong> <span class="badge-irregular">ㄹ탈락</span></td>
+                        <td>to make / create</td>
+                        <td>만들→ <strong>만드-</strong></td>
+                        <td><strong>만드는 게 어때요?</strong></td>
+                        <td>⚠️ ㄹ 탈락</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Verb Cards Section -->
+        <div class="section-title">🃏 동사 카드 (Verb Flashcards)</div>
+        <div class="section-title-en">Click on each card to study the conjugation steps and example sentences</div>
+
+        <div class="cards-grid">
+
+            <!-- SAMPLE: 사다 -->
+            <div class="verb-card sample-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">예시 (Sample)</div>
+                        <div class="card-verb-ko">사다</div>
+                        <div class="card-verb-en">to buy / to purchase</div>
+                    </div>
+                    <div class="card-badge">✅ 예시</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">사다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">사-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">사는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            엄마: 이것을 살까?<br>
+                            나: 아니요, 저것을 <span class="hl">사는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Mom: Shall we buy this?<br>Me: No, how about buying that one?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1: 고르다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">1번</div>
+                        <div class="card-verb-ko">고르다</div>
+                        <div class="card-verb-en">to choose / to pick / to select</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">고르다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">고르-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">고르는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            아빠: 이 인형은 너무 비싸다.<br>
+                            나: 그럼 저 인형을 <span class="hl">고르는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Dad: This doll is too expensive.<br>Me: Then how about choosing that doll?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2: 운동하다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">2번</div>
+                        <div class="card-verb-ko">운동하다</div>
+                        <div class="card-verb-en">to exercise / to work out</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">운동하다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">운동하-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">운동하는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            엄마: <span class="hl">운동하는 게 어때요</span>?<br>
+                            나: 지금 비가 와서 못해요.
+                        </div>
+                        <div class="example-en">Mom: How about exercising?<br>Me: It's raining now, so I can't.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3: 가다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">3번</div>
+                        <div class="card-verb-ko">가다</div>
+                        <div class="card-verb-en">to go</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">가다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">가-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">가는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            여름 방학에 서울에 <span class="hl">가는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">How about going to Seoul for summer vacation?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4: 열다 (ㄹ-irregular) -->
+            <div class="verb-card irregular">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">4번 ⚠️ ㄹ 탈락 (ㄹ Drop)</div>
+                        <div class="card-verb-ko">열다</div>
+                        <div class="card-verb-en">to open</div>
+                    </div>
+                    <div class="card-badge">⚠️ ㄹ 탈락</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">열다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">열-</div>
+                        <div class="conj-note">받침이 ㄹ!</div>
+                    </div>
+                    <div class="conj-row highlight-row">
+                        <div class="conj-label">ㄹ 탈락</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value" style="color:#e74c3c;">열 → 여</div>
+                        <div class="conj-note">ㄹ이 ㄴ 앞에서 없어져요!</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">여는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            나: 방이 너무 더워요.<br>
+                            엄마: 더우면 창문을 <span class="hl">여는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Me: The room is too hot.<br>Mom: If it's hot, how about opening the window?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5: 들다 (ㄹ-irregular) -->
+            <div class="verb-card irregular">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">5번 ⚠️ ㄹ 탈락 (ㄹ Drop)</div>
+                        <div class="card-verb-ko">들다</div>
+                        <div class="card-verb-en">to lift / to hold / to carry</div>
+                    </div>
+                    <div class="card-badge">⚠️ ㄹ 탈락</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">들다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">들-</div>
+                        <div class="conj-note">받침이 ㄹ!</div>
+                    </div>
+                    <div class="conj-row highlight-row">
+                        <div class="conj-label">ㄹ 탈락</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value" style="color:#e74c3c;">들 → 드</div>
+                        <div class="conj-note">ㄹ이 ㄴ 앞에서 없어져요!</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">드는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            나: 이 상자가 너무 무거워요.<br>
+                            아빠: 같이 <span class="hl">드는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Me: This box is too heavy.<br>Dad: How about lifting it together?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6: 먹다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">6번</div>
+                        <div class="card-verb-ko">먹다</div>
+                        <div class="card-verb-en">to eat</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">먹다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">먹-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">먹는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            배가 고프니까 저녁을 <span class="hl">먹는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Since we're hungry, how about eating dinner?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7: 자다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">7번</div>
+                        <div class="card-verb-ko">자다</div>
+                        <div class="card-verb-en">to sleep / to go to bed</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">자다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">자-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">자는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            밤이 깊으니 어서 <span class="hl">자는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">It's late at night, so how about going to sleep soon?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8: 청소하다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">8번</div>
+                        <div class="card-verb-ko">청소하다</div>
+                        <div class="card-verb-en">to clean / to tidy up</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">청소하다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">청소하-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">청소하는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            엄마: 책상이 지저분하구나.<br>
+                            <span class="hl">청소하는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Mom: The desk is messy.<br>How about cleaning it up?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9: 보다 -->
+            <div class="verb-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">9번</div>
+                        <div class="card-verb-ko">보다</div>
+                        <div class="card-verb-en">to watch / to see / to look</div>
+                    </div>
+                    <div class="card-badge">규칙 Regular</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">보다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">보-</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">보는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            엄마: 무슨 영화를 볼까?<br>
+                            나: 인어공주를 <span class="hl">보는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">Mom: What movie shall we watch?<br>Me: How about watching The Little Mermaid?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10: 만들다 (ㄹ-irregular) -->
+            <div class="verb-card irregular">
+                <div class="card-header">
+                    <div>
+                        <div class="card-num">10번 ⚠️ ㄹ 탈락 (ㄹ Drop)</div>
+                        <div class="card-verb-ko">만들다</div>
+                        <div class="card-verb-en">to make / to create</div>
+                    </div>
+                    <div class="card-badge">⚠️ ㄹ 탈락</div>
+                </div>
+                <div class="card-body">
+                    <div class="conj-row">
+                        <div class="conj-label">기본형 (Dict.)</div>
+                        <div class="conj-value">만들다</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">어간 (Stem)</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value">만들-</div>
+                        <div class="conj-note">받침이 ㄹ!</div>
+                    </div>
+                    <div class="conj-row highlight-row">
+                        <div class="conj-label">ㄹ 탈락</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value" style="color:#e74c3c;">만들 → 만드</div>
+                        <div class="conj-note">ㄹ이 ㄴ 앞에서 없어져요!</div>
+                    </div>
+                    <div class="conj-row">
+                        <div class="conj-label">+ 는 게 어때요</div>
+                        <div class="conj-arrow">→</div>
+                        <div class="conj-value conj-final">만드는 게 어때요?</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-ko">
+                            올해 추석에는 송편을 <span class="hl">만드는 게 어때요</span>?
+                        </div>
+                        <div class="example-en">How about making songpyeon (rice cakes) this Chuseok (harvest festival)?</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end cards-grid -->
+
+        <!-- Remember Box -->
+        <div class="remember-box">
+            <h3>📌 꼭 기억하세요! (Key Points to Remember!)</h3>
+            <p>
+                <span class="r-green">✅ 규칙 동사 (Regular verbs)</span>: 어간(Stem) + <strong>는 게 어때요?</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;사다 → 사- + 는 게 어때요 = <strong>사는 게 어때요?</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;먹다 → 먹- + 는 게 어때요 = <strong>먹는 게 어때요?</strong><br><br>
+                <span class="r-red">⚠️ ㄹ 탈락 동사 (ㄹ-drop verbs)</span>: 받침 ㄹ이 ㄴ 앞에서 사라져요! (ㄹ disappears before ㄴ!)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;열다 → <span class="r-red">여</span>- + 는 게 어때요 = <strong>여는 게 어때요?</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;들다 → <span class="r-red">드</span>- + 는 게 어때요 = <strong>드는 게 어때요?</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;만들다 → <span class="r-red">만드</span>- + 는 게 어때요 = <strong>만드는 게 어때요?</strong>
+            </p>
+            <div class="en-note">
+                ㄹ-drop rule: When a verb stem ends in ㄹ as a final consonant (받침), the ㄹ disappears whenever the following syllable starts with ㄴ.
+                Since ~는 게 어때요 begins with ㄴ (는), the ㄹ always drops: 열다 → 여는, 들다 → 드는, 만들다 → 만드는.
+            </div>
+        </div>
+
+    </div><!-- end content -->
+</div><!-- end container -->
+</body>
+</html>

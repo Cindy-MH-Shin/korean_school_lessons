@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>동사 심화 어휘 — 사다·고르다·가다… Verb Vocabulary Expansion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber:       #e4a340;
+  --amber-deep:  #c07820;
+  --navy:        #2c4a6e;
+  --navy-light:  #4a7a9b;
+  --sand:        #f8eddb;
+  --sand-light:  #fdf9f2;
+  --gold:        #d4a843;
+  --coral:       #e07060;
+  --coral-light: #f5c4bb;
+  --text:        #2a2015;
+  --text-soft:   #6b5c4a;
+  --text-muted:  #a09080;
+  --white:       #ffffff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand-light);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; top:-80px; right:-80px;
+  width:400px; height:400px;
+  background: radial-gradient(circle, rgba(228,163,64,0.25) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+}
+body::after {
+  content: '';
+  position: fixed; bottom:-60px; left:-60px;
+  width:320px; height:320px;
+  background: radial-gradient(circle, rgba(44,74,110,0.15) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+/* ── HEADER ── */
+.header {
+  position: relative; text-align: center;
+  padding: 52px 24px 36px; overflow: hidden;
+}
+.header-bg {
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, #fdf4e8 0%, #f0f5fd 55%, #edf8f4 100%);
+  z-index:0;
+}
+.icon-float {
+  position: absolute; font-size: 26px; opacity: 0.45;
+  animation: drift 8s ease-in-out infinite;
+}
+.icon-float:nth-child(1){top:10%;left:5%;animation-delay:0s;font-size:22px;}
+.icon-float:nth-child(2){top:18%;left:14%;animation-delay:1.5s;font-size:18px;}
+.icon-float:nth-child(3){top:8%;right:11%;animation-delay:0.8s;}
+.icon-float:nth-child(4){top:28%;right:5%;animation-delay:2.2s;font-size:20px;}
+.icon-float:nth-child(5){bottom:14%;left:9%;animation-delay:1s;font-size:24px;}
+.icon-float:nth-child(6){bottom:10%;right:17%;animation-delay:3s;font-size:16px;}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(8deg);}}
+.header-content{position:relative;z-index:1;}
+.header-label{
+  display:inline-block; background:var(--amber);
+  color:white; font-size:11px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase;
+  padding:5px 18px; border-radius:20px; margin-bottom:16px;
+}
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(30px,5.5vw,56px);
+  color:var(--navy); line-height:1.1; margin-bottom:8px;
+}
+.header h1 span{font-style:italic;color:var(--amber-deep);}
+.header-sub{
+  font-family:'Noto Serif KR',serif;
+  font-size:18px; color:var(--text-soft); margin-bottom:4px;
+}
+.header-desc{
+  font-size:14px; color:var(--text-muted); margin-top:8px;
+  max-width:560px; margin-inline:auto; line-height:1.7;
+}
+
+/* ── NAV ── */
+.nav-wrap{
+  position:relative; z-index:2;
+  display:flex; justify-content:center;
+  gap:8px; padding:0 20px 32px; flex-wrap:wrap;
+}
+.nav-btn{
+  background:white; border:2px solid #e8e0d4;
+  color:var(--text-soft); padding:10px 22px;
+  border-radius:30px; font-size:14px; font-weight:500;
+  cursor:pointer; transition:all 0.25s;
+}
+.nav-btn:hover{border-color:var(--amber);color:var(--navy);}
+.nav-btn.active{background:var(--navy);border-color:var(--navy);color:white;}
+.nav-btn.quiz-btn.active{background:var(--coral);border-color:var(--coral);}
+
+/* ── MAIN ── */
+.main{max-width:960px;margin:0 auto;padding:0 20px 80px;position:relative;z-index:1;}
+.section{display:none;}
+.section.active{display:block;animation:fadeUp 0.4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTION TITLES ── */
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px; color:var(--navy); margin-bottom:6px;
+}
+.sec-desc{
+  font-size:14px; color:var(--text-muted);
+  margin-bottom:28px; line-height:1.7;
+}
+
+/* ── VERB MAP TABLE ── */
+.vm-wrap{
+  background:white; border-radius:16px;
+  border:1.5px solid #ede8e0; overflow:hidden;
+  margin-bottom:22px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+.vm-head{
+  display:grid;
+  grid-template-columns: 130px 1fr 1fr 1fr;
+  background:var(--navy); color:white;
+  font-size:12px; font-weight:500;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:13px 18px; gap:10px;
+}
+.vm-row{
+  display:grid;
+  grid-template-columns: 130px 1fr 1fr 1fr;
+  padding:16px 18px; gap:10px;
+  border-bottom:1px solid #f0ece6;
+  align-items:start; transition:background 0.2s;
+}
+.vm-row:hover{background:#fdf9f4;}
+.vm-row:last-child{border-bottom:none;}
+.vm-verb{
+  font-family:'Noto Serif KR',serif;
+  font-size:18px; font-weight:600; color:var(--navy);
+}
+.vm-verb-en{font-size:12px; color:var(--text-muted); margin-top:2px;}
+.vm-irregular{
+  display:inline-block;
+  background:var(--coral); color:white;
+  font-size:10px; padding:1px 6px; border-radius:6px;
+  margin-top:4px;
+}
+.vm-cell{font-size:14px; line-height:1.8;}
+.noun-chip, .adj-chip{
+  display:inline-block; border-radius:20px;
+  padding:3px 10px; margin:2px 3px 2px 0;
+  font-size:13px; font-family:'Noto Serif KR',serif;
+}
+.noun-chip{background:#e8f4ec; color:#2d6e44; border:1px solid #b8ddc4;}
+.adj-chip{background:#fdf0e0; color:#8a5200; border:1px solid #e8c87e;}
+.vm-en-note{font-size:12px; color:var(--text-muted); line-height:1.6; margin-top:4px; font-style:italic;}
+
+/* ── VOCAB GRID ── */
+.coll-group-title{
+  font-size:13px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--text-muted); margin-bottom:14px;
+  padding-left:14px; border-left:3px solid var(--gold);
+}
+.vocab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:13px; margin-bottom:28px;
+}
+.vocab-card{
+  background:white; border:1.5px solid #ede8e0;
+  border-radius:14px; padding:16px 14px;
+  transition:all 0.25s; box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  position:relative; overflow:hidden;
+}
+.vocab-card::before{
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:3px;
+}
+.vocab-card.noun::before{background:var(--navy-light);}
+.vocab-card.adj::before{background:var(--amber);}
+.vocab-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+.vocab-tag{
+  font-size:10px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;
+}
+.tag-noun{color:var(--navy);}
+.tag-adj{color:var(--amber-deep);}
+.vocab-en{font-size:19px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.vocab-ko{
+  font-family:'Noto Serif KR',serif;
+  font-size:15px; color:var(--text-soft);
+}
+.vocab-note{font-size:11px;color:var(--text-muted);margin-top:4px;font-style:italic;}
+
+/* ── VERB SECTION DIVIDER ── */
+.verb-divider{
+  display:flex; align-items:center; gap:14px;
+  margin:30px 0 18px 0;
+}
+.verb-badge{
+  background:var(--navy); color:white;
+  font-family:'Noto Serif KR',serif;
+  font-size:18px; font-weight:600;
+  padding:8px 20px; border-radius:30px;
+  white-space:nowrap;
+}
+.verb-badge-en{font-size:13px;color:var(--text-muted);font-style:italic;}
+.verb-divider-line{flex:1;height:1.5px;background:#e8e0d4;}
+.badge-rl{background:var(--coral);font-size:11px;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+
+/* ── COLLOCATIONS ── */
+.coll-group{margin-bottom:32px;}
+.coll-list{display:flex;flex-direction:column;gap:10px;}
+.coll-item{
+  background:white; border:1.5px solid #ede8e0;
+  border-radius:12px; padding:14px 20px;
+  display:flex; align-items:center;
+  justify-content:space-between; gap:16px;
+  transition:all 0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.coll-item:hover{border-color:var(--gold);transform:translateX(4px);}
+.coll-left{display:flex;align-items:center;gap:10px;}
+.coll-icon{font-size:20px;width:28px;flex-shrink:0;text-align:center;}
+.coll-en{font-size:17px;font-weight:600;color:var(--text);}
+.coll-en-note{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.coll-arrow{color:var(--text-muted);font-size:18px;flex-shrink:0;}
+.coll-ko{
+  font-family:'Noto Serif KR',serif;
+  font-size:16px; color:var(--amber-deep); text-align:right;
+}
+.coll-ko-verb{
+  font-size:12px; color:var(--navy-light);
+  text-align:right; margin-top:2px; font-weight:500;
+}
+
+/* ── QUIZ ── */
+.quiz-header{
+  background:linear-gradient(135deg,var(--coral),#b84a38);
+  color:white; border-radius:16px;
+  padding:28px 32px; margin-bottom:28px;
+  display:flex; align-items:center;
+  justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.quiz-header h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:4px;}
+.quiz-header p{font-size:14px;opacity:0.85;}
+.quiz-score-display{
+  background:rgba(255,255,255,0.2);
+  border-radius:12px; padding:12px 24px;
+  text-align:center; font-size:13px;
+  opacity:0; transition:opacity 0.3s;
+}
+.quiz-score-display.visible{opacity:1;}
+.quiz-score-num{font-size:32px;font-weight:700;}
+.q-card{
+  background:white; border:1.5px solid #ede8e0;
+  border-radius:16px; padding:22px 26px;
+  margin-bottom:16px; box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  transition:border-color 0.3s;
+}
+.q-card.answered-correct{border-color:var(--navy-light);}
+.q-card.answered-wrong{border-color:var(--coral);}
+.q-num{
+  font-size:11px; font-weight:600; letter-spacing:2px;
+  color:var(--text-muted); text-transform:uppercase; margin-bottom:10px;
+}
+.q-text{
+  font-size:20px; font-weight:600; color:var(--text);
+  margin-bottom:18px; line-height:1.5;
+}
+.q-text .highlight{color:var(--navy);font-style:italic;}
+.q-options{display:grid;gap:10px;}
+.q-opt{
+  background:#fdf9f2; border:2px solid #ede8e0;
+  border-radius:10px; padding:12px 18px;
+  font-size:16px; cursor:pointer; text-align:left;
+  transition:all 0.2s; font-family:inherit;
+  color:var(--text); display:flex; align-items:center; gap:12px;
+}
+.q-opt:hover:not(:disabled){border-color:var(--amber);background:#fdf3e3;transform:translateX(3px);}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{border-color:var(--navy);background:#eef4fb;color:var(--navy);font-weight:600;}
+.q-opt.wrong{border-color:var(--coral);background:#fff5f3;color:var(--coral);}
+.q-opt .opt-icon{font-size:18px;width:24px;flex-shrink:0;}
+.q-opt .opt-ko{font-family:'Noto Serif KR',serif;}
+.q-explanation{
+  margin-top:14px; padding:14px 18px;
+  border-radius:10px; font-size:14px; line-height:1.7; display:none;
+}
+.q-explanation.show{display:block;}
+.q-explanation.correct-exp{background:#eef4fb;border:1.5px solid var(--navy-light);color:#1a3d6e;}
+.q-explanation.wrong-exp{background:#fff5f3;border:1.5px solid var(--coral-light);color:#8a2a1a;}
+
+.quiz-controls{
+  display:flex; gap:12px; justify-content:center;
+  margin-top:28px; flex-wrap:wrap;
+}
+.btn-submit,.btn-retry,.btn-review{
+  padding:14px 36px; border-radius:30px;
+  font-size:16px; font-weight:600;
+  border:none; cursor:pointer;
+  transition:all 0.25s; font-family:inherit;
+}
+.btn-submit{background:var(--coral);color:white;}
+.btn-submit:hover{background:#b84a38;transform:translateY(-2px);box-shadow:0 6px 20px rgba(224,112,96,0.4);}
+.btn-retry{background:var(--navy);color:white;}
+.btn-retry:hover{background:#1e3352;transform:translateY(-2px);}
+.btn-review{background:white;color:var(--text);border:2px solid #ede8e0;}
+.btn-review:hover{border-color:var(--text-soft);transform:translateY(-2px);}
+
+.quiz-result-banner{
+  display:none;
+  background:linear-gradient(135deg,var(--navy),var(--navy-light));
+  color:white; border-radius:16px;
+  padding:32px; text-align:center; margin-top:28px;
+}
+.quiz-result-banner.show{display:block;animation:fadeUp 0.5s ease;}
+.result-score{font-size:56px;font-weight:700;margin:12px 0;}
+.result-msg{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;}
+.result-sub{font-size:14px;opacity:0.85;}
+
+@media(max-width:640px){
+  .vm-head,.vm-row{grid-template-columns:1fr 1fr;}
+  .vm-head .head-note,.vm-row .vm-en-note{display:none;}
+  .coll-item{flex-direction:column;align-items:flex-start;}
+  .coll-ko,.coll-ko-verb{text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-bg"></div>
+  <span class="icon-float">🛍️</span>
+  <span class="icon-float">🏃</span>
+  <span class="icon-float">🎬</span>
+  <span class="icon-float">🏠</span>
+  <span class="icon-float">🍎</span>
+  <span class="icon-float">✨</span>
+  <div class="header-content">
+    <div class="header-label">Verb Vocabulary Expansion</div>
+    <h1>동사 심화 어휘 <span>Verb + Noun &amp; Adj</span></h1>
+    <div class="header-sub">동사와 함께 쓰이는 명사 &amp; 형용사 학습</div>
+    <p class="header-desc">~는 게 어때요? 단원 확장 — 사다, 고르다, 운동하다, 가다, 열다, 들다, 먹다, 자다, 청소하다, 보다, 만들다</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <button class="nav-btn active" onclick="showSection('families',this)">🗺️ 동사 지도 Verb Map</button>
+  <button class="nav-btn" onclick="showSection('vocab',this)">📚 어휘 카드 Vocab</button>
+  <button class="nav-btn" onclick="showSection('coll',this)">🔗 콜로케이션</button>
+  <button class="nav-btn quiz-btn" onclick="showSection('quiz',this)">✏️ 퀴즈 Quiz</button>
+</div>
+
+<div class="main">
+
+<!-- ═══ SECTION 1: VERB MAP ═══ -->
+<div id="families" class="section active">
+  <h2 class="sec-title">🗺️ 동사 지도 — Verb Map</h2>
+  <p class="sec-desc">각 동사와 자주 함께 쓰이는 명사(초록)와 상황을 설명하는 형용사(노랑)를 한눈에 봐요 — Each verb shown with its common nouns (green) and situational adjectives (yellow)</p>
+
+  <div class="vm-wrap">
+    <div class="vm-head">
+      <div>동사 Verb</div>
+      <div>함께 쓰이는 명사 Nouns Used With It</div>
+      <div>상황 형용사 Describing Adjectives</div>
+      <div>예시 문장 Example</div>
+    </div>
+
+    <!-- 사다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">사다</div>
+        <div class="vm-verb-en">to buy</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">가방 bag</span>
+        <span class="noun-chip">과일 fruit</span>
+        <span class="noun-chip">집 house</span>
+        <span class="noun-chip">옷 clothes</span>
+        <span class="noun-chip">선물 gift</span>
+        <span class="noun-chip">책 book</span>
+        <span class="noun-chip">신발 shoes</span>
+        <span class="noun-chip">꽃 flowers</span>
+        <span class="noun-chip">채소 vegetables</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">비싼 expensive</span>
+        <span class="adj-chip">싼 cheap</span>
+        <span class="adj-chip">새로운 new</span>
+        <span class="adj-chip">예쁜 pretty</span>
+        <span class="adj-chip">신선한 fresh</span>
+      </div>
+      <div class="vm-en-note">시장에서 <strong>신선한 과일을 사다</strong>. / Let's buy <em>fresh fruit</em> at the market.</div>
+    </div>
+
+    <!-- 고르다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">고르다</div>
+        <div class="vm-verb-en">to choose / pick</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">인형 doll</span>
+        <span class="noun-chip">색깔 color</span>
+        <span class="noun-chip">메뉴 menu</span>
+        <span class="noun-chip">선물 gift</span>
+        <span class="noun-chip">자리 seat</span>
+        <span class="noun-chip">옷 clothes</span>
+        <span class="noun-chip">책 book</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">마음에 드는 one's liking</span>
+        <span class="adj-chip">예쁜 pretty</span>
+        <span class="adj-chip">좋은 good</span>
+        <span class="adj-chip">어려운 hard to decide</span>
+      </div>
+      <div class="vm-en-note">마음에 드는 <strong>색깔을 고르다</strong>. / Choose the <em>color</em> you like.</div>
+    </div>
+
+    <!-- 운동하다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">운동하다</div>
+        <div class="vm-verb-en">to exercise</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">수영 swimming</span>
+        <span class="noun-chip">달리기 running</span>
+        <span class="noun-chip">요가 yoga</span>
+        <span class="noun-chip">축구 soccer</span>
+        <span class="noun-chip">체육관 gym</span>
+        <span class="noun-chip">공원 park</span>
+        <span class="noun-chip">아침 morning</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">바쁜 busy</span>
+        <span class="adj-chip">건강한 healthy</span>
+        <span class="adj-chip">힘든 tiring</span>
+        <span class="adj-chip">규칙적인 regular</span>
+      </div>
+      <div class="vm-en-note">매일 아침 <strong>공원에서 달리기를 운동하다</strong>. / Exercise by <em>running in the park</em> every morning.</div>
+    </div>
+
+    <!-- 가다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">가다</div>
+        <div class="vm-verb-en">to go</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">학교 school</span>
+        <span class="noun-chip">서울 Seoul</span>
+        <span class="noun-chip">공원 park</span>
+        <span class="noun-chip">병원 hospital</span>
+        <span class="noun-chip">시장 market</span>
+        <span class="noun-chip">교회 church</span>
+        <span class="noun-chip">여행 trip</span>
+        <span class="noun-chip">바다 sea</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">먼 far</span>
+        <span class="adj-chip">가까운 near</span>
+        <span class="adj-chip">즐거운 enjoyable</span>
+        <span class="adj-chip">바쁜 busy</span>
+      </div>
+      <div class="vm-en-note">여름 방학에 <strong>서울에 가다</strong>. / <em>Go to Seoul</em> for summer vacation.</div>
+    </div>
+
+    <!-- 열다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">열다</div>
+        <div class="vm-verb-en">to open</div>
+        <div class="vm-irregular">⚠️ ㄹ탈락</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">창문 window</span>
+        <span class="noun-chip">문 door</span>
+        <span class="noun-chip">냉장고 refrigerator</span>
+        <span class="noun-chip">상자 box</span>
+        <span class="noun-chip">가방 bag</span>
+        <span class="noun-chip">책 book</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">더운 hot</span>
+        <span class="adj-chip">답답한 stuffy</span>
+        <span class="adj-chip">잠긴 locked</span>
+        <span class="adj-chip">무거운 heavy</span>
+      </div>
+      <div class="vm-en-note">더우면 <strong>창문을 열다</strong>. (<em>여는 게 어때요</em>?) / If it's hot, open the <em>window</em>.</div>
+    </div>
+
+    <!-- 들다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">들다</div>
+        <div class="vm-verb-en">to lift / carry</div>
+        <div class="vm-irregular">⚠️ ㄹ탈락</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">상자 box</span>
+        <span class="noun-chip">가방 bag</span>
+        <span class="noun-chip">짐 luggage</span>
+        <span class="noun-chip">물건 item</span>
+        <span class="noun-chip">바구니 basket</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">무거운 heavy</span>
+        <span class="adj-chip">가벼운 light</span>
+        <span class="adj-chip">큰 big / large</span>
+        <span class="adj-chip">작은 small</span>
+      </div>
+      <div class="vm-en-note">무거운 <strong>상자를 같이 들다</strong>. (<em>드는 게 어때요</em>?) / Lift the <em>heavy box</em> together.</div>
+    </div>
+
+    <!-- 먹다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">먹다</div>
+        <div class="vm-verb-en">to eat</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">밥 rice/meal</span>
+        <span class="noun-chip">저녁 dinner</span>
+        <span class="noun-chip">과일 fruit</span>
+        <span class="noun-chip">빵 bread</span>
+        <span class="noun-chip">라면 ramen</span>
+        <span class="noun-chip">채소 vegetables</span>
+        <span class="noun-chip">아침 breakfast</span>
+        <span class="noun-chip">점심 lunch</span>
+        <span class="noun-chip">과자 snack</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">맛있는 delicious</span>
+        <span class="adj-chip">뜨거운 hot</span>
+        <span class="adj-chip">달콤한 sweet</span>
+        <span class="adj-chip">매운 spicy</span>
+        <span class="adj-chip">배고픈 hungry</span>
+      </div>
+      <div class="vm-en-note">배가 고프니까 <strong>맛있는 저녁을 먹다</strong>. / Let's eat <em>a delicious dinner</em> since we're hungry.</div>
+    </div>
+
+    <!-- 자다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">자다</div>
+        <div class="vm-verb-en">to sleep</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">낮잠 nap</span>
+        <span class="noun-chip">밤 night</span>
+        <span class="noun-chip">침대 bed</span>
+        <span class="noun-chip">방 room</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">피곤한 tired</span>
+        <span class="adj-chip">졸린 sleepy</span>
+        <span class="adj-chip">깊은 deep (sleep)</span>
+        <span class="adj-chip">늦은 late</span>
+      </div>
+      <div class="vm-en-note">밤이 늦었으니 <strong>어서 자다</strong>. / It's late, so go to <em>sleep</em> soon.</div>
+    </div>
+
+    <!-- 청소하다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">청소하다</div>
+        <div class="vm-verb-en">to clean / tidy</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">방 room</span>
+        <span class="noun-chip">책상 desk</span>
+        <span class="noun-chip">화장실 bathroom</span>
+        <span class="noun-chip">부엌 kitchen</span>
+        <span class="noun-chip">집 house</span>
+        <span class="noun-chip">바닥 floor</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">지저분한 messy</span>
+        <span class="adj-chip">더러운 dirty</span>
+        <span class="adj-chip">깔끔한 neat</span>
+        <span class="adj-chip">깨끗한 clean</span>
+      </div>
+      <div class="vm-en-note">지저분한 <strong>책상을 청소하다</strong>. / Clean the <em>messy desk</em>.</div>
+    </div>
+
+    <!-- 보다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">보다</div>
+        <div class="vm-verb-en">to watch / see</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">영화 movie</span>
+        <span class="noun-chip">TV TV</span>
+        <span class="noun-chip">드라마 drama</span>
+        <span class="noun-chip">하늘 sky</span>
+        <span class="noun-chip">사진 photo</span>
+        <span class="noun-chip">인어공주 Little Mermaid</span>
+        <span class="noun-chip">만화 cartoon</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">재미있는 fun/interesting</span>
+        <span class="adj-chip">슬픈 sad</span>
+        <span class="adj-chip">무서운 scary</span>
+        <span class="adj-chip">감동적인 touching</span>
+      </div>
+      <div class="vm-en-note">재미있는 <strong>영화를 보다</strong>. / Watch a <em>fun movie</em>.</div>
+    </div>
+
+    <!-- 만들다 -->
+    <div class="vm-row">
+      <div>
+        <div class="vm-verb">만들다</div>
+        <div class="vm-verb-en">to make / create</div>
+        <div class="vm-irregular">⚠️ ㄹ탈락</div>
+      </div>
+      <div class="vm-cell">
+        <span class="noun-chip">송편 songpyeon</span>
+        <span class="noun-chip">케이크 cake</span>
+        <span class="noun-chip">음식 food</span>
+        <span class="noun-chip">인형 doll</span>
+        <span class="noun-chip">카드 card</span>
+        <span class="noun-chip">쿠키 cookie</span>
+        <span class="noun-chip">선물 gift</span>
+      </div>
+      <div class="vm-cell">
+        <span class="adj-chip">맛있는 delicious</span>
+        <span class="adj-chip">예쁜 pretty</span>
+        <span class="adj-chip">쉬운 easy</span>
+        <span class="adj-chip">어려운 difficult</span>
+        <span class="adj-chip">특별한 special</span>
+      </div>
+      <div class="vm-en-note">추석에 <strong>예쁜 송편을 만들다</strong>. (<em>만드는 게 어때요</em>?) / Make <em>pretty songpyeon</em> at Chuseok.</div>
+    </div>
+
+  </div><!-- /vm-wrap -->
+</div>
+
+<!-- ═══ SECTION 2: VOCAB CARDS ═══ -->
+<div id="vocab" class="section">
+  <h2 class="sec-title">📚 어휘 카드 — Independent Vocabulary</h2>
+  <p class="sec-desc">동사들과 함께 자주 쓰이는 핵심 명사와 형용사를 카드로 익혀요 — Core nouns and adjectives used with the unit's verbs</p>
+
+  <!-- ── SHOPPING / BUYING 사다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">사다 <span style="font-size:13px;font-weight:400;">to buy</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — things you buy</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Bag</div><div class="vocab-ko">가방</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Fruit</div><div class="vocab-ko">과일</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">House</div><div class="vocab-ko">집</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Clothes</div><div class="vocab-ko">옷</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Gift / Present</div><div class="vocab-ko">선물</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Shoes</div><div class="vocab-ko">신발</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Vegetables</div><div class="vocab-ko">채소</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Flowers</div><div class="vocab-ko">꽃</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — price &amp; quality</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Expensive</div><div class="vocab-ko">비싼</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Cheap / Affordable</div><div class="vocab-ko">싼</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">New</div><div class="vocab-ko">새로운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Fresh</div><div class="vocab-ko">신선한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Pretty / Beautiful</div><div class="vocab-ko">예쁜</div></div>
+  </div>
+
+  <!-- ── EXERCISE 운동하다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">운동하다 <span style="font-size:13px;font-weight:400;">to exercise</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — types &amp; places of exercise</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Swimming</div><div class="vocab-ko">수영</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Running</div><div class="vocab-ko">달리기</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Soccer</div><div class="vocab-ko">축구</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Yoga</div><div class="vocab-ko">요가</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Park</div><div class="vocab-ko">공원</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Gym</div><div class="vocab-ko">체육관</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — how exercise feels</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Healthy</div><div class="vocab-ko">건강한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Tiring / Hard</div><div class="vocab-ko">힘든</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Busy</div><div class="vocab-ko">바쁜</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Regular / Consistent</div><div class="vocab-ko">규칙적인</div></div>
+  </div>
+
+  <!-- ── LIFTING 들다 / OPENING 열다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">열다 / 들다 <span class="badge-rl">ㄹ탈락</span> <span style="font-size:13px;font-weight:400;margin-left:6px;">to open / lift</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — things you open or carry</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Window</div><div class="vocab-ko">창문</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Door</div><div class="vocab-ko">문</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Box</div><div class="vocab-ko">상자</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Luggage / Bags</div><div class="vocab-ko">짐</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Refrigerator</div><div class="vocab-ko">냉장고</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Basket</div><div class="vocab-ko">바구니</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — describing weight &amp; conditions</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Heavy</div><div class="vocab-ko">무거운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Light</div><div class="vocab-ko">가벼운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Hot (weather/room)</div><div class="vocab-ko">더운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Stuffy</div><div class="vocab-ko">답답한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Big / Large</div><div class="vocab-ko">큰</div></div>
+  </div>
+
+  <!-- ── EATING 먹다 / SLEEPING 자다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">먹다 / 자다 <span style="font-size:13px;font-weight:400;">to eat / sleep</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — meals &amp; foods</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Meal / Rice</div><div class="vocab-ko">밥</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Breakfast</div><div class="vocab-ko">아침</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Lunch</div><div class="vocab-ko">점심</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Dinner</div><div class="vocab-ko">저녁</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Ramen / Noodles</div><div class="vocab-ko">라면</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Bread</div><div class="vocab-ko">빵</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Snack</div><div class="vocab-ko">과자</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Nap</div><div class="vocab-ko">낮잠</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — taste &amp; feelings</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Delicious / Tasty</div><div class="vocab-ko">맛있는</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Sweet</div><div class="vocab-ko">달콤한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Spicy</div><div class="vocab-ko">매운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Hungry</div><div class="vocab-ko">배고픈</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Tired</div><div class="vocab-ko">피곤한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Sleepy</div><div class="vocab-ko">졸린</div></div>
+  </div>
+
+  <!-- ── CLEANING 청소하다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">청소하다 <span style="font-size:13px;font-weight:400;">to clean</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — places &amp; things to clean</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Room</div><div class="vocab-ko">방</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Desk</div><div class="vocab-ko">책상</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Bathroom</div><div class="vocab-ko">화장실</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Kitchen</div><div class="vocab-ko">부엌</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Floor</div><div class="vocab-ko">바닥</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — clean / messy states</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Messy</div><div class="vocab-ko">지저분한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Dirty</div><div class="vocab-ko">더러운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Clean</div><div class="vocab-ko">깨끗한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Neat / Tidy</div><div class="vocab-ko">깔끔한</div></div>
+  </div>
+
+  <!-- ── WATCHING / MAKING 보다 만들다 ── -->
+  <div class="verb-divider">
+    <div class="verb-badge">보다 / 만들다 <span class="badge-rl">만들: ㄹ탈락</span> <span style="font-size:13px;font-weight:400;margin-left:6px;">to watch / make</span></div>
+    <div class="verb-divider-line"></div>
+  </div>
+  <div class="coll-group-title">명사 Nouns — things to watch &amp; make</div>
+  <div class="vocab-grid">
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Movie</div><div class="vocab-ko">영화</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Drama (TV)</div><div class="vocab-ko">드라마</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Cartoon / Animation</div><div class="vocab-ko">만화</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Songpyeon (rice cake)</div><div class="vocab-ko">송편</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Cake</div><div class="vocab-ko">케이크</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Cookie</div><div class="vocab-ko">쿠키</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Card (greeting)</div><div class="vocab-ko">카드</div></div>
+    <div class="vocab-card noun"><div class="vocab-tag tag-noun">NOUN · 명사</div><div class="vocab-en">Doll</div><div class="vocab-ko">인형</div></div>
+  </div>
+  <div class="coll-group-title">형용사 Adjectives — describing films &amp; creations</div>
+  <div class="vocab-grid">
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Fun / Interesting</div><div class="vocab-ko">재미있는</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Sad</div><div class="vocab-ko">슬픈</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Scary</div><div class="vocab-ko">무서운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Touching / Moving</div><div class="vocab-ko">감동적인</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Special</div><div class="vocab-ko">특별한</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Easy</div><div class="vocab-ko">쉬운</div></div>
+    <div class="vocab-card adj"><div class="vocab-tag tag-adj">ADJ · 형용사</div><div class="vocab-en">Difficult</div><div class="vocab-ko">어려운</div></div>
+  </div>
+
+</div><!-- /vocab section -->
+
+<!-- ═══ SECTION 3: COLLOCATIONS ═══ -->
+<div id="coll" class="section">
+  <h2 class="sec-title">🔗 동사 + 명사 콜로케이션</h2>
+  <p class="sec-desc">동사와 명사를 뭉치(덩어리)로 외우면 더 자연스러운 한국어가 됩니다 — Learn verb+noun pairs as natural chunks</p>
+
+  <!-- 사다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">사다 (to buy) — 무엇을 살 수 있어요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">👜</div><div><div class="coll-en">Buy a bag</div><div class="coll-en-note">to buy a new bag</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">가방을 사다</div><div class="coll-ko-verb">가방을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🍎</div><div><div class="coll-en">Buy fruit</div><div class="coll-en-note">fresh fruit at the market</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">과일을 사다</div><div class="coll-ko-verb">과일을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏠</div><div><div class="coll-en">Buy a house</div><div class="coll-en-note">to purchase / buy a home</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">집을 사다</div><div class="coll-ko-verb">집을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">👗</div><div><div class="coll-en">Buy clothes</div><div class="coll-en-note">shopping for clothes</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">옷을 사다</div><div class="coll-ko-verb">옷을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🎁</div><div><div class="coll-en">Buy a gift</div><div class="coll-en-note">buy a present for someone</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">선물을 사다</div><div class="coll-ko-verb">선물을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">👟</div><div><div class="coll-en">Buy shoes</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">신발을 사다</div><div class="coll-ko-verb">신발을 사는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">💐</div><div><div class="coll-en">Buy flowers</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">꽃을 사다</div><div class="coll-ko-verb">꽃을 사는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 고르다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">고르다 (to choose) — 무엇을 고를 수 있어요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🎎</div><div><div class="coll-en">Choose a doll</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">인형을 고르다</div><div class="coll-ko-verb">인형을 고르는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🎨</div><div><div class="coll-en">Choose a color</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">색깔을 고르다</div><div class="coll-ko-verb">색깔을 고르는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🍽️</div><div><div class="coll-en">Choose from the menu</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">메뉴를 고르다</div><div class="coll-ko-verb">메뉴를 고르는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">💺</div><div><div class="coll-en">Choose a seat</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">자리를 고르다</div><div class="coll-ko-verb">자리를 고르는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 운동하다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">운동하다 (to exercise) — 어떤 운동을 해요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏊</div><div><div class="coll-en">Do swimming</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">수영을 하다</div><div class="coll-ko-verb">수영을 하는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏃</div><div><div class="coll-en">Go running</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">달리기를 하다</div><div class="coll-ko-verb">달리기를 하는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">⚽</div><div><div class="coll-en">Play soccer</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">축구를 하다</div><div class="coll-ko-verb">축구를 하는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🧘</div><div><div class="coll-en">Do yoga</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">요가를 하다</div><div class="coll-ko-verb">요가를 하는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 가다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">가다 (to go) — 어디에 가요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏫</div><div><div class="coll-en">Go to school</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">학교에 가다</div><div class="coll-ko-verb">학교에 가는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🗺️</div><div><div class="coll-en">Go to Seoul</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">서울에 가다</div><div class="coll-ko-verb">서울에 가는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🌳</div><div><div class="coll-en">Go to the park</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">공원에 가다</div><div class="coll-ko-verb">공원에 가는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏥</div><div><div class="coll-en">Go to the hospital</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">병원에 가다</div><div class="coll-ko-verb">병원에 가는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🌊</div><div><div class="coll-en">Go to the sea / beach</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">바다에 가다</div><div class="coll-ko-verb">바다에 가는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 열다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">열다 (to open) ⚠️ 여는 게 어때요? — 무엇을 열어요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🪟</div><div><div class="coll-en">Open the window</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">창문을 열다</div><div class="coll-ko-verb">창문을 여는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🚪</div><div><div class="coll-en">Open the door</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">문을 열다</div><div class="coll-ko-verb">문을 여는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">📦</div><div><div class="coll-en">Open the box</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">상자를 열다</div><div class="coll-ko-verb">상자를 여는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🧊</div><div><div class="coll-en">Open the refrigerator</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">냉장고를 열다</div><div class="coll-ko-verb">냉장고를 여는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 들다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">들다 (to lift/carry) ⚠️ 드는 게 어때요? — 무엇을 들어요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">📦</div><div><div class="coll-en">Lift the box</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">상자를 들다</div><div class="coll-ko-verb">상자를 드는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">👜</div><div><div class="coll-en">Carry the bag</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">가방을 들다</div><div class="coll-ko-verb">가방을 드는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🧳</div><div><div class="coll-en">Carry the luggage</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">짐을 들다</div><div class="coll-ko-verb">짐을 드는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 먹다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">먹다 (to eat) — 무엇을 먹어요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🍚</div><div><div class="coll-en">Eat a meal / rice</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">밥을 먹다</div><div class="coll-ko-verb">밥을 먹는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🌙</div><div><div class="coll-en">Eat dinner</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">저녁을 먹다</div><div class="coll-ko-verb">저녁을 먹는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">☀️</div><div><div class="coll-en">Eat breakfast</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">아침을 먹다</div><div class="coll-ko-verb">아침을 먹는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🍜</div><div><div class="coll-en">Eat ramen</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">라면을 먹다</div><div class="coll-ko-verb">라면을 먹는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 청소하다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">청소하다 (to clean) — 어디를 청소해요?</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🛋️</div><div><div class="coll-en">Clean the room</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">방을 청소하다</div><div class="coll-ko-verb">방을 청소하는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">📖</div><div><div class="coll-en">Clean the desk</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">책상을 청소하다</div><div class="coll-ko-verb">책상을 청소하는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🏠</div><div><div class="coll-en">Clean the house</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">집을 청소하다</div><div class="coll-ko-verb">집을 청소하는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 보다 / 만들다 -->
+  <div class="coll-group">
+    <div class="coll-group-title">보다 / 만들다 — 무엇을 봐요? 만들어요? (만드는 게 어때요?)</div>
+    <div class="coll-list">
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🎬</div><div><div class="coll-en">Watch a movie</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">영화를 보다</div><div class="coll-ko-verb">영화를 보는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">📺</div><div><div class="coll-en">Watch a drama</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">드라마를 보다</div><div class="coll-ko-verb">드라마를 보는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🍡</div><div><div class="coll-en">Make songpyeon (Chuseok rice cake)</div><div class="coll-en-note">⚠️ 만들다 → 만드는</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">송편을 만들다</div><div class="coll-ko-verb">송편을 만드는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">🎂</div><div><div class="coll-en">Make a cake</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">케이크를 만들다</div><div class="coll-ko-verb">케이크를 만드는 게 어때요?</div></div>
+      </div>
+      <div class="coll-item">
+        <div class="coll-left"><div class="coll-icon">💌</div><div><div class="coll-en">Make a card</div></div></div>
+        <div class="coll-arrow">→</div>
+        <div><div class="coll-ko">카드를 만들다</div><div class="coll-ko-verb">카드를 만드는 게 어때요?</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /coll section -->
+
+<!-- ═══ SECTION 4: QUIZ ═══ -->
+<div id="quiz" class="section">
+
+  <div class="quiz-header">
+    <div>
+      <h2>✏️ 어휘 퀴즈 Vocabulary Quiz</h2>
+      <p>동사와 함께 쓰이는 명사·형용사를 골라 보세요 — Choose the right noun or adjective for each verb!</p>
+    </div>
+    <div class="quiz-score-display" id="scoreDisplay">
+      <div>Score</div>
+      <div class="quiz-score-num" id="scoreNum">0/0</div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="qc1">
+    <div class="q-num">Q1 · 동사 + 명사</div>
+    <div class="q-text">"<span class="highlight">사다</span>" 와 가장 자연스럽게 쓰이는 것은? <br><small style="font-weight:normal;font-size:14px;">Which word goes most naturally with <em>사다</em> (to buy)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(1,this,false)"><span class="opt-icon">😴</span><span class="opt-ko">낮잠 (nap)</span></button>
+      <button class="q-opt" onclick="answer(1,this,true)"><span class="opt-icon">👜</span><span class="opt-ko">가방 (bag)</span></button>
+      <button class="q-opt" onclick="answer(1,this,false)"><span class="opt-icon">🪟</span><span class="opt-ko">창문 (window)</span></button>
+      <button class="q-opt" onclick="answer(1,this,false)"><span class="opt-icon">🏃</span><span class="opt-ko">달리기 (running)</span></button>
+    </div>
+    <div class="q-explanation" id="exp1">✅ <strong>가방을 사다 = Buy a bag</strong>. 사다 (to buy) goes with purchasable things: 가방, 옷, 과일, 신발, 선물… <br>"새 가방을 사는 게 어때요?" = How about buying a new bag?</div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="qc2">
+    <div class="q-num">Q2 · 형용사 의미</div>
+    <div class="q-text">"<span class="highlight">무거운</span>"의 영어 뜻은? <br><small style="font-weight:normal;font-size:14px;">What does 무거운 mean in English?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(2,this,false)"><span class="opt-icon">☀️</span>Hot</button>
+      <button class="q-opt" onclick="answer(2,this,false)"><span class="opt-icon">💨</span>Stuffy</button>
+      <button class="q-opt" onclick="answer(2,this,true)"><span class="opt-icon">🏋️</span>Heavy</button>
+      <button class="q-opt" onclick="answer(2,this,false)"><span class="opt-icon">😌</span>Light</button>
+    </div>
+    <div class="q-explanation" id="exp2">✅ <strong>무거운 = Heavy</strong>. 반대말(opposite): 가벼운 = Light. <br>"이 상자가 너무 무거워요. 같이 드는 게 어때요?" = This box is too heavy. How about lifting it together?</div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="qc3">
+    <div class="q-num">Q3 · 동사 + 명사</div>
+    <div class="q-text">"<span class="highlight">청소하다</span>" 와 가장 자연스럽게 쓰이는 것은?<br><small style="font-weight:normal;font-size:14px;">Which word naturally goes with 청소하다 (to clean)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(3,this,false)"><span class="opt-icon">🎬</span><span class="opt-ko">영화 (movie)</span></button>
+      <button class="q-opt" onclick="answer(3,this,false)"><span class="opt-icon">🍎</span><span class="opt-ko">과일 (fruit)</span></button>
+      <button class="q-opt" onclick="answer(3,this,true)"><span class="opt-icon">📖</span><span class="opt-ko">책상 (desk)</span></button>
+      <button class="q-opt" onclick="answer(3,this,false)"><span class="opt-icon">🎁</span><span class="opt-ko">선물 (gift)</span></button>
+    </div>
+    <div class="q-explanation" id="exp3">✅ <strong>책상을 청소하다 = Clean the desk</strong>. 청소하다 goes with places/surfaces: 방, 책상, 화장실, 부엌, 집. <br>"책상이 지저분하구나 — 청소하는 게 어때요?" = The desk is messy — how about cleaning it?</div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="qc4">
+    <div class="q-num">Q4 · 형용사 의미</div>
+    <div class="q-text">"<span class="highlight">지저분한</span>"의 영어 뜻은?<br><small style="font-weight:normal;font-size:14px;">What does 지저분한 mean?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(4,this,false)"><span class="opt-icon">✨</span>Neat / Tidy</button>
+      <button class="q-opt" onclick="answer(4,this,false)"><span class="opt-icon">🌿</span>Fresh</button>
+      <button class="q-opt" onclick="answer(4,this,true)"><span class="opt-icon">🗑️</span>Messy</button>
+      <button class="q-opt" onclick="answer(4,this,false)"><span class="opt-icon">😰</span>Scary</button>
+    </div>
+    <div class="q-explanation" id="exp4">✅ <strong>지저분한 = Messy</strong>. 반대말(opposite): 깔끔한/깨끗한 = Neat/Clean. <br>"방이 지저분하다 → 청소하는 게 어때요?" = The room is messy → How about cleaning it?</div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="qc5">
+    <div class="q-num">Q5 · 동사 + 명사</div>
+    <div class="q-text">"<span class="highlight">열다</span>" 와 가장 자연스럽게 쓰이는 것은? (열다→여는 게 어때요)<br><small style="font-weight:normal;font-size:14px;">Which word goes naturally with 열다 (to open)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(5,this,false)"><span class="opt-icon">🍡</span><span class="opt-ko">송편 (songpyeon)</span></button>
+      <button class="q-opt" onclick="answer(5,this,true)"><span class="opt-icon">🪟</span><span class="opt-ko">창문 (window)</span></button>
+      <button class="q-opt" onclick="answer(5,this,false)"><span class="opt-icon">⚽</span><span class="opt-ko">축구 (soccer)</span></button>
+      <button class="q-opt" onclick="answer(5,this,false)"><span class="opt-icon">🎬</span><span class="opt-ko">영화 (movie)</span></button>
+    </div>
+    <div class="q-explanation" id="exp5">✅ <strong>창문을 열다 = Open the window</strong>. 열다 goes with: 창문, 문, 냉장고, 상자, 가방. <br>⚠️ 열다 → 여는: "더우면 창문을 여는 게 어때요?" = If it's hot, how about opening the window?</div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="qc6">
+    <div class="q-num">Q6 · 형용사 의미</div>
+    <div class="q-text">"<span class="highlight">재미있는</span>"의 영어 뜻은?<br><small style="font-weight:normal;font-size:14px;">What does 재미있는 mean?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(6,this,false)"><span class="opt-icon">😢</span>Sad</button>
+      <button class="q-opt" onclick="answer(6,this,true)"><span class="opt-icon">😄</span>Fun / Interesting</button>
+      <button class="q-opt" onclick="answer(6,this,false)"><span class="opt-icon">😱</span>Scary</button>
+      <button class="q-opt" onclick="answer(6,this,false)"><span class="opt-icon">😴</span>Tired</button>
+    </div>
+    <div class="q-explanation" id="exp6">✅ <strong>재미있는 = Fun / Interesting</strong>. 재미있는 영화를 보다 = Watch an interesting movie. <br>"인어공주를 보는 게 어때요? 아주 재미있어요!" = How about watching The Little Mermaid? It's so fun!</div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="qc7">
+    <div class="q-num">Q7 · 동사 + 장소</div>
+    <div class="q-text">"<span class="highlight">가다</span>" 와 함께 쓰이는 표현은?<br><small style="font-weight:normal;font-size:14px;">Which expression goes with 가다 (to go)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(7,this,false)"><span class="opt-icon">📦</span><span class="opt-ko">상자를 들다</span></button>
+      <button class="q-opt" onclick="answer(7,this,true)"><span class="opt-icon">🌊</span><span class="opt-ko">바다에 가다</span></button>
+      <button class="q-opt" onclick="answer(7,this,false)"><span class="opt-icon">🎂</span><span class="opt-ko">케이크를 만들다</span></button>
+      <button class="q-opt" onclick="answer(7,this,false)"><span class="opt-icon">🍜</span><span class="opt-ko">라면을 먹다</span></button>
+    </div>
+    <div class="q-explanation" id="exp7">✅ <strong>바다에 가다 = Go to the sea</strong>. 가다 takes destinations with 에: 학교에, 서울에, 공원에, 병원에, 바다에. <br>"여름 방학에 바다에 가는 게 어때요?" = How about going to the sea for summer vacation?</div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="qc8">
+    <div class="q-num">Q8 · 동사 + 명사</div>
+    <div class="q-text">"<span class="highlight">만들다</span>" 와 가장 자연스럽게 쓰이는 것은? (만들다→만드는 게 어때요)<br><small style="font-weight:normal;font-size:14px;">Which word goes with 만들다 (to make)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(8,this,false)"><span class="opt-icon">🏊</span><span class="opt-ko">수영 (swimming)</span></button>
+      <button class="q-opt" onclick="answer(8,this,false)"><span class="opt-icon">🚪</span><span class="opt-ko">문 (door)</span></button>
+      <button class="q-opt" onclick="answer(8,this,true)"><span class="opt-icon">🍡</span><span class="opt-ko">송편 (songpyeon)</span></button>
+      <button class="q-opt" onclick="answer(8,this,false)"><span class="opt-icon">🏥</span><span class="opt-ko">병원 (hospital)</span></button>
+    </div>
+    <div class="q-explanation" id="exp8">✅ <strong>송편을 만들다 = Make songpyeon</strong>. 만들다 goes with things you create: 케이크, 음식, 카드, 쿠키, 인형, 송편. <br>⚠️ 만들다 → 만드는: "추석에 송편을 만드는 게 어때요?" = How about making songpyeon at Chuseok?</div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" id="qc9">
+    <div class="q-num">Q9 · 형용사 의미</div>
+    <div class="q-text">"<span class="highlight">배고픈</span>"의 영어 뜻은?<br><small style="font-weight:normal;font-size:14px;">What does 배고픈 mean?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(9,this,false)"><span class="opt-icon">😴</span>Sleepy</button>
+      <button class="q-opt" onclick="answer(9,this,false)"><span class="opt-icon">😰</span>Tired</button>
+      <button class="q-opt" onclick="answer(9,this,false)"><span class="opt-icon">🔥</span>Spicy</button>
+      <button class="q-opt" onclick="answer(9,this,true)"><span class="opt-icon">🍽️</span>Hungry</button>
+    </div>
+    <div class="q-explanation" id="exp9">✅ <strong>배고픈 = Hungry</strong>. 배가 고프다 (formal) / 배고파요 (casual). <br>"배가 고프니까 저녁을 먹는 게 어때요?" = Since we're hungry, how about eating dinner?</div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" id="qc10">
+    <div class="q-num">Q10 · 동사 + 명사</div>
+    <div class="q-text">"<span class="highlight">운동하다 / 달리기를 하다</span>" 에 가장 자연스러운 장소는?<br><small style="font-weight:normal;font-size:14px;">Which place goes most naturally with exercising / running?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(10,this,false)"><span class="opt-icon">🛋️</span><span class="opt-ko">방 (room)</span></button>
+      <button class="q-opt" onclick="answer(10,this,true)"><span class="opt-icon">🌳</span><span class="opt-ko">공원 (park)</span></button>
+      <button class="q-opt" onclick="answer(10,this,false)"><span class="opt-icon">🧊</span><span class="opt-ko">냉장고 (refrigerator)</span></button>
+      <button class="q-opt" onclick="answer(10,this,false)"><span class="opt-icon">🏥</span><span class="opt-ko">병원 (hospital)</span></button>
+    </div>
+    <div class="q-explanation" id="exp10">✅ <strong>공원에서 달리기를 하다 = Go running in the park</strong>. 공원 (park) is a natural setting for 운동하다. <br>"아침마다 공원에서 운동하는 게 어때요?" = How about exercising in the park every morning?</div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card" id="qc11">
+    <div class="q-num">Q11 · 콜로케이션 정리</div>
+    <div class="q-text">"<span class="highlight">신선한</span>" 과 가장 자연스럽게 어울리는 명사는?<br><small style="font-weight:normal;font-size:14px;">Which noun best collocates with 신선한 (fresh)?</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(11,this,false)"><span class="opt-icon">😴</span><span class="opt-ko">낮잠 (nap)</span></button>
+      <button class="q-opt" onclick="answer(11,this,false)"><span class="opt-icon">🚪</span><span class="opt-ko">문 (door)</span></button>
+      <button class="q-opt" onclick="answer(11,this,true)"><span class="opt-icon">🍎</span><span class="opt-ko">과일 (fruit)</span></button>
+      <button class="q-opt" onclick="answer(11,this,false)"><span class="opt-icon">📦</span><span class="opt-ko">상자 (box)</span></button>
+    </div>
+    <div class="q-explanation" id="exp11">✅ <strong>신선한 과일 = Fresh fruit</strong>. 신선한 (fresh) pairs well with food items: 신선한 과일, 신선한 채소. <br>"시장에서 신선한 과일을 사는 게 어때요?" = How about buying fresh fruit at the market?</div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card" id="qc12">
+    <div class="q-num">Q12 · 심화 콜로케이션</div>
+    <div class="q-text">다음 중 "들다(드는 게 어때요?)"와 어울리는 것은?<br><small style="font-weight:normal;font-size:14px;">Which best completes: "___을/를 드는 게 어때요?" (들다 = to lift/carry)</small></div>
+    <div class="q-options">
+      <button class="q-opt" onclick="answer(12,this,false)"><span class="opt-icon">🎬</span><span class="opt-ko">영화 (movie)</span></button>
+      <button class="q-opt" onclick="answer(12,this,false)"><span class="opt-icon">🛁</span><span class="opt-ko">화장실 (bathroom)</span></button>
+      <button class="q-opt" onclick="answer(12,this,true)"><span class="opt-icon">🧳</span><span class="opt-ko">짐 (luggage)</span></button>
+      <button class="q-opt" onclick="answer(12,this,false)"><span class="opt-icon">⚽</span><span class="opt-ko">축구 (soccer)</span></button>
+    </div>
+    <div class="q-explanation" id="exp12">✅ <strong>짐을 들다 = Carry the luggage</strong>. 들다 (to lift/carry) goes with physical objects: 짐, 상자, 가방, 바구니. <br>⚠️ ㄹ탈락: 들다 → 드는: "짐이 많으니 같이 드는 게 어때요?" = There's a lot of luggage — how about carrying it together?</div>
+  </div>
+
+  <div class="quiz-controls">
+    <button class="btn-submit" onclick="submitQuiz()">🎯 결과 보기 See Results</button>
+    <button class="btn-retry" onclick="retryQuiz()" style="display:none" id="retryBtn">🔄 다시 하기 Retry</button>
+  </div>
+
+  <div class="quiz-result-banner" id="resultBanner">
+    <div class="result-score" id="resultScore">0/12</div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="result-sub" id="resultSub"></div>
+  </div>
+
+</div><!-- /quiz section -->
+
+</div><!-- /main -->
+
+<script>
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  btn.classList.add('active');
+}
+
+const answers = {};
+const TOTAL = 12;
+
+function answer(qNum, btn, isCorrect) {
+  if (answers[qNum] !== undefined) return;
+  answers[qNum] = isCorrect;
+
+  const card = document.getElementById('qc' + qNum);
+  const exp = document.getElementById('exp' + qNum);
+  const allOpts = card.querySelectorAll('.q-opt');
+
+  allOpts.forEach(o => { o.disabled = true; o.style.pointerEvents = 'none'; });
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+
+  if (!isCorrect) {
+    allOpts.forEach(o => {
+      if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+        o.classList.add('correct');
+      }
+    });
+    card.classList.add('answered-wrong');
+  } else {
+    card.classList.add('answered-correct');
+  }
+
+  exp.classList.add('show');
+  exp.classList.add(isCorrect ? 'correct-exp' : 'wrong-exp');
+
+  const correct = Object.values(answers).filter(v => v === true).length;
+  const answered = Object.keys(answers).length;
+  document.getElementById('scoreNum').textContent = correct + '/' + answered;
+  document.getElementById('scoreDisplay').classList.add('visible');
+}
+
+function submitQuiz() {
+  const correct = Object.values(answers).filter(v => v === true).length;
+  const banner = document.getElementById('resultBanner');
+  document.getElementById('resultScore').textContent = correct + '/' + TOTAL;
+
+  let msg = '', sub = '';
+  if (correct === TOTAL) {
+    msg = '🏆 완벽해요! Perfect Score!';
+    sub = '모든 동사와 명사·형용사 짝을 완벽하게 알아요! You have mastered all verb collocations!';
+  } else if (correct >= 10) {
+    msg = '🌟 아주 잘했어요! Excellent!';
+    sub = '조금만 더 복습하면 완벽해요! Just a little more review and you\'ll be perfect!';
+  } else if (correct >= 7) {
+    msg = '👍 잘했어요! Good job!';
+    sub = '동사 지도와 콜로케이션을 다시 한번 복습해 보세요. Review the Verb Map and Collocations again!';
+  } else {
+    msg = '💪 계속 도전하세요! Keep going!';
+    sub = '어휘 카드를 다시 보고 퀴즈에 도전해 보세요! Review the Vocab Cards and try again!';
+  }
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultSub').textContent = sub;
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('retryBtn').style.display = 'inline-block';
+}
+
+function retryQuiz() {
+  for (let k in answers) delete answers[k];
+  for (let i = 1; i <= TOTAL; i++) {
+    const card = document.getElementById('qc' + i);
+    card.classList.remove('answered-correct', 'answered-wrong');
+    card.querySelectorAll('.q-opt').forEach(o => {
+      o.classList.remove('correct', 'wrong');
+      o.disabled = false;
+      o.style.pointerEvents = '';
+    });
+    const exp = document.getElementById('exp' + i);
+    exp.classList.remove('show', 'correct-exp', 'wrong-exp');
+  }
+  document.getElementById('resultBanner').classList.remove('show');
+  document.getElementById('retryBtn').style.display = 'none';
+  document.getElementById('scoreDisplay').classList.remove('visible');
+  document.getElementById('scoreNum').textContent = '0/0';
+  window.scrollTo({ top: document.getElementById('quiz').offsetTop - 80, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

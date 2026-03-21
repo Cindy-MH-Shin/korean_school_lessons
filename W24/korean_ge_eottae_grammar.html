@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문법: ~는 게 어때(요)? | Grammar: "How about...?"</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 36px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 18px; opacity: 0.9; }
+        .header .subtitle-en { font-size: 15px; opacity: 0.8; font-style: italic; margin-top: 4px; }
+
+        .content { padding: 40px; }
+
+        /* ===== Section Styles ===== */
+        .section-title {
+            font-size: 24px; font-weight: bold; color: #16a085;
+            margin: 35px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1abc9c;
+        }
+        .section-title-en { font-size: 13px; color: #aaa; font-style: italic; }
+
+        /* ===== Intro Box ===== */
+        .intro-box {
+            background: #e8f8f5; border-radius: 14px;
+            padding: 25px; margin-bottom: 30px;
+            border-left: 6px solid #1abc9c;
+        }
+        .intro-ko { font-size: 18px; color: #2c3e50; font-weight: bold; margin-bottom: 8px; }
+        .intro-en { font-size: 15px; color: #555; line-height: 1.8; }
+
+        /* ===== Formula Box ===== */
+        .formula-box {
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f5e3 100%);
+            border: 2px solid #1abc9c;
+            border-radius: 14px; padding: 28px;
+            text-align: center; margin: 20px 0;
+        }
+        .formula-title { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .formula-main {
+            font-size: 26px; font-weight: bold; color: #16a085;
+            margin: 10px 0; line-height: 1.5;
+        }
+        .formula-en { font-size: 16px; color: #555; margin-top: 10px; font-style: italic; }
+        .formula-highlight { color: #e74c3c; }
+        .formula-arrow { font-size: 22px; color: #1abc9c; margin: 0 10px; }
+
+        /* ===== Meaning Boxes ===== */
+        .meaning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px; margin: 15px 0;
+        }
+        @media (max-width: 600px) { .meaning-grid { grid-template-columns: 1fr; } }
+        .meaning-card {
+            background: #f0faf8; border-radius: 12px;
+            padding: 18px; border-left: 4px solid #1abc9c;
+        }
+        .meaning-card h4 { color: #16a085; font-size: 15px; margin-bottom: 8px; }
+        .meaning-card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* ===== Rule Box ===== */
+        .rule-box {
+            background: #f9f9f9; border-radius: 12px;
+            padding: 20px; margin: 15px 0;
+        }
+        .rule-box h4 { font-size: 17px; color: #16a085; margin-bottom: 12px; }
+        .rule-step {
+            display: flex; align-items: flex-start;
+            margin-bottom: 12px; background: white;
+            border-radius: 8px; padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+        }
+        .step-num {
+            background: #1abc9c; color: white;
+            width: 26px; height: 26px;
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold;
+            flex-shrink: 0; margin-right: 14px; margin-top: 2px;
+        }
+        .step-text { font-size: 15px; color: #2c3e50; line-height: 1.6; }
+        .step-en { font-size: 13px; color: #888; font-style: italic; margin-top: 4px; }
+
+        /* ===== Warning / Special Box ===== */
+        .warning-box {
+            background: #fef9e7; border-radius: 12px;
+            padding: 20px; margin: 15px 0;
+            border-left: 5px solid #f39c12;
+        }
+        .warning-title { color: #e67e22; font-size: 17px; font-weight: bold; margin-bottom: 10px; }
+        .warning-text { font-size: 15px; color: #555; line-height: 1.8; }
+
+        /* ===== Conjugation Table ===== */
+        .conj-table {
+            width: 100%; border-collapse: collapse;
+            margin: 15px 0; font-size: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 10px; overflow: hidden;
+        }
+        .conj-table thead tr {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            color: white;
+        }
+        .conj-table th { padding: 13px 16px; text-align: center; font-size: 14px; }
+        .conj-table td { padding: 11px 16px; text-align: center; border-bottom: 1px solid #e8f8f5; }
+        .conj-table tbody tr:hover { background: #e8f8f5; }
+        .conj-table .irregular-row { background: #fdf2f2; }
+        .conj-table .irregular-row:hover { background: #fce8e8; }
+        .rl-badge {
+            background: #e74c3c; color: white;
+            font-size: 10px; padding: 1px 6px;
+            border-radius: 8px; margin-left: 4px;
+        }
+
+        /* ===== Dialogue Examples ===== */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 18px; margin-top: 18px;
+        }
+        .dialogue-card {
+            background: #f9f9f9; border-radius: 14px;
+            padding: 18px; border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+        }
+        .dialogue-card:hover {
+            border-color: #1abc9c;
+            box-shadow: 0 6px 18px rgba(26,188,156,0.15);
+        }
+        .dialogue-num {
+            background: #1abc9c; color: white;
+            font-size: 12px; font-weight: bold;
+            padding: 3px 10px; border-radius: 12px;
+            display: inline-block; margin-bottom: 12px;
+        }
+        .dialogue-verb {
+            font-size: 13px; color: #888;
+            margin-bottom: 10px; font-style: italic;
+        }
+        .dialogue-line {
+            font-size: 15px; color: #2c3e50;
+            margin-bottom: 4px; line-height: 1.6;
+        }
+        .dialogue-line .hl { color: #16a085; font-weight: bold; }
+        .dialogue-en {
+            font-size: 13px; color: #888;
+            font-style: italic; margin-top: 8px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 8px; line-height: 1.6;
+        }
+
+        /* ===== Formal vs Informal ===== */
+        .level-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px; margin: 15px 0;
+        }
+        @media (max-width: 700px) { .level-grid { grid-template-columns: 1fr; } }
+        .level-card {
+            border-radius: 12px; padding: 18px;
+            text-align: center;
+        }
+        .level-card.formal { background: #e8f8f5; border: 2px solid #1abc9c; }
+        .level-card.informal { background: #eaf4fb; border: 2px solid #3498db; }
+        .level-card.friend { background: #fef9e7; border: 2px solid #f39c12; }
+        .level-name { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
+        .level-form { font-size: 20px; font-weight: bold; color: #2c3e50; margin-bottom: 6px; }
+        .level-desc { font-size: 13px; color: #777; line-height: 1.6; }
+
+        /* ===== Mistake Box ===== */
+        .mistake-box {
+            background: #fef2f2; border-radius: 12px;
+            padding: 20px; margin: 10px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        .mistake-title { color: #c0392b; font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .mistake-row {
+            display: flex; align-items: center; margin-bottom: 10px;
+            background: white; border-radius: 8px; padding: 10px 14px;
+        }
+        .mistake-wrong { color: #e74c3c; font-size: 15px; flex: 1; }
+        .mistake-arrow { font-size: 20px; color: #888; margin: 0 12px; }
+        .mistake-right { color: #27ae60; font-size: 15px; flex: 1; font-weight: bold; }
+        .mistake-note { font-size: 12px; color: #888; font-style: italic; margin-top: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📖 문법: ~는 게 어때(요)?</h1>
+        <div class="subtitle">Grammar Explanation — "How about doing...?" / "Why don't you...?"</div>
+        <div class="subtitle-en">Suggesting and recommending actions in Korean</div>
+    </div>
+
+    <div class="content">
+
+        <!-- ===== 1. MEANING ===== -->
+        <div class="section-title">1. 무슨 뜻인가요? (What does it mean?)
+            <span class="section-title-en"> — Meaning &amp; Usage</span>
+        </div>
+
+        <div class="intro-box">
+            <div class="intro-ko">~는 게 어때(요)? = "...하는 게 어때요?" = "~하는 건 어떤가요?"</div>
+            <div class="intro-en">
+                This pattern is used to gently <strong>suggest or recommend an action</strong> to someone.
+                It is similar to saying <strong>"How about doing...?"</strong> or <strong>"Why don't you/we...?"</strong> in English.
+                It is friendly and polite — perfect for offering advice or ideas!
+            </div>
+        </div>
+
+        <div class="meaning-grid">
+            <div class="meaning-card">
+                <h4>🇰🇷 한국어로는...</h4>
+                <p>어떤 행동을 <strong>제안하거나 권유할 때</strong> 쓰는 표현이에요.<br>
+                "이렇게 해 보는 게 어때요?" 처럼 부드럽게 말할 때 사용해요.</p>
+            </div>
+            <div class="meaning-card">
+                <h4>🇺🇸 In English...</h4>
+                <p>Use this when you want to <strong>suggest an action</strong> to someone — like giving a gentle piece of advice.
+                "How about sleeping early?" / "Why don't we eat dinner?"</p>
+            </div>
+        </div>
+
+        <!-- ===== 2. FORMULA ===== -->
+        <div class="section-title">2. 어떻게 만드나요? (How do you form it?)
+            <span class="section-title-en"> — Formation Formula</span>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-title">📐 기본 공식 (Basic Formula)</div>
+            <div class="formula-main">
+                동사 어간 <span class="formula-arrow">+</span>
+                <span class="formula-highlight">는 게 어때요?</span>
+            </div>
+            <div class="formula-en">Verb Stem + 는 게 어때요? = "How about [verb]-ing?"</div>
+        </div>
+
+        <div class="formula-box" style="background: linear-gradient(135deg, #fef9e7, #fef3cd); border-color: #f39c12;">
+            <div class="formula-title">⚠️ ㄹ 탈락 공식 (ㄹ-Drop Formula)</div>
+            <div class="formula-main" style="color: #e67e22;">
+                ㄹ로 끝나는 어간 <span class="formula-arrow" style="color:#f39c12;">→</span>
+                <span style="color:#e74c3c;">ㄹ 탈락</span>
+                <span class="formula-arrow" style="color:#f39c12;">+</span>
+                <span class="formula-highlight" style="color:#e67e22;">는 게 어때요?</span>
+            </div>
+            <div class="formula-en" style="color:#888;">
+                When stem ends in ㄹ (as final consonant/받침): Drop ㄹ, then add 는 게 어때요?
+            </div>
+        </div>
+
+        <!-- ===== 3. STEP BY STEP ===== -->
+        <div class="section-title">3. 단계별로 만들어 봐요 (Step-by-Step)
+            <span class="section-title-en"> — How to conjugate</span>
+        </div>
+
+        <div class="rule-box">
+            <h4>✅ 규칙 동사 (Regular Verbs) — 예: 먹다, 가다, 보다</h4>
+            <div class="rule-step">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    동사에서 <strong>다</strong>를 없애요 → 어간을 찾아요<br>
+                    <div class="step-en">Remove 다 from the dictionary form to find the verb stem.</div>
+                    먹<strong>다</strong> → 먹- &nbsp;|&nbsp; 가<strong>다</strong> → 가- &nbsp;|&nbsp; 보<strong>다</strong> → 보-
+                </div>
+            </div>
+            <div class="rule-step">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                    어간 뒤에 <strong>는 게 어때요?</strong>를 붙여요<br>
+                    <div class="step-en">Add 는 게 어때요? right after the stem.</div>
+                    먹- + 는 게 어때요 = <strong>먹는 게 어때요?</strong><br>
+                    가- + 는 게 어때요 = <strong>가는 게 어때요?</strong><br>
+                    보- + 는 게 어때요 = <strong>보는 게 어때요?</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="rule-box" style="background: #fef9e7;">
+            <h4>⚠️ ㄹ 탈락 동사 (ㄹ-Drop Verbs) — 예: 열다, 들다, 만들다</h4>
+            <div class="rule-step">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    동사에서 <strong>다</strong>를 없애요 → 어간을 찾아요<br>
+                    <div class="step-en">Remove 다 to find the verb stem.</div>
+                    열<strong>다</strong> → 열- &nbsp;|&nbsp; 들<strong>다</strong> → 들- &nbsp;|&nbsp; 만들<strong>다</strong> → 만들-
+                </div>
+            </div>
+            <div class="rule-step" style="background: #fdecea; border-color: #e74c3c;">
+                <div class="step-num" style="background:#e74c3c;">2</div>
+                <div class="step-text">
+                    받침 <strong style="color:#e74c3c;">ㄹ</strong>을 없애요! (ㄹ이 ㄴ 앞에서 탈락해요)<br>
+                    <div class="step-en">Drop the final ㄹ! (ㄹ always disappears before ㄴ in Korean.)</div>
+                    열- → <strong style="color:#e74c3c;">여-</strong> &nbsp;|&nbsp; 들- → <strong style="color:#e74c3c;">드-</strong> &nbsp;|&nbsp; 만들- → <strong style="color:#e74c3c;">만드-</strong>
+                </div>
+            </div>
+            <div class="rule-step">
+                <div class="step-num">3</div>
+                <div class="step-text">
+                    <strong>는 게 어때요?</strong>를 붙여요<br>
+                    <div class="step-en">Add 는 게 어때요? after the new stem.</div>
+                    여- + 는 게 어때요 = <strong>여는 게 어때요?</strong><br>
+                    드- + 는 게 어때요 = <strong>드는 게 어때요?</strong><br>
+                    만드- + 는 게 어때요 = <strong>만드는 게 어때요?</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 4. CONJUGATION TABLE ===== -->
+        <div class="section-title">4. 활용 표 (Conjugation Table)
+            <span class="section-title-en"> — All 10 verbs at a glance</span>
+        </div>
+
+        <table class="conj-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>기본형<br>Dictionary</th>
+                    <th>어간<br>Stem</th>
+                    <th>규칙<br>Rule</th>
+                    <th>~는 게 어때요?<br>Final Form</th>
+                    <th>영어<br>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>예</td>
+                    <td>사다</td>
+                    <td>사-</td>
+                    <td>사 + <strong>는</strong></td>
+                    <td><strong>사는 게 어때요?</strong></td>
+                    <td>How about buying?</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>고르다</td>
+                    <td>고르-</td>
+                    <td>고르 + <strong>는</strong></td>
+                    <td><strong>고르는 게 어때요?</strong></td>
+                    <td>How about choosing?</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>운동하다</td>
+                    <td>운동하-</td>
+                    <td>운동하 + <strong>는</strong></td>
+                    <td><strong>운동하는 게 어때요?</strong></td>
+                    <td>How about exercising?</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>가다</td>
+                    <td>가-</td>
+                    <td>가 + <strong>는</strong></td>
+                    <td><strong>가는 게 어때요?</strong></td>
+                    <td>How about going?</td>
+                </tr>
+                <tr class="irregular-row">
+                    <td>4</td>
+                    <td>열다 <span class="rl-badge">ㄹ탈락</span></td>
+                    <td>열→ <strong style="color:#e74c3c;">여-</strong></td>
+                    <td>여 + <strong>는</strong></td>
+                    <td><strong>여는 게 어때요?</strong></td>
+                    <td>How about opening?</td>
+                </tr>
+                <tr class="irregular-row">
+                    <td>5</td>
+                    <td>들다 <span class="rl-badge">ㄹ탈락</span></td>
+                    <td>들→ <strong style="color:#e74c3c;">드-</strong></td>
+                    <td>드 + <strong>는</strong></td>
+                    <td><strong>드는 게 어때요?</strong></td>
+                    <td>How about lifting?</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>먹다</td>
+                    <td>먹-</td>
+                    <td>먹 + <strong>는</strong></td>
+                    <td><strong>먹는 게 어때요?</strong></td>
+                    <td>How about eating?</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>자다</td>
+                    <td>자-</td>
+                    <td>자 + <strong>는</strong></td>
+                    <td><strong>자는 게 어때요?</strong></td>
+                    <td>How about sleeping?</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>청소하다</td>
+                    <td>청소하-</td>
+                    <td>청소하 + <strong>는</strong></td>
+                    <td><strong>청소하는 게 어때요?</strong></td>
+                    <td>How about cleaning?</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>보다</td>
+                    <td>보-</td>
+                    <td>보 + <strong>는</strong></td>
+                    <td><strong>보는 게 어때요?</strong></td>
+                    <td>How about watching?</td>
+                </tr>
+                <tr class="irregular-row">
+                    <td>10</td>
+                    <td>만들다 <span class="rl-badge">ㄹ탈락</span></td>
+                    <td>만들→ <strong style="color:#e74c3c;">만드-</strong></td>
+                    <td>만드 + <strong>는</strong></td>
+                    <td><strong>만드는 게 어때요?</strong></td>
+                    <td>How about making?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ===== 5. EXAMPLE DIALOGUES ===== -->
+        <div class="section-title">5. 예문으로 배워요 (Learn with Examples)
+            <span class="section-title-en"> — All 10 sentences in context</span>
+        </div>
+
+        <div class="examples-grid">
+            <div class="dialogue-card">
+                <span class="dialogue-num">예시 (Sample) 사다</span>
+                <div class="dialogue-line">엄마: 이것을 살까?</div>
+                <div class="dialogue-line">나: 아니요, 저것을 <span class="hl">사는 게 어때요</span>?</div>
+                <div class="dialogue-en">Mom: Shall we buy this?<br>Me: No, how about buying that one?</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">1번 고르다</span>
+                <div class="dialogue-line">아빠: 이 인형은 너무 비싸다.</div>
+                <div class="dialogue-line">나: 그럼 저 인형을 <span class="hl">고르는 게 어때요</span>?</div>
+                <div class="dialogue-en">Dad: This doll is too expensive.<br>Me: Then how about choosing that doll?</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">2번 운동하다</span>
+                <div class="dialogue-line">엄마: <span class="hl">운동하는 게 어때요</span>?</div>
+                <div class="dialogue-line">나: 지금 비가 와서 못해요.</div>
+                <div class="dialogue-en">Mom: How about exercising?<br>Me: It's raining now, so I can't.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">3번 가다</span>
+                <div class="dialogue-line">여름 방학에 서울에 <span class="hl">가는 게 어때요</span>?</div>
+                <div class="dialogue-en">How about going to Seoul for summer vacation?</div>
+            </div>
+            <div class="dialogue-card" style="border-color: #fadbd8;">
+                <span class="dialogue-num" style="background:#e74c3c;">4번 열다 ⚠️ ㄹ탈락</span>
+                <div class="dialogue-line">나: 방이 너무 더워요.</div>
+                <div class="dialogue-line">엄마: 더우면 창문을 <span class="hl">여는 게 어때요</span>?</div>
+                <div class="dialogue-en">Me: The room is too hot.<br>Mom: If it's hot, how about opening the window?<br><em style="color:#e74c3c;">열다 → 여는 (ㄹ drop!)</em></div>
+            </div>
+            <div class="dialogue-card" style="border-color: #fadbd8;">
+                <span class="dialogue-num" style="background:#e74c3c;">5번 들다 ⚠️ ㄹ탈락</span>
+                <div class="dialogue-line">나: 이 상자가 너무 무거워요.</div>
+                <div class="dialogue-line">아빠: 같이 <span class="hl">드는 게 어때요</span>?</div>
+                <div class="dialogue-en">Me: This box is too heavy.<br>Dad: How about lifting it together?<br><em style="color:#e74c3c;">들다 → 드는 (ㄹ drop!)</em></div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">6번 먹다</span>
+                <div class="dialogue-line">배가 고프니까 저녁을 <span class="hl">먹는 게 어때요</span>?</div>
+                <div class="dialogue-en">Since we're hungry, how about eating dinner?</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">7번 자다</span>
+                <div class="dialogue-line">밤이 깊으니 어서 <span class="hl">자는 게 어때요</span>?</div>
+                <div class="dialogue-en">It's late at night, so how about going to sleep?</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">8번 청소하다</span>
+                <div class="dialogue-line">엄마: 책상이 지저분하구나.</div>
+                <div class="dialogue-line"><span class="hl">청소하는 게 어때요</span>?</div>
+                <div class="dialogue-en">Mom: The desk is messy.<br>How about cleaning it up?</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num">9번 보다</span>
+                <div class="dialogue-line">엄마: 무슨 영화를 볼까?</div>
+                <div class="dialogue-line">나: 인어공주를 <span class="hl">보는 게 어때요</span>?</div>
+                <div class="dialogue-en">Mom: What movie shall we watch?<br>Me: How about watching The Little Mermaid?</div>
+            </div>
+            <div class="dialogue-card" style="border-color: #fadbd8;">
+                <span class="dialogue-num" style="background:#e74c3c;">10번 만들다 ⚠️ ㄹ탈락</span>
+                <div class="dialogue-line">올해 추석에는 송편을 <span class="hl">만드는 게 어때요</span>?</div>
+                <div class="dialogue-en">How about making songpyeon (rice cakes) this Chuseok?<br><em style="color:#e74c3c;">만들다 → 만드는 (ㄹ drop!)</em></div>
+            </div>
+        </div>
+
+        <!-- ===== 6. FORMAL vs INFORMAL ===== -->
+        <div class="section-title">6. 격식 / 반말 (Formality Levels)
+            <span class="section-title-en"> — How polite should you be?</span>
+        </div>
+
+        <div class="level-grid">
+            <div class="level-card formal">
+                <div class="level-name">🤝 공손한 말 (Polite/Formal)</div>
+                <div class="level-form">~는 게 어때요?</div>
+                <div class="level-desc">Used with adults, teachers, parents — anyone you want to be respectful with.<br>어때<strong>요</strong> (with 요) = polite!</div>
+            </div>
+            <div class="level-card informal">
+                <div class="level-name">😊 일상 말 (Casual/Neutral)</div>
+                <div class="level-form">~는 게 어때?</div>
+                <div class="level-desc">Used with close friends or family of similar age. Drop the 요!<br>어때 (without 요) = casual!</div>
+            </div>
+            <div class="level-card friend">
+                <div class="level-name">📝 예시 비교</div>
+                <div class="level-form" style="font-size:16px; color:#e67e22;">먹는 게 어때요? ✅<br>먹는 게 어때? ✅</div>
+                <div class="level-desc">Both are correct! Use 어때요 with elders/adults. Use 어때 with friends.</div>
+            </div>
+        </div>
+
+        <!-- ===== 7. COMMON MISTAKES ===== -->
+        <div class="section-title">7. 흔한 실수 (Common Mistakes)
+            <span class="section-title-en"> — Watch out for these!</span>
+        </div>
+
+        <div class="mistake-box">
+            <div class="mistake-title">❌ 틀리기 쉬운 것들 (Things easy to get wrong)</div>
+            <div class="mistake-row">
+                <div>
+                    <div class="mistake-wrong">❌ 열는 게 어때요?</div>
+                    <div class="mistake-note">열다: 받침 ㄹ을 없애야 해요! (Must drop ㄹ!)</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div>
+                    <div class="mistake-right">✅ 여는 게 어때요?</div>
+                    <div class="mistake-note">열 → 여 + 는</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div>
+                    <div class="mistake-wrong">❌ 들는 게 어때요?</div>
+                    <div class="mistake-note">들다: 받침 ㄹ을 없애야 해요! (Must drop ㄹ!)</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div>
+                    <div class="mistake-right">✅ 드는 게 어때요?</div>
+                    <div class="mistake-note">들 → 드 + 는</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div>
+                    <div class="mistake-wrong">❌ 만들는 게 어때요?</div>
+                    <div class="mistake-note">만들다: 받침 ㄹ을 없애야 해요! (Must drop ㄹ!)</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div>
+                    <div class="mistake-right">✅ 만드는 게 어때요?</div>
+                    <div class="mistake-note">만들 → 만드 + 는</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">💡 알아두세요! (Good to Know!)</div>
+            <div class="warning-text">
+                <strong>~는 게 어때요?</strong>는 상대방에게 부드럽게 제안할 때 써요. 명령이 아니라 <em>제안</em>이에요!<br>
+                <em>This pattern makes a gentle suggestion, NOT a command. It's friendly and considerate!</em><br><br>
+                상황 (Context) 예시:<br>
+                &nbsp;→ 친구가 피곤해 보일 때: "잠깐 쉬는 게 어때요?" (If a friend looks tired: "How about taking a short break?")<br>
+                &nbsp;→ 방법을 제안할 때: "지하철을 타는 게 어때요?" (Suggesting a way: "How about taking the subway?")<br>
+                &nbsp;→ 같이 할 것을 권유할 때: "같이 먹는 게 어때요?" (Inviting someone: "How about eating together?")
+            </div>
+        </div>
+
+    </div><!-- end content -->
+</div><!-- end container -->
+</body>
+</html>
