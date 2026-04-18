@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연결어미 — -고 / -아어서 / -지만</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 17px; opacity: 0.9; }
+        .header .subtitle-en { font-size: 14px; opacity: 0.8; font-style: italic; margin-top: 4px; }
+
+        /* ===== Topic Tabs ===== */
+        .topic-nav {
+            display: flex; background: #eaf3fb;
+            border-bottom: 3px solid #90c4e8;
+        }
+        .topic-btn {
+            flex: 1; padding: 18px 10px; text-align: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            border: none; background: transparent; color: #999; transition: all 0.3s;
+            font-family: inherit;
+        }
+        .topic-btn.active { color: #0d4f7c; background: white; border-bottom: 4px solid #1a6fa8; }
+        .topic-btn:hover { background: #d9edf8; color: #1a6fa8; }
+        .topic-section { display: none; padding: 40px; }
+        .topic-section.active { display: block; }
+
+        /* ===== Colors ===== */
+        :root {
+            --blue: #1a6fa8;
+            --blue-dark: #0d4f7c;
+            --blue-light: #eaf3fb;
+            --teal: #0e8c72;
+            --teal-light: #e6f7f3;
+            --red: #c0392b;
+            --red-light: #fef2f2;
+            --orange: #d4881e;
+            --orange-light: #fef5e7;
+            --green: #27ae60;
+            --green-light: #eafaf1;
+            --purple: #7c5cbf;
+            --purple-light: #f0ebff;
+            --gray: #f4f6f8;
+        }
+
+        /* ===== Section Titles ===== */
+        .section-title {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 32px 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-title-en { font-size: 13px; color: #aaa; font-style: italic; }
+
+        /* Topic header banners */
+        .topic-header {
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 28px;
+            color: white;
+        }
+        .th-1 { background: linear-gradient(135deg, #1a6fa8 0%, #26a69a 100%); }
+        .th-2 { background: linear-gradient(135deg, #0e8c72 0%, #1a6fa8 100%); }
+        .th-3 { background: linear-gradient(135deg, #7c5cbf 0%, #1a6fa8 100%); }
+        .topic-header h2 { font-size: 28px; margin-bottom: 6px; }
+        .topic-header .th-en { font-size: 15px; opacity: 0.9; font-style: italic; }
+        .topic-header .th-sub { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+
+        /* ===== Intro Box ===== */
+        .intro-box {
+            background: var(--blue-light); border-radius: 14px;
+            padding: 22px; margin-bottom: 20px;
+            border-left: 6px solid var(--blue);
+        }
+        .intro-ko { font-size: 17px; color: #2c3e50; font-weight: bold; margin-bottom: 8px; }
+        .intro-en { font-size: 14px; color: #555; line-height: 1.8; }
+
+        /* ===== Meaning Grid ===== */
+        .meaning-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 16px; margin: 14px 0;
+        }
+        @media (max-width: 600px) { .meaning-grid { grid-template-columns: 1fr; } }
+        .meaning-card {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; border-left: 4px solid var(--blue);
+        }
+        .meaning-card.teal { background: var(--teal-light); border-left-color: var(--teal); }
+        .meaning-card.purple { background: var(--purple-light); border-left-color: var(--purple); }
+        .meaning-card h4 { color: var(--blue-dark); font-size: 14px; margin-bottom: 8px; }
+        .meaning-card.teal h4 { color: var(--teal); }
+        .meaning-card.purple h4 { color: var(--purple); }
+        .meaning-card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* ===== Big Contrast Box ===== */
+        .contrast-box {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 0; margin: 20px 0; border-radius: 16px; overflow: hidden;
+            border: 2px solid #c2dff0;
+            box-shadow: 0 4px 16px rgba(26,111,168,0.12);
+        }
+        .contrast-left  { background: #eaf3fb; padding: 26px 22px; text-align: center; }
+        .contrast-right { background: var(--teal-light); padding: 26px 22px; text-align: center; }
+        .contrast-divider {
+            background: white; display: flex; align-items: center; justify-content: center;
+            padding: 0 14px; font-size: 26px; color: #bbb; font-weight: 300;
+        }
+        .contrast-tag {
+            display: inline-block; border-radius: 20px;
+            font-size: 12px; font-weight: bold; letter-spacing: 1px;
+            padding: 4px 14px; margin-bottom: 12px; text-transform: uppercase;
+        }
+        .tag-blue  { background: var(--blue); color: white; }
+        .tag-teal  { background: var(--teal); color: white; }
+        .tag-red   { background: var(--red); color: white; }
+        .contrast-verb { font-size: 32px; font-weight: bold; margin: 8px 0; }
+        .contrast-verb.blue  { color: var(--blue); }
+        .contrast-verb.teal  { color: var(--teal); }
+        .contrast-verb.red   { color: var(--red); }
+        .contrast-meaning { font-size: 14px; color: #555; margin-top: 4px; }
+        .contrast-subject {
+            font-size: 12px; color: #888; margin-top: 10px;
+            background: rgba(255,255,255,0.7); border-radius: 8px;
+            padding: 6px 10px; display: inline-block;
+        }
+
+        /* ===== Formula Box ===== */
+        .formula-box {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #c5dff0 100%);
+            border: 2px solid var(--blue);
+            border-radius: 14px; padding: 26px;
+            text-align: center; margin: 18px 0;
+        }
+        .formula-box.teal {
+            background: linear-gradient(135deg, var(--teal-light) 0%, #b2dfdb 100%);
+            border-color: var(--teal);
+        }
+        .formula-box.purple {
+            background: linear-gradient(135deg, var(--purple-light) 0%, #d1c4e9 100%);
+            border-color: var(--purple);
+        }
+        .formula-title { font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+        .formula-main {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 10px 0; line-height: 1.6;
+        }
+        .formula-box.teal .formula-main { color: var(--teal); }
+        .formula-box.purple .formula-main { color: var(--purple); }
+        .formula-en { font-size: 14px; color: #555; margin-top: 10px; font-style: italic; }
+        .formula-highlight { color: var(--red); }
+        .formula-arrow { font-size: 20px; color: var(--blue); margin: 0 8px; }
+
+        /* ===== Type Grid (3 col) ===== */
+        .type-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 14px 0;
+        }
+        @media (max-width: 700px) { .type-grid { grid-template-columns: 1fr; } }
+        .type-card {
+            border-radius: 14px; padding: 18px; text-align: center;
+        }
+        .type-card.blue-card   { background: var(--blue-light);   border: 2px solid var(--blue); }
+        .type-card.teal-card   { background: var(--teal-light);   border: 2px solid var(--teal); }
+        .type-card.purple-card { background: var(--purple-light); border: 2px solid var(--purple); }
+        .type-card.green-card  { background: var(--green-light);  border: 2px solid var(--green); }
+        .type-card.red-card    { background: var(--red-light);    border: 2px solid var(--red); }
+        .type-card.orange-card { background: var(--orange-light); border: 2px solid var(--orange); }
+        .type-label { font-size: 13px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .type-label.bl { color: var(--blue); }
+        .type-label.tl { color: var(--teal); }
+        .type-label.pl { color: var(--purple); }
+        .type-label.gl { color: var(--green); }
+        .type-label.rl { color: var(--red); }
+        .type-label.ol { color: var(--orange); }
+        .type-form { font-size: 20px; font-weight: bold; color: #2c3e50; margin: 6px 0; }
+        .type-desc { font-size: 13px; color: #666; line-height: 1.6; }
+        .type-ex { font-size: 13px; margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.7); }
+
+        /* ===== Suffix Grid (for endings comparison) ===== */
+        .ending-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 16px 0;
+        }
+        @media (max-width: 600px) { .ending-grid { grid-template-columns: 1fr; } }
+        .ending-chip {
+            background: white; border-radius: 12px;
+            padding: 18px 14px; text-align: center;
+            box-shadow: 0 2px 8px rgba(26,111,168,0.1);
+        }
+        .ending-chip.blue-chip  { border: 2px solid #90c4e8; }
+        .ending-chip.teal-chip  { border: 2px solid #80cbc4; }
+        .ending-chip.purple-chip { border: 2px solid #ce93d8; }
+        .ending-letter { font-size: 28px; font-weight: bold; margin-bottom: 6px; }
+        .ending-name { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .ending-ex { font-size: 13px; color: #555; font-style: italic; line-height: 1.7; }
+
+        /* ===== Rule Box ===== */
+        .rule-box {
+            background: #f9f9f9; border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .rule-box h4 { font-size: 16px; color: var(--blue-dark); margin-bottom: 12px; }
+        .rule-step {
+            display: flex; align-items: flex-start;
+            margin-bottom: 10px; background: white;
+            border-radius: 8px; padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+        }
+        .step-num {
+            background: var(--blue); color: white;
+            width: 26px; height: 26px;
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold;
+            flex-shrink: 0; margin-right: 14px; margin-top: 2px;
+        }
+        .step-num.teal   { background: var(--teal); }
+        .step-num.purple { background: var(--purple); }
+        .step-num.tip    { background: var(--orange); }
+        .step-text { font-size: 14px; color: #2c3e50; line-height: 1.6; flex: 1; }
+        .step-en { font-size: 13px; color: #888; font-style: italic; margin-top: 4px; }
+
+        /* ===== Main Pairs Table ===== */
+        .pairs-table {
+            width: 100%; border-collapse: collapse;
+            margin: 16px 0; font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px; overflow: hidden;
+        }
+        .pairs-table thead tr {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: white;
+        }
+        .pairs-table.teal-head thead tr { background: linear-gradient(135deg, var(--teal) 0%, #076652 100%); }
+        .pairs-table.purple-head thead tr { background: linear-gradient(135deg, var(--purple) 0%, #5a3fa0 100%); }
+        .pairs-table th { padding: 12px 14px; text-align: center; font-size: 13px; }
+        .pairs-table td { padding: 11px 14px; text-align: center; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+        .pairs-table tbody tr:hover { background: var(--blue-light); }
+        .pairs-table .blue-cell   { color: var(--blue); font-weight: bold; font-size: 15px; }
+        .pairs-table .teal-cell   { color: var(--teal); font-weight: bold; font-size: 15px; }
+        .pairs-table .red-cell    { color: var(--red);  font-weight: bold; font-size: 15px; }
+        .pairs-table .purple-cell { color: var(--purple); font-weight: bold; font-size: 15px; }
+        .pairs-table .orange-cell { color: var(--orange); font-weight: bold; font-size: 15px; }
+
+        /* ===== Examples Grid ===== */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px; margin-top: 16px;
+        }
+        .dialogue-card {
+            background: #f9f9f9; border-radius: 14px;
+            padding: 18px; border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+        }
+        .dialogue-card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 6px 18px rgba(26,111,168,0.15);
+        }
+        .dialogue-num {
+            font-size: 12px; font-weight: bold;
+            padding: 3px 10px; border-radius: 12px;
+            display: inline-block; margin-bottom: 10px; color: white;
+        }
+        .bg-blue   { background: var(--blue); }
+        .bg-teal   { background: var(--teal); }
+        .bg-red    { background: var(--red); }
+        .bg-orange { background: var(--orange); }
+        .bg-purple { background: var(--purple); }
+        .bg-green  { background: var(--green); }
+        .pair-label  { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .sentence-line { font-size: 15px; color: #2c3e50; margin-bottom: 6px; line-height: 1.7; }
+        .hl-blue   { color: var(--blue);   font-weight: bold; }
+        .hl-teal   { color: var(--teal);   font-weight: bold; }
+        .hl-red    { color: var(--red);    font-weight: bold; }
+        .hl-purple { color: var(--purple); font-weight: bold; }
+        .hl-orange { color: var(--orange); font-weight: bold; }
+        .hl-green  { color: var(--green);  font-weight: bold; }
+        .dialogue-en {
+            font-size: 13px; color: #888; font-style: italic;
+            margin-top: 10px; border-top: 1px solid #e0e0e0;
+            padding-top: 8px; line-height: 1.6;
+        }
+
+        /* ===== Compare Blocks ===== */
+        .compare-block {
+            background: white; border-radius: 12px;
+            padding: 18px; margin: 10px 0;
+            border: 1.5px solid #c5dff0;
+            box-shadow: 0 2px 10px rgba(26,111,168,0.06);
+        }
+        .compare-title {
+            font-size: 15px; font-weight: bold; color: var(--blue-dark);
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1.5px dashed #c5dff0;
+        }
+        .compare-row {
+            display: flex; align-items: flex-start;
+            gap: 12px; margin-bottom: 8px;
+            padding: 10px 12px; border-radius: 8px;
+        }
+        .compare-row.blue-row   { background: var(--blue-light);   border-left: 4px solid var(--blue); }
+        .compare-row.teal-row   { background: var(--teal-light);   border-left: 4px solid var(--teal); }
+        .compare-row.red-row    { background: var(--red-light);    border-left: 4px solid var(--red); }
+        .compare-row.purple-row { background: var(--purple-light); border-left: 4px solid var(--purple); }
+        .compare-row.orange-row { background: var(--orange-light); border-left: 4px solid var(--orange); }
+        .compare-tag {
+            font-size: 11px; font-weight: bold; padding: 2px 8px;
+            border-radius: 8px; white-space: nowrap; margin-top: 2px;
+        }
+        .compare-tag.bl { background: var(--blue);   color: white; }
+        .compare-tag.tl { background: var(--teal);   color: white; }
+        .compare-tag.rl { background: var(--red);    color: white; }
+        .compare-tag.pl { background: var(--purple); color: white; }
+        .compare-tag.ol { background: var(--orange); color: white; }
+        .compare-body { font-size: 15px; color: #2c3e50; line-height: 1.7; flex: 1; }
+        .compare-en { font-size: 13px; color: #888; font-style: italic; }
+
+        /* ===== Warning / Note / Mistake ===== */
+        .warning-box {
+            background: var(--orange-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--orange);
+        }
+        .warning-title { color: var(--orange); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .warning-text  { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .note-box {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--blue);
+        }
+        .note-box.teal-note   { background: var(--teal-light);   border-left-color: var(--teal); }
+        .note-box.purple-note { background: var(--purple-light); border-left-color: var(--purple); }
+        .note-title { color: var(--blue); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .note-box.teal-note   .note-title { color: var(--teal); }
+        .note-box.purple-note .note-title { color: var(--purple); }
+        .note-text { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .mistake-box {
+            background: var(--red-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .mistake-title { color: var(--red); font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .mistake-row {
+            display: flex; align-items: center;
+            gap: 12px; margin-bottom: 10px;
+            background: white; border-radius: 8px; padding: 12px;
+        }
+        .mistake-wrong { background: #fde8e8; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--red); line-height: 1.5; }
+        .mistake-right { background: #e6f7f0; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--teal); line-height: 1.5; }
+        .mistake-arrow { font-size: 20px; color: #aaa; flex-shrink: 0; }
+        .mistake-note  { font-size: 12px; color: #999; font-style: italic; margin-top: 4px; }
+
+        /* ===== Conjugation mini table ===== */
+        .conj-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px; margin: 14px 0;
+        }
+        .conj-card {
+            border-radius: 12px; padding: 16px; border: 2px solid #c5dff0;
+            background: white;
+        }
+        .conj-verb { font-size: 20px; font-weight: bold; color: var(--blue-dark); margin-bottom: 4px; }
+        .conj-en   { font-size: 12px; color: #999; margin-bottom: 10px; }
+        .conj-row  { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px dashed #eee; }
+        .conj-row:last-child { border-bottom: none; }
+        .conj-label { color: #aaa; }
+        .conj-form  { font-weight: bold; color: #2c3e50; }
+
+        @media (max-width: 768px) {
+            .topic-btn { font-size: 12px; padding: 12px 6px; }
+            .topic-section { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>📚 연결어미 — -고 / -아어서 / -지만</h1>
+        <div class="subtitle">두 문장을 연결해요 · Connecting Two Clauses</div>
+        <div class="subtitle-en">-고 (and/then) · -아/어서 (so/because) · -지만 (but)</div>
+    </div>
+
+    <div id="topic-main" class="topic-section active">
+<!-- ══════════════════════════════════════════════════════
+         TOPIC 3: 연결어미 -고, -아/어서, -지만
+    ══════════════════════════════════════════════════════ -->
+    <div id="topic-3" class="topic-section">
+
+        <div class="topic-header th-3">
+            <h2>③ 연결어미 — -고, -아/어서, -지만</h2>
+            <div class="th-en">Connecting Endings — Joining Two Clauses Together</div>
+            <div class="th-sub">지금까지 배운 모든 동사를 복합 문장으로 확장해요! Expand all learned verbs into full sentences!</div>
+        </div>
+
+        <div class="intro-box">
+            <div class="intro-ko">연결어미는 두 문장을 하나로 이어줘요!</div>
+            <div class="intro-en">
+                <strong>Connecting endings (연결어미)</strong> attach to the first verb to link two clauses.
+                The three most essential ones are: <strong>-고</strong> (and / then), <strong>-아/어서</strong> (so / because / and then), and <strong>-지만</strong> (but / however).
+                Once mastered, your Korean sentences will sound dramatically more natural!
+            </div>
+        </div>
+
+        <!-- Three Types overview -->
+        <div class="section-title">1. 세 가지 연결어미 (Three Connecting Endings)
+            <span class="section-title-en"> — At a Glance</span>
+        </div>
+
+        <div class="type-grid">
+            <div class="type-card blue-card">
+                <div class="type-label bl">🔵 순서/나열 Sequence / List</div>
+                <div class="type-form">-고</div>
+                <div class="type-desc">and / and then<br>나열, 순서, 동시<br>Listing or sequential actions<br><br>시제 자유! (Tense flexible)</div>
+                <div class="type-ex">걷<strong>고</strong> 쉬어요.<br>I walk and (then) rest.</div>
+            </div>
+            <div class="type-card teal-card">
+                <div class="type-label tl">🟢 이유/순서 Reason / Cause</div>
+                <div class="type-form">-아/어서</div>
+                <div class="type-desc">so / because / after doing<br>원인·이유 또는 연속 동작<br>Cause-result OR tight sequence<br><br>⚠️ 앞 절에 시제 없음!</div>
+                <div class="type-ex">뛰<strong>어서</strong> 피곤해요.<br>I ran, so I'm tired.</div>
+            </div>
+            <div class="type-card purple-card">
+                <div class="type-label pl">🟣 대조 Contrast</div>
+                <div class="type-form">-지만</div>
+                <div class="type-desc">but / however / although<br>앞 절과 반대되는 내용<br>Contrasting two facts<br><br>시제 자유! (Tense flexible)</div>
+                <div class="type-ex">걷고 싶<strong>지만</strong> 피곤해요.<br>I want to walk, but I'm tired.</div>
+            </div>
+        </div>
+
+        <!-- Formulas for each -->
+        <div class="formula-box">
+            <div class="formula-title">📐 -고 공식</div>
+            <div class="formula-main">
+                동사/형용사 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">고</span>
+                &nbsp;+ 다음 문장
+            </div>
+            <div class="formula-en">No irregulars, no vowel harmony — just attach 고 to any stem. Works for verbs AND adjectives.<br>
+            걷- + 고 = 걷고 &nbsp;|&nbsp; 날- + 고 = 날고 &nbsp;|&nbsp; 예쁘- + 고 = 예쁘고</div>
+        </div>
+
+        <div class="formula-box teal">
+            <div class="formula-title">📐 -아/어서 공식 (Same as -아/어요 vowel harmony!)</div>
+            <div class="formula-main">
+                ㅏ/ㅗ 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">아서</span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                나머지 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">어서</span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                하다 <span class="formula-arrow">→</span> <span class="formula-highlight">해서</span>
+            </div>
+            <div class="formula-en">
+                Same vowel harmony rule as -아/어요! 가다→가서 · 오다→와서 · 먹다→먹어서 · 하다→해서<br>
+                <em>⚠️ Critical: The first clause (아/어서) NEVER gets its own past tense marker -았/었. Only the final verb shows tense!</em>
+            </div>
+        </div>
+
+        <div class="formula-box purple">
+            <div class="formula-title">📐 -지만 공식</div>
+            <div class="formula-main">
+                동사/형용사 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">지만</span>
+                &nbsp;+ 반대 내용
+            </div>
+            <div class="formula-en">No irregulars, no vowel harmony — attach 지만 to any stem. Can also take past tense: 걸었지만 (walked but...).<br>
+            걷- + 지만 = 걷지만 &nbsp;|&nbsp; 피곤하- + 지만 = 피곤하지만 &nbsp;|&nbsp; 뛰었- + 지만 = 뛰었지만</div>
+        </div>
+
+        <!-- Key differences -->
+        <div class="section-title">2. -고 vs -아/어서 — 가장 중요한 차이! (Key Difference!)
+            <span class="section-title-en"> — This is where students often get confused</span>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ -아/어서 앞에는 과거 시제 못 써요! (NO past tense before -아/어서!)</div>
+            <div class="warning-text">
+                -아/어서 앞에는 절대로 -았/었을 붙이지 않아요. 전체 시제는 마지막 동사에서 표현해요!<br>
+                <em>Never use -았/었 before -아/어서. The tense of the whole sentence is shown only in the final verb.</em><br><br>
+                ❌ <span style="color:#c0392b;">뛰<strong>었</strong>어서 피곤해요.</span> &nbsp;&nbsp; ✅ <span style="color:#0e8c72;">뛰<strong>어서</strong> 피곤해요.</span> (I ran so I'm tired.)<br>
+                ❌ <span style="color:#c0392b;">먹<strong>었</strong>어서 배가 불러요.</span> &nbsp;&nbsp; ✅ <span style="color:#0e8c72;">먹<strong>어서</strong> 배가 불러요.</span> (I ate so I'm full.)<br><br>
+                But -고 and -지만 CAN take past tense in the first clause:<br>
+                ✅ 어제 뛰<strong>었고</strong> 오늘은 쉬었어요. (Yesterday I ran and today I rested.)
+            </div>
+        </div>
+
+        <div class="compare-block">
+            <div class="compare-title">-고 vs -아/어서 — 같은 상황, 다른 뉘앙스</div>
+            <div class="compare-row blue-row">
+                <span class="compare-tag bl">-고</span>
+                <div class="compare-body">
+                    <strong>공원에서 걷<span class="hl-blue">고</span> 쉬었어요.</strong>
+                    <div class="compare-en">I walked in the park and rested. → Simple sequence/list (neutral, no cause-effect implied)</div>
+                </div>
+            </div>
+            <div class="compare-row teal-row">
+                <span class="compare-tag tl">-아/어서</span>
+                <div class="compare-body">
+                    <strong>공원에서 걸<span class="hl-teal">어서</span> 피곤해요.</strong>
+                    <div class="compare-en">I walked in the park, so I'm tired. → Cause and result (the walking caused the tiredness)</div>
+                </div>
+            </div>
+            <div class="compare-row blue-row">
+                <span class="compare-tag bl">-고</span>
+                <div class="compare-body">
+                    <strong>밥을 먹<span class="hl-blue">고</span> 나서 산책해요.</strong>
+                    <div class="compare-en">After eating, I take a walk. → Sequential order (one after the other)</div>
+                </div>
+            </div>
+            <div class="compare-row teal-row">
+                <span class="compare-tag tl">-아/어서</span>
+                <div class="compare-body">
+                    <strong>배가 고파<span class="hl-teal">서</span> 밥을 먹어요.</strong>
+                    <div class="compare-en">I'm hungry, so I eat. → Reason stated first, result follows</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main table -->
+        <div class="section-title">3. 활용표 (Conjugation Table)
+            <span class="section-title-en"> — All three endings with movement verbs</span>
+        </div>
+
+        <table class="pairs-table purple-head">
+            <thead>
+                <tr>
+                    <th>동사 Verb</th>
+                    <th>-고 (and/then)</th>
+                    <th>-아/어서 (so/because)</th>
+                    <th>-지만 (but)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>기다</strong> crawl</td>
+                    <td class="blue-cell">기고</td>
+                    <td class="teal-cell">기어서</td>
+                    <td class="purple-cell">기지만</td>
+                </tr>
+                <tr>
+                    <td><strong>걷다</strong> walk ⚠️</td>
+                    <td class="blue-cell">걷고</td>
+                    <td class="teal-cell">걸어서 (ㄷ→ㄹ)</td>
+                    <td class="purple-cell">걷지만</td>
+                </tr>
+                <tr>
+                    <td><strong>뛰다</strong> run/jump</td>
+                    <td class="blue-cell">뛰고</td>
+                    <td class="teal-cell">뛰어서</td>
+                    <td class="purple-cell">뛰지만</td>
+                </tr>
+                <tr>
+                    <td><strong>날다</strong> fly</td>
+                    <td class="blue-cell">날고</td>
+                    <td class="teal-cell">날아서</td>
+                    <td class="purple-cell">날지만</td>
+                </tr>
+                <tr>
+                    <td><strong>쉬다</strong> rest</td>
+                    <td class="blue-cell">쉬고</td>
+                    <td class="teal-cell">쉬어서</td>
+                    <td class="purple-cell">쉬지만</td>
+                </tr>
+                <tr>
+                    <td><strong>먹다</strong> eat</td>
+                    <td class="blue-cell">먹고</td>
+                    <td class="teal-cell">먹어서</td>
+                    <td class="purple-cell">먹지만</td>
+                </tr>
+                <tr>
+                    <td><strong>피곤하다</strong> tired</td>
+                    <td class="blue-cell">피곤하고</td>
+                    <td class="teal-cell">피곤해서</td>
+                    <td class="purple-cell">피곤하지만</td>
+                </tr>
+                <tr>
+                    <td><strong>예쁘다</strong> pretty</td>
+                    <td class="blue-cell">예쁘고</td>
+                    <td class="teal-cell">예뻐서</td>
+                    <td class="purple-cell">예쁘지만</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Examples -->
+        <div class="section-title">4. 예문으로 배워요 (Example Sentences)</div>
+        <div class="examples-grid">
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-blue">-고 (나열/순서)</span>
+                <div class="pair-label">and · and then · listing actions</div>
+                <div class="sentence-line">공원에서 걷<span class="hl-blue">고</span> 쉬었어요.</div>
+                <div class="sentence-line">아침에 뛰<span class="hl-blue">고</span> 저녁에 걸어요.</div>
+                <div class="sentence-line">나비가 날<span class="hl-blue">고</span> 벌레가 기어요.</div>
+                <div class="dialogue-en">I walked in the park and rested.<br>I run in the morning and walk in the evening.<br>Butterflies fly and bugs crawl.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">-아/어서 (이유)</span>
+                <div class="pair-label">so · because (cause → result)</div>
+                <div class="sentence-line">많이 뛰<span class="hl-teal">어서</span> 피곤해요.</div>
+                <div class="sentence-line">날씨가 좋<span class="hl-teal">아서</span> 걸어요.</div>
+                <div class="sentence-line">배가 아파<span class="hl-teal">서</span> 뛸 수 없어요.</div>
+                <div class="dialogue-en">I ran a lot, so I'm tired.<br>The weather is nice, so I walk.<br>My stomach hurts, so I can't run.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">-아/어서 (순서)</span>
+                <div class="pair-label">after doing · tight sequence</div>
+                <div class="sentence-line">공원에 가<span class="hl-teal">서</span> 걸었어요.</div>
+                <div class="sentence-line">집에 와<span class="hl-teal">서</span> 쉬었어요.</div>
+                <div class="sentence-line">일어나<span class="hl-teal">서</span> 뛰었어요.</div>
+                <div class="dialogue-en">I went to the park and (then) walked.<br>I came home and (then) rested.<br>I got up and (then) ran.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-purple">-지만 (대조)</span>
+                <div class="pair-label">but · however · although</div>
+                <div class="sentence-line">걷고 싶<span class="hl-purple">지만</span> 피곤해요.</div>
+                <div class="sentence-line">뛰<span class="hl-purple">지만</span> 빠르지 않아요.</div>
+                <div class="sentence-line">쉬고 싶<span class="hl-purple">지만</span> 바빠요.</div>
+                <div class="dialogue-en">I want to walk, but I'm tired.<br>I run, but I'm not fast.<br>I want to rest, but I'm busy.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-blue">복합 문장 Mixed</span>
+                <div class="pair-label">모두 합쳐서 · Combining all three!</div>
+                <div class="sentence-line">많이 걸<span class="hl-teal">어서</span> 피곤하<span class="hl-purple">지만</span> 행복해요!</div>
+                <div class="sentence-line">뛰<span class="hl-blue">고</span> 걷<span class="hl-blue">고</span> 나서 쉬어요.</div>
+                <div class="sentence-line">날고 싶<span class="hl-purple">지만</span> 날 수 없어요!</div>
+                <div class="dialogue-en">I walked a lot, so I'm tired, but I'm happy!<br>After running and walking, I rest.<br>I want to fly, but I cannot fly!</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-purple">대화 Dialogue</span>
+                <div class="pair-label">실전 대화 · Real conversation</div>
+                <div class="sentence-line">A: 오늘 공원에 갔<span class="hl-blue">고</span> 많이 걸었어요!</div>
+                <div class="sentence-line">B: 그래서 피곤하지요?</div>
+                <div class="sentence-line">A: 네, 피곤하<span class="hl-purple">지만</span> 기분이 좋아요.</div>
+                <div class="sentence-line">B: 쉬<span class="hl-teal">어서</span> 내일 또 가요!</div>
+                <div class="dialogue-en">A: I went to the park today and walked a lot!<br>B: So you're tired, right?<br>A: Yes, but I feel good.<br>B: Rest up and go again tomorrow!</div>
+            </div>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="section-title">5. 흔한 실수 (Common Mistakes)</div>
+        <div class="mistake-box">
+            <div class="mistake-title">❌ 틀리기 쉬운 것들</div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 뛰었어서 피곤해요.
+                    <div class="mistake-note">-아/어서 앞에 과거 시제 금지!</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 뛰어서 피곤해요.
+                    <div class="mistake-note">아/어서 앞에 -았/었 불가 — tense at end only</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 걸어서 나는 공원에 가요.
+                    <div class="mistake-note">아/어서 절이 주절 앞에 와야 해요</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 나는 걸어서 공원에 가요.
+                    <div class="mistake-note">Or: 공원에 가서 걸었어요. Subject first, then verb chain</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 피곤하지만 그러나 걸어요.
+                    <div class="mistake-note">-지만 already means "but" — don't add 그러나/하지만</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 피곤하지만 걸어요.
+                    <div class="mistake-note">-지만 alone is enough — no extra "but" needed</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 걷고서 피곤해요. (wanting to mean "because")
+                    <div class="mistake-note">-고 does NOT express cause/reason</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 걸어서 피곤해요.
+                    <div class="mistake-note">Use -아/어서 for reason/cause. -고 = list/sequence only</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box purple-note">
+            <div class="note-title">💡 세 가지 한눈에 정리! (Quick Summary)</div>
+            <div class="note-text">
+                <strong>-고</strong> = and / then → 순서나 나열 · No vowel harmony · Tense flexible · Works for verbs AND adjectives<br>
+                &nbsp;→ 걷<strong>고</strong> 쉬어요. / 예쁘<strong>고</strong> 착해요. (pretty and kind)<br><br>
+                <strong>-아/어서</strong> = so / because / and then (tight) → 이유 또는 연속 동작 · Vowel harmony applies · NO past tense in first clause!<br>
+                &nbsp;→ 걸<strong>어서</strong> 피곤해요. / 날씨가 좋<strong>아서</strong> 걸어요.<br><br>
+                <strong>-지만</strong> = but / although → 대조 · No vowel harmony · Tense flexible · Very common in daily speech<br>
+                &nbsp;→ 걷고 싶<strong>지만</strong> 피곤해요. / 비가 오<strong>지만</strong> 걸었어요.<br><br>
+                ✨ <strong>봄 동사로 3개 다 연습해요!</strong> 걷고 뛰어서 피곤하지만 행복해요! 🌿
+            </div>
+        </div>
+
+    </div><!-- end topic-3 -->
+    </div>
+
+</div>
+</body>
+</html>

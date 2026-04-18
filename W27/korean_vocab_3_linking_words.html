@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 카드 ③ 연결어미 -고 / -아어서 / -지만 | Connecting Endings Vocabulary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #7c5cbf 0%, #1a6fa8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: linear-gradient(135deg, #7c5cbf 0%, #5a3fa0 40%, #1a6fa8 100%);
+            color: white; padding: 40px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .header::before {
+            content: '🔵🟢🟣🔵🟢🟣🔵🟢🟣';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 18px; letter-spacing: 12px; opacity: 0.18;
+        }
+        .header h1 { font-size: 36px; margin-bottom: 8px; text-shadow: 1px 2px 4px rgba(0,0,0,0.25); }
+        .header .subtitle  { font-size: 18px; opacity: 0.95; margin-bottom: 6px; }
+        .header .subtitle-en { font-size: 14px; opacity: 0.82; font-style: italic; }
+        .topic-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.22);
+            padding: 5px 20px; border-radius: 20px;
+            font-size: 13px; margin-bottom: 12px; letter-spacing: 2px; font-weight: bold;
+        }
+
+        /* ── TABS ── */
+        .nav-tabs { display: flex; background: var(--purple-light); border-bottom: 3px solid #ce93d8; }
+        .nav-tab {
+            flex: 1; padding: 18px 10px; text-align: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            border: none; background: transparent; color: #aaa; transition: all 0.3s;
+            font-family: inherit;
+        }
+        .nav-tab.active { color: var(--purple-dark); background: white; border-bottom: 4px solid var(--purple); }
+        .nav-tab:hover  { background: #e0d8f8; color: var(--purple); }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* ── CSS VARS ── */
+        :root {
+            --blue: #1a6fa8; --blue-dark: #0d4f7c; --blue-light: #eaf3fb;
+            --teal: #0e8c72; --teal-dark: #076652; --teal-light: #e6f7f3;
+            --purple: #7c5cbf; --purple-dark: #5a3fa0; --purple-light: #f0ebff;
+            --red: #c0392b;   --red-light: #fef2f2;
+            --orange: #d4881e; --orange-light: #fef5e7;
+            --green: #27ae60; --green-light: #eafaf1;
+        }
+
+        /* ── CATEGORY HEADERS ── */
+        .cat-header {
+            color: white; padding: 15px 22px; border-radius: 12px;
+            margin: 30px 0 18px; font-size: 19px; font-weight: bold;
+        }
+        .cat-purple { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); }
+        .cat-blue   { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); }
+        .cat-teal   { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); }
+        .cat-orange { background: linear-gradient(135deg, var(--orange) 0%, #b36a00 100%); }
+        .cat-tri    { background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 50%, var(--purple) 100%); }
+
+        /* ── SECTION TITLE ── */
+        .sec-title {
+            font-size: 22px; font-weight: bold;
+            margin: 30px 0 5px; padding-bottom: 9px;
+            border-bottom: 3px solid var(--purple);
+            color: var(--purple-dark);
+        }
+        .sec-title-en { font-size: 13px; color: #aaa; font-style: italic; margin-bottom: 16px; }
+
+        /* ── QUICK REF TABLE ── */
+        .quick-ref {
+            background: var(--purple-light); border-radius: 15px;
+            padding: 24px; margin-bottom: 30px;
+            border-left: 5px solid var(--purple);
+        }
+        .quick-ref h2 { font-size: 21px; color: var(--purple-dark); margin-bottom: 4px; }
+        .quick-ref-en { font-size: 13px; color: #999; font-style: italic; margin-bottom: 16px; }
+        .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .ref-table th {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+            color: white; padding: 11px 12px; text-align: center; font-size: 13px;
+        }
+        .ref-table td { padding: 10px 12px; border-bottom: 1px solid #d8ccf5; text-align: center; }
+        .ref-table .row-blue   { background: var(--blue-light); }
+        .ref-table .row-teal   { background: var(--teal-light); }
+        .ref-table .row-purple { background: var(--purple-light); }
+        .ref-table tbody tr:hover { filter: brightness(0.95); }
+        .blue-w   { color: var(--blue);        font-weight: bold; font-size: 15px; }
+        .teal-w   { color: var(--teal);        font-weight: bold; font-size: 15px; }
+        .purple-w { color: var(--purple);      font-weight: bold; font-size: 15px; }
+        .red-w    { color: var(--red);         font-weight: bold; }
+        .orange-w { color: var(--orange);      font-weight: bold; }
+
+        /* ── PHRASE TABLE ── */
+        .phrase-table {
+            width: 100%; border-collapse: collapse;
+            margin-bottom: 24px; font-size: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden;
+        }
+        .phrase-table thead tr {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: white;
+        }
+        .phrase-table th { padding: 13px 14px; text-align: left; font-size: 14px; }
+        .phrase-table tbody tr:nth-child(even) { background: var(--purple-light); }
+        .phrase-table tbody tr:hover { background: #ddd5f8; transition: background 0.2s; }
+        .phrase-table td { padding: 12px 14px; border-bottom: 1px solid #d8ccf5; vertical-align: middle; }
+        .word-ko   { font-size: 22px; font-weight: bold; color: var(--purple-dark); }
+        .word-ro   { font-size: 12px; color: var(--purple); font-style: italic; margin-top: 2px; }
+        .word-meaning { font-weight: 600; color: #4a5568; }
+        .word-note { font-size: 13px; color: #718096; margin-top: 3px; }
+        .tag-reg  { display:inline-block; background:var(--blue-light);   color:var(--blue-dark);   font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #90c4e8; }
+        .tag-irr  { display:inline-block; background:var(--red-light);    color:var(--red);          font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #f48fb1; }
+        .tag-adj  { display:inline-block; background:var(--purple-light); color:var(--purple-dark);  font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #ce93d8; }
+
+        /* ── THREE-WAY SPLIT VERB CARD ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 22px; margin-top: 18px;
+        }
+        .verb-card-3 {
+            border: 3px solid #ce93d8;
+            border-radius: 18px; overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .verb-card-3:hover { transform: translateY(-4px); border-color: var(--purple); box-shadow: 0 12px 30px rgba(124,92,191,0.22); }
+        .verb-card-3.irr-card { border-color: #f48fb1; }
+        .verb-card-3.irr-card:hover { border-color: var(--red); }
+
+        /* 3-col header */
+        .card-header-3 { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; }
+        .header-blue {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: white; padding: 14px 12px;
+        }
+        .header-teal {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            color: white; padding: 14px 12px;
+        }
+        .header-purple {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+            color: white; padding: 14px 12px;
+        }
+        .header-div {
+            background: #1a252f;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 8px; font-size: 16px; color: rgba(255,255,255,0.5);
+        }
+        .header-div.teal-bg   { background: #054d3a; }
+        .header-div.purple-bg { background: #3a1f80; }
+        .h-type { font-size: 10px; opacity: 0.8; letter-spacing: 1px; margin-bottom: 3px; text-transform: uppercase; }
+        .h-verb { font-size: 18px; font-weight: bold; }
+        .h-en   { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+
+        /* card body */
+        .card-body { padding: 14px 18px; }
+        .form-row {
+            display: flex; align-items: center; gap: 8px;
+            background: #fafafa; border-radius: 8px;
+            padding: 8px 12px; margin-bottom: 7px;
+        }
+        .form-label { font-size: 11px; color: #999; min-width: 80px; font-weight: bold; }
+        .form-value { font-size: 13px; font-weight: bold; color: #2c3e50; flex: 1; }
+        .form-suffix-blue   { display:inline-block; background:#ddeeff; color:var(--blue-dark);   border-radius:8px; padding:1px 10px; font-weight:bold; font-size:13px; }
+        .form-suffix-teal   { display:inline-block; background:#b2dfdb; color:var(--teal-dark);   border-radius:8px; padding:1px 10px; font-weight:bold; font-size:13px; }
+        .form-suffix-purple { display:inline-block; background:#e0d8f8; color:var(--purple-dark); border-radius:8px; padding:1px 10px; font-weight:bold; font-size:13px; }
+        .form-note { font-size: 11px; color: var(--red); font-style: italic; }
+        .irreg-chip {
+            display: inline-block; background: var(--red-light);
+            color: var(--red); font-size: 12px; font-weight: bold;
+            padding: 2px 10px; border-radius: 8px; margin-bottom: 8px;
+        }
+        .sent-blue {
+            background: var(--blue-light); border-radius: 10px;
+            padding: 10px 13px; margin-top: 7px; border-left: 4px solid var(--blue);
+        }
+        .sent-teal {
+            background: var(--teal-light); border-radius: 10px;
+            padding: 10px 13px; margin-top: 7px; border-left: 4px solid var(--teal);
+        }
+        .sent-purple {
+            background: var(--purple-light); border-radius: 10px;
+            padding: 10px 13px; margin-top: 7px; border-left: 4px solid var(--purple);
+        }
+        .sent-orange {
+            background: var(--orange-light); border-radius: 10px;
+            padding: 10px 13px; margin-top: 7px; border-left: 4px solid var(--orange);
+        }
+        .sent-tag   { font-size: 10px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .tag-blue   { color: var(--blue); }
+        .tag-teal   { color: var(--teal); }
+        .tag-purple { color: var(--purple-dark); }
+        .tag-orange { color: var(--orange); }
+        .sent-ko { font-size: 14px; color: #2c3e50; font-weight: 600; line-height: 1.5; }
+        .sent-en { font-size: 12px; color: #888; font-style: italic; margin-top: 3px; }
+        .hl-blue   { color: var(--blue);        font-weight: bold; }
+        .hl-teal   { color: var(--teal);        font-weight: bold; }
+        .hl-purple { color: var(--purple-dark); font-weight: bold; }
+        .hl-orange { color: var(--orange);      font-weight: bold; }
+        .hl-red    { color: var(--red);         font-weight: bold; }
+
+        /* ── CONJUGATION CARDS (Spring Verbs style) ── */
+        .verb-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px; margin-bottom: 26px;
+        }
+        .verb-card-conj {
+            border-radius: 16px; padding: 18px;
+            border: 2px solid #e0e0e0;
+            background: white; transition: all 0.2s;
+        }
+        .verb-card-conj:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .vc-verb  { font-size: 24px; font-weight: bold; margin-bottom: 3px; }
+        .vc-eng   { font-size: 13px; color: #718096; margin-bottom: 10px; }
+        .vc-row   { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px dashed #eee; }
+        .vc-row:last-child { border-bottom: none; }
+        .vc-label { color: #9e9e9e; flex-shrink: 0; margin-right: 6px; }
+        .vc-form  { font-weight: bold; text-align: right; }
+        .vc-blue   { border-top: 5px solid var(--blue);   } .vc-blue   .vc-verb { color: var(--blue-dark);   }
+        .vc-teal   { border-top: 5px solid var(--teal);   } .vc-teal   .vc-verb { color: var(--teal-dark);   }
+        .vc-purple { border-top: 5px solid var(--purple); } .vc-purple .vc-verb { color: var(--purple-dark); }
+        .vc-red    { border-top: 5px solid var(--red);    } .vc-red    .vc-verb { color: #7b1a12; }
+        .vc-orange { border-top: 5px solid var(--orange); } .vc-orange .vc-verb { color: #7d5300; }
+        .vc-green  { border-top: 5px solid var(--green);  } .vc-green  .vc-verb { color: #1b5e20; }
+        .vc-go     { color: var(--blue);        font-weight: bold; }
+        .vc-aeo    { color: var(--teal);        font-weight: bold; }
+        .vc-ji     { color: var(--purple-dark); font-weight: bold; }
+
+        /* ── IRREGULAR BOX ── */
+        .irregular-box {
+            background: linear-gradient(135deg, var(--red-light) 0%, var(--purple-light) 100%);
+            border: 2px solid #f48fb1; border-radius: 14px;
+            padding: 18px 22px; margin: 16px 0 24px;
+        }
+        .irregular-box h3 { font-size: 16px; color: #880e4f; margin-bottom: 10px; }
+        .irreg-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+        .irreg-tag { background: white; border-radius: 8px; padding: 6px 14px; font-size: 14px; border: 1px solid #f48fb1; }
+        .irreg-tag strong { color: #c62828; }
+
+        /* ── TIP BOXES ── */
+        .tip-box { border-radius: 12px; padding: 16px 20px; margin: 14px 0; font-size: 14px; line-height: 1.9; }
+        .tip-purple { background: var(--purple-light); border: 2px solid #ce93d8; color: var(--purple-dark); }
+        .tip-orange { background: var(--orange-light); border: 2px solid #f5cba7; color: #7d5300; }
+        .tip-blue   { background: var(--blue-light);   border: 2px solid #90c4e8; color: var(--blue-dark); }
+        .tip-red    { background: var(--red-light);    border: 2px solid #f1948a; color: #7b1a12; }
+        .tip-tri    { background: linear-gradient(135deg, var(--blue-light), var(--teal-light), var(--purple-light));
+                      border: 2px solid #ce93d8; color: #2c3e50; }
+
+        /* ── ADJECTIVE / NOUN CARDS ── */
+        .noun-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px; margin: 14px 0 26px;
+        }
+        .noun-card {
+            background: white; border-radius: 14px;
+            padding: 18px; border: 2px solid #d8ccf5;
+            transition: all 0.2s;
+        }
+        .noun-card:hover { border-color: var(--purple); box-shadow: 0 6px 16px rgba(124,92,191,0.15); }
+        .noun-card.blue-card  { border-color: #90c4e8; }
+        .noun-card.blue-card:hover { border-color: var(--blue); box-shadow: 0 6px 16px rgba(26,111,168,0.15); }
+        .noun-card.teal-card  { border-color: #80cbc4; }
+        .noun-card.teal-card:hover { border-color: var(--teal); }
+        .nc-ko { font-size: 24px; font-weight: bold; color: var(--purple-dark); margin-bottom: 2px; }
+        .nc-ko.bl { color: var(--blue-dark); }
+        .nc-ko.tl { color: var(--teal-dark); }
+        .nc-ro { font-size: 12px; color: var(--purple); font-style: italic; margin-bottom: 5px; }
+        .nc-ro.bl { color: var(--blue); }
+        .nc-ro.tl { color: var(--teal); }
+        .nc-en { font-size: 15px; font-weight: 600; color: #2c3e50; margin-bottom: 6px; }
+        .nc-ex { font-size: 13px; color: #666; line-height: 1.7; background: #f4f6f8; border-radius: 8px; padding: 8px 10px; margin-top: 8px; }
+
+        /* ── REMEMBER BOX ── */
+        .remember-box {
+            border-radius: 16px; padding: 26px; margin-top: 36px;
+            border: 2px solid var(--purple); background: var(--purple-light);
+        }
+        .remember-box h3 { font-size: 20px; margin-bottom: 14px; color: var(--purple-dark); }
+        .remember-box p  { font-size: 15px; color: #444; line-height: 2.2; }
+        .r-blue   { color: var(--blue);        font-weight: bold; }
+        .r-teal   { color: var(--teal);        font-weight: bold; }
+        .r-purple { color: var(--purple);      font-weight: bold; }
+        .r-red    { color: var(--red);         font-weight: bold; }
+        .r-orange { color: var(--orange);      font-weight: bold; }
+        .en-note  { font-size: 13px; color: #777; font-style: italic; margin-top: 14px; border-top: 1px solid #d8ccf5; padding-top: 12px; line-height: 1.8; }
+
+        .tip-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px; margin-top: 22px;
+        }
+        .tip-card { border-radius: 14px; padding: 18px; border: 2px solid; }
+        .tip-card.blue-tip   { background: var(--blue-light);   border-color: var(--blue); }
+        .tip-card.teal-tip   { background: var(--teal-light);   border-color: var(--teal); }
+        .tip-card.purple-tip { background: var(--purple-light); border-color: var(--purple); }
+        .tip-card.red-tip    { background: var(--red-light);    border-color: var(--red); }
+        .tip-title   { font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+        .tip-title.b { color: var(--blue-dark); }
+        .tip-title.t { color: var(--teal-dark); }
+        .tip-title.p { color: var(--purple-dark); }
+        .tip-title.r { color: var(--red); }
+        .tip-body { font-size: 14px; color: #444; line-height: 1.9; }
+
+        /* ── MISTAKE BOX ── */
+        .mistake-box { background: var(--red-light); border-radius: 12px; padding: 18px; margin: 14px 0; }
+        .mistake-title { color: var(--red); font-size: 15px; font-weight: bold; margin-bottom: 12px; }
+        .mistake-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+            background: white; border-radius: 8px; padding: 11px;
+        }
+        .mistake-wrong { background: #fde8e8; padding: 9px 12px; border-radius: 8px; font-size: 13px; flex: 1; color: var(--red); line-height: 1.5; }
+        .mistake-right { background: #e6f7f0; padding: 9px 12px; border-radius: 8px; font-size: 13px; flex: 1; color: var(--teal); line-height: 1.5; }
+        .mistake-arrow { font-size: 18px; color: #aaa; flex-shrink: 0; }
+        .mistake-note  { font-size: 11px; color: #999; font-style: italic; margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .content { padding: 20px; }
+            .verb-grid { grid-template-columns: 1fr 1fr; }
+            .noun-grid { grid-template-columns: 1fr 1fr; }
+            .nav-tab { font-size: 12px; padding: 12px 5px; }
+            .card-header-3 { grid-template-columns: 1fr; }
+            .header-div { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="topic-badge">③ GRAMMAR TOPIC 3 · 문법 ③</div>
+        <h1>📋 연결어미 — -고 / -아/어서 / -지만</h1>
+        <div class="subtitle">단어 카드 · Vocabulary Cards — Connecting Endings</div>
+        <div class="subtitle-en">All vocabulary from Grammar ③ — verbs, adjectives &amp; nouns organized by connecting ending pattern</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('verbs', event)">🔵🟢🟣 동사 카드 Verb Cards</button>
+        <button class="nav-tab" onclick="showSection('conj', event)">📊 활용표 Conjugation</button>
+        <button class="nav-tab" onclick="showSection('adj', event)">🌸 형용사 · 명사</button>
+        <button class="nav-tab" onclick="showSection('ref', event)">⭐ 참고 Reference</button>
+    </div>
+
+    <div class="content">
+
+    <!-- ══════════════════════════════════════════
+         TAB 1: VERB CARDS (3-way split: -고 / -아어서 / -지만)
+    ══════════════════════════════════════════ -->
+    <div id="verbs-section" class="section active">
+
+        <div class="quick-ref">
+            <h2>⚡ 세 가지 연결어미 핵심 공식</h2>
+            <div class="quick-ref-en">Three connecting endings at a glance — study the color codes before the cards</div>
+            <table class="ref-table">
+                <thead>
+                    <tr>
+                        <th>연결어미</th>
+                        <th>뜻 Meaning</th>
+                        <th>공식 Formula</th>
+                        <th>시제 Tense</th>
+                        <th>모음조화 Vowel Harmony</th>
+                        <th>예 Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row-blue">
+                        <td><strong class="blue-w">🔵 -고</strong></td>
+                        <td>and / and then<br><em>순서 · 나열</em></td>
+                        <td class="blue-w">어간 + 고</td>
+                        <td>자유 ✅</td>
+                        <td>없음 — 간단!</td>
+                        <td>걷<strong class="blue-w">고</strong> 쉬어요</td>
+                    </tr>
+                    <tr class="row-teal">
+                        <td><strong class="teal-w">🟢 -아/어서</strong></td>
+                        <td>so / because / after<br><em>이유 · 연속</em></td>
+                        <td class="teal-w">ㅏ/ㅗ → 아서<br>나머지 → 어서<br>하다 → 해서</td>
+                        <td><span class="red-w">⚠️ 앞절 금지!</span></td>
+                        <td>있음 ⚠️</td>
+                        <td>뛰<strong class="teal-w">어서</strong> 피곤해요</td>
+                    </tr>
+                    <tr class="row-purple">
+                        <td><strong class="purple-w">🟣 -지만</strong></td>
+                        <td>but / however<br><em>대조 · 역접</em></td>
+                        <td class="purple-w">어간 + 지만</td>
+                        <td>자유 ✅</td>
+                        <td>없음 — 간단!</td>
+                        <td>피곤하<strong class="purple-w">지만</strong> 걸어요</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Spring verbs section -->
+        <div class="cat-header cat-tri">🌿 봄 나들이 동사 — 세 가지 연결어미로 연습해요!</div>
+
+        <div class="cards-grid">
+
+            <!-- 기다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">기고</div>
+                        <div class="h-en">crawl and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">기어서</div>
+                        <div class="h-en">crawl so... / after crawling</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">기지만</div>
+                        <div class="h-en">crawl, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">기다 → 기- &nbsp;<span style="font-size:12px;color:#888;">(규칙 Regular)</span></div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 나열/순서</span>
+                        <div class="sent-ko">나비가 날<span class="hl-blue">고</span> 벌레가 기어요.</div>
+                        <div class="sent-en">Butterflies fly and bugs crawl.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 이유</span>
+                        <div class="sent-ko">기<span class="hl-teal">어서</span> 무릎이 아파요.</div>
+                        <div class="sent-en">I crawled, so my knees hurt.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">기<span class="hl-purple">지만</span> 빠를 수 있어요!</div>
+                        <div class="sent-en">I crawl, but I can be fast!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 걷다 (ㄷ 불규칙) -->
+            <div class="verb-card-3 irr-card">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">걷고</div>
+                        <div class="h-en">walk and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 ⚠️ ㄷ→ㄹ</div>
+                        <div class="h-verb">걸어서</div>
+                        <div class="h-en">walk so... / after walking</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">걷지만</div>
+                        <div class="h-en">walk, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="irreg-chip">⚠️ ㄷ 불규칙 — -아/어서 앞에서 걷 → 걸! (-고, -지만은 그냥 걷-)</div>
+                    <div class="form-row">
+                        <div class="form-label">어간 →</div>
+                        <div class="form-value">걷- (고/지만) &nbsp;|&nbsp; 걸- (아/어서 앞) <span class="form-note">⚠️</span></div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 나열</span>
+                        <div class="sent-ko">공원에서 걷<span class="hl-blue">고</span> 쉬었어요.</div>
+                        <div class="sent-en">I walked in the park and rested.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 이유 (⚠️ 걸어서 not 걷어서)</span>
+                        <div class="sent-ko">공원에서 걸<span class="hl-teal">어서</span> 피곤해요.</div>
+                        <div class="sent-en">I walked in the park, so I'm tired.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">걷<span class="hl-purple">지만</span> 빠르지 않아요.</div>
+                        <div class="sent-en">I walk, but I'm not fast.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 뛰다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">뛰고</div>
+                        <div class="h-en">run and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">뛰어서</div>
+                        <div class="h-en">run so... / after running</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">뛰지만</div>
+                        <div class="h-en">run, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">뛰다 → 뛰- &nbsp;<span style="font-size:12px;color:#888;">(규칙 Regular)</span></div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 순서</span>
+                        <div class="sent-ko">아침에 뛰<span class="hl-blue">고</span> 저녁에 걸어요.</div>
+                        <div class="sent-en">I run in the morning and walk in the evening.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 이유</span>
+                        <div class="sent-ko">많이 뛰<span class="hl-teal">어서</span> 피곤해요.</div>
+                        <div class="sent-en">I ran a lot, so I'm tired.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">뛰<span class="hl-purple">지만</span> 빠르지 않아요.</div>
+                        <div class="sent-en">I run, but I'm not fast.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 날다 (ㄹ 어간) -->
+            <div class="verb-card-3 irr-card">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">날고</div>
+                        <div class="h-en">fly and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 ⚠️ ㄹ어간</div>
+                        <div class="h-verb">날아서</div>
+                        <div class="h-en">fly so... / after flying</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">날지만</div>
+                        <div class="h-en">fly, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="irreg-chip">⚠️ ㄹ 어간 — 모음 앞 날아서 (ㄹ 유지) · ㄴ/ㅂ 앞 납니다 (ㄹ 탈락)</div>
+                    <div class="form-row">
+                        <div class="form-label">어간 →</div>
+                        <div class="form-value">날- &nbsp;→&nbsp; 날<strong>고</strong> · 날<strong>아서</strong> · 날<strong>지만</strong> ✅</div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 나열</span>
+                        <div class="sent-ko">나비가 날<span class="hl-blue">고</span> 벌레가 기어요.</div>
+                        <div class="sent-en">Butterflies fly and bugs crawl.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 이유</span>
+                        <div class="sent-ko">높이 날<span class="hl-teal">아서</span> 멀리 볼 수 있어요.</div>
+                        <div class="sent-en">I fly high, so I can see far.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">날<span class="hl-purple">지만</span> 빠르지 않아요.</div>
+                        <div class="sent-en">I fly, but I'm not fast.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 쉬다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">쉬고</div>
+                        <div class="h-en">rest and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">쉬어서</div>
+                        <div class="h-en">rest so... / after resting</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">쉬지만</div>
+                        <div class="h-en">rest, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">쉬다 → 쉬- &nbsp;<span style="font-size:12px;color:#888;">(규칙 Regular)</span></div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 나서 after (순서)</span>
+                        <div class="sent-ko">뛰<span class="hl-blue">고</span> 걷<span class="hl-blue">고</span> 나서 쉬어요.</div>
+                        <div class="sent-en">After running and walking, I rest.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 연속동작</span>
+                        <div class="sent-ko">집에 와<span class="hl-teal">서</span> 쉬었어요.</div>
+                        <div class="sent-en">I came home and (then) rested.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">쉬고 싶<span class="hl-purple">지만</span> 바빠요.</div>
+                        <div class="sent-en">I want to rest, but I'm busy.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 먹다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">먹고</div>
+                        <div class="h-en">eat and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">먹어서</div>
+                        <div class="h-en">eat so... / after eating</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">먹지만</div>
+                        <div class="h-en">eat, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">먹다 → 먹- &nbsp;<span style="font-size:12px;color:#888;">(규칙 Regular · 받침 ㄱ)</span></div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 나서 순서</span>
+                        <div class="sent-ko">밥을 먹<span class="hl-blue">고</span> 나서 산책해요.</div>
+                        <div class="sent-en">After eating, I take a walk.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 이유</span>
+                        <div class="sent-ko">먹<span class="hl-teal">어서</span> 배가 불러요.</div>
+                        <div class="sent-en">I ate, so I'm full.</div>
+                    </div>
+                    <div class="sent-purple">
+                        <span class="sent-tag tag-purple">-지만 대조</span>
+                        <div class="sent-ko">먹<span class="hl-purple">지만</span> 배가 안 불러요.</div>
+                        <div class="sent-en">I eat, but I'm not full.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 가다/오다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">가고 / 오고</div>
+                        <div class="h-en">go and... / come and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">가서 / 와서</div>
+                        <div class="h-en">go and then / come and then</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">가지만 / 오지만</div>
+                        <div class="h-en">go, but... / come, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">가다 →</div>
+                        <div class="form-value">가- &nbsp;→&nbsp; 가<strong>고</strong> · 가<strong>서</strong> (ㅏ모음!) · 가<strong>지만</strong></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">오다 →</div>
+                        <div class="form-value">오- &nbsp;→&nbsp; 오<strong>고</strong> · 와<strong>서</strong> (ㅗ+아서→와서!) · 오<strong>지만</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 순서 (가다)</span>
+                        <div class="sent-ko">공원에 가<span class="hl-teal">서</span> 걸었어요.</div>
+                        <div class="sent-en">I went to the park and (then) walked.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 순서 (오다 → 와서)</span>
+                        <div class="sent-ko">집에 와<span class="hl-teal">서</span> 쉬었어요.</div>
+                        <div class="sent-en">I came home and (then) rested.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 일어나다 -->
+            <div class="verb-card-3">
+                <div class="card-header-3">
+                    <div class="header-blue">
+                        <div class="h-type">🔵 -고 and/then</div>
+                        <div class="h-verb">일어나고</div>
+                        <div class="h-en">get up and...</div>
+                    </div>
+                    <div class="header-div teal-bg">|</div>
+                    <div class="header-teal">
+                        <div class="h-type">🟢 -아/어서 so/after</div>
+                        <div class="h-verb">일어나서</div>
+                        <div class="h-en">get up and then</div>
+                    </div>
+                    <div class="header-div purple-bg">|</div>
+                    <div class="header-purple">
+                        <div class="h-type">🟣 -지만 but</div>
+                        <div class="h-verb">일어나지만</div>
+                        <div class="h-en">get up, but...</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">일어나다 → 일어나- &nbsp;<span style="font-size:12px;color:#888;">(규칙 / ㅏ 모음 → 아서)</span></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">-아/어서 순서</span>
+                        <div class="sent-ko">일어나<span class="hl-teal">서</span> 뛰었어요.</div>
+                        <div class="sent-en">I got up and (then) ran.</div>
+                    </div>
+                    <div class="sent-blue">
+                        <span class="sent-tag tag-blue">-고 순서</span>
+                        <div class="sent-ko">일어나<span class="hl-blue">고</span> 씻었어요.</div>
+                        <div class="sent-en">I got up and washed up.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end verb cards -->
+
+        <div class="tip-box tip-orange" style="margin-top:22px;">
+            ⚠️ <strong>-고 vs -아/어서 — 헷갈리는 차이!</strong><br>
+            <strong>🔵 -고</strong> = 그냥 순서/나열 (neutral list/sequence) — 인과관계 없어요! → 걷<strong>고</strong> 쉬어요. <em>(walked AND rested)</em><br>
+            <strong>🟢 -아/어서</strong> = 원인→결과 또는 꼭 연속동작 → 걸<strong>어서</strong> 피곤해요. <em>(walked, THEREFORE tired)</em><br>
+            ✨ <em>-아/어서 앞에는 절대 과거형 -았/었 금지!</em> &nbsp;❌ 뛰었어서 → ✅ 뛰어서 피곤해요.
+        </div>
+
+    </div><!-- end verbs section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 2: CONJUGATION TABLE
+    ══════════════════════════════════════════ -->
+    <div id="conj-section" class="section">
+
+        <div class="cat-header cat-purple">📊 전체 활용표 — All Verbs: 세 가지 연결어미</div>
+
+        <table class="phrase-table">
+            <thead>
+                <tr>
+                    <th>동사 Verb</th>
+                    <th>뜻 Meaning</th>
+                    <th>유형 Type</th>
+                    <th>🔵 -고 (and/then)</th>
+                    <th>🟢 -아/어서 (so/because)</th>
+                    <th>🟣 -지만 (but)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="word-ko">기다</div><div class="word-ro">gi-da</div></td>
+                    <td><div class="word-meaning">to crawl</div></td>
+                    <td><span class="tag-reg">✅ 규칙</span></td>
+                    <td class="blue-w">기고</td>
+                    <td class="teal-w">기어서</td>
+                    <td class="purple-w">기지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">걷다 ⚠️</div><div class="word-ro">geot-da</div></td>
+                    <td><div class="word-meaning">to walk</div></td>
+                    <td><span class="tag-irr">⚠️ ㄷ 불규칙</span></td>
+                    <td class="blue-w">걷고</td>
+                    <td class="teal-w">걸어서 ⚠️</td>
+                    <td class="purple-w">걷지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">뛰다</div><div class="word-ro">ttwi-da</div></td>
+                    <td><div class="word-meaning">to run/jump</div></td>
+                    <td><span class="tag-reg">✅ 규칙</span></td>
+                    <td class="blue-w">뛰고</td>
+                    <td class="teal-w">뛰어서</td>
+                    <td class="purple-w">뛰지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">날다 ⚠️</div><div class="word-ro">nal-da</div></td>
+                    <td><div class="word-meaning">to fly</div></td>
+                    <td><span class="tag-irr">⚠️ ㄹ 어간</span></td>
+                    <td class="blue-w">날고</td>
+                    <td class="teal-w">날아서</td>
+                    <td class="purple-w">날지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">쉬다</div><div class="word-ro">swi-da</div></td>
+                    <td><div class="word-meaning">to rest</div></td>
+                    <td><span class="tag-reg">✅ 규칙</span></td>
+                    <td class="blue-w">쉬고</td>
+                    <td class="teal-w">쉬어서</td>
+                    <td class="purple-w">쉬지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">먹다</div><div class="word-ro">meok-da</div></td>
+                    <td><div class="word-meaning">to eat</div></td>
+                    <td><span class="tag-reg">✅ 규칙</span></td>
+                    <td class="blue-w">먹고</td>
+                    <td class="teal-w">먹어서</td>
+                    <td class="purple-w">먹지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">가다</div><div class="word-ro">ga-da</div></td>
+                    <td><div class="word-meaning">to go</div></td>
+                    <td><span class="tag-reg">✅ 규칙 (ㅏ 모음)</span></td>
+                    <td class="blue-w">가고</td>
+                    <td class="teal-w">가서 (ㅏ→아서)</td>
+                    <td class="purple-w">가지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">오다</div><div class="word-ro">o-da</div></td>
+                    <td><div class="word-meaning">to come</div></td>
+                    <td><span class="tag-reg">✅ 규칙 (ㅗ 모음)</span></td>
+                    <td class="blue-w">오고</td>
+                    <td class="teal-w">와서 (ㅗ+아→와)</td>
+                    <td class="purple-w">오지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">일어나다</div><div class="word-ro">il-eo-na-da</div></td>
+                    <td><div class="word-meaning">to get up</div></td>
+                    <td><span class="tag-reg">✅ 규칙</span></td>
+                    <td class="blue-w">일어나고</td>
+                    <td class="teal-w">일어나서</td>
+                    <td class="purple-w">일어나지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">피곤하다</div><div class="word-ro">pi-gon-ha-da</div></td>
+                    <td><div class="word-meaning">to be tired</div></td>
+                    <td><span class="tag-adj">🌸 형용사</span></td>
+                    <td class="blue-w">피곤하고</td>
+                    <td class="teal-w">피곤해서</td>
+                    <td class="purple-w">피곤하지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">예쁘다</div><div class="word-ro">ye-bbeu-da</div></td>
+                    <td><div class="word-meaning">to be pretty</div></td>
+                    <td><span class="tag-adj">🌸 형용사 (ㅡ 탈락)</span></td>
+                    <td class="blue-w">예쁘고</td>
+                    <td class="teal-w">예뻐서 ⚠️</td>
+                    <td class="purple-w">예쁘지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">좋다</div><div class="word-ro">jo-ta</div></td>
+                    <td><div class="word-meaning">to be good/nice</div></td>
+                    <td><span class="tag-adj">🌸 형용사 (ㅗ 모음)</span></td>
+                    <td class="blue-w">좋고</td>
+                    <td class="teal-w">좋아서</td>
+                    <td class="purple-w">좋지만</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="irregular-box">
+            <h3>⚠️ 불규칙 & 주의사항 Irregular & Special Rules</h3>
+            <div class="irreg-row">
+                <div class="irreg-tag">걷다 <strong>ㄷ 불규칙</strong>: -아/어서 앞 → <strong>걸어서</strong> ❌걷어서 &nbsp;|&nbsp; -고/-지만 앞 → <strong>걷고 / 걷지만</strong> ✅</div>
+            </div>
+            <div class="irreg-row">
+                <div class="irreg-tag">예쁘다 <strong>ㅡ 탈락</strong>: 예쁘 + 어서 → ㅡ 탈락 + 아/어 합침 → <strong>예뻐서</strong></div>
+                <div class="irreg-tag">오다: 오 + 아서 → <strong>와서</strong> (ㅗ+아 축약)</div>
+            </div>
+            <div class="irreg-row">
+                <div class="irreg-tag"><strong>⚠️ 아/어서 시제 금지!</strong> ❌ 뛰었어서 → ✅ 뛰어서 피곤해요 (시제는 마지막 동사에만!)</div>
+            </div>
+        </div>
+
+        <div class="cat-header cat-orange" style="margin-top:26px;">📝 활용 카드 Mini Conjugation Cards</div>
+
+        <div class="verb-grid">
+            <div class="verb-card-conj vc-blue">
+                <div class="vc-verb">기다</div>
+                <div class="vc-eng">to crawl · 규칙</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">기고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">기어서</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">기지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">기어서 피곤해요</span></div>
+            </div>
+            <div class="verb-card-conj vc-red">
+                <div class="vc-verb">걷다 ⚠️</div>
+                <div class="vc-eng">to walk · ㄷ-불규칙</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">걷고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">걸어서 ⚠️</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">걷지만</span></div>
+                <div class="vc-row"><span class="vc-label">⚠️주의</span>    <span class="vc-form" style="color:var(--red);font-size:11px;">걷어서 ❌ 걸어서 ✅</span></div>
+            </div>
+            <div class="verb-card-conj vc-blue">
+                <div class="vc-verb">뛰다</div>
+                <div class="vc-eng">to run · 규칙</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">뛰고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">뛰어서</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">뛰지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">뛰어서 피곤해요</span></div>
+            </div>
+            <div class="verb-card-conj vc-purple">
+                <div class="vc-verb">날다 ⚠️</div>
+                <div class="vc-eng">to fly · ㄹ-어간</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">날고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">날아서</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">날지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">날아서 행복해요</span></div>
+            </div>
+            <div class="verb-card-conj vc-orange">
+                <div class="vc-verb">쉬다</div>
+                <div class="vc-eng">to rest · 규칙</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">쉬고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">쉬어서</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">쉬지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">쉬어서 좋아요!</span></div>
+            </div>
+            <div class="verb-card-conj vc-teal">
+                <div class="vc-verb">먹다</div>
+                <div class="vc-eng">to eat · 규칙</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">먹고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">먹어서</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">먹지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">먹어서 배불러요</span></div>
+            </div>
+            <div class="verb-card-conj vc-green">
+                <div class="vc-verb">가다</div>
+                <div class="vc-eng">to go · ㅏ 모음</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">가고</span></div>
+                <div class="vc-row"><span class="vc-label">🟢 -아/어서</span><span class="vc-form vc-aeo">가서 (ㅏ→아서)</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">가지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">공원에 가서 걸었어요</span></div>
+            </div>
+            <div class="verb-card-conj vc-blue">
+                <div class="vc-verb">오다</div>
+                <div class="vc-eng">to come · ㅗ 모음</div>
+                <div class="vc-row"><span class="vc-label">🔵 -고</span>    <span class="vc-form vc-go">오고</span></div>
+                <div class="vc-row"><span class="vc-form vc-aeo" style="grid-column:1/-1; font-size:12px;">와서 ⚠️ (ㅗ+아→와 축약)</span></div>
+                <div class="vc-row"><span class="vc-label">🟣 -지만</span>  <span class="vc-form vc-ji">오지만</span></div>
+                <div class="vc-row"><span class="vc-label">예문</span>      <span class="vc-form" style="font-size:12px;">집에 와서 쉬었어요</span></div>
+            </div>
+        </div>
+
+    </div><!-- end conj section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 3: ADJECTIVES & NOUNS
+    ══════════════════════════════════════════ -->
+    <div id="adj-section" class="section">
+
+        <div class="cat-header cat-purple">🌸 형용사 Adjectives — 연결어미와 함께!</div>
+        <div style="font-size:14px;color:#666;margin-bottom:16px;">형용사도 -고, -아/어서, -지만 모두 쓸 수 있어요! Adjectives work with all three endings too!</div>
+
+        <table class="phrase-table">
+            <thead>
+                <tr>
+                    <th>형용사</th>
+                    <th>뜻 Meaning</th>
+                    <th>유형</th>
+                    <th>🔵 -고</th>
+                    <th>🟢 -아/어서</th>
+                    <th>🟣 -지만</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="word-ko">피곤하다</div><div class="word-ro">pi-gon-ha-da</div></td>
+                    <td><div class="word-meaning">tired · exhausted</div></td>
+                    <td><span class="tag-adj">하다 형용사</span></td>
+                    <td class="blue-w">피곤하고</td>
+                    <td class="teal-w">피곤해서</td>
+                    <td class="purple-w">피곤하지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">행복하다</div><div class="word-ro">haeng-bo-ka-da</div></td>
+                    <td><div class="word-meaning">happy · joyful</div></td>
+                    <td><span class="tag-adj">하다 형용사</span></td>
+                    <td class="blue-w">행복하고</td>
+                    <td class="teal-w">행복해서</td>
+                    <td class="purple-w">행복하지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">바쁘다</div><div class="word-ro">ba-bbeu-da</div></td>
+                    <td><div class="word-meaning">busy</div><div class="word-note">⚠️ ㅡ 탈락</div></td>
+                    <td><span class="tag-irr">⚠️ ㅡ 탈락</span></td>
+                    <td class="blue-w">바쁘고</td>
+                    <td class="teal-w">바빠서 ⚠️</td>
+                    <td class="purple-w">바쁘지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">예쁘다</div><div class="word-ro">ye-bbeu-da</div></td>
+                    <td><div class="word-meaning">pretty · beautiful</div><div class="word-note">⚠️ ㅡ 탈락</div></td>
+                    <td><span class="tag-irr">⚠️ ㅡ 탈락</span></td>
+                    <td class="blue-w">예쁘고</td>
+                    <td class="teal-w">예뻐서 ⚠️</td>
+                    <td class="purple-w">예쁘지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">착하다</div><div class="word-ro">cha-ka-da</div></td>
+                    <td><div class="word-meaning">kind · good-natured</div></td>
+                    <td><span class="tag-adj">하다 형용사</span></td>
+                    <td class="blue-w">착하고</td>
+                    <td class="teal-w">착해서</td>
+                    <td class="purple-w">착하지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">좋다</div><div class="word-ro">jo-ta</div></td>
+                    <td><div class="word-meaning">good / nice / like</div></td>
+                    <td><span class="tag-adj">형용사 ㅗ 모음</span></td>
+                    <td class="blue-w">좋고</td>
+                    <td class="teal-w">좋아서</td>
+                    <td class="purple-w">좋지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">빠르다</div><div class="word-ro">bba-reu-da</div></td>
+                    <td><div class="word-meaning">fast · quick</div><div class="word-note">⚠️ ㄹ 불규칙</div></td>
+                    <td><span class="tag-irr">⚠️ ㄹ 불규칙</span></td>
+                    <td class="blue-w">빠르고</td>
+                    <td class="teal-w">빨라서 ⚠️</td>
+                    <td class="purple-w">빠르지만</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">아프다</div><div class="word-ro">a-peu-da</div></td>
+                    <td><div class="word-meaning">hurt / sick / painful</div><div class="word-note">⚠️ ㅡ 탈락</div></td>
+                    <td><span class="tag-irr">⚠️ ㅡ 탈락</span></td>
+                    <td class="blue-w">아프고</td>
+                    <td class="teal-w">아파서 ⚠️</td>
+                    <td class="purple-w">아프지만</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box tip-purple">
+            💡 <strong>형용사도 -고 싶지만 가능해요!</strong><br>
+            형용사 + <strong>-고</strong>: 예쁘<strong>고</strong> 착해요. <em>(She's pretty and kind.)</em><br>
+            형용사 + <strong>-아/어서</strong>: 날씨가 좋<strong>아서</strong> 걸어요. <em>(The weather is nice, so I walk.)</em><br>
+            형용사 + <strong>-지만</strong>: 피곤하<strong>지만</strong> 행복해요! <em>(I'm tired, but I'm happy!)</em>
+        </div>
+
+        <!-- NOUNS -->
+        <div class="cat-header cat-blue" style="margin-top:30px;">📖 명사 Nouns — Grammar ③ 예문에 나온 단어들</div>
+
+        <div class="sec-title">장소 Places</div>
+        <div class="noun-grid">
+            <div class="noun-card blue-card">
+                <div class="nc-ko bl">공원</div>
+                <div class="nc-ro bl">gong-won</div>
+                <div class="nc-en">park</div>
+                <div class="nc-ex">공원에 가<span class="hl-teal">서</span> 걸었어요.<br><em>I went to the park and walked.</em></div>
+            </div>
+            <div class="noun-card blue-card">
+                <div class="nc-ko bl">집</div>
+                <div class="nc-ro bl">jip</div>
+                <div class="nc-en">home / house</div>
+                <div class="nc-ex">집에 와<span class="hl-teal">서</span> 쉬었어요.<br><em>I came home and (then) rested.</em></div>
+            </div>
+            <div class="noun-card blue-card">
+                <div class="nc-ko bl">운동장</div>
+                <div class="nc-ro bl">un-dong-jang</div>
+                <div class="nc-en">playground / sports field</div>
+                <div class="nc-ex">운동장에서 뛰<span class="hl-blue">고</span> 걸어요.<br><em>I run and walk on the playground.</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">시간 Time</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">아침</div>
+                <div class="nc-ro">a-chim</div>
+                <div class="nc-en">morning</div>
+                <div class="nc-ex">아침에 뛰<span class="hl-blue">고</span> 저녁에 걸어요.<br><em>I run in the morning and walk in the evening.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">저녁</div>
+                <div class="nc-ro">jeo-nyeok</div>
+                <div class="nc-en">evening / dinner</div>
+                <div class="nc-ex">저녁에 걸<span class="hl-teal">어서</span> 피곤해요.<br><em>I walked in the evening, so I'm tired.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">오늘</div>
+                <div class="nc-ro">o-neul</div>
+                <div class="nc-en">today</div>
+                <div class="nc-ex">오늘 공원에 갔<span class="hl-blue">고</span> 많이 걸었어요!<br><em>Today I went to the park and walked a lot!</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">내일</div>
+                <div class="nc-ro">nae-il</div>
+                <div class="nc-en">tomorrow</div>
+                <div class="nc-ex">쉬<span class="hl-teal">어서</span> 내일 또 가요!<br><em>Rest up and go again tomorrow!</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">자연 · 동물 Nature &amp; Animals</div>
+        <div class="noun-grid">
+            <div class="noun-card teal-card">
+                <div class="nc-ko tl">나비</div>
+                <div class="nc-ro tl">na-bi</div>
+                <div class="nc-en">butterfly</div>
+                <div class="nc-ex">나비가 날<span class="hl-blue">고</span> 벌레가 기어요.<br><em>Butterflies fly and bugs crawl.</em></div>
+            </div>
+            <div class="noun-card teal-card">
+                <div class="nc-ko tl">벌레</div>
+                <div class="nc-ro tl">beol-le</div>
+                <div class="nc-en">bug / insect</div>
+                <div class="nc-ex">나비가 날<span class="hl-blue">고</span> 벌레가 기어요.<br><em>Butterflies fly and bugs crawl.</em></div>
+            </div>
+            <div class="noun-card teal-card">
+                <div class="nc-ko tl">날씨</div>
+                <div class="nc-ro tl">nal-ssi</div>
+                <div class="nc-en">weather</div>
+                <div class="nc-ex">날씨가 좋<span class="hl-teal">아서</span> 걸어요.<br><em>The weather is nice, so I walk.</em></div>
+            </div>
+            <div class="noun-card teal-card">
+                <div class="nc-ko tl">비</div>
+                <div class="nc-ro tl">bi</div>
+                <div class="nc-en">rain</div>
+                <div class="nc-ex">비가 오<span class="hl-purple">지만</span> 걸었어요.<br><em>It rained, but I walked.</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">신체 · 감정 Body &amp; Feelings</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">배</div>
+                <div class="nc-ro">bae</div>
+                <div class="nc-en">stomach / belly</div>
+                <div class="nc-ex">배가 아파<span class="hl-teal">서</span> 뛸 수 없어요.<br><em>My stomach hurts, so I can't run.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">기분</div>
+                <div class="nc-ro">gi-bun</div>
+                <div class="nc-en">mood / feeling</div>
+                <div class="nc-ex">피곤하<span class="hl-purple">지만</span> 기분이 좋아요.<br><em>I'm tired, but I feel good.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">밥</div>
+                <div class="nc-ro">bap</div>
+                <div class="nc-en">rice / meal</div>
+                <div class="nc-ex">밥을 먹<span class="hl-blue">고</span> 나서 산책해요.<br><em>After eating, I take a walk.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">산책</div>
+                <div class="nc-ro">san-chaek</div>
+                <div class="nc-en">a walk / stroll</div>
+                <div class="nc-ex">밥을 먹고 나서 산책해요.<br><em>After eating, I take a walk.</em></div>
+            </div>
+        </div>
+
+    </div><!-- end adj section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 4: QUICK REFERENCE
+    ══════════════════════════════════════════ -->
+    <div id="ref-section" class="section">
+
+        <div class="cat-header cat-purple">⭐ 빠른 참고 Quick Reference — 세 가지 연결어미</div>
+
+        <div class="remember-box">
+            <h3>💡 핵심 규칙 정리! (Key Rules Summary)</h3>
+            <p>
+                <span class="r-blue">① -고</span> = and / then → 어간 + 고 · 불규칙 없음 · 시제 자유 · 동사 &amp; 형용사 모두 OK<br>
+                &nbsp;&nbsp;&nbsp;→ 걷<strong>고</strong> 쉬어요. / 예쁘<strong>고</strong> 착해요.<br>
+                <span class="r-teal">② -아/어서</span> = so / because / and then → 모음조화 ⚠️ · 앞 절에 시제 금지 ⚠️<br>
+                &nbsp;&nbsp;&nbsp;→ 뛰<strong>어서</strong> 피곤해요. / 날씨가 좋<strong>아서</strong> 걸어요.<br>
+                <span class="r-purple">③ -지만</span> = but / however → 어간 + 지만 · 불규칙 없음 · 시제 자유 · 일상에서 매우 자주!<br>
+                &nbsp;&nbsp;&nbsp;→ 걷고 싶<strong>지만</strong> 피곤해요. / 비가 오<strong>지만</strong> 걸었어요.<br>
+                <span class="r-red">⚠️ 절대 금지!</span> -아/어서 앞에 -았/었 ❌ → ❌ 뛰었어서 → ✅ 뛰어서 피곤해요.<br>
+                <span class="r-orange">⚠️ 주의!</span> -지만 뒤에 그러나/하지만 중복 금지 ❌ → ❌ 피곤하지만 그러나 → ✅ 피곤하지만
+            </p>
+            <div class="en-note">
+                Mnemonic: <strong>Blue -고</strong> = neutral "and" (no emotion, just listing) · <strong>Teal -아/어서</strong> = "therefore" (cause causes result) ·
+                <strong>Purple -지만</strong> = "nevertheless" (contrast, like English "but").
+                The #1 student error: using -아/어서 for past-tense first clauses — always resist the urge to add -었!
+            </div>
+        </div>
+
+        <div class="tip-grid" style="margin-top:24px;">
+            <div class="tip-card blue-tip">
+                <div class="tip-title b">🔵 -고 핵심</div>
+                <div class="tip-body">
+                    <strong>나열/순서:</strong> 뛰<strong>고</strong> 걸어요.<br>
+                    <strong>동시:</strong> 음악을 듣<strong>고</strong> 걸어요.<br>
+                    <strong>형용사:</strong> 예쁘<strong>고</strong> 착해요.<br>
+                    <strong>과거 가능:</strong> 뛰었<strong>고</strong> 쉬었어요. ✅<br><br>
+                    <em>No vowel harmony · No irregulars · Most flexible!</em>
+                </div>
+            </div>
+            <div class="tip-card teal-tip">
+                <div class="tip-title t">🟢 -아/어서 핵심</div>
+                <div class="tip-body">
+                    <strong>이유:</strong> 뛰<strong>어서</strong> 피곤해요.<br>
+                    <strong>순서(꼭):</strong> 가<strong>서</strong> 걸었어요.<br>
+                    <strong>ㅏ/ㅗ → 아서:</strong> 좋<strong>아서</strong>, 가<strong>서</strong><br>
+                    <strong>나머지 → 어서:</strong> 뛰<strong>어서</strong>, 먹<strong>어서</strong><br>
+                    <strong>하다 → 해서:</strong> 피곤해<strong>서</strong><br><br>
+                    <em style="color:var(--red);">⚠️ NO -았/었 before -아/어서!</em>
+                </div>
+            </div>
+            <div class="tip-card purple-tip">
+                <div class="tip-title p">🟣 -지만 핵심</div>
+                <div class="tip-body">
+                    <strong>대조:</strong> 피곤하<strong>지만</strong> 행복해요.<br>
+                    <strong>소망+역접:</strong> 걷고 싶<strong>지만</strong> 바빠요.<br>
+                    <strong>과거 가능:</strong> 뛰었<strong>지만</strong> 안 빨랐어요.<br><br>
+                    <em>No vowel harmony · Very common in daily speech · Never add 그러나/하지만 after!</em>
+                </div>
+            </div>
+            <div class="tip-card red-tip">
+                <div class="tip-title r">❌ 흔한 실수 Common Mistakes</div>
+                <div class="tip-body">
+                    ❌ 뛰<strong>었</strong>어서 → ✅ 뛰<strong>어서</strong><br>
+                    ❌ 걷<strong>어서</strong> → ✅ 걸<strong>어서</strong> (ㄷ→ㄹ!)<br>
+                    ❌ 피곤하지만 <strong>그러나</strong> → ✅ 피곤하<strong>지만</strong><br>
+                    ❌ 걷<strong>고서</strong> 피곤해요 → ✅ 걸<strong>어서</strong> 피곤해요<br><br>
+                    <em>-고 is NEVER used for cause/reason!</em>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-header cat-tri" style="margin-top:30px;">🌿 복합 문장 연습 Combined Sentence Practice</div>
+
+        <div class="tip-box tip-tri">
+            ✨ <strong>세 가지 어미 모두 합쳐서! — Using all three in one sentence:</strong><br><br>
+            많이 걸<span class="hl-teal">어서</span> 피곤하<span class="hl-purple">지만</span> 행복해요!
+            &nbsp;<em>(I walked a lot, so I'm tired, but I'm happy!)</em><br>
+            뛰<span class="hl-blue">고</span> 걷<span class="hl-blue">고</span> 나서 쉬어요.
+            &nbsp;<em>(After running and walking, I rest.)</em><br>
+            날<span class="hl-blue">고</span> 싶<span class="hl-purple">지만</span> 날 수 없어요!
+            &nbsp;<em>(I want to fly, but I cannot fly!)</em><br>
+            날씨가 좋<span class="hl-teal">아서</span> 걷<span class="hl-blue">고</span> 뛰었어요.
+            &nbsp;<em>(The weather was nice, so I walked and ran.)</em>
+        </div>
+
+        <div class="remember-box" style="margin-top:24px; background:var(--blue-light); border-color:var(--blue);">
+            <h3 style="color:var(--blue-dark);">📋 전체 단어 목록 Complete Word List</h3>
+            <p style="line-height:2.4;">
+                <strong style="color:var(--purple-dark);">동사 (Verbs):</strong>
+                기다 · 걷다⚠️ · 뛰다 · 날다⚠️ · 쉬다 · 먹다 · 가다 · 오다 · 일어나다 · 산책하다<br>
+                <strong style="color:var(--purple-dark);">형용사 (Adjectives):</strong>
+                피곤하다 · 행복하다 · 바쁘다⚠️ · 예쁘다⚠️ · 착하다 · 좋다 · 빠르다⚠️ · 아프다⚠️<br>
+                <strong style="color:var(--blue-dark);">장소 (Places):</strong>
+                공원 · 집 · 운동장<br>
+                <strong style="color:var(--blue-dark);">시간 (Time):</strong>
+                아침 · 저녁 · 오늘 · 내일<br>
+                <strong style="color:var(--blue-dark);">자연/동물 (Nature):</strong>
+                나비 · 벌레 · 날씨 · 비<br>
+                <strong style="color:var(--blue-dark);">신체/감정 (Body/Emotion):</strong>
+                배 · 기분 · 밥 · 산책<br>
+                <strong style="color:var(--orange);">핵심 어미 (Key Endings):</strong>
+                -고 (and/then) · -아/어서 (so/because) · -지만 (but)
+            </p>
+        </div>
+
+    </div><!-- end ref section -->
+
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, e) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        e.target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>

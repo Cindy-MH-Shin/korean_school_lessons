@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-고 싶다 / -고 싶어하다</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 17px; opacity: 0.9; }
+        .header .subtitle-en { font-size: 14px; opacity: 0.8; font-style: italic; margin-top: 4px; }
+
+        /* ===== Topic Tabs ===== */
+        .topic-nav {
+            display: flex; background: #eaf3fb;
+            border-bottom: 3px solid #90c4e8;
+        }
+        .topic-btn {
+            flex: 1; padding: 18px 10px; text-align: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            border: none; background: transparent; color: #999; transition: all 0.3s;
+            font-family: inherit;
+        }
+        .topic-btn.active { color: #0d4f7c; background: white; border-bottom: 4px solid #1a6fa8; }
+        .topic-btn:hover { background: #d9edf8; color: #1a6fa8; }
+        .topic-section { display: none; padding: 40px; }
+        .topic-section.active { display: block; }
+
+        /* ===== Colors ===== */
+        :root {
+            --blue: #1a6fa8;
+            --blue-dark: #0d4f7c;
+            --blue-light: #eaf3fb;
+            --teal: #0e8c72;
+            --teal-light: #e6f7f3;
+            --red: #c0392b;
+            --red-light: #fef2f2;
+            --orange: #d4881e;
+            --orange-light: #fef5e7;
+            --green: #27ae60;
+            --green-light: #eafaf1;
+            --purple: #7c5cbf;
+            --purple-light: #f0ebff;
+            --gray: #f4f6f8;
+        }
+
+        /* ===== Section Titles ===== */
+        .section-title {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 32px 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-title-en { font-size: 13px; color: #aaa; font-style: italic; }
+
+        /* Topic header banners */
+        .topic-header {
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 28px;
+            color: white;
+        }
+        .th-1 { background: linear-gradient(135deg, #1a6fa8 0%, #26a69a 100%); }
+        .th-2 { background: linear-gradient(135deg, #0e8c72 0%, #1a6fa8 100%); }
+        .th-3 { background: linear-gradient(135deg, #7c5cbf 0%, #1a6fa8 100%); }
+        .topic-header h2 { font-size: 28px; margin-bottom: 6px; }
+        .topic-header .th-en { font-size: 15px; opacity: 0.9; font-style: italic; }
+        .topic-header .th-sub { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+
+        /* ===== Intro Box ===== */
+        .intro-box {
+            background: var(--blue-light); border-radius: 14px;
+            padding: 22px; margin-bottom: 20px;
+            border-left: 6px solid var(--blue);
+        }
+        .intro-ko { font-size: 17px; color: #2c3e50; font-weight: bold; margin-bottom: 8px; }
+        .intro-en { font-size: 14px; color: #555; line-height: 1.8; }
+
+        /* ===== Meaning Grid ===== */
+        .meaning-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 16px; margin: 14px 0;
+        }
+        @media (max-width: 600px) { .meaning-grid { grid-template-columns: 1fr; } }
+        .meaning-card {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; border-left: 4px solid var(--blue);
+        }
+        .meaning-card.teal { background: var(--teal-light); border-left-color: var(--teal); }
+        .meaning-card.purple { background: var(--purple-light); border-left-color: var(--purple); }
+        .meaning-card h4 { color: var(--blue-dark); font-size: 14px; margin-bottom: 8px; }
+        .meaning-card.teal h4 { color: var(--teal); }
+        .meaning-card.purple h4 { color: var(--purple); }
+        .meaning-card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* ===== Big Contrast Box ===== */
+        .contrast-box {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 0; margin: 20px 0; border-radius: 16px; overflow: hidden;
+            border: 2px solid #c2dff0;
+            box-shadow: 0 4px 16px rgba(26,111,168,0.12);
+        }
+        .contrast-left  { background: #eaf3fb; padding: 26px 22px; text-align: center; }
+        .contrast-right { background: var(--teal-light); padding: 26px 22px; text-align: center; }
+        .contrast-divider {
+            background: white; display: flex; align-items: center; justify-content: center;
+            padding: 0 14px; font-size: 26px; color: #bbb; font-weight: 300;
+        }
+        .contrast-tag {
+            display: inline-block; border-radius: 20px;
+            font-size: 12px; font-weight: bold; letter-spacing: 1px;
+            padding: 4px 14px; margin-bottom: 12px; text-transform: uppercase;
+        }
+        .tag-blue  { background: var(--blue); color: white; }
+        .tag-teal  { background: var(--teal); color: white; }
+        .tag-red   { background: var(--red); color: white; }
+        .contrast-verb { font-size: 32px; font-weight: bold; margin: 8px 0; }
+        .contrast-verb.blue  { color: var(--blue); }
+        .contrast-verb.teal  { color: var(--teal); }
+        .contrast-verb.red   { color: var(--red); }
+        .contrast-meaning { font-size: 14px; color: #555; margin-top: 4px; }
+        .contrast-subject {
+            font-size: 12px; color: #888; margin-top: 10px;
+            background: rgba(255,255,255,0.7); border-radius: 8px;
+            padding: 6px 10px; display: inline-block;
+        }
+
+        /* ===== Formula Box ===== */
+        .formula-box {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #c5dff0 100%);
+            border: 2px solid var(--blue);
+            border-radius: 14px; padding: 26px;
+            text-align: center; margin: 18px 0;
+        }
+        .formula-box.teal {
+            background: linear-gradient(135deg, var(--teal-light) 0%, #b2dfdb 100%);
+            border-color: var(--teal);
+        }
+        .formula-box.purple {
+            background: linear-gradient(135deg, var(--purple-light) 0%, #d1c4e9 100%);
+            border-color: var(--purple);
+        }
+        .formula-title { font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+        .formula-main {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 10px 0; line-height: 1.6;
+        }
+        .formula-box.teal .formula-main { color: var(--teal); }
+        .formula-box.purple .formula-main { color: var(--purple); }
+        .formula-en { font-size: 14px; color: #555; margin-top: 10px; font-style: italic; }
+        .formula-highlight { color: var(--red); }
+        .formula-arrow { font-size: 20px; color: var(--blue); margin: 0 8px; }
+
+        /* ===== Type Grid (3 col) ===== */
+        .type-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 14px 0;
+        }
+        @media (max-width: 700px) { .type-grid { grid-template-columns: 1fr; } }
+        .type-card {
+            border-radius: 14px; padding: 18px; text-align: center;
+        }
+        .type-card.blue-card   { background: var(--blue-light);   border: 2px solid var(--blue); }
+        .type-card.teal-card   { background: var(--teal-light);   border: 2px solid var(--teal); }
+        .type-card.purple-card { background: var(--purple-light); border: 2px solid var(--purple); }
+        .type-card.green-card  { background: var(--green-light);  border: 2px solid var(--green); }
+        .type-card.red-card    { background: var(--red-light);    border: 2px solid var(--red); }
+        .type-card.orange-card { background: var(--orange-light); border: 2px solid var(--orange); }
+        .type-label { font-size: 13px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .type-label.bl { color: var(--blue); }
+        .type-label.tl { color: var(--teal); }
+        .type-label.pl { color: var(--purple); }
+        .type-label.gl { color: var(--green); }
+        .type-label.rl { color: var(--red); }
+        .type-label.ol { color: var(--orange); }
+        .type-form { font-size: 20px; font-weight: bold; color: #2c3e50; margin: 6px 0; }
+        .type-desc { font-size: 13px; color: #666; line-height: 1.6; }
+        .type-ex { font-size: 13px; margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.7); }
+
+        /* ===== Suffix Grid (for endings comparison) ===== */
+        .ending-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 16px 0;
+        }
+        @media (max-width: 600px) { .ending-grid { grid-template-columns: 1fr; } }
+        .ending-chip {
+            background: white; border-radius: 12px;
+            padding: 18px 14px; text-align: center;
+            box-shadow: 0 2px 8px rgba(26,111,168,0.1);
+        }
+        .ending-chip.blue-chip  { border: 2px solid #90c4e8; }
+        .ending-chip.teal-chip  { border: 2px solid #80cbc4; }
+        .ending-chip.purple-chip { border: 2px solid #ce93d8; }
+        .ending-letter { font-size: 28px; font-weight: bold; margin-bottom: 6px; }
+        .ending-name { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .ending-ex { font-size: 13px; color: #555; font-style: italic; line-height: 1.7; }
+
+        /* ===== Rule Box ===== */
+        .rule-box {
+            background: #f9f9f9; border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .rule-box h4 { font-size: 16px; color: var(--blue-dark); margin-bottom: 12px; }
+        .rule-step {
+            display: flex; align-items: flex-start;
+            margin-bottom: 10px; background: white;
+            border-radius: 8px; padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+        }
+        .step-num {
+            background: var(--blue); color: white;
+            width: 26px; height: 26px;
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold;
+            flex-shrink: 0; margin-right: 14px; margin-top: 2px;
+        }
+        .step-num.teal   { background: var(--teal); }
+        .step-num.purple { background: var(--purple); }
+        .step-num.tip    { background: var(--orange); }
+        .step-text { font-size: 14px; color: #2c3e50; line-height: 1.6; flex: 1; }
+        .step-en { font-size: 13px; color: #888; font-style: italic; margin-top: 4px; }
+
+        /* ===== Main Pairs Table ===== */
+        .pairs-table {
+            width: 100%; border-collapse: collapse;
+            margin: 16px 0; font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px; overflow: hidden;
+        }
+        .pairs-table thead tr {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: white;
+        }
+        .pairs-table.teal-head thead tr { background: linear-gradient(135deg, var(--teal) 0%, #076652 100%); }
+        .pairs-table.purple-head thead tr { background: linear-gradient(135deg, var(--purple) 0%, #5a3fa0 100%); }
+        .pairs-table th { padding: 12px 14px; text-align: center; font-size: 13px; }
+        .pairs-table td { padding: 11px 14px; text-align: center; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+        .pairs-table tbody tr:hover { background: var(--blue-light); }
+        .pairs-table .blue-cell   { color: var(--blue); font-weight: bold; font-size: 15px; }
+        .pairs-table .teal-cell   { color: var(--teal); font-weight: bold; font-size: 15px; }
+        .pairs-table .red-cell    { color: var(--red);  font-weight: bold; font-size: 15px; }
+        .pairs-table .purple-cell { color: var(--purple); font-weight: bold; font-size: 15px; }
+        .pairs-table .orange-cell { color: var(--orange); font-weight: bold; font-size: 15px; }
+
+        /* ===== Examples Grid ===== */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px; margin-top: 16px;
+        }
+        .dialogue-card {
+            background: #f9f9f9; border-radius: 14px;
+            padding: 18px; border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+        }
+        .dialogue-card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 6px 18px rgba(26,111,168,0.15);
+        }
+        .dialogue-num {
+            font-size: 12px; font-weight: bold;
+            padding: 3px 10px; border-radius: 12px;
+            display: inline-block; margin-bottom: 10px; color: white;
+        }
+        .bg-blue   { background: var(--blue); }
+        .bg-teal   { background: var(--teal); }
+        .bg-red    { background: var(--red); }
+        .bg-orange { background: var(--orange); }
+        .bg-purple { background: var(--purple); }
+        .bg-green  { background: var(--green); }
+        .pair-label  { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .sentence-line { font-size: 15px; color: #2c3e50; margin-bottom: 6px; line-height: 1.7; }
+        .hl-blue   { color: var(--blue);   font-weight: bold; }
+        .hl-teal   { color: var(--teal);   font-weight: bold; }
+        .hl-red    { color: var(--red);    font-weight: bold; }
+        .hl-purple { color: var(--purple); font-weight: bold; }
+        .hl-orange { color: var(--orange); font-weight: bold; }
+        .hl-green  { color: var(--green);  font-weight: bold; }
+        .dialogue-en {
+            font-size: 13px; color: #888; font-style: italic;
+            margin-top: 10px; border-top: 1px solid #e0e0e0;
+            padding-top: 8px; line-height: 1.6;
+        }
+
+        /* ===== Compare Blocks ===== */
+        .compare-block {
+            background: white; border-radius: 12px;
+            padding: 18px; margin: 10px 0;
+            border: 1.5px solid #c5dff0;
+            box-shadow: 0 2px 10px rgba(26,111,168,0.06);
+        }
+        .compare-title {
+            font-size: 15px; font-weight: bold; color: var(--blue-dark);
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1.5px dashed #c5dff0;
+        }
+        .compare-row {
+            display: flex; align-items: flex-start;
+            gap: 12px; margin-bottom: 8px;
+            padding: 10px 12px; border-radius: 8px;
+        }
+        .compare-row.blue-row   { background: var(--blue-light);   border-left: 4px solid var(--blue); }
+        .compare-row.teal-row   { background: var(--teal-light);   border-left: 4px solid var(--teal); }
+        .compare-row.red-row    { background: var(--red-light);    border-left: 4px solid var(--red); }
+        .compare-row.purple-row { background: var(--purple-light); border-left: 4px solid var(--purple); }
+        .compare-row.orange-row { background: var(--orange-light); border-left: 4px solid var(--orange); }
+        .compare-tag {
+            font-size: 11px; font-weight: bold; padding: 2px 8px;
+            border-radius: 8px; white-space: nowrap; margin-top: 2px;
+        }
+        .compare-tag.bl { background: var(--blue);   color: white; }
+        .compare-tag.tl { background: var(--teal);   color: white; }
+        .compare-tag.rl { background: var(--red);    color: white; }
+        .compare-tag.pl { background: var(--purple); color: white; }
+        .compare-tag.ol { background: var(--orange); color: white; }
+        .compare-body { font-size: 15px; color: #2c3e50; line-height: 1.7; flex: 1; }
+        .compare-en { font-size: 13px; color: #888; font-style: italic; }
+
+        /* ===== Warning / Note / Mistake ===== */
+        .warning-box {
+            background: var(--orange-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--orange);
+        }
+        .warning-title { color: var(--orange); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .warning-text  { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .note-box {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--blue);
+        }
+        .note-box.teal-note   { background: var(--teal-light);   border-left-color: var(--teal); }
+        .note-box.purple-note { background: var(--purple-light); border-left-color: var(--purple); }
+        .note-title { color: var(--blue); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .note-box.teal-note   .note-title { color: var(--teal); }
+        .note-box.purple-note .note-title { color: var(--purple); }
+        .note-text { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .mistake-box {
+            background: var(--red-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .mistake-title { color: var(--red); font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .mistake-row {
+            display: flex; align-items: center;
+            gap: 12px; margin-bottom: 10px;
+            background: white; border-radius: 8px; padding: 12px;
+        }
+        .mistake-wrong { background: #fde8e8; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--red); line-height: 1.5; }
+        .mistake-right { background: #e6f7f0; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--teal); line-height: 1.5; }
+        .mistake-arrow { font-size: 20px; color: #aaa; flex-shrink: 0; }
+        .mistake-note  { font-size: 12px; color: #999; font-style: italic; margin-top: 4px; }
+
+        /* ===== Conjugation mini table ===== */
+        .conj-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px; margin: 14px 0;
+        }
+        .conj-card {
+            border-radius: 12px; padding: 16px; border: 2px solid #c5dff0;
+            background: white;
+        }
+        .conj-verb { font-size: 20px; font-weight: bold; color: var(--blue-dark); margin-bottom: 4px; }
+        .conj-en   { font-size: 12px; color: #999; margin-bottom: 10px; }
+        .conj-row  { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px dashed #eee; }
+        .conj-row:last-child { border-bottom: none; }
+        .conj-label { color: #aaa; }
+        .conj-form  { font-weight: bold; color: #2c3e50; }
+
+        @media (max-width: 768px) {
+            .topic-btn { font-size: 12px; padding: 12px 6px; }
+            .topic-section { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>📚 -고 싶다 / -고 싶어하다</h1>
+        <div class="subtitle">원하는 것을 표현해요 · Expressing Desire</div>
+        <div class="subtitle-en">I want to... / She wants to... | 동사 어간 + 고 싶다/싶어하다</div>
+    </div>
+
+    <div id="topic-main" class="topic-section active">
+<!-- ══════════════════════════════════════════════════════
+         TOPIC 1: -고 싶다 / -고 싶어하다
+    ══════════════════════════════════════════════════════ -->
+    <div id="topic-1" class="topic-section active">
+
+        <div class="topic-header th-1">
+            <h2>① -고 싶다 / -고 싶어하다</h2>
+            <div class="th-en">Expressing Desire — "I want to..." / "She wants to..."</div>
+            <div class="th-sub">⭐ 가장 빨리 써먹는 표현! The most immediately useful grammar after verbs!</div>
+        </div>
+
+        <div class="intro-box">
+            <div class="intro-ko">동사에 "-고 싶다"를 붙이면 "~하고 싶어요"가 돼요!</div>
+            <div class="intro-en">
+                Attach <strong>-고 싶다</strong> to any verb stem to say "I want to [verb]."
+                Korean has TWO forms: <strong>싶다</strong> for the speaker's own desire (1st person),
+                and <strong>싶어하다</strong> when describing someone else's desire (2nd/3rd person).
+                This distinction does not exist in English — it's one of Korean's most characteristic features!
+            </div>
+        </div>
+
+        <!-- Core Contrast -->
+        <div class="contrast-box">
+            <div class="contrast-left">
+                <span class="contrast-tag tag-blue">🙋 1인칭 1st Person</span>
+                <div class="contrast-verb blue">-고 싶다</div>
+                <div class="contrast-meaning">내가 ~하고 싶어요<br><em>I want to...</em></div>
+                <div class="contrast-subject">내 마음을 직접 말해요<br>Speaker expresses their own desire</div>
+                <div style="margin-top:14px; font-size:14px; color:#2c3e50;">
+                    <strong>나는 걷고 싶어요.</strong><br>
+                    <span style="color:#888;font-style:italic;font-size:13px;">I want to walk.</span>
+                </div>
+            </div>
+            <div class="contrast-divider">↔</div>
+            <div class="contrast-right">
+                <span class="contrast-tag tag-teal">👥 2·3인칭 2nd/3rd Person</span>
+                <div class="contrast-verb teal">-고 싶어하다</div>
+                <div class="contrast-meaning">그가 ~하고 싶어해요<br><em>He/She wants to...</em></div>
+                <div class="contrast-subject">다른 사람의 마음을 관찰해요<br>Speaker observes another's desire</div>
+                <div style="margin-top:14px; font-size:14px; color:#2c3e50;">
+                    <strong>민아는 걷고 싶어해요.</strong><br>
+                    <span style="color:#888;font-style:italic;font-size:13px;">Mina wants to walk.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formula -->
+        <div class="section-title">1. 어떻게 만드나요? (How to form it?)
+            <span class="section-title-en"> — The Formula</span>
+        </div>
+
+        <div class="formula-box">
+            <div class="formula-title">📐 -고 싶다 공식 (Formation Formula)</div>
+            <div class="formula-main">
+                동사 어간 <span class="formula-arrow">+</span>
+                <span class="formula-highlight">고 싶다</span>
+                &nbsp;→&nbsp; "-고 싶어요" (폴라이트 present)
+            </div>
+            <div class="formula-en">
+                Verb stem + 고 싶다 (any verb, no exceptions, no irregular changes for this ending!)<br>
+                <em>✨ Good news: 고 싶다 attaches to the <strong>plain stem</strong> — no vowel harmony or irregulars to worry about here!</em>
+            </div>
+        </div>
+
+        <!-- Rule Steps -->
+        <div class="rule-box">
+            <h4>✅ 단계별로 만들기 (Step-by-Step)</h4>
+            <div class="rule-step">
+                <div class="step-num">1</div>
+                <div class="step-text">
+                    기본형에서 <strong>다</strong>를 없애 어간을 찾아요<br>
+                    <div class="step-en">Remove 다 to find the verb stem.</div>
+                    걷<strong>다</strong> → 걷- &nbsp;|&nbsp; 뛰<strong>다</strong> → 뛰- &nbsp;|&nbsp; 날<strong>다</strong> → 날-
+                </div>
+            </div>
+            <div class="rule-step">
+                <div class="step-num">2</div>
+                <div class="step-text">
+                    어간에 <strong style="color:#c0392b;">고 싶다</strong>를 붙여요<br>
+                    <div class="step-en">Add 고 싶다 to the stem. (No changes needed!)</div>
+                    걷- + 고 싶다 = <strong>걷고 싶다</strong> &nbsp;|&nbsp; 뛰- + 고 싶다 = <strong>뛰고 싶다</strong> &nbsp;|&nbsp; 날- + 고 싶다 = <strong>날고 싶다</strong>
+                </div>
+            </div>
+            <div class="rule-step">
+                <div class="step-num">3</div>
+                <div class="step-text">
+                    시제에 맞게 활용해요 (Conjugate for tense)<br>
+                    <div class="step-en">싶다 conjugates like an adjective.</div>
+                    현재: 걷고 <strong>싶어요</strong> &nbsp;|&nbsp; 과거: 걷고 <strong>싶었어요</strong> &nbsp;|&nbsp; 미래/희망: 걷고 <strong>싶을 거예요</strong>
+                </div>
+            </div>
+            <div class="rule-step" style="background:#fef5e7; border-color:#e67e22;">
+                <div class="step-num tip">💡</div>
+                <div class="step-text">
+                    3인칭에는 <strong style="color:#d4881e;">-고 싶어하다</strong>로 바꿔요<br>
+                    <div class="step-en">For 2nd/3rd person, replace 싶다 → 싶어하다 (an action verb).</div>
+                    걷고 싶어요 (나) → 걷고 <strong>싶어해요</strong> (그/그녀) &nbsp;|&nbsp; 걷고 싶었어요 → 걷고 <strong>싶어했어요</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conjugation table -->
+        <div class="section-title">2. 활용표 (Conjugation Table)
+            <span class="section-title-en"> — with last week's movement verbs!</span>
+        </div>
+
+        <table class="pairs-table">
+            <thead>
+                <tr>
+                    <th>동사 Verb</th>
+                    <th>-고 싶어요 (나 I)</th>
+                    <th>-고 싶었어요 (나 Past)</th>
+                    <th>-고 싶어해요 (그/그녀)</th>
+                    <th>-고 싶어했어요 (그/그녀 Past)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>기다</strong> crawl</td>
+                    <td class="blue-cell">기고 싶어요</td>
+                    <td>기고 싶었어요</td>
+                    <td class="teal-cell">기고 싶어해요</td>
+                    <td>기고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>걷다</strong> walk</td>
+                    <td class="blue-cell">걷고 싶어요</td>
+                    <td>걷고 싶었어요</td>
+                    <td class="teal-cell">걷고 싶어해요</td>
+                    <td>걷고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>뛰다</strong> run/jump</td>
+                    <td class="blue-cell">뛰고 싶어요</td>
+                    <td>뛰고 싶었어요</td>
+                    <td class="teal-cell">뛰고 싶어해요</td>
+                    <td>뛰고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>날다</strong> fly</td>
+                    <td class="blue-cell">날고 싶어요</td>
+                    <td>날고 싶었어요</td>
+                    <td class="teal-cell">날고 싶어해요</td>
+                    <td>날고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>쉬다</strong> rest</td>
+                    <td class="blue-cell">쉬고 싶어요</td>
+                    <td>쉬고 싶었어요</td>
+                    <td class="teal-cell">쉬고 싶어해요</td>
+                    <td>쉬고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>먹다</strong> eat</td>
+                    <td class="blue-cell">먹고 싶어요</td>
+                    <td>먹고 싶었어요</td>
+                    <td class="teal-cell">먹고 싶어해요</td>
+                    <td>먹고 싶어했어요</td>
+                </tr>
+                <tr>
+                    <td><strong>자다</strong> sleep</td>
+                    <td class="blue-cell">자고 싶어요</td>
+                    <td>자고 싶었어요</td>
+                    <td class="teal-cell">자고 싶어해요</td>
+                    <td>자고 싶어했어요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ 가장 중요한 규칙! (The Most Important Rule!)</div>
+            <div class="warning-text">
+                <strong>내 마음 = 싶다 &nbsp;|&nbsp; 남의 마음 = 싶어하다</strong><br><br>
+                You cannot use 싶다 to describe someone else's inner feeling — that would be claiming to read their mind!<br>
+                Use 싶어하다 (an action you observe) for 2nd/3rd person.<br><br>
+                ✅ 나는 쉬고 싶어요. (I want to rest.) &nbsp;&nbsp; ❌ 민아는 쉬고 싶어요. (You can't know her mind!)<br>
+                ✅ 민아는 쉬고 <strong>싶어해요</strong>. (Mina seems to want to rest — observable behavior)
+            </div>
+        </div>
+
+        <!-- Example Dialogues -->
+        <div class="section-title">3. 예문으로 배워요 (Example Sentences)
+            <span class="section-title-en"> — In natural context</span>
+        </div>
+
+        <div class="examples-grid">
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-blue">나 (1인칭) — 나는</span>
+                <div class="pair-label">내 소망을 말해요 · Expressing my own wish</div>
+                <div class="sentence-line">나는 나비처럼 <span class="hl-blue">날고 싶어요</span>!</div>
+                <div class="sentence-line">공원에서 천천히 <span class="hl-blue">걷고 싶어요</span>.</div>
+                <div class="sentence-line">오늘은 집에서 <span class="hl-blue">쉬고 싶어요</span>.</div>
+                <div class="dialogue-en">I want to fly like a butterfly!<br>I want to walk slowly in the park.<br>I want to rest at home today.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">3인칭 — 민아는</span>
+                <div class="pair-label">다른 사람의 소망 · Describing someone else's wish</div>
+                <div class="sentence-line">민아는 높이 <span class="hl-teal">뛰고 싶어해요</span>.</div>
+                <div class="sentence-line">준서는 강아지처럼 <span class="hl-teal">뛰고 싶어해요</span>.</div>
+                <div class="sentence-line">아이들은 운동장에서 <span class="hl-teal">놀고 싶어해요</span>.</div>
+                <div class="dialogue-en">Mina wants to jump high.<br>Junseo wants to run like a dog.<br>The children want to play on the playground.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-blue">과거 Past — 싶었어요</span>
+                <div class="pair-label">과거의 소망 · A wish in the past</div>
+                <div class="sentence-line">어제는 많이 <span class="hl-blue">걷고 싶었어요</span>.</div>
+                <div class="sentence-line">봄에는 나비처럼 <span class="hl-blue">날고 싶었어요</span>.</div>
+                <div class="sentence-line">피곤해서 <span class="hl-blue">쉬고 싶었어요</span>.</div>
+                <div class="dialogue-en">Yesterday, I wanted to walk a lot.<br>In spring, I wanted to fly like a butterfly.<br>I was tired and wanted to rest.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-orange">부정 Negative — 싶지 않아요</span>
+                <div class="pair-label">원하지 않을 때 · When you don't want to</div>
+                <div class="sentence-line">오늘은 뛰고 <span class="hl-orange">싶지 않아요</span>.</div>
+                <div class="sentence-line">거기는 가고 <span class="hl-orange">싶지 않아요</span>.</div>
+                <div class="sentence-line">민아는 기고 <span class="hl-orange">싶지 않아해요</span>. (3인칭)</div>
+                <div class="dialogue-en">I don't want to run today.<br>I don't want to go there.<br>Mina doesn't want to crawl. (3rd person)</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-blue">명사 원함 — 이/가 싶다</span>
+                <div class="pair-label">명사 + 이/가 + 싶다 · Wanting a noun</div>
+                <div class="sentence-line">물<span class="hl-blue">이 싶어요</span>. (I want water.)</div>
+                <div class="sentence-line">휴식<span class="hl-blue">이 싶어요</span>. (I want rest.)</div>
+                <div class="sentence-line">→ 더 자연스럽게: 물을 마시고 싶어요.</div>
+                <div class="dialogue-en">For nouns, "명사 + 가/이 싶어요" is possible but<br>often more natural to use verb: 마시고 싶어요, 먹고 싶어요.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">대화 Dialogue</span>
+                <div class="pair-label">실전 대화 · Real conversation</div>
+                <div class="sentence-line">A: 오늘 뭐 하고 <span class="hl-blue">싶어요</span>?</div>
+                <div class="sentence-line">B: 공원에서 <span class="hl-blue">걷고 싶어요</span>!</div>
+                <div class="sentence-line">A: 민아는 뭐 하고 <span class="hl-teal">싶어해요</span>?</div>
+                <div class="sentence-line">B: 집에서 <span class="hl-teal">쉬고 싶어해요</span>.</div>
+                <div class="dialogue-en">A: What do you want to do today?<br>B: I want to walk in the park!<br>A: What does Mina want to do?<br>B: She wants to rest at home.</div>
+            </div>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="section-title">4. 흔한 실수 (Common Mistakes)
+            <span class="section-title-en"> — Watch out!</span>
+        </div>
+
+        <div class="mistake-box">
+            <div class="mistake-title">❌ 틀리기 쉬운 것들</div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 민아는 걷고 싶어요.
+                    <div class="mistake-note">싶다 = only for the speaker's own feeling</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 민아는 걷고 싶어해요.
+                    <div class="mistake-note">싶어하다 = observing someone else's desire</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 나는 쉬고 싶어해요.
+                    <div class="mistake-note">싶어하다 sounds strange for 1st person</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 나는 쉬고 싶어요.
+                    <div class="mistake-note">Use 싶다 for your own desire</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 나는 뛰어고 싶어요.
+                    <div class="mistake-note">-고 attaches to the plain stem, not the conjugated form</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 나는 뛰고 싶어요.
+                    <div class="mistake-note">Stem 뛰- + 고 싶다 (never change the stem for -고 싶다)</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 나는 싶어요 날다.
+                    <div class="mistake-note">Word order: verb comes before 고 싶다</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 나는 날고 싶어요.
+                    <div class="mistake-note">Always: [verb stem] + 고 싶어요</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <div class="note-title">💡 기억하는 팁! (Tips to Remember)</div>
+            <div class="note-text">
+                <strong>① 공식은 딱 하나!</strong> 어간 + <strong>고 싶다</strong> — 불규칙 없어요. 모든 동사에 그냥 붙여요!<br><br>
+                <strong>② 사람으로 구별해요:</strong><br>
+                &nbsp;→ 나/저 (I/me) → <strong>싶어요</strong> &nbsp;&nbsp;|&nbsp;&nbsp; 그/그녀/민아/아이들 → <strong>싶어해요</strong><br><br>
+                <strong>③ 봄 동사로 연습해요! 🌿</strong><br>
+                &nbsp;→ 걷고 싶어요 · 뛰고 싶어요 · 날고 싶어요 · 쉬고 싶어요 · 기고 싶어요<br><br>
+                <strong>④ 부정은 "싶지 않아요"!</strong> 동사 어간 + 고 싶지 않아요 = don't want to ~
+            </div>
+        </div>
+
+    </div><!-- end topic-1 -->
+    </div>
+
+</div>
+</body>
+</html>

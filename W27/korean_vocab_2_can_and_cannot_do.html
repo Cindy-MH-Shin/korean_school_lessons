@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 카드 ② -(으)ㄹ 수 있다/없다 | Can · Cannot Vocabulary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #0e8c72 0%, #1a6fa8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: linear-gradient(135deg, #0e8c72 0%, #076652 40%, #1a6fa8 100%);
+            color: white; padding: 40px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .header::before {
+            content: '🚶🏃🦋😴🍽️🏊🗣️🚴🐛';
+            position: absolute;
+            top: 10px; left: 0; right: 0;
+            font-size: 20px; letter-spacing: 10px; opacity: 0.2;
+        }
+        .header h1 { font-size: 38px; margin-bottom: 8px; text-shadow: 1px 2px 4px rgba(0,0,0,0.25); }
+        .header .subtitle { font-size: 18px; opacity: 0.95; margin-bottom: 6px; }
+        .header .subtitle-en { font-size: 14px; opacity: 0.82; font-style: italic; }
+        .topic-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            padding: 5px 20px; border-radius: 20px;
+            font-size: 13px; margin-bottom: 12px; letter-spacing: 2px; font-weight: bold;
+        }
+
+        /* ── TABS ── */
+        .nav-tabs { display: flex; background: #e6f7f3; border-bottom: 3px solid #80cbc4; }
+        .nav-tab {
+            flex: 1; padding: 18px 10px; text-align: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            border: none; background: transparent; color: #aaa; transition: all 0.3s;
+            font-family: inherit;
+        }
+        .nav-tab.active { color: #076652; background: white; border-bottom: 4px solid #0e8c72; }
+        .nav-tab:hover  { background: #b2dfdb; color: #0e8c72; }
+        .content { padding: 40px; }
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* ── CSS VARS ── */
+        :root {
+            --teal: #0e8c72; --teal-dark: #076652; --teal-light: #e6f7f3;
+            --blue: #1a6fa8; --blue-dark: #0d4f7c; --blue-light: #eaf3fb;
+            --red: #c0392b;  --red-light: #fef2f2;
+            --orange: #d4881e; --orange-light: #fef5e7;
+            --purple: #7c5cbf; --purple-light: #f0ebff;
+            --green: #27ae60; --green-light: #eafaf1;
+        }
+
+        /* ── CATEGORY HEADERS ── */
+        .cat-header {
+            color: white; padding: 15px 22px; border-radius: 12px;
+            margin: 30px 0 18px; font-size: 19px; font-weight: bold;
+        }
+        .cat-teal   { background: linear-gradient(135deg, #0e8c72 0%, #26a69a 100%); }
+        .cat-blue   { background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%); }
+        .cat-orange { background: linear-gradient(135deg, #d4881e 0%, #e67e22 100%); }
+        .cat-red    { background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); }
+        .cat-purple { background: linear-gradient(135deg, #7c5cbf 0%, #9b59b6 100%); }
+
+        /* ── SECTION TITLE ── */
+        .sec-title {
+            font-size: 24px; font-weight: bold;
+            margin: 32px 0 6px; padding-bottom: 10px;
+            border-bottom: 3px solid var(--teal);
+            color: var(--teal-dark);
+        }
+        .sec-title-en { font-size: 13px; color: #aaa; font-style: italic; margin-bottom: 18px; }
+
+        /* ── QUICK REF TABLE ── */
+        .quick-ref {
+            background: var(--teal-light); border-radius: 15px;
+            padding: 24px; margin-bottom: 30px;
+            border-left: 5px solid var(--teal);
+        }
+        .quick-ref h2 { font-size: 21px; color: var(--teal-dark); margin-bottom: 4px; }
+        .quick-ref-en { font-size: 13px; color: #999; font-style: italic; margin-bottom: 16px; }
+        .ref-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .ref-table th {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            color: white; padding: 11px 12px; text-align: center; font-size: 13px;
+        }
+        .ref-table td { padding: 10px 12px; border-bottom: 1px solid #a5d6cf; text-align: center; }
+        .ref-table tbody tr:nth-child(odd) { background: #f0faf7; }
+        .ref-table tbody tr:hover { background: #b2dfdb; }
+        .ref-table .teal-w  { color: var(--teal);  font-weight: bold; font-size: 15px; }
+        .ref-table .red-w   { color: var(--red);   font-weight: bold; font-size: 15px; }
+        .ref-table .blue-w  { color: var(--blue);  font-weight: bold; font-size: 15px; }
+        .ref-table .orange-w { color: var(--orange); font-weight: bold; }
+
+        /* ── MAIN VERB TABLE (phrase-table style) ── */
+        .phrase-table {
+            width: 100%; border-collapse: collapse;
+            margin-bottom: 26px; font-size: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden;
+        }
+        .phrase-table thead tr {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); color: white;
+        }
+        .phrase-table th { padding: 13px 14px; text-align: left; font-size: 14px; }
+        .phrase-table tbody tr:nth-child(even) { background: #f0faf7; }
+        .phrase-table tbody tr:hover { background: #b2dfdb; transition: background 0.2s; }
+        .phrase-table td { padding: 12px 14px; border-bottom: 1px solid #b2dfdb; vertical-align: middle; }
+        .word-ko  { font-size: 22px; font-weight: bold; color: var(--teal-dark); }
+        .word-ro  { font-size: 12px; color: var(--teal); font-style: italic; margin-top: 2px; }
+        .word-meaning { font-weight: 600; color: #4a5568; }
+        .word-note { font-size: 13px; color: #718096; margin-top: 3px; }
+        .tag-reg  { display:inline-block; background:#e6f7f3; color:var(--teal-dark); font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #80cbc4; }
+        .tag-irr  { display:inline-block; background:#fde8e8; color:var(--red); font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #f48fb1; }
+        .tag-new  { display:inline-block; background:var(--blue-light); color:var(--blue-dark); font-size:12px; font-weight:bold; padding:2px 8px; border-radius:8px; border:1px solid #90c4e8; }
+
+        /* ── VERB CONJUGATION CARDS (Spring Verbs style) ── */
+        .verb-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .verb-card-conj {
+            border-radius: 16px; padding: 20px;
+            border: 2px solid #e0e0e0;
+            background: white; transition: all 0.2s;
+        }
+        .verb-card-conj:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .vc-verb   { font-size: 26px; font-weight: bold; margin-bottom: 3px; }
+        .vc-eng    { font-size: 13px; color: #718096; margin-bottom: 12px; }
+        .vc-row    { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px dashed #eee; }
+        .vc-row:last-child { border-bottom: none; }
+        .vc-label  { color: #9e9e9e; flex-shrink: 0; margin-right: 8px; }
+        .vc-form   { font-weight: bold; text-align: right; }
+        .vc-teal   { border-top: 5px solid var(--teal);   } .vc-teal   .vc-verb { color: var(--teal-dark); }
+        .vc-blue   { border-top: 5px solid var(--blue);   } .vc-blue   .vc-verb { color: var(--blue-dark); }
+        .vc-orange { border-top: 5px solid var(--orange); } .vc-orange .vc-verb { color: #8a5200; }
+        .vc-red    { border-top: 5px solid var(--red);    } .vc-red    .vc-verb { color: #7b1a12; }
+        .vc-purple { border-top: 5px solid var(--purple); } .vc-purple .vc-verb { color: #4a2d8a; }
+        .vc-green  { border-top: 5px solid var(--green);  } .vc-green  .vc-verb { color: #1b5e20; }
+        .vc-teal .vc-can  { color: var(--teal);  }
+        .vc-teal .vc-cant { color: var(--red);   }
+        .vc-can  { color: var(--teal);  font-weight: bold; }
+        .vc-cant { color: var(--red);   font-weight: bold; }
+
+        /* ── CAN/CANNOT SPLIT CARDS (vocab_next3 style) ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 22px; margin-top: 18px;
+        }
+        .verb-card-split {
+            border: 3px solid #80cbc4;
+            border-radius: 18px; overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .verb-card-split:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 12px 30px rgba(14,140,114,0.22); }
+        .verb-card-split.irr-card { border-color: #f48fb1; }
+        .verb-card-split.irr-card:hover { border-color: var(--red); box-shadow: 0 12px 30px rgba(192,57,43,0.2); }
+
+        .card-header-split { display: grid; grid-template-columns: 1fr auto 1fr; }
+        .header-teal {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            color: white; padding: 16px 18px;
+        }
+        .header-red {
+            background: linear-gradient(135deg, var(--red) 0%, #922b21 100%);
+            color: white; padding: 16px 18px;
+        }
+        .header-arrow-teal {
+            background: #054d3a;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 10px; font-size: 18px; color: rgba(255,255,255,0.6);
+        }
+        .h-type { font-size: 11px; opacity: 0.8; letter-spacing: 1px; margin-bottom: 3px; text-transform: uppercase; }
+        .h-verb { font-size: 22px; font-weight: bold; }
+        .h-en   { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+
+        .card-body { padding: 16px 20px; }
+        .form-row {
+            display: flex; align-items: center; gap: 8px;
+            background: #fafafa; border-radius: 8px;
+            padding: 8px 13px; margin-bottom: 8px;
+        }
+        .form-label { font-size: 11px; color: #999; min-width: 80px; font-weight: bold; }
+        .form-value { font-size: 14px; font-weight: bold; color: #2c3e50; flex: 1; }
+        .form-suffix-teal {
+            display: inline-block; background: #b2dfdb;
+            color: var(--teal-dark); border-radius: 8px;
+            padding: 1px 10px; font-weight: bold; font-size: 13px;
+        }
+        .form-suffix-red {
+            display: inline-block; background: #fde0dd;
+            color: var(--red); border-radius: 8px;
+            padding: 1px 10px; font-weight: bold; font-size: 13px;
+        }
+        .form-note { font-size: 11px; color: #e74c3c; font-style: italic; }
+        .irreg-chip {
+            display: inline-block; background: #fde8e8;
+            color: var(--red); font-size: 12px; font-weight: bold;
+            padding: 2px 10px; border-radius: 8px; margin-bottom: 8px;
+        }
+        .sent-teal {
+            background: var(--teal-light); border-radius: 10px;
+            padding: 11px 14px; margin-top: 8px;
+            border-left: 4px solid var(--teal);
+        }
+        .sent-red {
+            background: var(--red-light); border-radius: 10px;
+            padding: 11px 14px; margin-top: 8px;
+            border-left: 4px solid var(--red);
+        }
+        .sent-orange {
+            background: var(--orange-light); border-radius: 10px;
+            padding: 11px 14px; margin-top: 8px;
+            border-left: 4px solid var(--orange);
+        }
+        .sent-tag  { font-size: 10px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .tag-teal  { color: var(--teal); }
+        .tag-red   { color: var(--red); }
+        .tag-orange { color: var(--orange); }
+        .sent-ko { font-size: 15px; color: #2c3e50; font-weight: 600; line-height: 1.5; }
+        .sent-en { font-size: 13px; color: #888; font-style: italic; margin-top: 3px; }
+        .hl-teal   { color: var(--teal);   font-weight: bold; }
+        .hl-red    { color: var(--red);    font-weight: bold; }
+        .hl-orange { color: var(--orange); font-weight: bold; }
+        .hl-blue   { color: var(--blue);   font-weight: bold; }
+
+        /* ── IRREGULAR BOX ── */
+        .irregular-box {
+            background: linear-gradient(135deg, #fce4ec 0%, var(--teal-light) 100%);
+            border: 2px solid #f48fb1;
+            border-radius: 14px; padding: 20px 24px; margin: 18px 0 26px;
+        }
+        .irregular-box h3 { font-size: 16px; color: #880e4f; margin-bottom: 10px; }
+        .irreg-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+        .irreg-tag {
+            background: white; border-radius: 8px; padding: 6px 14px;
+            font-size: 14px; border: 1px solid #f48fb1;
+        }
+        .irreg-tag strong { color: #c62828; }
+
+        /* ── TIP / NOTE BOXES ── */
+        .tip-box { border-radius: 12px; padding: 16px 20px; margin: 14px 0; font-size: 14px; line-height: 1.9; }
+        .tip-teal   { background: var(--teal-light);   border: 2px solid #80cbc4; color: var(--teal-dark); }
+        .tip-orange { background: var(--orange-light); border: 2px solid #f5cba7; color: #7d5300; }
+        .tip-blue   { background: var(--blue-light);   border: 2px solid #90c4e8; color: var(--blue-dark); }
+        .tip-red    { background: var(--red-light);    border: 2px solid #f1948a; color: #7b1a12; }
+
+        /* ── NOUN TABLE ── */
+        .noun-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px; margin: 14px 0 26px;
+        }
+        .noun-card {
+            background: white; border-radius: 14px;
+            padding: 18px; border: 2px solid #c5dff0;
+            transition: all 0.2s;
+        }
+        .noun-card:hover { border-color: var(--teal); box-shadow: 0 6px 16px rgba(14,140,114,0.15); }
+        .nc-ko   { font-size: 24px; font-weight: bold; color: var(--teal-dark); margin-bottom: 2px; }
+        .nc-ro   { font-size: 12px; color: var(--teal); font-style: italic; margin-bottom: 6px; }
+        .nc-en   { font-size: 15px; font-weight: 600; color: #2c3e50; margin-bottom: 6px; }
+        .nc-ex   { font-size: 13px; color: #666; line-height: 1.7;
+                   background: #f4f6f8; border-radius: 8px; padding: 8px 10px; margin-top: 8px; }
+
+        /* ── REMEMBER BOX ── */
+        .remember-box {
+            border-radius: 16px; padding: 26px; margin-top: 38px;
+            border: 2px solid var(--teal);
+            background: var(--teal-light);
+        }
+        .remember-box h3 { font-size: 20px; margin-bottom: 14px; color: var(--teal-dark); }
+        .remember-box p  { font-size: 15px; color: #444; line-height: 2.1; }
+        .r-teal   { color: var(--teal);   font-weight: bold; }
+        .r-red    { color: var(--red);    font-weight: bold; }
+        .r-orange { color: var(--orange); font-weight: bold; }
+        .r-blue   { color: var(--blue);   font-weight: bold; }
+        .en-note {
+            font-size: 13px; color: #777; font-style: italic;
+            margin-top: 14px; border-top: 1px solid #b2dfdb; padding-top: 12px; line-height: 1.8;
+        }
+
+        .tip-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px; margin-top: 22px;
+        }
+        .tip-card {
+            border-radius: 14px; padding: 18px; border: 2px solid;
+        }
+        .tip-card.teal-tip   { background: var(--teal-light);   border-color: var(--teal); }
+        .tip-card.red-tip    { background: var(--red-light);    border-color: var(--red); }
+        .tip-card.orange-tip { background: var(--orange-light); border-color: var(--orange); }
+        .tip-title { font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+        .tip-title.t { color: var(--teal-dark); }
+        .tip-title.r { color: var(--red); }
+        .tip-title.o { color: #7d5300; }
+        .tip-body { font-size: 14px; color: #444; line-height: 1.9; }
+
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .content { padding: 20px; }
+            .verb-grid { grid-template-columns: 1fr 1fr; }
+            .noun-grid { grid-template-columns: 1fr 1fr; }
+            .nav-tab { font-size: 12px; padding: 12px 5px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="topic-badge">② GRAMMAR TOPIC 2 · 문법 ②</div>
+        <h1>📋 -(으)ㄹ 수 있다 / 없다</h1>
+        <div class="subtitle">단어 카드 · Vocabulary Cards — Can · Cannot</div>
+        <div class="subtitle-en">All vocabulary used in Grammar Topic ② — verbs, nouns &amp; key expressions organized by pattern</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('verbs', event)">🔵 동사 카드 Verb Cards</button>
+        <button class="nav-tab" onclick="showSection('conj', event)">📊 활용표 Conjugation</button>
+        <button class="nav-tab" onclick="showSection('nouns', event)">📖 명사 Nouns</button>
+        <button class="nav-tab" onclick="showSection('ref', event)">⭐ 참고 Reference</button>
+    </div>
+
+    <div class="content">
+
+    <!-- ══════════════════════════════════════════
+         TAB 1: VERB CARDS (Can / Cannot Split)
+    ══════════════════════════════════════════ -->
+    <div id="verbs-section" class="section active">
+
+        <div class="quick-ref">
+            <h2>⚡ -(으)ㄹ 수 있다/없다 핵심 공식</h2>
+            <div class="quick-ref-en">Formation rule at a glance before studying each verb card</div>
+            <table class="ref-table">
+                <thead>
+                    <tr>
+                        <th>어간 끝 Stem Ending</th>
+                        <th>+</th>
+                        <th>✅ 있다 (CAN)</th>
+                        <th>❌ 없다 (CANNOT)</th>
+                        <th>💬 못-형 Casual</th>
+                        <th>예 Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>받침 있음</strong> (has 받침)</td>
+                        <td class="teal-w">+</td>
+                        <td class="teal-w">을 수 있다</td>
+                        <td class="red-w">을 수 없다</td>
+                        <td class="orange-w">못 + 동사</td>
+                        <td>먹<strong>을</strong> 수 있어요</td>
+                    </tr>
+                    <tr>
+                        <td><strong>받침 없음</strong> (no 받침)</td>
+                        <td class="teal-w">+</td>
+                        <td class="teal-w">ㄹ 수 있다</td>
+                        <td class="red-w">ㄹ 수 없다</td>
+                        <td class="orange-w">못 + 동사</td>
+                        <td>가<strong>ㄹ</strong> 수 있어요</td>
+                    </tr>
+                    <tr>
+                        <td>⚠️ <strong>ㄷ 불규칙</strong> (걷다)</td>
+                        <td class="red-w">→</td>
+                        <td class="teal-w">걸<u>을</u> 수 있다</td>
+                        <td class="red-w">걸<u>을</u> 수 없다</td>
+                        <td class="orange-w">못 걸어요</td>
+                        <td>걷 + 을 → <strong>걸을</strong></td>
+                    </tr>
+                    <tr>
+                        <td>⚠️ <strong>ㄹ 어간</strong> (날다/알다)</td>
+                        <td class="blue-w">→</td>
+                        <td class="teal-w">날 수 있다</td>
+                        <td class="red-w">날 수 없다</td>
+                        <td class="orange-w">못 날아요</td>
+                        <td>날- + ㄹ → <strong>날</strong> (ㄹ 합침)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Spring verbs -->
+        <div class="cat-header cat-teal">🌿 봄 나들이 동사 Spring Movement Verbs — (으)ㄹ 수 있다/없다</div>
+
+        <div class="cards-grid">
+
+            <!-- 기다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">길 수 있다</div>
+                        <div class="h-en">can crawl</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">길 수 없다</div>
+                        <div class="h-en">cannot crawl</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">기다 → 기- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">길 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">아기는 아직 <span class="hl-teal">길 수 있어요</span>.</div>
+                        <div class="sent-en">The baby can still crawl.</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">다리가 아파서 <span class="hl-red">길 수 없어요</span>. = 못 기어요.</div>
+                        <div class="sent-en">My leg hurts so I cannot crawl.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 걷다 (ㄷ 불규칙) -->
+            <div class="verb-card-split irr-card">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">걸을 수 있다</div>
+                        <div class="h-en">can walk</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">걸을 수 없다</div>
+                        <div class="h-en">cannot walk</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="irreg-chip">⚠️ ㄷ 불규칙 — 걷 + 을 → 걸을!</div>
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">걷다 → 걷- &nbsp;<span class="form-note">⚠️ 을 앞에서 ㄷ→ㄹ</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">을 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">걸을 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">한 시간 동안 <span class="hl-teal">걸을 수 있어요</span>.</div>
+                        <div class="sent-en">I can walk for an hour.</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">발이 아파서 <span class="hl-red">걸을 수 없어요</span>. = 못 걸어요.</div>
+                        <div class="sent-en">My foot hurts so I cannot walk.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 뛰다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">뛸 수 있다</div>
+                        <div class="h-en">can run / jump</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">뛸 수 없다</div>
+                        <div class="h-en">cannot run / jump</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">뛰다 → 뛰- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">뛸 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">운동장에서 <span class="hl-teal">뛸 수 있어요</span>. 괜찮아요!</div>
+                        <div class="sent-en">I can run on the playground. It's okay!</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">비가 와서 밖에서 <span class="hl-red">뛸 수 없어요</span>. = 못 뛰어요.</div>
+                        <div class="sent-en">It's raining so I cannot run outside.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 날다 (ㄹ 어간) -->
+            <div class="verb-card-split irr-card">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">날 수 있다</div>
+                        <div class="h-en">can fly</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">날 수 없다</div>
+                        <div class="h-en">cannot fly</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="irreg-chip">⚠️ ㄹ 어간 — 날- + ㄹ 수 있다 → 날 수 있다 (ㄹ 합침)</div>
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">날다 → 날- &nbsp;<span class="form-note">ㄹ 어간 — ㄹ naturally merges</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">날 수 있어요</strong> ✅</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN (새/나비)</span>
+                        <div class="sent-ko">새는 하늘을 <span class="hl-teal">날 수 있어요</span>.</div>
+                        <div class="sent-en">A bird can fly in the sky.</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT (사람)</span>
+                        <div class="sent-ko">사람은 혼자 <span class="hl-red">날 수 없어요</span>. = 못 날아요.</div>
+                        <div class="sent-en">Humans cannot fly on their own.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 쉬다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">쉴 수 있다</div>
+                        <div class="h-en">can rest</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">쉴 수 없다</div>
+                        <div class="h-en">cannot rest</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">쉬다 → 쉬- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">쉴 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">지금은 <span class="hl-teal">쉴 수 있어요</span>. 바쁘지 않아요.</div>
+                        <div class="sent-en">I can rest now. I'm not busy.</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">너무 바빠서 <span class="hl-red">쉴 수 없어요</span>. = 못 쉬어요.</div>
+                        <div class="sent-en">I'm too busy so I cannot rest.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end spring verb cards -->
+
+        <!-- Everyday verbs -->
+        <div class="cat-header cat-blue" style="margin-top:36px;">📋 일상 동사 Everyday Verbs — (으)ㄹ 수 있다/없다</div>
+
+        <div class="cards-grid">
+
+            <!-- 먹다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">먹을 수 있다</div>
+                        <div class="h-en">can eat</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">먹을 수 없다</div>
+                        <div class="h-en">cannot eat</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">먹다 → 먹- &nbsp;<span style="font-size:12px;color:#888;">(받침 ㄱ 있음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">을 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">먹을 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">한국 음식을 다 <span class="hl-teal">먹을 수 있어요</span>!</div>
+                        <div class="sent-en">I can eat all Korean food!</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 알레르기 Allergy</span>
+                        <div class="sent-ko">땅콩을 <span class="hl-red">먹을 수 없어요</span>. 알레르기가 있어요.</div>
+                        <div class="sent-en">I cannot eat peanuts. I have an allergy.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 수영하다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">수영할 수 있다</div>
+                        <div class="h-en">can swim</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">수영할 수 없다</div>
+                        <div class="h-en">cannot swim</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">수영하다 → 수영하- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">수영할 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 질문/대답 Q&amp;A</span>
+                        <div class="sent-ko">수영을 <span class="hl-teal">할 수 있어요</span>? — 네, 할 수 있어요!</div>
+                        <div class="sent-en">Can you swim? — Yes, I can!</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">수영을 <span class="hl-red">할 수 없어요</span>. 배운 적이 없어요. = 못 해요.</div>
+                        <div class="sent-en">I cannot swim. I've never learned.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 말하다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">말할 수 있다</div>
+                        <div class="h-en">can speak</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">말할 수 없다</div>
+                        <div class="h-en">cannot speak</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">말하다 → 말하- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">말할 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">한국어를 조금 <span class="hl-teal">말할 수 있어요</span>!</div>
+                        <div class="sent-en">I can speak a little Korean!</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">중국어는 아직 <span class="hl-red">말할 수 없어요</span>. = 못 해요.</div>
+                        <div class="sent-en">I cannot speak Chinese yet.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 타다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">탈 수 있다</div>
+                        <div class="h-en">can ride</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">탈 수 없다</div>
+                        <div class="h-en">cannot ride</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">타다 → 타- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">탈 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 — 자전거 Bicycle</span>
+                        <div class="sent-ko">저는 자전거를 <span class="hl-teal">탈 수 있어요</span>.</div>
+                        <div class="sent-en">I can ride a bicycle.</div>
+                    </div>
+                    <div class="sent-orange">
+                        <span class="sent-tag tag-orange">💬 못 형태 CASUAL</span>
+                        <div class="sent-ko">버스를 <span class="hl-orange">못 타요</span>. 시간이 없어요.</div>
+                        <div class="sent-en">I can't take the bus. I don't have time.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 가다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">갈 수 있다</div>
+                        <div class="h-en">can go</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">갈 수 없다</div>
+                        <div class="h-en">cannot go</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">가다 → 가- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음 / 규칙)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">갈 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능성 Possibility</span>
+                        <div class="sent-ko">내일 공원에 <span class="hl-teal">갈 수 있어요</span>? — 네!</div>
+                        <div class="sent-en">Can you go to the park tomorrow? — Yes!</div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 — 회의 있음</span>
+                        <div class="sent-ko">지금은 <span class="hl-red">갈 수 없어요</span>. 회의가 있어요.</div>
+                        <div class="sent-en">I cannot go now. I have a meeting.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 따라가다 -->
+            <div class="verb-card-split">
+                <div class="card-header-split">
+                    <div class="header-teal">
+                        <div class="h-type">✅ CAN · 가능</div>
+                        <div class="h-verb">따라갈 수 있다</div>
+                        <div class="h-en">can follow / keep up</div>
+                    </div>
+                    <div class="header-arrow-teal">↔</div>
+                    <div class="header-red">
+                        <div class="h-type">❌ CANNOT · 불가능</div>
+                        <div class="h-verb">따라갈 수 없다</div>
+                        <div class="h-en">cannot keep up</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-label">기본형 →</div>
+                        <div class="form-value">따라가다 → 따라가- &nbsp;<span style="font-size:12px;color:#888;">(받침 없음)</span></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label">공식 Pattern</div>
+                        <div class="form-value"><span class="form-suffix-teal">ㄹ 수 있다</span> &nbsp;→&nbsp; <strong style="color:var(--teal)">따라갈 수 있어요</strong></div>
+                    </div>
+                    <div class="sent-red">
+                        <span class="sent-tag tag-red">❌ 불가능 CANNOT</span>
+                        <div class="sent-ko">너무 빨라서 <span class="hl-red">못 따라가요</span>.</div>
+                        <div class="sent-en">It's too fast so I can't keep up.</div>
+                    </div>
+                    <div class="sent-teal">
+                        <span class="sent-tag tag-teal">✅ 가능 CAN</span>
+                        <div class="sent-ko">천천히 하면 <span class="hl-teal">따라갈 수 있어요</span>.</div>
+                        <div class="sent-en">If you go slowly, I can keep up.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end everyday verb cards -->
+
+        <div class="tip-box tip-orange" style="margin-top:24px;">
+            ⚠️ <strong>못 vs -(으)ㄹ 수 없다 — 언제 써요?</strong><br>
+            <strong>-(으)ㄹ 수 없다</strong> — 격식체, 이유 설명에 좋아요 → 지금은 갈 수 없어요. 회의가 있어요.<br>
+            <strong>못 + 동사</strong> — 구어체, 즉흥적/감탄적 → 못 가요! 갑자기 일이 생겼어요.<br>
+            ✨ 두 가지 다 맞아요. <em>수 없다</em> = more formal/written · <em>못</em> = more casual/spoken.
+        </div>
+
+    </div><!-- end verbs section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 2: CONJUGATION TABLE (Spring Verbs style)
+    ══════════════════════════════════════════ -->
+    <div id="conj-section" class="section">
+
+        <div class="cat-header cat-teal">📊 전체 활용표 — All Verbs: -(으)ㄹ 수 있다/없다 Forms</div>
+
+        <table class="phrase-table">
+            <thead>
+                <tr>
+                    <th>동사 Verb</th>
+                    <th>뜻 Meaning</th>
+                    <th>어간 Stem</th>
+                    <th>유형 Type</th>
+                    <th>✅ 있다 CAN</th>
+                    <th>❌ 없다 CANNOT</th>
+                    <th>💬 못-형 Casual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="word-ko">기다</div><div class="word-ro">gi-da</div></td>
+                    <td><div class="word-meaning">to crawl</div><div class="word-note">네 발로 / on all fours</div></td>
+                    <td><strong>기-</strong></td>
+                    <td><span class="tag-reg">✅ 규칙 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">길 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">길 수 없어요</td>
+                    <td>못 기어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">걷다 ⚠️</div><div class="word-ro">geot-da</div></td>
+                    <td><div class="word-meaning">to walk</div><div class="word-note">천천히 / slowly</div></td>
+                    <td><strong>걷- → 걸-</strong></td>
+                    <td><span class="tag-irr">⚠️ ㄷ 불규칙</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">걸을 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">걸을 수 없어요</td>
+                    <td>못 걸어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">뛰다</div><div class="word-ro">ttwi-da</div></td>
+                    <td><div class="word-meaning">to run / jump</div><div class="word-note">빠르게, 높이</div></td>
+                    <td><strong>뛰-</strong></td>
+                    <td><span class="tag-reg">✅ 규칙 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">뛸 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">뛸 수 없어요</td>
+                    <td>못 뛰어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">날다 ⚠️</div><div class="word-ro">nal-da</div></td>
+                    <td><div class="word-meaning">to fly</div><div class="word-note">하늘에서 / in the sky</div></td>
+                    <td><strong>날-</strong></td>
+                    <td><span class="tag-irr">⚠️ ㄹ 어간</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">날 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">날 수 없어요</td>
+                    <td>못 날아요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">쉬다</div><div class="word-ro">swi-da</div></td>
+                    <td><div class="word-meaning">to rest</div><div class="word-note">잠깐 / take a break</div></td>
+                    <td><strong>쉬-</strong></td>
+                    <td><span class="tag-reg">✅ 규칙 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">쉴 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">쉴 수 없어요</td>
+                    <td>못 쉬어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">먹다</div><div class="word-ro">meok-da</div></td>
+                    <td><div class="word-meaning">to eat</div><div class="word-note">음식을 / food</div></td>
+                    <td><strong>먹-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 ㄱ</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">먹을 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">먹을 수 없어요</td>
+                    <td>못 먹어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">수영하다</div><div class="word-ro">su-yeong-ha-da</div></td>
+                    <td><div class="word-meaning">to swim</div><div class="word-note">수영장/바다에서</div></td>
+                    <td><strong>수영하-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">수영할 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">수영할 수 없어요</td>
+                    <td>못 수영해요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">말하다</div><div class="word-ro">mal-ha-da</div></td>
+                    <td><div class="word-meaning">to speak</div><div class="word-note">언어를 / a language</div></td>
+                    <td><strong>말하-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">말할 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">말할 수 없어요</td>
+                    <td>못 말해요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">타다</div><div class="word-ro">ta-da</div></td>
+                    <td><div class="word-meaning">to ride</div><div class="word-note">자전거/버스를</div></td>
+                    <td><strong>타-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">탈 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">탈 수 없어요</td>
+                    <td>못 타요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">가다</div><div class="word-ro">ga-da</div></td>
+                    <td><div class="word-meaning">to go</div><div class="word-note">어디에 / somewhere</div></td>
+                    <td><strong>가-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 없음</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">갈 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">갈 수 없어요</td>
+                    <td>못 가요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">읽다</div><div class="word-ro">ik-da</div></td>
+                    <td><div class="word-meaning">to read</div><div class="word-note">책/문장을</div></td>
+                    <td><strong>읽-</strong></td>
+                    <td><span class="tag-new">📋 일상 / 받침 ㄱ</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">읽을 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">읽을 수 없어요</td>
+                    <td>못 읽어요</td>
+                </tr>
+                <tr>
+                    <td><div class="word-ko">알다 ⚠️</div><div class="word-ro">al-da</div></td>
+                    <td><div class="word-meaning">to know</div><div class="word-note">사실/방법을</div></td>
+                    <td><strong>알-</strong></td>
+                    <td><span class="tag-irr">⚠️ ㄹ 어간</span></td>
+                    <td style="color:var(--teal);font-weight:bold;">알 수 있어요</td>
+                    <td style="color:var(--red);font-weight:bold;">알 수 없어요</td>
+                    <td>못 알아요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="irregular-box">
+            <h3>⚠️ 불규칙 동사 정리 Irregular Verb Summary</h3>
+            <div class="irreg-row">
+                <div class="irreg-tag">걷다 <strong>ㄷ 불규칙</strong>: 걷 + 을 수 있다 → <strong>걸을</strong> 수 있다 ❌걷을 수 있다</div>
+                <div class="irreg-tag">걷다: 못 + 걸어요 (→ <strong>못 걸어요</strong>) — ㄷ→ㄹ 앞에 어</div>
+            </div>
+            <div class="irreg-row">
+                <div class="irreg-tag">날다 <strong>ㄹ 어간</strong>: 날- + ㄹ 수 있다 → <strong>날 수 있다</strong> ❌날을 수 있다</div>
+                <div class="irreg-tag">알다 <strong>ㄹ 어간</strong>: 알- + ㄹ 수 있다 → <strong>알 수 있다</strong></div>
+            </div>
+        </div>
+
+        <div class="cat-header cat-orange" style="margin-top:28px;">📝 활용 카드 Conjugation Cards</div>
+
+        <div class="verb-grid">
+            <div class="verb-card-conj vc-teal">
+                <div class="vc-verb">기다</div>
+                <div class="vc-eng">to crawl · 규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">길 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">길 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 기어요</span></div>
+                <div class="vc-row"><span class="vc-label">과거 CAN (Past)</span><span class="vc-form vc-can">길 수 있었어요</span></div>
+            </div>
+            <div class="verb-card-conj vc-red">
+                <div class="vc-verb">걷다 ⚠️</div>
+                <div class="vc-eng">to walk · ㄷ-불규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">걸을 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">걸을 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 걸어요</span></div>
+                <div class="vc-row"><span class="vc-label">⚠️ 주의!</span><span class="vc-form" style="color:var(--red);font-size:12px;">걷을 ❌ → 걸을 ✅</span></div>
+            </div>
+            <div class="verb-card-conj vc-blue">
+                <div class="vc-verb">뛰다</div>
+                <div class="vc-eng">to run/jump · 규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">뛸 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">뛸 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 뛰어요</span></div>
+                <div class="vc-row"><span class="vc-label">과거 CANNOT</span><span class="vc-form vc-cant">뛸 수 없었어요</span></div>
+            </div>
+            <div class="verb-card-conj vc-purple">
+                <div class="vc-verb">날다 ⚠️</div>
+                <div class="vc-eng">to fly · ㄹ-어간</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">날 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">날 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 날아요</span></div>
+                <div class="vc-row"><span class="vc-label">⚠️ 주의!</span><span class="vc-form" style="color:var(--red);font-size:12px;">날을 ❌ → 날 ✅ (ㄹ 합침)</span></div>
+            </div>
+            <div class="verb-card-conj vc-orange">
+                <div class="vc-verb">쉬다</div>
+                <div class="vc-eng">to rest · 규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">쉴 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">쉴 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 쉬어요</span></div>
+                <div class="vc-row"><span class="vc-label">과거 CAN</span><span class="vc-form vc-can">쉴 수 있었어요</span></div>
+            </div>
+            <div class="verb-card-conj vc-teal">
+                <div class="vc-verb">먹다</div>
+                <div class="vc-eng">to eat · 규칙 · 받침 ㄱ</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">먹을 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">먹을 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 먹어요</span></div>
+                <div class="vc-row"><span class="vc-label">질문 Q</span><span class="vc-form" style="color:#555;">먹을 수 있어요?</span></div>
+            </div>
+            <div class="verb-card-conj vc-blue">
+                <div class="vc-verb">수영하다</div>
+                <div class="vc-eng">to swim · 규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">수영할 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">수영할 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 수영해요</span></div>
+                <div class="vc-row"><span class="vc-label">질문 Q</span><span class="vc-form" style="color:#555;">수영할 수 있어요?</span></div>
+            </div>
+            <div class="verb-card-conj vc-green">
+                <div class="vc-verb">말하다</div>
+                <div class="vc-eng">to speak · 규칙</div>
+                <div class="vc-row"><span class="vc-label">✅ 있다 CAN</span><span class="vc-form vc-can">말할 수 있어요</span></div>
+                <div class="vc-row"><span class="vc-label">❌ 없다 CANNOT</span><span class="vc-form vc-cant">말할 수 없어요</span></div>
+                <div class="vc-row"><span class="vc-label">💬 못-형</span><span class="vc-form" style="color:var(--orange);">못 말해요</span></div>
+                <div class="vc-row"><span class="vc-label">언어 예</span><span class="vc-form" style="color:#555;">한국어, 중국어</span></div>
+            </div>
+        </div>
+
+        <div class="tip-box tip-teal">
+            💡 <strong>능력 vs 가능성 — Ability vs Possibility</strong><br>
+            <strong>-(으)ㄹ 수 있다/없다</strong> covers BOTH meanings in Korean — unlike English which separates "can" (ability) from "it's possible" (possibility).<br>
+            &nbsp;→ 저는 자전거를 탈 수 있어요. (I <em>can</em> ride — learned skill / ability)<br>
+            &nbsp;→ 내일 갈 수 있어요. (I <em>can</em> go — it's possible / situation allows)
+        </div>
+
+    </div><!-- end conj section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 3: NOUNS
+    ══════════════════════════════════════════ -->
+    <div id="nouns-section" class="section">
+
+        <div class="cat-header cat-blue">📖 명사 Nouns — Grammar ② 예문에 나온 단어들</div>
+
+        <div class="sec-title">신체 부위 Body Parts</div>
+        <div class="sec-title-en">Nouns from "I cannot walk — my foot hurts" type sentences</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">다리</div>
+                <div class="nc-ro">da-ri</div>
+                <div class="nc-en">leg</div>
+                <div class="nc-ex">다리가 아파서 걸을 수 없어요.<br><em>My leg hurts so I cannot walk.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">발</div>
+                <div class="nc-ro">bal</div>
+                <div class="nc-en">foot</div>
+                <div class="nc-ex">발이 아파서 못 걸어요.<br><em>My foot hurts so I can't walk.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">배</div>
+                <div class="nc-ro">bae</div>
+                <div class="nc-en">stomach / belly</div>
+                <div class="nc-ex">배가 아파서 뛸 수 없어요.<br><em>My stomach hurts so I can't run.</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">언어 Languages</div>
+        <div class="sec-title-en">Frequently paired with 말하다/할 수 있다</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">한국어</div>
+                <div class="nc-ro">han-gu-geo</div>
+                <div class="nc-en">Korean (language)</div>
+                <div class="nc-ex">한국어를 조금 말할 수 있어요!<br><em>I can speak a little Korean!</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">중국어</div>
+                <div class="nc-ro">jung-gu-geo</div>
+                <div class="nc-en">Chinese (language)</div>
+                <div class="nc-ex">중국어는 아직 말할 수 없어요.<br><em>I cannot speak Chinese yet.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">영어</div>
+                <div class="nc-ro">yeong-eo</div>
+                <div class="nc-en">English (language)</div>
+                <div class="nc-ex">영어를 할 수 있어요?<br><em>Can you speak English?</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">교통 · 이동 Transportation &amp; Movement</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">자전거</div>
+                <div class="nc-ro">ja-jeon-geo</div>
+                <div class="nc-en">bicycle</div>
+                <div class="nc-ex">자전거를 탈 수 있어요.<br><em>I can ride a bicycle.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">버스</div>
+                <div class="nc-ro">beo-seu</div>
+                <div class="nc-en">bus</div>
+                <div class="nc-ex">버스로 갈 수 있어요.<br><em>You can go by bus.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">공원</div>
+                <div class="nc-ro">gong-won</div>
+                <div class="nc-en">park</div>
+                <div class="nc-ex">내일 공원에 갈 수 있어요?<br><em>Can you go to the park tomorrow?</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">음식 · 건강 Food &amp; Health</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">한국 음식</div>
+                <div class="nc-ro">han-guk eum-sik</div>
+                <div class="nc-en">Korean food</div>
+                <div class="nc-ex">한국 음식을 다 먹을 수 있어요!<br><em>I can eat all Korean food!</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">땅콩</div>
+                <div class="nc-ro">ttang-kong</div>
+                <div class="nc-en">peanuts</div>
+                <div class="nc-ex">땅콩을 먹을 수 없어요.<br><em>I cannot eat peanuts.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">알레르기</div>
+                <div class="nc-ro">al-le-reu-gi</div>
+                <div class="nc-en">allergy</div>
+                <div class="nc-ex">알레르기가 있어요. 먹을 수 없어요.<br><em>I have an allergy. I cannot eat it.</em></div>
+            </div>
+        </div>
+
+        <div class="sec-title">일상 Daily Life</div>
+        <div class="noun-grid">
+            <div class="noun-card">
+                <div class="nc-ko">회의</div>
+                <div class="nc-ro">hoe-ui</div>
+                <div class="nc-en">meeting</div>
+                <div class="nc-ex">지금은 갈 수 없어요. 회의가 있어요.<br><em>I cannot go now. I have a meeting.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">시간</div>
+                <div class="nc-ro">si-gan</div>
+                <div class="nc-en">time</div>
+                <div class="nc-ex">오늘 시간이 없어서 못 가요.<br><em>I don't have time today so I can't go.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">아기</div>
+                <div class="nc-ro">a-gi</div>
+                <div class="nc-en">baby</div>
+                <div class="nc-ex">아기는 혼자 걸을 수 없어요.<br><em>A baby cannot walk alone.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">사람</div>
+                <div class="nc-ro">sa-ram</div>
+                <div class="nc-en">person / people</div>
+                <div class="nc-ex">사람은 날 수 없어요.<br><em>Humans cannot fly.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">비</div>
+                <div class="nc-ro">bi</div>
+                <div class="nc-en">rain</div>
+                <div class="nc-ex">비가 와서 뛸 수 없어요.<br><em>It's raining so I cannot run.</em></div>
+            </div>
+            <div class="noun-card">
+                <div class="nc-ko">수(방법)</div>
+                <div class="nc-ro">su</div>
+                <div class="nc-en">way / means (grammar word)</div>
+                <div class="nc-ex">할 수 있다 = "there is a way to do it"<br><em>수 here means way/means/possibility</em></div>
+            </div>
+        </div>
+
+        <div class="tip-box tip-blue" style="margin-top:20px;">
+            💡 <strong>장소 패턴 Location Pattern 복습:</strong> [장소에서/에] + [동사] + [수 있다/없다]<br>
+            공원<strong>에서</strong> 뛸 수 있어요. / 수영장<strong>에서</strong> 수영할 수 있어요. / 집<strong>에서</strong> 쉴 수 있어요.
+        </div>
+
+    </div><!-- end nouns section -->
+
+
+    <!-- ══════════════════════════════════════════
+         TAB 4: QUICK REFERENCE
+    ══════════════════════════════════════════ -->
+    <div id="ref-section" class="section">
+
+        <div class="cat-header cat-teal">⭐ 빠른 참고 Quick Reference — -(으)ㄹ 수 있다/없다</div>
+
+        <div class="remember-box">
+            <h3>💡 기억하는 팁! (Key Rules to Remember)</h3>
+            <p>
+                <span class="r-teal">① 받침 있음 (has final consonant)</span> → <strong>을 수 있다/없다</strong>
+                &nbsp;→ 먹<strong>을</strong> · 읽<strong>을</strong> · 앉<strong>을</strong><br>
+                <span class="r-teal">② 받침 없음 (no final consonant)</span> → <strong>ㄹ 수 있다/없다</strong>
+                &nbsp;→ 가<strong>ㄹ</strong> · 쉴 · 뛸 · 탈<br>
+                <span class="r-red">③ ㄷ 불규칙 (걷다)</span> → 을 앞에서 <strong>ㄷ→ㄹ</strong> → 걸<strong>을</strong> 수 있다 ❌걷을<br>
+                <span class="r-orange">④ ㄹ 어간 (날다/알다)</span> → ㄹ이 합쳐져요 → <strong>날</strong> 수 있다 ❌날을<br>
+                <span class="r-teal">⑤ 부정 두 가지</span> → <strong>(으)ㄹ 수 없다</strong> (formal/written) = <strong>못 + 동사</strong> (casual/spoken)<br>
+            </p>
+            <div class="en-note">
+                The key grammatical insight: 수(數) means "way / means" — so -(으)ㄹ 수 있다 literally means
+                "there IS a way to [verb]" and -(으)ㄹ 수 없다 means "there is NO way to [verb]."
+                Both ability (skill) and possibility (situation) are covered by this one pattern.
+            </div>
+        </div>
+
+        <div class="tip-grid" style="margin-top:24px;">
+            <div class="tip-card teal-tip">
+                <div class="tip-title t">✅ -(으)ㄹ 수 있다</div>
+                <div class="tip-body">
+                    <strong>능력 Ability (skill learned):</strong><br>
+                    자전거를 탈 수 있어요. <em>(I can ride a bike.)</em><br>
+                    한국어를 말할 수 있어요.<br><br>
+                    <strong>가능성 Possibility (situation):</strong><br>
+                    내일 갈 수 있어요. <em>(I can go tomorrow.)</em><br>
+                    버스로 갈 수 있어요.
+                </div>
+            </div>
+            <div class="tip-card red-tip">
+                <div class="tip-title r">❌ -(으)ㄹ 수 없다 / 못</div>
+                <div class="tip-body">
+                    <strong>불능력 Inability:</strong><br>
+                    사람은 날 수 없어요. <em>(Can't fly.)</em><br>
+                    아기는 걸을 수 없어요.<br><br>
+                    <strong>불가능 Impossibility:</strong><br>
+                    회의가 있어서 갈 수 없어요.<br>
+                    → 구어체: 못 가요! 갑자기 일이!
+                </div>
+            </div>
+            <div class="tip-card orange-tip">
+                <div class="tip-title o">⚠️ 불규칙 Irregulars — Don't Forget!</div>
+                <div class="tip-body">
+                    <strong>ㄷ 불규칙 — 걷다:</strong><br>
+                    ✅ <strong>걸을</strong> 수 있어요 / 없어요<br>
+                    ❌ ~~걷을~~ 수 있어요<br><br>
+                    <strong>ㄹ 어간 — 날다/알다:</strong><br>
+                    ✅ <strong>날</strong> 수 있어요 (ㄹ merges)<br>
+                    ❌ ~~날을~~ 수 있어요
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-header cat-purple" style="margin-top:32px;">🌿 봄 동사 속도 비교 Speed Scale</div>
+        <div class="tip-box tip-teal">
+            🐛 <strong>기다</strong> (crawl) 길 수 있다
+            &nbsp;&nbsp;→&nbsp;&nbsp; 🚶 <strong>걷다</strong> (walk) 걸을 수 있다
+            &nbsp;&nbsp;→&nbsp;&nbsp; 🏃 <strong>뛰다</strong> (run) 뛸 수 있다
+            &nbsp;&nbsp;→&nbsp;&nbsp; 🦋 <strong>날다</strong> (fly) 날 수 있다
+            &nbsp;&nbsp;→&nbsp;&nbsp; 😴 <strong>쉬다</strong> (rest) 쉴 수 있다<br><br>
+            <em>사람은 날 수 없지만 걷고 뛸 수 있어요! 그래서 쉬고 싶어요! 🌿</em>
+        </div>
+
+        <div class="remember-box" style="margin-top:24px; background:var(--blue-light); border-color:var(--blue);">
+            <h3 style="color:var(--blue-dark);">📋 전체 단어 목록 Complete Word List</h3>
+            <p style="line-height:2.4;">
+                <strong style="color:var(--teal-dark);">동사 (Verbs):</strong>
+                기다 · 걷다⚠️ · 뛰다 · 날다⚠️ · 쉬다 · 먹다 · 수영하다 · 말하다 · 타다 · 가다 · 따라가다 · 읽다 · 알다⚠️<br>
+                <strong style="color:var(--blue-dark);">신체 (Body):</strong>
+                다리 · 발 · 배<br>
+                <strong style="color:var(--blue-dark);">언어 (Languages):</strong>
+                한국어 · 중국어 · 영어<br>
+                <strong style="color:var(--blue-dark);">교통/장소 (Transport/Place):</strong>
+                자전거 · 버스 · 공원<br>
+                <strong style="color:var(--blue-dark);">음식/건강 (Food/Health):</strong>
+                한국 음식 · 땅콩 · 알레르기<br>
+                <strong style="color:var(--blue-dark);">일상 (Daily):</strong>
+                회의 · 시간 · 아기 · 사람 · 비 · 수(方)<br>
+                <strong style="color:var(--orange);">핵심 표현 (Key Patterns):</strong>
+                -(으)ㄹ 수 있다 · -(으)ㄹ 수 없다 · 못 + 동사
+            </p>
+        </div>
+
+    </div><!-- end ref section -->
+
+    </div><!-- end content -->
+</div><!-- end container -->
+
+<script>
+    function showSection(name, e) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById(name + '-section').classList.add('active');
+        e.target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-(으)ㄹ 수 있다 / 없다</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a6fa8 0%, #0d4f7c 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header .subtitle { font-size: 17px; opacity: 0.9; }
+        .header .subtitle-en { font-size: 14px; opacity: 0.8; font-style: italic; margin-top: 4px; }
+
+        /* ===== Topic Tabs ===== */
+        .topic-nav {
+            display: flex; background: #eaf3fb;
+            border-bottom: 3px solid #90c4e8;
+        }
+        .topic-btn {
+            flex: 1; padding: 18px 10px; text-align: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            border: none; background: transparent; color: #999; transition: all 0.3s;
+            font-family: inherit;
+        }
+        .topic-btn.active { color: #0d4f7c; background: white; border-bottom: 4px solid #1a6fa8; }
+        .topic-btn:hover { background: #d9edf8; color: #1a6fa8; }
+        .topic-section { display: none; padding: 40px; }
+        .topic-section.active { display: block; }
+
+        /* ===== Colors ===== */
+        :root {
+            --blue: #1a6fa8;
+            --blue-dark: #0d4f7c;
+            --blue-light: #eaf3fb;
+            --teal: #0e8c72;
+            --teal-light: #e6f7f3;
+            --red: #c0392b;
+            --red-light: #fef2f2;
+            --orange: #d4881e;
+            --orange-light: #fef5e7;
+            --green: #27ae60;
+            --green-light: #eafaf1;
+            --purple: #7c5cbf;
+            --purple-light: #f0ebff;
+            --gray: #f4f6f8;
+        }
+
+        /* ===== Section Titles ===== */
+        .section-title {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 32px 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-title-en { font-size: 13px; color: #aaa; font-style: italic; }
+
+        /* Topic header banners */
+        .topic-header {
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 28px;
+            color: white;
+        }
+        .th-1 { background: linear-gradient(135deg, #1a6fa8 0%, #26a69a 100%); }
+        .th-2 { background: linear-gradient(135deg, #0e8c72 0%, #1a6fa8 100%); }
+        .th-3 { background: linear-gradient(135deg, #7c5cbf 0%, #1a6fa8 100%); }
+        .topic-header h2 { font-size: 28px; margin-bottom: 6px; }
+        .topic-header .th-en { font-size: 15px; opacity: 0.9; font-style: italic; }
+        .topic-header .th-sub { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+
+        /* ===== Intro Box ===== */
+        .intro-box {
+            background: var(--blue-light); border-radius: 14px;
+            padding: 22px; margin-bottom: 20px;
+            border-left: 6px solid var(--blue);
+        }
+        .intro-ko { font-size: 17px; color: #2c3e50; font-weight: bold; margin-bottom: 8px; }
+        .intro-en { font-size: 14px; color: #555; line-height: 1.8; }
+
+        /* ===== Meaning Grid ===== */
+        .meaning-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 16px; margin: 14px 0;
+        }
+        @media (max-width: 600px) { .meaning-grid { grid-template-columns: 1fr; } }
+        .meaning-card {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; border-left: 4px solid var(--blue);
+        }
+        .meaning-card.teal { background: var(--teal-light); border-left-color: var(--teal); }
+        .meaning-card.purple { background: var(--purple-light); border-left-color: var(--purple); }
+        .meaning-card h4 { color: var(--blue-dark); font-size: 14px; margin-bottom: 8px; }
+        .meaning-card.teal h4 { color: var(--teal); }
+        .meaning-card.purple h4 { color: var(--purple); }
+        .meaning-card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* ===== Big Contrast Box ===== */
+        .contrast-box {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 0; margin: 20px 0; border-radius: 16px; overflow: hidden;
+            border: 2px solid #c2dff0;
+            box-shadow: 0 4px 16px rgba(26,111,168,0.12);
+        }
+        .contrast-left  { background: #eaf3fb; padding: 26px 22px; text-align: center; }
+        .contrast-right { background: var(--teal-light); padding: 26px 22px; text-align: center; }
+        .contrast-divider {
+            background: white; display: flex; align-items: center; justify-content: center;
+            padding: 0 14px; font-size: 26px; color: #bbb; font-weight: 300;
+        }
+        .contrast-tag {
+            display: inline-block; border-radius: 20px;
+            font-size: 12px; font-weight: bold; letter-spacing: 1px;
+            padding: 4px 14px; margin-bottom: 12px; text-transform: uppercase;
+        }
+        .tag-blue  { background: var(--blue); color: white; }
+        .tag-teal  { background: var(--teal); color: white; }
+        .tag-red   { background: var(--red); color: white; }
+        .contrast-verb { font-size: 32px; font-weight: bold; margin: 8px 0; }
+        .contrast-verb.blue  { color: var(--blue); }
+        .contrast-verb.teal  { color: var(--teal); }
+        .contrast-verb.red   { color: var(--red); }
+        .contrast-meaning { font-size: 14px; color: #555; margin-top: 4px; }
+        .contrast-subject {
+            font-size: 12px; color: #888; margin-top: 10px;
+            background: rgba(255,255,255,0.7); border-radius: 8px;
+            padding: 6px 10px; display: inline-block;
+        }
+
+        /* ===== Formula Box ===== */
+        .formula-box {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #c5dff0 100%);
+            border: 2px solid var(--blue);
+            border-radius: 14px; padding: 26px;
+            text-align: center; margin: 18px 0;
+        }
+        .formula-box.teal {
+            background: linear-gradient(135deg, var(--teal-light) 0%, #b2dfdb 100%);
+            border-color: var(--teal);
+        }
+        .formula-box.purple {
+            background: linear-gradient(135deg, var(--purple-light) 0%, #d1c4e9 100%);
+            border-color: var(--purple);
+        }
+        .formula-title { font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+        .formula-main {
+            font-size: 22px; font-weight: bold; color: var(--blue-dark);
+            margin: 10px 0; line-height: 1.6;
+        }
+        .formula-box.teal .formula-main { color: var(--teal); }
+        .formula-box.purple .formula-main { color: var(--purple); }
+        .formula-en { font-size: 14px; color: #555; margin-top: 10px; font-style: italic; }
+        .formula-highlight { color: var(--red); }
+        .formula-arrow { font-size: 20px; color: var(--blue); margin: 0 8px; }
+
+        /* ===== Type Grid (3 col) ===== */
+        .type-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 14px 0;
+        }
+        @media (max-width: 700px) { .type-grid { grid-template-columns: 1fr; } }
+        .type-card {
+            border-radius: 14px; padding: 18px; text-align: center;
+        }
+        .type-card.blue-card   { background: var(--blue-light);   border: 2px solid var(--blue); }
+        .type-card.teal-card   { background: var(--teal-light);   border: 2px solid var(--teal); }
+        .type-card.purple-card { background: var(--purple-light); border: 2px solid var(--purple); }
+        .type-card.green-card  { background: var(--green-light);  border: 2px solid var(--green); }
+        .type-card.red-card    { background: var(--red-light);    border: 2px solid var(--red); }
+        .type-card.orange-card { background: var(--orange-light); border: 2px solid var(--orange); }
+        .type-label { font-size: 13px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .type-label.bl { color: var(--blue); }
+        .type-label.tl { color: var(--teal); }
+        .type-label.pl { color: var(--purple); }
+        .type-label.gl { color: var(--green); }
+        .type-label.rl { color: var(--red); }
+        .type-label.ol { color: var(--orange); }
+        .type-form { font-size: 20px; font-weight: bold; color: #2c3e50; margin: 6px 0; }
+        .type-desc { font-size: 13px; color: #666; line-height: 1.6; }
+        .type-ex { font-size: 13px; margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.7); }
+
+        /* ===== Suffix Grid (for endings comparison) ===== */
+        .ending-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin: 16px 0;
+        }
+        @media (max-width: 600px) { .ending-grid { grid-template-columns: 1fr; } }
+        .ending-chip {
+            background: white; border-radius: 12px;
+            padding: 18px 14px; text-align: center;
+            box-shadow: 0 2px 8px rgba(26,111,168,0.1);
+        }
+        .ending-chip.blue-chip  { border: 2px solid #90c4e8; }
+        .ending-chip.teal-chip  { border: 2px solid #80cbc4; }
+        .ending-chip.purple-chip { border: 2px solid #ce93d8; }
+        .ending-letter { font-size: 28px; font-weight: bold; margin-bottom: 6px; }
+        .ending-name { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .ending-ex { font-size: 13px; color: #555; font-style: italic; line-height: 1.7; }
+
+        /* ===== Rule Box ===== */
+        .rule-box {
+            background: #f9f9f9; border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .rule-box h4 { font-size: 16px; color: var(--blue-dark); margin-bottom: 12px; }
+        .rule-step {
+            display: flex; align-items: flex-start;
+            margin-bottom: 10px; background: white;
+            border-radius: 8px; padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+        }
+        .step-num {
+            background: var(--blue); color: white;
+            width: 26px; height: 26px;
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold;
+            flex-shrink: 0; margin-right: 14px; margin-top: 2px;
+        }
+        .step-num.teal   { background: var(--teal); }
+        .step-num.purple { background: var(--purple); }
+        .step-num.tip    { background: var(--orange); }
+        .step-text { font-size: 14px; color: #2c3e50; line-height: 1.6; flex: 1; }
+        .step-en { font-size: 13px; color: #888; font-style: italic; margin-top: 4px; }
+
+        /* ===== Main Pairs Table ===== */
+        .pairs-table {
+            width: 100%; border-collapse: collapse;
+            margin: 16px 0; font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px; overflow: hidden;
+        }
+        .pairs-table thead tr {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: white;
+        }
+        .pairs-table.teal-head thead tr { background: linear-gradient(135deg, var(--teal) 0%, #076652 100%); }
+        .pairs-table.purple-head thead tr { background: linear-gradient(135deg, var(--purple) 0%, #5a3fa0 100%); }
+        .pairs-table th { padding: 12px 14px; text-align: center; font-size: 13px; }
+        .pairs-table td { padding: 11px 14px; text-align: center; border-bottom: 1px solid #eef2f6; vertical-align: middle; }
+        .pairs-table tbody tr:hover { background: var(--blue-light); }
+        .pairs-table .blue-cell   { color: var(--blue); font-weight: bold; font-size: 15px; }
+        .pairs-table .teal-cell   { color: var(--teal); font-weight: bold; font-size: 15px; }
+        .pairs-table .red-cell    { color: var(--red);  font-weight: bold; font-size: 15px; }
+        .pairs-table .purple-cell { color: var(--purple); font-weight: bold; font-size: 15px; }
+        .pairs-table .orange-cell { color: var(--orange); font-weight: bold; font-size: 15px; }
+
+        /* ===== Examples Grid ===== */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px; margin-top: 16px;
+        }
+        .dialogue-card {
+            background: #f9f9f9; border-radius: 14px;
+            padding: 18px; border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+        }
+        .dialogue-card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 6px 18px rgba(26,111,168,0.15);
+        }
+        .dialogue-num {
+            font-size: 12px; font-weight: bold;
+            padding: 3px 10px; border-radius: 12px;
+            display: inline-block; margin-bottom: 10px; color: white;
+        }
+        .bg-blue   { background: var(--blue); }
+        .bg-teal   { background: var(--teal); }
+        .bg-red    { background: var(--red); }
+        .bg-orange { background: var(--orange); }
+        .bg-purple { background: var(--purple); }
+        .bg-green  { background: var(--green); }
+        .pair-label  { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .sentence-line { font-size: 15px; color: #2c3e50; margin-bottom: 6px; line-height: 1.7; }
+        .hl-blue   { color: var(--blue);   font-weight: bold; }
+        .hl-teal   { color: var(--teal);   font-weight: bold; }
+        .hl-red    { color: var(--red);    font-weight: bold; }
+        .hl-purple { color: var(--purple); font-weight: bold; }
+        .hl-orange { color: var(--orange); font-weight: bold; }
+        .hl-green  { color: var(--green);  font-weight: bold; }
+        .dialogue-en {
+            font-size: 13px; color: #888; font-style: italic;
+            margin-top: 10px; border-top: 1px solid #e0e0e0;
+            padding-top: 8px; line-height: 1.6;
+        }
+
+        /* ===== Compare Blocks ===== */
+        .compare-block {
+            background: white; border-radius: 12px;
+            padding: 18px; margin: 10px 0;
+            border: 1.5px solid #c5dff0;
+            box-shadow: 0 2px 10px rgba(26,111,168,0.06);
+        }
+        .compare-title {
+            font-size: 15px; font-weight: bold; color: var(--blue-dark);
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1.5px dashed #c5dff0;
+        }
+        .compare-row {
+            display: flex; align-items: flex-start;
+            gap: 12px; margin-bottom: 8px;
+            padding: 10px 12px; border-radius: 8px;
+        }
+        .compare-row.blue-row   { background: var(--blue-light);   border-left: 4px solid var(--blue); }
+        .compare-row.teal-row   { background: var(--teal-light);   border-left: 4px solid var(--teal); }
+        .compare-row.red-row    { background: var(--red-light);    border-left: 4px solid var(--red); }
+        .compare-row.purple-row { background: var(--purple-light); border-left: 4px solid var(--purple); }
+        .compare-row.orange-row { background: var(--orange-light); border-left: 4px solid var(--orange); }
+        .compare-tag {
+            font-size: 11px; font-weight: bold; padding: 2px 8px;
+            border-radius: 8px; white-space: nowrap; margin-top: 2px;
+        }
+        .compare-tag.bl { background: var(--blue);   color: white; }
+        .compare-tag.tl { background: var(--teal);   color: white; }
+        .compare-tag.rl { background: var(--red);    color: white; }
+        .compare-tag.pl { background: var(--purple); color: white; }
+        .compare-tag.ol { background: var(--orange); color: white; }
+        .compare-body { font-size: 15px; color: #2c3e50; line-height: 1.7; flex: 1; }
+        .compare-en { font-size: 13px; color: #888; font-style: italic; }
+
+        /* ===== Warning / Note / Mistake ===== */
+        .warning-box {
+            background: var(--orange-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--orange);
+        }
+        .warning-title { color: var(--orange); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .warning-text  { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .note-box {
+            background: var(--blue-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+            border-left: 5px solid var(--blue);
+        }
+        .note-box.teal-note   { background: var(--teal-light);   border-left-color: var(--teal); }
+        .note-box.purple-note { background: var(--purple-light); border-left-color: var(--purple); }
+        .note-title { color: var(--blue); font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+        .note-box.teal-note   .note-title { color: var(--teal); }
+        .note-box.purple-note .note-title { color: var(--purple); }
+        .note-text { font-size: 14px; color: #555; line-height: 1.8; }
+
+        .mistake-box {
+            background: var(--red-light); border-radius: 12px;
+            padding: 18px; margin: 14px 0;
+        }
+        .mistake-title { color: var(--red); font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .mistake-row {
+            display: flex; align-items: center;
+            gap: 12px; margin-bottom: 10px;
+            background: white; border-radius: 8px; padding: 12px;
+        }
+        .mistake-wrong { background: #fde8e8; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--red); line-height: 1.5; }
+        .mistake-right { background: #e6f7f0; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; color: var(--teal); line-height: 1.5; }
+        .mistake-arrow { font-size: 20px; color: #aaa; flex-shrink: 0; }
+        .mistake-note  { font-size: 12px; color: #999; font-style: italic; margin-top: 4px; }
+
+        /* ===== Conjugation mini table ===== */
+        .conj-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px; margin: 14px 0;
+        }
+        .conj-card {
+            border-radius: 12px; padding: 16px; border: 2px solid #c5dff0;
+            background: white;
+        }
+        .conj-verb { font-size: 20px; font-weight: bold; color: var(--blue-dark); margin-bottom: 4px; }
+        .conj-en   { font-size: 12px; color: #999; margin-bottom: 10px; }
+        .conj-row  { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px dashed #eee; }
+        .conj-row:last-child { border-bottom: none; }
+        .conj-label { color: #aaa; }
+        .conj-form  { font-weight: bold; color: #2c3e50; }
+
+        @media (max-width: 768px) {
+            .topic-btn { font-size: 12px; padding: 12px 6px; }
+            .topic-section { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>📚 -(으)ㄹ 수 있다 / 없다</h1>
+        <div class="subtitle">능력과 가능성을 표현해요 · Expressing Ability & Possibility</div>
+        <div class="subtitle-en">Can / Cannot | 동사 어간 + (으)ㄹ 수 있다/없다</div>
+    </div>
+
+    <div id="topic-main" class="topic-section active">
+<!-- ══════════════════════════════════════════════════════
+         TOPIC 2: -(으)ㄹ 수 있다 / 없다
+    ══════════════════════════════════════════════════════ -->
+    <div id="topic-2" class="topic-section">
+
+        <div class="topic-header th-2">
+            <h2>② -(으)ㄹ 수 있다 / 없다</h2>
+            <div class="th-en">Expressing Ability & Possibility — "Can" / "Cannot"</div>
+            <div class="th-sub">피동·사동 이후 자연스러운 다음 단계 — 행위의 가능성을 표현해요!</div>
+        </div>
+
+        <div class="intro-box">
+            <div class="intro-ko">동사에 "-(으)ㄹ 수 있다/없다"를 붙이면 "할 수 있어요/없어요"가 돼요!</div>
+            <div class="intro-en">
+                Attach <strong>-(으)ㄹ 수 있다</strong> to a verb stem to say "can [verb]."
+                Attach <strong>-(으)ㄹ 수 없다</strong> to say "cannot [verb]."
+                수(數) here means "way" or "means" — literally "there is a way to do it."
+                This pattern covers BOTH ability (skill) AND possibility (circumstance).
+            </div>
+        </div>
+
+        <!-- Core Contrast -->
+        <div class="contrast-box">
+            <div class="contrast-left">
+                <span class="contrast-tag tag-teal">✅ 가능 Possible / Able</span>
+                <div class="contrast-verb teal">-(으)ㄹ 수 있다</div>
+                <div class="contrast-meaning">~할 수 있어요<br><em>can / is able to</em></div>
+                <div class="contrast-subject">능력 또는 가능성<br>Ability OR possibility</div>
+                <div style="margin-top:14px; font-size:14px; color:#2c3e50;">
+                    <strong>걸을 수 있어요.</strong><br>
+                    <span style="color:#888;font-style:italic;font-size:13px;">I can walk. / It's possible to walk.</span>
+                </div>
+            </div>
+            <div class="contrast-divider">↔</div>
+            <div class="contrast-right">
+                <span class="contrast-tag tag-red">❌ 불가능 Impossible / Unable</span>
+                <div class="contrast-verb red">-(으)ㄹ 수 없다</div>
+                <div class="contrast-meaning">~할 수 없어요<br><em>cannot / is not able to</em></div>
+                <div class="contrast-subject">불능력 또는 불가능성<br>Inability OR impossibility</div>
+                <div style="margin-top:14px; font-size:14px; color:#2c3e50;">
+                    <strong>날 수 없어요.</strong><br>
+                    <span style="color:#888;font-style:italic;font-size:13px;">I cannot fly. / It's not possible to fly.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formula -->
+        <div class="section-title">1. 어떻게 만드나요? (How to form it?)
+            <span class="section-title-en"> — The Formula + Vowel Harmony</span>
+        </div>
+
+        <div class="formula-box teal">
+            <div class="formula-title">📐 -(으)ㄹ 수 있다/없다 공식</div>
+            <div class="formula-main">
+                받침 있는 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">을 수 있다</span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                받침 없는 어간 <span class="formula-arrow">+</span> <span class="formula-highlight">ㄹ 수 있다</span>
+            </div>
+            <div class="formula-en">
+                Final consonant (받침) present → add <strong>을 수 있다</strong> &nbsp;|&nbsp; No final consonant → add <strong>ㄹ 수 있다</strong><br>
+                <em>✨ ㄹ-stem verbs (날다, 알다): drop ㄹ before adding ㄹ! → 날다 → 날 수 있다 (ㄹ merges)</em>
+            </div>
+        </div>
+
+        <div class="type-grid">
+            <div class="type-card teal-card">
+                <div class="type-label tl">✅ 받침 있음 — 을</div>
+                <div class="type-form">-을 수 있다</div>
+                <div class="type-desc">어간이 자음으로 끝나요<br>Stem ends in consonant</div>
+                <div class="type-ex">먹다 → 먹<strong>을</strong> 수 있어요<br>읽다 → 읽<strong>을</strong> 수 있어요<br>걷다 → 걸<strong>을</strong> 수 있어요 ⚠️</div>
+            </div>
+            <div class="type-card blue-card">
+                <div class="type-label bl">✅ 받침 없음 — ㄹ</div>
+                <div class="type-form">-ㄹ 수 있다</div>
+                <div class="type-desc">어간이 모음으로 끝나요<br>Stem ends in vowel</div>
+                <div class="type-ex">가다 → 가<strong>ㄹ</strong> 수 있어요<br>쉬다 → 쉴 수 있어요<br>뛰다 → 뛸 수 있어요</div>
+            </div>
+            <div class="type-card orange-card">
+                <div class="type-label ol">⚠️ ㄹ 어간 — 특수</div>
+                <div class="type-form">ㄹ drops + ㄹ</div>
+                <div class="type-desc">어간의 ㄹ이 그대로 유지돼요<br>ㄹ-stem: ㄹ merges</div>
+                <div class="type-ex">날다 → 날 수 있어요<br>알다 → 알 수 있어요<br>살다 → 살 수 있어요</div>
+            </div>
+        </div>
+
+        <!-- Rule Steps for irregular -->
+        <div class="rule-box">
+            <h4>⚠️ 불규칙 주의사항 (Irregular Verb Watch)</h4>
+            <div class="rule-step">
+                <div class="step-num teal">걷</div>
+                <div class="step-text">
+                    <strong>걷다 (ㄷ 불규칙)</strong> — 모음 앞에서 ㄷ → ㄹ 변화가 있어요<br>
+                    <div class="step-en">걷다 is ㄷ-irregular: before vowel endings ㄷ→ㄹ.</div>
+                    걷 + 을 수 있다 → 걷 앞에 을(모음)이 오므로: <strong>걸을 수 있어요</strong> (NOT ❌ 걷을 수 있어요)
+                </div>
+            </div>
+            <div class="rule-step">
+                <div class="step-num teal">날</div>
+                <div class="step-text">
+                    <strong>날다 (ㄹ 어간)</strong> — ㄹ 어간 + ㄹ 수 있다 → ㄹ이 합쳐져요<br>
+                    <div class="step-en">날다 stem is 날-. ㄹ stays — result looks the same: 날 수 있어요.</div>
+                    날- + ㄹ 수 있다 = <strong>날 수 있어요</strong> ✅ &nbsp;(naturally: 날 + ㄹ → 날, the ㄹ merges)
+                </div>
+            </div>
+            <div class="rule-step" style="background:#fef5e7; border-color:#e67e22;">
+                <div class="step-num tip">💡</div>
+                <div class="step-text">
+                    부정: 없다 대신 <strong>못</strong>도 쓸 수 있어요!<br>
+                    <div class="step-en">Two ways to say "cannot": -(으)ㄹ 수 없다 OR 못 + verb (verb에 직접 붙여요).</div>
+                    걸을 수 없어요 = 못 걸어요 &nbsp;|&nbsp; 날 수 없어요 = 못 날아요 (same meaning, 못 is more casual/spoken)
+                </div>
+            </div>
+        </div>
+
+        <!-- Main table -->
+        <div class="section-title">2. 활용표 (Conjugation Table)
+            <span class="section-title-en"> — 봄 동사 + everyday verbs</span>
+        </div>
+
+        <table class="pairs-table teal-head">
+            <thead>
+                <tr>
+                    <th>동사 Verb</th>
+                    <th>어간 Stem</th>
+                    <th>형태 Form</th>
+                    <th>✅ 있다 (Can)</th>
+                    <th>❌ 없다 (Cannot)</th>
+                    <th>못 형태 못-form</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>기다</strong> crawl</td>
+                    <td>기-</td>
+                    <td>받침 없음</td>
+                    <td class="teal-cell">길 수 있어요</td>
+                    <td class="red-cell">길 수 없어요</td>
+                    <td>못 기어요</td>
+                </tr>
+                <tr>
+                    <td><strong>걷다</strong> walk ⚠️</td>
+                    <td>걷- → 걸-</td>
+                    <td>ㄷ 불규칙</td>
+                    <td class="teal-cell">걸을 수 있어요</td>
+                    <td class="red-cell">걸을 수 없어요</td>
+                    <td>못 걸어요</td>
+                </tr>
+                <tr>
+                    <td><strong>뛰다</strong> run/jump</td>
+                    <td>뛰-</td>
+                    <td>받침 없음</td>
+                    <td class="teal-cell">뛸 수 있어요</td>
+                    <td class="red-cell">뛸 수 없어요</td>
+                    <td>못 뛰어요</td>
+                </tr>
+                <tr>
+                    <td><strong>날다</strong> fly ⚠️</td>
+                    <td>날-</td>
+                    <td>ㄹ 어간</td>
+                    <td class="teal-cell">날 수 있어요</td>
+                    <td class="red-cell">날 수 없어요</td>
+                    <td>못 날아요</td>
+                </tr>
+                <tr>
+                    <td><strong>쉬다</strong> rest</td>
+                    <td>쉬-</td>
+                    <td>받침 없음</td>
+                    <td class="teal-cell">쉴 수 있어요</td>
+                    <td class="red-cell">쉴 수 없어요</td>
+                    <td>못 쉬어요</td>
+                </tr>
+                <tr>
+                    <td><strong>먹다</strong> eat</td>
+                    <td>먹-</td>
+                    <td>받침 있음</td>
+                    <td class="teal-cell">먹을 수 있어요</td>
+                    <td class="red-cell">먹을 수 없어요</td>
+                    <td>못 먹어요</td>
+                </tr>
+                <tr>
+                    <td><strong>수영하다</strong> swim</td>
+                    <td>수영하-</td>
+                    <td>받침 없음</td>
+                    <td class="teal-cell">수영할 수 있어요</td>
+                    <td class="red-cell">수영할 수 없어요</td>
+                    <td>못 수영해요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Examples -->
+        <div class="section-title">3. 예문으로 배워요 (Example Sentences)</div>
+        <div class="examples-grid">
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">능력 Ability</span>
+                <div class="pair-label">배운 기술 · Learned skills</div>
+                <div class="sentence-line">저는 자전거를 <span class="hl-teal">탈 수 있어요</span>.</div>
+                <div class="sentence-line">한국어를 조금 <span class="hl-teal">말할 수 있어요</span>.</div>
+                <div class="sentence-line">수영을 <span class="hl-teal">할 수 있어요</span>? — 네, 할 수 있어요!</div>
+                <div class="dialogue-en">I can ride a bicycle.<br>I can speak a little Korean.<br>Can you swim? — Yes, I can!</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-red">불능 Inability</span>
+                <div class="pair-label">못 하는 것들 · Things one cannot do</div>
+                <div class="sentence-line">사람은 <span class="hl-red">날 수 없어요</span>.</div>
+                <div class="sentence-line">아기는 혼자 <span class="hl-red">걸을 수 없어요</span>.</div>
+                <div class="sentence-line">아파서 <span class="hl-red">뛸 수 없어요</span>.</div>
+                <div class="dialogue-en">Humans cannot fly.<br>A baby cannot walk alone.<br>I'm sick so I cannot run.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-teal">가능성 Possibility</span>
+                <div class="pair-label">상황에 따른 가능 · Situational possibility</div>
+                <div class="sentence-line">내일 공원에 <span class="hl-teal">갈 수 있어요</span>?</div>
+                <div class="sentence-line">지금은 <span class="hl-teal">쉴 수 있어요</span>. 바쁘지 않아요.</div>
+                <div class="sentence-line">버스로 <span class="hl-teal">갈 수 있어요</span>.</div>
+                <div class="dialogue-en">Can you go to the park tomorrow?<br>I can rest now. I'm not busy.<br>You can go by bus.</div>
+            </div>
+            <div class="dialogue-card">
+                <span class="dialogue-num bg-orange">못 형태 못-form</span>
+                <div class="pair-label">구어체 표현 · Spoken/casual form</div>
+                <div class="sentence-line">다리가 아파서 <span class="hl-orange">못 걸어요</span>.</div>
+                <div class="sentence-line">오늘 시간이 없어서 <span class="hl-orange">못 가요</span>.</div>
+                <div class="sentence-line">너무 빨라서 <span class="hl-orange">못 따라가요</span>.</div>
+                <div class="dialogue-en">My leg hurts so I can't walk.<br>I don't have time today so I can't go.<br>It's too fast so I can't keep up.</div>
+            </div>
+        </div>
+
+        <!-- Mistakes -->
+        <div class="section-title">4. 흔한 실수 (Common Mistakes)</div>
+        <div class="mistake-box">
+            <div class="mistake-title">❌ 틀리기 쉬운 것들</div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 걷을 수 있어요.
+                    <div class="mistake-note">걷다 is ㄷ-irregular — before 을 (vowel), ㄷ→ㄹ</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 걸을 수 있어요.
+                    <div class="mistake-note">걷- becomes 걸- before 을 (same rule as 걸어요)</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 날을 수 있어요.
+                    <div class="mistake-note">날다 has ㄹ stem — don't add 을</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 날 수 있어요.
+                    <div class="mistake-note">ㄹ stems add ㄹ 수 있다, and 날 + ㄹ merges → 날</div>
+                </div>
+            </div>
+            <div class="mistake-row">
+                <div class="mistake-wrong">❌ 가을 수 있어요.
+                    <div class="mistake-note">가다 has no 받침 — don't use 을</div>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="mistake-right">✅ 갈 수 있어요.
+                    <div class="mistake-note">No 받침 → ㄹ: 가- + ㄹ 수 있다 = 갈 수 있어요</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box teal-note">
+            <div class="note-title">💡 수 있다 vs 못 — 언제 써요? (Which to use?)</div>
+            <div class="note-text">
+                <strong>-(으)ㄹ 수 없다</strong> — more formal, written, explains WHY not possible<br>
+                &nbsp;→ 지금은 갈 수 없어요. 회의가 있어요. (I cannot go now. I have a meeting.)<br><br>
+                <strong>못 + 동사</strong> — casual, spoken, more immediate/spontaneous<br>
+                &nbsp;→ 못 가요! 갑자기 일이 생겼어요. (Can't go! Something came up suddenly.)<br><br>
+                ✨ Both are correct. 수 없다 sounds more formal; 못 sounds more natural in daily speech.
+            </div>
+        </div>
+
+    </div><!-- end topic-2 -->
+    </div>
+
+</div>
+</body>
+</html>
